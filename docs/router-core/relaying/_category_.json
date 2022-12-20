@@ -1,0 +1,8 @@
+{
+  "label": "Relayer",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "This section of the documentation will provide an in-depth view of the relayers on the Router chain."
+  }
+}
