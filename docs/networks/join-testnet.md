@@ -4,6 +4,8 @@ sidebar_position: 3
 
 # Joining Testnet
 
+Coming soon...
+
 <!-- ## Osmosis Installer -->
 
 <!-- Join a network by using Osmosis Installer from [https://get.osmosis.zone](https://get.osmosis.zone) 

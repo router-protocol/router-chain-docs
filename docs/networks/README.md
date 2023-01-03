@@ -3,21 +3,21 @@ sidebar_position: 1
 ---
 # Public Endpoints
 
-These following API's are recommended for development purposes. For maximun control and reliability it's recommended to run your own node. This can be easility accomplsihed by using the [getRouter](https://github.com/router-protocol/router-chain) installer. 
+These following API's are recommended for development purposes. For maximun control and reliability it's recommended to run your own Router node. This can be easily accomplished by following the intstruction given in this [git repository](https://github.com/router-protocol/router-chain).
 
 ## Official Public Endpoints 
 
-| Network | Testnet | Devnet |
-| -------- | -------- | -------- | -------- | 
-| **Chain ID**  | - | router-devnet-1  |
-| **gRPC endpoint**  | - | devnet-alpha.grpc.routerprotocol.com:443 |
-| **gRPC-gateway**  | -  | https://devnet-alpha.grpc.routerprotocol.com |
-| **TM endpoint**  | -  | https://devnet-alpha.tm.routerprotocol.com |
-| **LCD endpoint**  | - | https://devnet-alpha.lcd.routerprotocol.com  |
-| **Faucet UI** | - | https://alpha-faucet-api.routerprotocol.com/ |
-| **Faucet endpoint** | - | https://alpha-faucet-ui.routerprotocol.com/ |
-| **Explorer endpoint** | - | https://alpha-explorer-api.routerprotocol.com/ |
-| **Explorer UI** | - | https://alpha-explorer-ui.routerprotocol.com/ |
+| Network | Devnet |
+| -------- | -------- | 
+| **Chain ID** | router-devnet-1  |
+| **gRPC endpoint** | devnet-alpha.grpc.routerprotocol.com:443 |
+| **gRPC-gateway** | https://devnet-alpha.grpc.routerprotocol.com |
+| **TM endpoint** | https://devnet-alpha.tm.routerprotocol.com |
+| **LCD endpoint** | https://devnet-alpha.lcd.routerprotocol.com  |
+| **Faucet UI** | https://alpha-faucet-api.routerprotocol.com/ |
+| **Faucet endpoint** | https://alpha-faucet-ui.routerprotocol.com/ |
+| **Explorer endpoint** | https://alpha-explorer-api.routerprotocol.com/ |
+| **Explorer UI** | https://alpha-explorer-ui.routerprotocol.com/ |
 
 
 

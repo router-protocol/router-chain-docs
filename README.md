@@ -4,10 +4,10 @@
     <img src="static/img/osmosis-docs-card.png" alt="Logo" width="120">
   </a>
 
-  <h2 align="center">Osmsosis Docs</h3>
+  <h2 align="center">Router Docs</h3>
 
   <p align="center">
-    Router's documentation portal, built with Docusaurus and inspired bye <a href="https://github.com/router-protocol/docs">Osmosis' </a> configuration and template.
+    Router's documentation portal, built with Docusaurus and inspired by <a href="https://github.com/router-protocol/docs">Osmosis' </a> configuration and template.
     <br />
     <a href="https://docs.osmosis.zone"><strong>Explore the docs »</strong></a>
     <br />

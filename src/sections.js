@@ -4,9 +4,12 @@ import {
   Cosmwasm,
   Beaker,
   Osmojs,
+  VoyagerIcon,
+  RouterIcon,
   Telescope,
   Frontend,
   LocalOsmosis,
+  Omnichain,
 } from './icons';
 
 const SECTIONS = [
@@ -24,33 +27,39 @@ const SECTIONS = [
   {
     name: 'Router Core',
     id: 'router-core',
-    icon: OsmosisCore,
-    section: 'core-sdk',
+    icon: RouterIcon,
+    section: 'core',
+  },
+  {
+    name: 'Omnichain DApps',
+    id: 'middleware',
+    icon: Omnichain,
+    section: 'core',
   },
   {
     name: 'CrossTalk',
     id: 'crosstalk',
     icon: Network,
-    section: 'core-sdk',
+    section: 'core',
   },
   {
-    name: 'Local Router',
-    id: 'localrouter',
-    icon: LocalOsmosis,
-    section: 'core-sdk',
+    name: 'Voyager',
+    id: 'middleware',
+    icon: VoyagerIcon,
+    section: 'core',
   },
   //Cosmwasm
   {
-    name: 'Cosmwasm',
-    id: 'cosmwasm',
+    name: 'Infrastructure',
+    id: 'infra',
     icon: Cosmwasm,
-    section: 'cosmwasm',
+    section: 'tooling',
   },
   {
-    name: 'Beaker',
-    id: 'beaker',
+    name: 'Utilities',
+    id: 'utils',
     icon: Beaker,
-    section: 'cosmwasm',
+    section: 'tooling',
   },
 
   // UI SDKs
@@ -79,12 +88,12 @@ const MULTI_SECTIONS = [
   [
     {
       name: 'Router Protocol',
-      section: 'core-sdk',
+      section: 'core',
       description: 'Development documentation for all things Router.',
     },
     {
-      name: 'CosmWasm',
-      section: 'cosmwasm',
+      name: 'Tooling',
+      section: 'tooling',
       description:
         'Building and interacting with smart contracts on the Router chain.',
     },

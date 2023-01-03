@@ -1,0 +1,11 @@
+---
+sidebar_position: 1
+---
+
+# Validator Overview
+
+Welcome to the validator documentation for Router. Validators are nodes that participate in the security of a network and are responsible for committing new blocks in the blockchain.
+
+Like other Cosmos-based chains, validators on the Router chain are expected to mine blocks in exchange for block rewards. However, validators on the Router chain are also tasked with another responsibility - running an orchestrator instance.
+
+Before reading more about orchestrators, it is important to understand the [high-level workflow](../overview/high-level-workflow) of a cross-chain transaction enabled via the Router chain. 

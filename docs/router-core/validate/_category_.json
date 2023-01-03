@@ -1,9 +1,0 @@
-{
-  "position": 6,
-  "label": "Validate",
-  "link": {
-    "type": "generated-index",
-    "title": "Validator Documentation",
-    "description": "The section of the documentation will explain the process of running a validator node on the Router chain."
-  }
-}

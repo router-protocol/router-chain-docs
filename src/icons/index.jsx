@@ -8,7 +8,9 @@ export { default as HTMLIcon } from './HTMLIcon';
 export { default as VueIcon } from './VueIcon';
 export { default as SwiftIcon } from './SwiftIcon';
 export { default as KotlinIcon } from './KotlinIcon';
-
+export { default as VoyagerIcon } from './VoyagerIcon';
+export { default as RouterIcon } from './RouterIcon';
+export { default as Omnichain } from './Omnichain';
 export { default as TerminalIcon } from './TerminalIcon';
 export { default as APIReferenceIcon } from './APIReferenceIcon';
 export { default as DisconnectedPlugIcon } from './DisconnectedPlugIcon';

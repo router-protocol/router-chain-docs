@@ -46,6 +46,7 @@ const SECTIONS = [
   defineSection('telescope'),
   defineSection('osmojs'),
   defineSection('learn'),
+  defineSection('validators'),
   defineSection('overview'),
   defineSection('apis'),
 ];
@@ -143,7 +144,7 @@ const config = {
           },
           {
             label: 'Develop',
-            to: '/router-core',
+            to: '/crosstalk',
             position: 'left',
             // className: 'new-badge',
             // activeBaseRegex: '(.*ui-kit|.*web-core)',
@@ -151,6 +152,12 @@ const config = {
           {
             label: 'Networks',
             to: '/networks',
+            position: 'left',
+            // className: 'new-badge',
+          },
+          {
+            label: 'Validators',
+            to: '/validators',
             position: 'left',
             // className: 'new-badge',
           },
