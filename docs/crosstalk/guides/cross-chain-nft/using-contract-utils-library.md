@@ -321,8 +321,8 @@ contract XERC1155 is ERC1155, ICrossTalkApplication {
 <details>
 <summary><b>Deployed Contracts for Reference</b></summary>
 
-**Polygon Mumbai Testnet:** 
+**Polygon Mumbai Testnet:** [https://mumbai.polygonscan.com/address/0x78A3B23DeF518f1489837b88743e557Be3EB560C](https://mumbai.polygonscan.com/address/0x78A3B23DeF518f1489837b88743e557Be3EB560C)
 
-**Avalanche Fuji Testnet:** 
+**Avalanche Fuji Testnet:** [https://testnet.snowtrace.io/address/0xA154De789a2c3a9b1308c4CF25bc1d882Ff09E1e](https://testnet.snowtrace.io/address/0xA154De789a2c3a9b1308c4CF25bc1d882Ff09E1e)
 
 </details>

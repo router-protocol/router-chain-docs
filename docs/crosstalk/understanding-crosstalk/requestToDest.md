@@ -27,7 +27,7 @@ Since users can use **`requestToDest`** to send multiple cross-chain calls in on
 ### 3) ackType
 When the contract calls are executed on the destination chain, the Router chain receives an acknowledgment from the destination chain, which specifies whether the execution was successful or did it result in some error. We provide users the option to get this acknowledgment from the Router chain to the source chain and perform some operations based on that acknowledgment.
   ```javascript
-      enum AckType {
+  enum AckType {
       NO_ACK,
       ACK_ON_SUCCESS,
       ACK_ON_ERROR,
