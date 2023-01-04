@@ -51,7 +51,7 @@ If you sent 3 payloads while initiating the request on the source chain and letâ
 </details>
 
 ### 3) execData
-Since you can send multiple payloads to multiple contract addresses on the destination chain, the execData is an array of bytes that provides you the return values of the **`handleRequestFromSource`** (on the destination chain) from each of these calls. You can decode this data and process it on the source chain.
+Since you can send multiple payloads to multiple contract addresses on the destination chain, the execData is an array of bytes that provides you the return values of the **`handleRequestFromSource`** (on the destination chain) from each of these calls. You can decode this data and process it on the source chain. The decoding for this data is shown with example in the [Ping-Pong contract](../guides/ping-pong-contract/using-gateway-contract#handling-the-acknowledgement-received-from-destination-chain).
 
 <details>
 <summary><b>a) If the calls were atomic:</b></summary>
