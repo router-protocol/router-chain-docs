@@ -30,14 +30,14 @@ Since you can send multiple payloads to multiple contract addresses on the desti
 
 If you sent 3 payloads while initiating the request on the source chain and let’s say the second one failed, you will receive: [true, false, false].
 
-Since the calls were atomic, none of the calls will actually get executed. However, we send you true in the array for the first requist so that you know exactly which call failed and help you debug the issue. In the array you received, the place where you received the first false is the index of the call that failed.
+Since the calls were atomic, none of the calls will actually get executed. However, we send you true in the array for the first request so that you know exactly which call failed and help you debug the issue. In the array you received, the place where you received the first false is the index of the call that failed.
 
 #### How to check the final execution status on the destination chain?
 
 ```javascript
 // function to get if the calls were executed on destination chain
 function getTxStatusForAtomicCall(
-	bool[] memory execFlags
+	  bool[] memory execFlags
 	) internal returns (bool) 
 {
 	return execFlags[execFlags.length - 1] == true;

@@ -347,7 +347,7 @@ contract PingPong is ICrossTalkApplication {
 <details>
 <summary><b>Deployed Contracts for Reference</b></summary>
 
-**Polygon Mumbai Testnet:** [https://mumbai.polygonscan.com/address/0x40d97308497e692280fdCEa2895265d4703ee195](https://mumbai.polygonscan.com/address/0x40d97308497e692280fdCEa2895265d4703ee195#writeContract)
+**Polygon Mumbai Testnet:** [https://mumbai.polygonscan.com/address/0x40d97308497e692280fdCEa2895265d4703ee195](https://mumbai.polygonscan.com/address/0x40d97308497e692280fdCEa2895265d4703ee195)
 
 **Avalanche Fuji Testnet:** [https://testnet.snowtrace.io/address/0xa4c21D61B79E4F7C00B2c6910982EE137E3572af](https://testnet.snowtrace.io/address/0xa4c21D61B79E4F7C00B2c6910982EE137E3572af)
 
