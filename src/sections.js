@@ -44,7 +44,7 @@ const SECTIONS = [
   },
   {
     name: 'Voyager',
-    id: 'middleware',
+    id: 'voyager',
     icon: VoyagerIcon,
     section: 'core',
   },

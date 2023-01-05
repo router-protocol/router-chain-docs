@@ -49,6 +49,7 @@ const SECTIONS = [
   defineSection('validators'),
   defineSection('overview'),
   defineSection('apis'),
+  defineSection('voyager'),
 ];
 
 /** @type {import('@docusaurus/types').Config} */
