@@ -73,7 +73,7 @@ export default function Homepage() {
               HeadingTag="h4"
               description={
                 <>
-                  Everything that is needed to learn about development using Router's core components. 
+                  Everything that is needed to learn about development using Router&apos;s core components. 
                 </>
               }
             >
