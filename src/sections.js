@@ -31,7 +31,7 @@ const SECTIONS = [
     section: 'core',
   },
   {
-    name: 'Omnichain DApps',
+    name: 'Omnichain dApps',
     id: 'middleware',
     icon: Omnichain,
     section: 'core',
