@@ -1,0 +1,62 @@
+---
+title: Introduction
+sidebar_position: 1
+---
+import {
+  HomepageCard as Card,
+  HomepageSection as Section,
+} from '../../src/components/HomepageComponents';
+
+import {
+  ChainIcon,
+  IDEIcon,
+  TerminalIcon,
+  ModulesIcon,
+  RelayerIcon,
+  AssetIcon,
+  KeysIcon,
+  Osmojs,
+  Transaction,
+  OsmosisCore,
+  Contribute,
+  Guide,
+} from '../../src/icons';
+
+# Introduction
+
+The guides on this page will provide the list of infrastructure available when building with Router.
+
+| **Infra** | **Purpose** |	**Users** |
+| -------- | -------- |  -------- |
+| **Router Scan** | Similar to any other chain explorer, this tool can be used for viewing the transactions, blocks, inbound and outbound requests and crosstalk requests, happening on Router Chain. <br /> Users can also view the validators data here - in terms of the stakes they have, uptime etc. | a. **dApps using Router chain for their cross-chain dApp**: to view their cross-chain transactions (inbounds/outbounds/crosstalk) and the status for these. <br />b. **Projects using Router as L1 chain:** to view their transactions on Router chain. <br />c. **End users using Router chain:** users using a dApp deployed on Router chain will use the explorer to view their transactions and it’s status.|
+| **Router Station** | Instantiate your contracts on Router chain, execute certain transactions from the contract, upgrade the contracts. | **Developers** using Router chain as L1 or using middleware capabilities for routing - this tool will be useful for them to interact with their contracts on Router chain. |
+| **Router Robot** | RouterRobot is a cross chain integration testing Framework for end to end testing, behavior driven development (BDD) and robotic process automation (RPA). | **Developers** building cross-chain dApps using Router chain will use this tool for their testing requirements. |
+| **Relayer** | Relayers can trustlessly relay outbound transaction to destination chain. | a. **dApps** can run their own application specific relayers to process their outbound transactions. <br /> b. Any user who want to run a trustless relayer for Router chain's outbound requests and earn the relayer fees for each transaction committed on destination chain.|
+
+ ## Get Started
+   <Section>
+  <Card
+    title="Router Scan"
+    description="Explorer for projects to monitor their cross-chain transactions"
+    to="/infra/router-scan"
+    icon={<IDEIcon />}
+  />
+ <Card
+    title="Router Station"
+    description="A tool to manage contract lifecycle-related processes on Router chain"
+    to="/infra/router-station"
+    icon={<TerminalIcon />}
+  />
+    <Card
+    title="Router Robot"
+    description="A cross-chain integration testing framework"
+    to="/infra/category/router-robot"
+    icon={<Osmojs />}
+  />
+    <Card
+    title="Relayer"
+    description="A cross-chain integration testing framework"
+    to="/infra/relayer"
+    icon={<RelayerIcon />}
+  />
+  </Section>

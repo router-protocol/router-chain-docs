@@ -50,6 +50,8 @@ const SECTIONS = [
   defineSection('overview'),
   defineSection('apis'),
   defineSection('voyager'),
+  defineSection('utils'),
+  defineSection('infra'),
 ];
 
 /** @type {import('@docusaurus/types').Config} */

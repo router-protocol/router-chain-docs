@@ -1,0 +1,50 @@
+---
+title: Introduction
+sidebar_position: 1
+---
+import {
+  HomepageCard as Card,
+  HomepageSection as Section,
+} from '../../src/components/HomepageComponents';
+
+import {
+  ChainIcon,
+  IDEIcon,
+  TerminalIcon,
+  ModulesIcon,
+  RelayerIcon,
+  AssetIcon,
+  KeysIcon,
+  Osmojs,
+  Transaction,
+  OsmosisCore,
+  Contribute,
+  Guide,
+} from '../../src/icons';
+
+# Introduction
+
+The guides on this page will provide the list of utilities available when building with Router.
+
+
+ ## Get Started
+   <Section>
+  <Card
+    title="Go Lang SDK"
+    description="Go SDK to interact with Router chain"
+    to="/router-core/installing-prerequisites"
+    icon={<IDEIcon />}
+  />
+ <Card
+    title="Typescript SDK"
+    description="TS SDK to interact with Router chain"
+    to="/router-core/routerd"
+    icon={<TerminalIcon />}
+  />
+    <Card
+    title="Router WASM bindings"
+    description="A Rust crate consisting of all types/messages to send OutboundRequests"
+    to="/router-core/category/router-robot"
+    icon={<Osmojs />}
+  />
+  </Section>
