@@ -32,7 +32,7 @@ const SECTIONS = [
   },
   {
     name: 'Omnichain dApps',
-    id: 'middleware',
+    id: 'omnichain-dapps',
     icon: Omnichain,
     section: 'core',
   },
@@ -95,7 +95,7 @@ const MULTI_SECTIONS = [
       name: 'Tooling',
       section: 'tooling',
       description:
-        'Building and interacting with smart contracts on the Router chain.',
+        'Tools to simplify building and maintaining dApps using Router.',
     },
     // {
     //   name: 'Frontend & SDKs',

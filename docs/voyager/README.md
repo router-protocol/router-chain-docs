@@ -22,7 +22,7 @@ import {
 
 # Introduction
 
-The guides on this page will explain the process of developing using Voyager.
+The guides on this page will explain the process of developing using Voyager. If you're new here or you're not sure if Voyager is compatible with your requirements, check out [this guide](../overview/choosing-the-right-framework.md) to figure out the best cross-chain framework for your dApp.
 
 
  ## Get Started

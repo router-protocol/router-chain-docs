@@ -50,6 +50,7 @@ const SECTIONS = [
   defineSection('overview'),
   defineSection('apis'),
   defineSection('voyager'),
+  defineSection('omnichain-dapps'),
   defineSection('utils'),
   defineSection('infra'),
 ];

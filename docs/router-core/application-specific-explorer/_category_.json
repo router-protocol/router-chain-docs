@@ -1,8 +1,0 @@
-{
-  "label": "Application-specific Explorer",
-  "position": 3,
-  "link": {
-    "type": "generated-index",
-    "description": "Custom explorer for projects to monitor their transactions"
-  }
-}

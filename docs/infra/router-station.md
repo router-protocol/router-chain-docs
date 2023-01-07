@@ -21,6 +21,13 @@ To use the Router Station UI for any operation related to the contract life-cycl
 - Now, click on the “Add” button. and your account is added to the Router Station.
 - You can follow the same process for multiple accounts here.
 
+<center>
+<video width="640" height="357.33" controls>
+  <source src={require('./videos/add_account.mpg').default} type="video/mp4">
+  </source>
+</video>
+</center>
+
 <!-- [add_account.gif](../../src/images/add-account.gif) -->
 
 </details>
@@ -30,7 +37,8 @@ To use the Router Station UI for any operation related to the contract life-cycl
 
 You can add an existing cosmwasm contract in the Router Station. To add an existing contract address, you need to click on the “+Add contract” button.  A pop-up shows up. The router contract address can be added in the Import contract text field and can be imported for further action.
 
-![add-existing-contract.png](../../src/images/add-existing-contract.png)
+<center><img src={require('../../src/images/add-existing-contract.png').default} alt="Add an existing contract" style={{width: 640, marginBottom: 12}}/></center>
+
 
 </details>
 
@@ -43,7 +51,12 @@ The Router chain is a cosmos chain. To deploy a smart contract first, you need t
 - Here, you need to select the wasm file.
 - Then click on the “Upload Only” button.
 
-[upload.mp4](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/063b148e-1ffe-4665-a6d1-b2528ce462b3/upload.mp4)
+<center>
+<video width="640" height="357.33" controls>
+  <source src={require('./videos/upload.mp4').default} type="video/mp4">
+  </source>
+</video>
+</center>
 
 Once the upload button is clicked an <code>Uploading Contract</code> toast msg can be seen, which signifies that the contract upload is happening in the background.
 
@@ -67,7 +80,15 @@ To deploy and instantiate a smart contract first, you need to follow the below m
 - Here, you also need to select the wasm file.
 - Then click on the “Upload and Instantiate” button.
 
-[new_contract.mp4](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8124b3c5-c2e1-4e56-9d70-a9e7e7c9e04d/new_contract.mp4)
+
+<center>
+<video width="640" height="357.33" controls>
+  <source src={require('./videos/new_contract.mp4').default} type="video/mp4">
+  </source>
+</video>
+</center>
+
+<!-- [new_contract.mp4](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8124b3c5-c2e1-4e56-9d70-a9e7e7c9e04d/new_contract.mp4) -->
 
 Once the upload and instantiate button is clicked upon, an <code>Uploading Contract</code> toast message can be seen. This signifies that the uploading of the contract is happening in the background.
 
@@ -85,7 +106,14 @@ A cosmwasm contract has multiple execute or query messages. The execute message 
 In the Router station, you need to select one contract on which you want to perform the operation. Then you can write down the JSON query in the text section as shown in the video. Now, according to the query type you can hit either the “Execute” or the “query” button.  The output will be shown in the right section of the query. 
 Please check out the video, In this video, you performed the message execution and query for the Counter contract. link?
 
-[messages.mp4](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5c3c2ea3-b7c2-4d94-98ce-44569b66639e/messages.mp4)
+<center>
+<video width="640" height="357.33" controls>
+  <source src={require('./videos/messages.mp4').default} type="video/mp4">
+  </source>
+</video>
+</center>
+
+<!-- [messages.mp4](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5c3c2ea3-b7c2-4d94-98ce-44569b66639e/messages.mp4) -->
 
 </details>
 
@@ -101,7 +129,12 @@ Cosmwasm contracts can be upgraded. To upgrade a cosmwasm smart contract, you ne
 
 Upon, the successful transaction you will able to see the updated code id in the contract info section.
 
-[migration.mp4](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7f9e0316-e437-410c-a830-224bf51ebcfb/migration.mp4)
+<center>
+<video width="640" height="357.33" controls>
+  <source src={require('./videos/migration.mp4').default} type="video/mp4">
+  </source>
+</video>
+</center>
 
 </details>
 
@@ -116,6 +149,13 @@ To update the contract’s admin address, you need to follow the below mentioned
 - Click on the “Update Admin” button. It will open one pop-up.
 - Provide the new admin address or leave it empty( if you want to set the admin address to null).
 - Now, Click on the “update” button. It will submit the update admin message on the chain.
+
+<center>
+<video width="640" height="357.33" controls>
+  <source src={require('./videos/update_admin.mp4').default} type="video/mp4">
+  </source>
+</video>
+</center>
 
 Upon, the successful transaction you will able to see the updated admin address in the contract info section.
 

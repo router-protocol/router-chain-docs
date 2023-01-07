@@ -23,3 +23,6 @@ states on external chains. Simply put, the Router architecture allows contracts 
 with contracts on other chains in a secure and decentralized manner. More details regarding the Router
 chain and how it enables cross-chain communication are given in the following sections.
 
+## Router CrossTalk
+
+## Global Liquidity via Voyager
