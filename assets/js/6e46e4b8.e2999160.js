@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkrouter_docs=self.webpackChunkrouter_docs||[]).push([[9375],{32220:s=>{s.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"omnichain-dapps"}')}}]);

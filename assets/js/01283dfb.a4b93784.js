@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkosmosis_docs=self.webpackChunkosmosis_docs||[]).push([[800],{63187:s=>{s.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"router-core"}')}}]);
