@@ -24,7 +24,7 @@ import {
 
 # Introduction
 
-The guides on this page will explain the process of developing cross-chain applications by leveraging Router's middleware capabilities. If you're new here or you're not sure if Router's OmniChain framework is compatible with your requirements, check out [this guide](../overview/choosing-the-right-framework.md) to figure out the best cross-chain framework for your dApp.
+The guides on this page will explain the process of developing cross-chain applications by leveraging Router's middleware capabilities. If you're new here or you're not sure if Router's OmniChain framework is compatible with your requirements, check out [this guide](../overview/choosing-the-right-framework) to figure out the best cross-chain framework for your dApp.
 
 
 
