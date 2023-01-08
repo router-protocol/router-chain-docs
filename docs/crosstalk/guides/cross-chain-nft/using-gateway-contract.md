@@ -31,7 +31,7 @@ contract XERC1155 is ERC1155, ICrossTalkApplication {
 ```
 
 1. Import the IGateway.sol, ICrossTalkApplication.sol and Utils.sol from `evm-gateway-contract/contracts`.
-2. Inherit the ICrossTalkApplication contract into your main contract (PingPong).
+2. Inherit the ICrossTalkApplication contract into your main contract (XERC1155).
 
 ### Creating state variables and the constructor
 
