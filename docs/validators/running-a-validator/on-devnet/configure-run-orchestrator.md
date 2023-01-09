@@ -42,9 +42,9 @@ To obtain the validator's Cosmos private key, run `routerd keys unsafe-export-e
 
 ### Ethereum Keys
 
-There are two ways to provide the credential access - a Geth Keystore with encrypted keys, or just a private key in plaintext.
+To provide the credential access, a private key in plaintext needs to be provided.
 
-**2. Ethereum Private Key (Unsafe)**
+**Ethereum Private Key (Unsafe)**
 
 Simply update the `ethPrivateKey` with a new Ethereum Private Key from a new account.
 
