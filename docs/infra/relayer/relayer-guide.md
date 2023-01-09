@@ -21,7 +21,7 @@ If running many nodes on a single VM, [ensure your open files limit is increased
 * Ensure you have a Router chain instance running instance running for the environment you want to setup the relayer for. In case you want to run the relayer for your local, follow [this guide](../../router-core/running-router-chain-locally) to setup Router chain locally.
 * Reliable RPCs for supporting networks
 
-## Stepup Relayer
+## Setup Relayer
 
 ### Step 1) Setup configuration for the relayer
 

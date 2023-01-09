@@ -28,7 +28,8 @@ In `config.json` file, there is a list of services supported by the deployment s
 5. `enable` - Set it to true to start respective service
 6. `repo` - ssh url of the repository
 7. `branch` - branch of the repo to checkout
-8. `clearCache` - set to true to remove already cloned repository. Setting this to true will clone repo again and build it from scratch. Set to false, if repo is already cloned and docker image is built and you don't want to rebuild again. PS: If you are not sure, then set it to true.
+8. `clearCache` - set to true to remove already cloned repository. It will clone repo again and build it from scratch. Set to false, if repo is already cloned and docker image is built and you don't want to rebuild again. 
+    PS: If you are not sure, then set it to true.
 
 Example service config for router-chain.
 ```jsx
