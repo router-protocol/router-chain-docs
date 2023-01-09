@@ -32,12 +32,12 @@ The guides on this page will explain the process of developing cross-chain appli
    <Section title="Developers" id="web-sdks" hasSubSections >
 
    <Section>
-  {/* <Card
-    title="Build and Test Osmosis Source Code"
-    description="Getting started with building and testing Osmosis codebase"
-    to="/router-core/build"
+  <Card
+    title="Understanding Omnichain Framework"
+    description="Dissecting different functions and parameters associated with Omnichain framework"
+    to="/omnichain-framework/understanding-ominchain-framework"
     icon={<OsmosisCore />}
-  /> */}
+  /> 
   <Card
     title="Installing Prerequisites"
     description="Setting up the machine for developing on the Router Chain"
