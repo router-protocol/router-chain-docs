@@ -5,13 +5,11 @@ sidebar_position: 2
 # Relayer Guide
 Steps involved in running a relayer
 
-*The following information is based off of [this guide](https://github.com/clemensgg/RELAYER-dev-crew/blob/main/HERMES/omniflix/relayer-doc.md) created by Clemens from CryptoCrew.*
-
 ## Minimum Requirements
 
-- 8-core (4 physical core), x86_64 architecture processor
-- 32 GB RAM (or equivalent swap file set up)
-- 1TB+ nVME drives
+- 2-core, x86_64 architecture processor
+- 4 GB RAM
+- 64GB storage
 
 If running many nodes on a single VM, [ensure your open files limit is increased](https://tecadmin.net/increase-open-files-limit-ubuntu/)
 
