@@ -1,10 +1,9 @@
 ---
+title: Joining Testnet
 sidebar_position: 3
 ---
 
-# Joining Testnet
-
-Coming soon...
+#### Details for this will be released closer to the testnet launch
 
 <!-- ## Osmosis Installer -->
 

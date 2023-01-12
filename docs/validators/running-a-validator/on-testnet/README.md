@@ -1,4 +1,6 @@
-# On Testnet 
+---
+title: On Testnet
+description: How to run a validator on Router testnet
+---
 
-# COMING SOON
-Details for running validator on testnet will be added once we are close to testnet go-live date.
+#### Details for this will be released closer to the testnet launch

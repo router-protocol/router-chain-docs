@@ -20,9 +20,15 @@ chain, validators running on the Router chain also monitor state changes on othe
 on the Router chain can write custom logic to trigger events in response to these external state changes.
 Additionally, applications on the Router chain can leverage a trustless network of relayers to update
 states on external chains. Simply put, the Router architecture allows contracts on one chain to interact
-with contracts on other chains in a secure and decentralized manner. More details regarding the Router
-chain and how it enables cross-chain communication are given in the following sections.
+with contracts on other chains in a secure and decentralized manner. 
+<!-- More details regarding the Router
+chain and how it enables cross-chain communication are given in the following sections. -->
 
 ## Router CrossTalk
+Router's CrossTalk library is an extensible cross-chain framework that enables seamless state transitions across multiple chains. In simple terms, this library leverages Router's infrastructure to allow contracts on one chain to pass instructions to contracts deployed on some other chain without the need for deploying any contracts on the Router chain. The library is structured in a way that it can be integrated seamlessly into your development environment to allow for cross-chain message passing without disturbing other parts of your product. CrossTalk is best suited for cross-chain dApps that do not require custom bridging logic or any data aggregation layer in the middle - developers can simply plug into this framework and transform their existing single-chain or multi-chain dApps into cross-chain dApps.
 
 ## Global Liquidity via Voyager
+Voyager is a cross-chain swapping engine that allows for cross-chain asset transfers as well as cross-chain sequencing of asset transfers and arbitrary instruction transfers. Voyager has a whole development suite around it, which includes:
+1. a widget that can be used by other projects to give their users an option to perform cross-chain transactions directly from their UI;
+2. an API and a SDK that abstracts Voyager's backend capabilities for projects that want to use their own UI/platform for offering the cross-chain asset swap functionality;
+3. most importantly, the sequencer library, which allows developers to build cross-chain applications that require both asset transfer and instruction transfer in a single cross-chain request. 

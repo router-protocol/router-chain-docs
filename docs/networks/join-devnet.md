@@ -3,6 +3,8 @@ sidebar_position: 2
 ---
 # Joining Devnet
 
+Coming soon...
+
 <!-- ## Osmosis Installer -->
 
 <!-- Join a network by using Osmosis Installer from [https://get.osmosis.zone](https://get.osmosis.zone) 

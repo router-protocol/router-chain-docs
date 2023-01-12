@@ -24,7 +24,7 @@ import {
 
 # Introduction
 
-The guides on this page will explain the process of developing on Router's CrossTalk framework. If you're new here or you're not sure if CrossTalk is compatible with your requirements, check out <a href="../overview/choosing-the-right-framework" target="_blank">this guide</a> to figure out the best cross-chain framework for your dApp.
+The guides on this page will explain the process of developing on Router's CrossTalk framework. This framework leverages Router's infrastructure to allow contracts on one chain to send intructions to contracts deployed on some other chain. The framework is structured in a way that it can be integrated seamlessly into your development environment without any overhead. If you're new here or you're not sure if CrossTalk is compatible with your requirements, check out <a href="../overview/choosing-the-right-framework" target="_blank">this guide</a> to figure out the best cross-chain framework for your dApp.
 
 
  ## Get Started

@@ -5,7 +5,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/vsDark');
 
 // const UIKitReferencePlugins = require('./plugins/ui-kit-reference-plugin.cjs');
 const { webpackPlugin } = require('./plugins/webpack-plugin.cjs');
-const posthogPlugin = require('./plugins/posthog-plugin.cjs');
+// const posthogPlugin = require('./plugins/posthog-plugin.cjs');
 
 /** @type {import('@docusaurus/preset-classic').Options} */ defaultSettings = {
   remarkPlugins: [
@@ -37,12 +37,11 @@ function defineSection(section, options = {}) {
 
 const SECTIONS = [
   defineSection('router-core'),
-  defineSection('localrouter'),
   defineSection('networks'),
-  defineSection('cosmwasm'),
+  // defineSection('cosmwasm'),
   defineSection('crosstalk'),
-  defineSection('frontend'),
-  defineSection('beaker'),
+  // defineSection('frontend'),
+  // defineSection('beaker'),
   defineSection('telescope'),
   defineSection('osmojs'),
   defineSection('learn'),
@@ -112,7 +111,7 @@ const config = {
     ...SECTIONS,
     // ...UIKitReferencePlugins,
     webpackPlugin,
-    posthogPlugin,
+    // posthogPlugin,
   ],
 
   themes: ['@docusaurus/theme-live-codeblock'],
@@ -196,10 +195,10 @@ const config = {
             className: 'pseudo-icon discord-icon',
             position: 'right',
           },
-          {
-            type: 'search',
-            position: 'right',
-          },
+          // {
+          //   type: 'search',
+          //   position: 'right',
+          // },
           {
             label: 'Launch Router Devnet',
             href: 'https://devnet-router-station.routerprotocol.com/',
@@ -312,16 +311,16 @@ const config = {
       liveCodeBlock: {
         playgroundPosition: 'bottom',
       },
-      algolia: {
-        appId: '2CBDVP21VK',
-        apiKey: 'd983fd8603756b134758592e0334d240',
-        indexName: 'Docs',
-        contextualSearch: true,
-        searchParameters: {},
-      },
-      posthog: {
-        apiKey: '00',
-      },
+      // algolia: {
+      //   appId: '2CBDVP21VK',
+      //   apiKey: 'd983fd8603756b134758592e0334d240',
+      //   indexName: 'Docs',
+      //   contextualSearch: true,
+      //   searchParameters: {},
+      // },
+      // posthog: {
+      //   apiKey: '00',
+      // },
     }),
 };
 
