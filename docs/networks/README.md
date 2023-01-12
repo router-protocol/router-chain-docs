@@ -9,11 +9,11 @@ These following API's are recommended for development purposes. For maximun cont
 
 | Network | Devnet |
 | -------- | -------- | 
-| **Chain ID** | router-devnet-1  |
-| **gRPC endpoint** | devnet-alpha.grpc.routerprotocol.com:443 |
-| **gRPC-gateway** | https://devnet-alpha.grpc.routerprotocol.com |
-| **TM endpoint** | https://devnet-alpha.tm.routerprotocol.com |
-| **LCD endpoint** | https://devnet-alpha.lcd.routerprotocol.com  |
+| **Chain ID** | router-1 |
+| **gRPC endpoint** | devnet.grpc.routerprotocol.com:443 |
+| **gRPC-gateway** | https://devnet.grpc.routerprotocol.com |
+| **TM endpoint** | https://devnet.tm.routerprotocol.com |
+| **LCD endpoint** | https://devnet.lcd.routerprotocol.com  |
 | **Faucet UI** | https://devnet-faucet.routerprotocol.com |
 | **Faucet endpoint** | https://devnet-faucet-api.routerprotocol.com |
 | **Explorer UI** | https://devnet-explorer.routerprotocol.com |

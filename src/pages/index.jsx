@@ -216,7 +216,13 @@ export default function Homepage() {
               description="A web application that makes it easier to interact with the Router chain."
               to="/infra/router-station"
               icon={<Createapp />}
-            />            
+            />       
+            <Card
+              title="Router Faucet"
+              description="Get funds to interact with the Router chain."
+              to="https://devnet-faucet.routerprotocol.com/"
+              icon={<AssetIcon />}
+            />                 
             <Card
               title="Relayer"
               description="Run a custom relayer to forward messages from Router to other chains."
