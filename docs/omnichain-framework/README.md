@@ -25,6 +25,7 @@ import {
 # Introduction
 
 The guides on this page will explain the process of developing cross-chain applications by leveraging Router's middleware capabilities. If you're new here or you're not sure if Router's OmniChain framework is compatible with your requirements, check out <a href="../overview/choosing-the-right-framework" target="_blank">this guide</a> to figure out the best cross-chain framework for your dApp.
+The guides on this page will explain the process of developing cross-chain applications by leveraging Router's middleware capabilities. If you're new here or you're not sure if Router's OmniChain framework is compatible with your requirements, check out [this guide](../overview/choosing-the-right-framework) to figure out the best cross-chain framework for your dApp.
 
 
 
@@ -32,12 +33,12 @@ The guides on this page will explain the process of developing cross-chain appli
    <Section title="Developers" id="web-sdks" hasSubSections >
 
    <Section>
-  {/* <Card
-    title="Build and Test Osmosis Source Code"
-    description="Getting started with building and testing Osmosis codebase"
-    to="/router-core/build"
+  <Card
+    title="Understanding Omnichain Framework"
+    description="Dissecting different functions and parameters associated with Omnichain framework"
+    to="/omnichain-framework/understanding-ominchain-framework"
     icon={<OsmosisCore />}
-  /> */}
+  /> 
   <Card
     title="Overview"
     description="What is Router's OmniChain framework?"
