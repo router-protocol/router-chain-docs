@@ -22,7 +22,7 @@ import {
 
 # Introduction
 
-The guides on this page will explain the process of developing using Voyager. If you're new here or you're not sure if Voyager is compatible with your requirements, check out [this guide](../overview/choosing-the-right-framework.md) to figure out the best cross-chain framework for your dApp.
+The guides on this page will explain the process of developing using Voyager. If you're new here or you're not sure if Voyager is compatible with your requirements, check out <a href="../overview/choosing-the-right-framework" target="_blank">this guide</a> to figure out the best cross-chain framework for your dApp.
 
 
  ## Get Started
@@ -42,8 +42,8 @@ The guides on this page will explain the process of developing using Voyager. If
     icon={<ChainIcon />}
   />
  <Card
-    title="Different Types of use-cases"
-    description="Learning how to build the different types of cross-chain token transfer use-cases using Voyager"
+    title="Different Use-cases"
+    description="Learning how to build different types of applications by using features enabled by Voyager"
     to="/voyager/building-different-use-cases"
     icon={<ModulesIcon />}
   />

@@ -5,11 +5,11 @@ The following is a list of tools available for the Router chain. Please make sur
 
 ## Devnet
 #### Block Explorer
-- [Router Explorer](https://alpha-explorer-ui.routerprotocol.com/)
+- [Router Explorer](https://devnet-explorer.routerprotocol.com/)
 #### Faucet
-- [Router Faucet](https://alpha-faucet-ui.routerprotocol.com/)
+- [Router Faucet](https://devnet-faucet.routerprotocol.com/)
 #### Web Application to Interact with the Router Chain
-- [Router Station](https://alpha-router-station.routerprotocol.com/)
+- [Router Station](https://devnet-router-station.routerprotocol.com/)
 
 ## Testnet
 Coming soon...

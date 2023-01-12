@@ -24,7 +24,7 @@ import {
 
 # Introduction
 
-The guides on this page will explain the process of developing cross-chain applications by leveraging Router's middleware capabilities. If you're new here or you're not sure if Router's OmniChain framework is compatible with your requirements, check out [this guide](../overview/choosing-the-right-framework.md) to figure out the best cross-chain framework for your dApp.
+The guides on this page will explain the process of developing cross-chain applications by leveraging Router's middleware capabilities. If you're new here or you're not sure if Router's OmniChain framework is compatible with your requirements, check out <a href="../overview/choosing-the-right-framework" target="_blank">this guide</a> to figure out the best cross-chain framework for your dApp.
 
 
 
@@ -39,16 +39,10 @@ The guides on this page will explain the process of developing cross-chain appli
     icon={<OsmosisCore />}
   /> */}
   <Card
-    title="Installing Prerequisites"
-    description="Setting up the machine for developing on the Router Chain"
-    to="/router-core/installing-prerequisites"
+    title="Overview"
+    description="What is Router's OmniChain framework?"
+    to="/omnichain-framework/overview"
     icon={<IDEIcon />}
-  />
- <Card
-    title="Router CLI"
-    description="Install routerd to join the network or simple query it."
-    to="/router-core/routerd"
-    icon={<TerminalIcon />}
   />
   {/* <Card
     title="Modules"
@@ -90,7 +84,7 @@ The guides on this page will explain the process of developing cross-chain appli
    <Card
     title="Your First Omnichain dApp"
     description="Learn how to deploy your first omnichain dApp leveraging the Router chain middleware"
-  to="/router-core/guides/your-first-omnichain-dapp"
+  to="guides/your-first-omnichain-dapp"
     icon={<Guide />}
   />
     {/* <Card

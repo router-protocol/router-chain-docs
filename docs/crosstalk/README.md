@@ -24,7 +24,7 @@ import {
 
 # Introduction
 
-The guides on this page will explain the process of developing on Router's CrossTalk framework. If you're new here or you're not sure if CrossTalk is compatible with your requirements, check out [this guide](../overview/choosing-the-right-framework.md) to figure out the best cross-chain framework for your dApp.
+The guides on this page will explain the process of developing on Router's CrossTalk framework. If you're new here or you're not sure if CrossTalk is compatible with your requirements, check out <a href="../overview/choosing-the-right-framework" target="_blank">this guide</a> to figure out the best cross-chain framework for your dApp.
 
 
  ## Get Started

@@ -50,7 +50,7 @@ const SECTIONS = [
   defineSection('overview'),
   defineSection('apis'),
   defineSection('voyager'),
-  defineSection('omnichain-dapps'),
+  defineSection('omnichain-framework'),
   defineSection('utils'),
   defineSection('infra'),
 ];
@@ -202,7 +202,7 @@ const config = {
           },
           {
             label: 'Launch Router Devnet',
-            href: 'https://alpha-router-station.routerprotocol.com/',
+            href: 'https://devnet-router-station.routerprotocol.com/',
             position: 'right',
             className: 'dev-portal-signup dev-portal-link',
           },
@@ -231,7 +231,7 @@ const config = {
               },
               {
                 label: 'Explorer',
-                href: 'https://alpha-explorer-ui.routerprotocol.com/',
+                href: 'https://devnet-explorer.routerprotocol.com/',
               },
               {
                 label: 'Careers',

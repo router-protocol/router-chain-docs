@@ -14,10 +14,10 @@ These following API's are recommended for development purposes. For maximun cont
 | **gRPC-gateway** | https://devnet-alpha.grpc.routerprotocol.com |
 | **TM endpoint** | https://devnet-alpha.tm.routerprotocol.com |
 | **LCD endpoint** | https://devnet-alpha.lcd.routerprotocol.com  |
-| **Faucet UI** | https://alpha-faucet-api.routerprotocol.com/ |
-| **Faucet endpoint** | https://alpha-faucet-ui.routerprotocol.com/ |
-| **Explorer endpoint** | https://alpha-explorer-api.routerprotocol.com/ |
-| **Explorer UI** | https://alpha-explorer-ui.routerprotocol.com/ |
+| **Faucet UI** | https://devnet-faucet.routerprotocol.com |
+| **Faucet endpoint** | https://devnet-faucet-api.routerprotocol.com |
+| **Explorer UI** | https://devnet-explorer.routerprotocol.com |
+| **Explorer endpoint** | https://devnet-explorer-api.routerprotocol.com |
 
 
 

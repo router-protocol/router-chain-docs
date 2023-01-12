@@ -1,2 +1,0 @@
-# Your First Omnichain dApp
-
