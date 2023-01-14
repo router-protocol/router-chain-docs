@@ -1,6 +1,6 @@
 ---
 title: Joining Testnet
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 #### Details for this will be released closer to the testnet launch
