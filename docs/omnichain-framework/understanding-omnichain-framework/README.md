@@ -1,9 +1,7 @@
----
-title: High-level Workflow
-sidebar_position: 2
----
+# Understanding Omnichain Framework
 
-<center><img src={require('./img/high-level-workflow.png').default} alt="High Level Workflow" /></center>
+## High Level Architecture
+<center><img src={require('../img/high-level-workflow.png').default} alt="High Level Workflow" /></center>
 
 Any cross-chain request between two third-party chains is divided into two independent flows - **Inbound** and **Outbound**.
 
