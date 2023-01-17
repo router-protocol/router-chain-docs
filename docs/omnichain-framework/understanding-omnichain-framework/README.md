@@ -30,3 +30,6 @@ Any cross-chain request between two third-party chains is divided into two indep
 **Step 5)** The application contract on the destination chain will take appropriate actions based on the data transferred.
 
 **Step 6)** After the **`handleRequestFromRouter()`** function execution is complete on the destination chain, the destination chain's Gateway contract emits an acknowledgment event that is listened to by the orchestrators on the Router chain.
+
+**Step 7)** The ack is then submitted to bridge contract ensuring the execution of Outbound Request. Upon receiving the ack, the bridge contract can mark the status of outbound request as completed and take required actions.
+
