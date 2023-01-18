@@ -14,7 +14,7 @@ Install the evm-gateway contracts with the following command:
 
 and 
 
-`yarn add @routerprotocol/crosstalk-utils`  or  `npm install @routerprotocol/crosstalk-utils`
+`yarn add @routerprotocol/router-crosstalk-utils`  or  `npm install @routerprotocol/router-crosstalk-utils`
 
 ### Instantiating the contract:
 
@@ -23,14 +23,14 @@ pragma solidity >=0.8.0 <0.9.0;
 
 import "evm-gateway-contract/contracts/ICrossTalkApplication.sol";
 import "evm-gateway-contract/contracts/Utils.sol";
-import "@routerprotocol/crosstalk-utils/contracts/CrossTalkUtils.sol";
+import "@routerprotocol/router-crosstalk-utils/contracts/CrossTalkUtils.sol";
 
 contract PingPong is ICrossTalkApplication {
 }
 ```
 
 1. Import the ICrossTalkApplication.sol and Utils.sol from `evm-gateway-contract/contracts`.
-2. Import CrossTalkUtils.sol from `@routerprotocol/crosstalk-uils/contracts`
+2. Import CrossTalkUtils.sol from `@routerprotocol/router-crosstalk-utils/contracts`
 3. Inherit the ICrossTalkApplication contract into your main contract <code>PingPong</code>.
 
 ### Creating state variables and the constructor
@@ -216,7 +216,7 @@ pragma solidity >=0.8.0 <0.9.0;
 
 import "evm-gateway-contract/contracts/ICrossTalkApplication.sol";
 import "evm-gateway-contract/contracts/Utils.sol";
-import "@routerprotocol/crosstalk-utils/contracts/CrossTalkUtils.sol";
+import "@routerprotocol/router-crosstalk-utils/contracts/CrossTalkUtils.sol";
 
 contract PingPong is ICrossTalkApplication {
 	address public gatewayContract;

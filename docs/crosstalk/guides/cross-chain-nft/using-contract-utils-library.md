@@ -18,7 +18,7 @@ Install the openzeppelin contracts library with the following command:
 
 Install the crosstalk-utils library using the following command:
 
-`yarn add @routerprotocol/crosstalk-utils`  or  `npm install @routerprotocol/crosstalk-utils`
+`yarn add @routerprotocol/router-crosstalk-utils`  or  `npm install @routerprotocol/router-crosstalk-utils`
 
 ### Instantiating the contract:
 
@@ -27,7 +27,7 @@ pragma solidity >=0.8.0 <0.9.0;
 
 import "evm-gateway-contract/contracts/ICrossTalkApplication.sol";
 import "evm-gateway-contract/contracts/Utils.sol";
-import "@routerprotocol/crosstalk-utils/contracts/CrossTalkUtils.sol";
+import "@routerprotocol/router-crosstalk-utils/contracts/CrossTalkUtils.sol";
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 
 contract XERC1155 is ERC1155, ICrossTalkApplication {
@@ -35,7 +35,7 @@ contract XERC1155 is ERC1155, ICrossTalkApplication {
 ```
 
 1. Import the ICrossTalkApplication.sol and Utils.sol from `evm-gateway-contract/contracts`.
-2. Import the CrossTalkUtils.sol from `@routerprotocol/crosstalk-utils/contracts`
+2. Import the CrossTalkUtils.sol from `@routerprotocol/router-crosstalk-utils/contracts`
 3. Inherit the ICrossTalkApplication contract into your main contract (XERC1155).
 
 ### Creating state variables and the constructor
@@ -207,7 +207,7 @@ pragma solidity >=0.8.0 <0.9.0;
 
 import "evm-gateway-contract/contracts/ICrossTalkApplication.sol";
 import "evm-gateway-contract/contracts/Utils.sol";
-import "@routerprotocol/crosstalk-utils/contracts/CrossTalkUtils.sol";
+import "@routerprotocol/router-crosstalk-utils/contracts/CrossTalkUtils.sol";
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 
 contract XERC1155 is ERC1155, ICrossTalkApplication {
