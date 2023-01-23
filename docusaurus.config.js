@@ -96,6 +96,10 @@ const config = {
           editUrl: 'https://github.com/router-protocol/docs/tree/main/',
           ...defaultSettings,
         },
+        gtag: {
+          trackingID: 'G-ZBN9NGXRCZ',
+          anonymizeIP: true,
+        },
         blog: false,
         theme: {
           customCss: [
