@@ -37,41 +37,11 @@ The guides on this page will explain the process of developing cross-chain appli
     icon={<IDEIcon />}
   />
     <Card
-    title="High-level Workflow"
+    title="Understanding Omnichain Framework"
     description="Understanding the flow involved in a cross-chain request executed via Router's OmniChain framework"
-    to="/omnichain-framework/understanding-ominchain-framework"
+    to="/omnichain-framework/understanding-omnichain-framework"
     icon={<OsmosisCore />}
   /> 
-  {/* <Card
-    title="Modules"
-    description="Osmosis modules and their respective CLI commands"
-    to="/router-core/modules"
-    icon={<ModulesIcon />}
-  />
-  <Card
-    title="Relaying"
-    description=" Relay IBC packets between Osmosis and other chains"
-    to="/router-core/relaying"
-    icon={<RelayerIcon />}
-  />
-  <Card
-    title="Assets"
-    description="     Currently supported assets on Osmosis with their corresponding channels and IBC denoms."
-    to="/router-core/asset-info"
-    icon={<AssetIcon />}
-  />
-  <Card
-    title="Key Management"
-    description="Managing keys via CLI and advanced operations such as multisig wallets"
-    to="/router-core/category/keys-management"
-    icon={<KeysIcon />}
-  />
-  <Card
-    title="Contributing"
-    description=" Guidelines to contributing to Osmosis core development."
-    to="/router-core/contributing"
-    icon={<Contribute />}
-  /> */}
   </Section>
 
   </Section>
