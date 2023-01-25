@@ -1,0 +1,39 @@
+version: 0.2
+
+env:
+  variables:
+    NODE_OPTIONS: --max-old-space-size=4096
+    APPLICATION_ID:
+    API_KEY:
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+    commands:
+      - n 16
+      - npm update -g npm
+      - echo node -v
+      - node -v
+      - echo npm -v
+      - npm -v
+      - echo install yarn...
+      - npm install -g yarn
+      - echo yarn -v
+      - yarn -v
+  pre_build:
+    commands:
+      - echo Build started on `date`
+      - yarn install
+  build:
+    commands:
+      - echo Build started on `date`
+      - yarn run build
+cache:
+  paths:
+    - 'node_modules/**/*'
+
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: no
+  base-directory: build
