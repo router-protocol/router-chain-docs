@@ -3,7 +3,7 @@ info:
   title: Pathfinder API
   description: API details for using the pathfinder API to do a cross-chain transfer/swap of tokens
 servers:
-  - url: https://api.stats.routerprotocol.com/api
+  - url: https://api.pathfinder.routerprotocol.com/api
     description: Router protocol mainnet
 tags:
   - name: Quote
