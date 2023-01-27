@@ -76,7 +76,6 @@ Restriction parameters are optional and can be added along with the aforemention
 | dstChains |	List of chainIds separated by a comma that needs to be shown in the destination chain selection menu. |
 | srcTokens |	List of token addresses belonging to the list of srcChains separated by a comma that needs to be shown in the source token selection menu. |
 | dstTokens |	List of token addresses belonging to the list of dstChains separated by a comma that needs to be shown in the destination token selection menu. |
-| feeTokens |	List of addresses of fee tokens belonging to list of srcChains seperated by a comma that needs to be shown in the fee selection menu. Only these fee tokens will be available for the users to select from. |
 
 :::note
 1. `height` and `width` are customizable, but we recommend keeping the aspect ratio close to the default.
