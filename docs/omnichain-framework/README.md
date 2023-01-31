@@ -76,3 +76,22 @@ The guides on this page will explain the process of developing cross-chain appli
   </Section>
 
   </Section>
+
+
+<Section title="Sample dApps using Omnichain Famework" id="web-sdks" hasSubSections >
+  <Section>
+    <Card
+      title="TExchange"
+      description="A dApp for exchanging testnet tokens"
+      to="/omnichain-framework/texchange"
+      icon={<Guide />}
+    />
+    <Card
+      title="Voyager"
+      description="A dApp which provides easy cross-chain swaps"
+      to="/voyager"
+      icon={<Guide />}
+    />
+  </Section>
+</Section>
+
