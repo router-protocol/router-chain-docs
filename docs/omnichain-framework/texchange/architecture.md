@@ -15,14 +15,19 @@ TExchange is connected to multiple chains -
 3. Mainnet chain - the TExchange will be connected to a mainnet chain, this mainnet chain will be used for converting testnet tokens to USDC
 
 ## High Level Architecture
-TEchange utilizes Router's Omnichain Framework to provide the token swap functionality to it's users. The heavy lifting of the swapping algorithm resides on the Router chain while the remaining chains are only used to lock and unlock funds. 
+TExchange utilizes Router's Omnichain Framework to provide the token swap functionality to it's users. The heavy lifting of the swapping algorithm resides on the Router chain while the remaining chains are only used to lock and unlock funds. 
 On Router chain TEchange has a DEX in the background which maintains the liquidity pairs for all the testnet tokens. Each testnet token has a pair with wrapped USDC. Whenever there is a request for a token swap on any chain, the request gets routed to Router chain where the DEX is utilized to convert the token into the required token and then a request is sent to the chain where the token is supposed to be unlocked.
 This architecture makes things much more scalable for TExchange -
 1. Liquidity pools need to be maintained only on a single chain which means there is no liquidity fragmentation
 2. All the heavy logic of swaps via multiple paths is on Router chain which is a low cost chain, making TEchange cost-effective
 3. Given the core logic sits on Router chain, other chains have simple functionality of locking and unlocking tokens. Hence, to extend this functionality across more chains such as non-EVM chains, the amount of effort will be considerably low. 
 
+![image](https://user-images.githubusercontent.com/21297284/216024398-b3ede5e5-707e-456d-83c7-03ac0956afbc.png)
+
+In order to buy/sell/swap testnet tokens, there should be liquidity with rUSDC in RouterDEX to determine the current price of an asset to execute the trade. 
+
 ## User Flow
+
 ### Buy Testnet Tokens
 Users can buy testnet tokens from the TExchange. Below is how the flow works -
 1. User is on the Mainnet chain
@@ -48,6 +53,8 @@ Users can sell their testnet tokens on the TExchange to earn mainnet USDC. Below
 8. On Router chain the inbound messages from Mumbai Polygon chain is received. Same amount of wrapped mMatic is minted and then the DEX is utilized to convert the wmMatic to wUSDC
 9. The middleware contract on Router chain then burns these wUSDC and creates an outbound request to unlock these tokens on the destination (Mainnet) chain
 10. The message is received by the contract on Mainnet chain and it unlocks the required amount of USDC to the user's address
+
+![image](https://user-images.githubusercontent.com/21297284/216024085-6f567523-1adf-4aac-be9d-e632707590aa.png)
 
 ### Swap Testnet Tokens
 Users can swap one testnet token to another testnet token via the TExchange. The flow works as below -
