@@ -2,35 +2,23 @@
 title: Check and Set Allowances
 sidebar_position: 2
 ---
-## Getting Allowance
+:::note
+You need to provide allowance for the wrapped version of the native asset to perform [native asset](../../configurations/native-assets) transfers/swaps.
+:::
 
-### Source Token Allowance
+### Getting Allowance
 
 ```javascript
 const src_token_allowance = await routerprotocol.getSourceTokenAllowance("TOKEN_ADDRESS", "DESTINATION_CHAIN_ID", "USER_ADDRESS")
 ```
 
-### Fee Token Allowance
-
-```javascript
-const fee_token_allowancea = const fee_token_allowance = await routerprotocol.getFeeTokenAllowance("TOKEN_ADDRESS", "DESTINATION_CHAIN_ID", "USER_ADDRESS")
-```
-
-## Setting Approval
-
-### Approving Source Token
+### Setting Approval
 
 ```javascript
 await routerprotocol.approveSourceToken("TOKEN_ADDRESS","USER_ADDRESS", "AMOUNT_TO_BE_APPROVED", "DESTINATION_CHAIN_ID", "SOURCE_SIGNER")
 ```
 
-### Approving Fee Token
-
-```javascript
-await routerprotocol.approveFeeToken("TOKEN_ADDRESS", "USER_ADDRESS", "AMOUNT_TO_BE_APPROVED", "SOURCE_SIGNER")
-```
-
-## Example
+### Example
 
 ```javascript
 import { RouterProtocol } from "@routerprotocol/router-js-sdk"

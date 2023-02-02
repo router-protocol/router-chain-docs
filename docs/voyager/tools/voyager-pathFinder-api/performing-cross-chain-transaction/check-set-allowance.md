@@ -6,10 +6,11 @@ sidebar_position: 2
 Prior to initiating a transaction using any web3 library (ethers.js or web3.js), users must make sure that Router's Reserve Token Handler has the appropriate permissions to use the requested asset in their wallet. You can achieve this via the following piece of code:
 
 :::note
-Router Protocol enables native asset transfers/swaps via their wrapped versions. Therefore, users need to provide an allowance to the wrapped version of the native asset being transferred/swapped. 
+Router Protocol enables native asset transfers/swaps via their wrapped versions. Therefore, users need to provide an allowance to the wrapped version of the native asset being transferred/swapped.
+Native asset and its wrapped asset info is given [here](../../configurations/native-assets).
 :::
 
-```jsx
+```ts
 import { ethers, Contract } from 'ethers'
 
 // ERC20 Contract ABI for "Approve" and "Allowance" functions
@@ -95,7 +96,7 @@ const main = async () => {
     await checkAndSetAllowance(
         wallet,
         '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174', // fromTokenAddress (USDC on Polygon)
-        '0x6e14f48576265272B6CAA3A7cC500a26050Be64E', // addressToApprove (Router's Reserve Token Handler on Polygon)
+        '0x6e14f48576265272B6CAA3A7cC500a26050Be64E', // addressToApprove (Voyager's Reserve Token Handler on Polygon)
         ethers.constants.MaxUint256 // amount to approve (infinite approval)
     );
 }

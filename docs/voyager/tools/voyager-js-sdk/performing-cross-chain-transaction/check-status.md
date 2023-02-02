@@ -11,23 +11,6 @@ const txStatus = await routerprotocol.getTransactionStatus("TXN_HASH")
 Unlike the Asset Swap API, there is no need to provide chainId while querying the status using the SDK as the chainId is included while initializing the RouterProtocol instance.
 :::
 
-<details>
-
-<summary>Response Type</summary>
-
-```javascript
-interface TransactionStatus{
-"tx_status":string,
-"tx_status_code":number,
-"src_chain_id":string,
-"dest_chain_id":string,
-"src_tx_hash":string,
-"dest_tx_hash":string
-}
-```
-
-</details>
-
 ## Sample Request and Response
 
 Checking the status of a cross-chain transaction from Polygon to Fantom:
@@ -39,15 +22,7 @@ import { RouterProtocol } from "@routerprotocol/router-js-sdk"
 import { ethers } from "ethers";
 
 const main = async() => {
-
-// initialize a RouterProtocol instance
-
-// get a quote for USDC transfer from Polygon to Fantom
-
-// get allowance and give the relevant approvals
-
-// execute the transaction
-
+  
 // fetching the status of the transaction
 setTimeout(async function() {
     let status = await routerprotocol.getTransactionStatus(tx.hash) 
@@ -69,7 +44,7 @@ main()
 
 ### Response
 
-```javascript
+```ts
 {
   tx_status: 'Completed',
   tx_status_code: 1,
@@ -79,3 +54,20 @@ main()
   dest_tx_hash: '0xc78cf044c0de46bdaedf661d740bbf09e39ad57074eee89f6856812fda06428f'
 }
 ```
+
+<details>
+
+<summary>Response Type</summary>
+
+```ts
+interface TransactionStatus{
+  "tx_status":string,
+  "tx_status_code":number,
+  "src_chain_id":string,
+  "dest_chain_id":string,
+  "src_tx_hash":string,
+  "dest_tx_hash":string
+}
+```
+
+</details>
