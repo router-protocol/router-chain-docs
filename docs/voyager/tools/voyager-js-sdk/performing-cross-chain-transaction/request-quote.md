@@ -3,87 +3,9 @@ title: Request a Quote
 sidebar_position: 1
 ---
 
-```jsx
-const quote = await routerprotocol.getQuote("AMOUNT", "DESTINATION_CHAIN_ID", "SOURCE_TOKEN_ADDRESS", "DESTINATION_TOKEN_ADDRESS", "USER_ADDRESS", "FEE_TOKEN_ADDRESS", "SLIPPAGE_TOLERANCE")
-```
-<details>
-<summary><b>Response</b></summary>
-
-```jsx
-interface Quote{ 
-    source: {
-    asset: {
-      decimals: number,
-      symbol: string,
-      name: string,
-      chainId: number,
-      address: string,
-      resourceID: string,
-      isMintable: boolean,
-      isWrappedAsset: boolean,
-      tokenInstance: {
-        decimals: number,
-        symbol: string,
-        name: string,
-        chainId: number,
-        address: string
-      }
-    },
-    stableReserveAsset: {
-      decimals: number,
-      symbol: string,
-      name: string,
-      chainId: number,
-      address: string,
-      resourceID: string,
-      isMintable: boolean,
-      isWrappedAsset: boolean
-    },
-    tokenAmount: string,
-    stableReserveAmount: string,
-    path: any[],
-    flags: string[],
-    priceImpact: string,
-    bridgeFee: number,
-    tokenPath: string
-  },
-  destination: {
-    asset: {
-      decimals: number,
-      symbolstring:string,
-      name: string,
-      chainId: number
-      address: string,
-      resourceID: string,
-      isMintable: boolean,
-      isWrappedAsset: boolean,
-      tokenInstance: {
-        decimals: number,
-        symbolstring:string,
-        name: string,
-        chainId: number
-        address: string
-      }
-    },
-    stableReserveAsset: {
-      decimals: number,
-      symbol: string,
-      name: string,
-      chainId: number
-      address: string,
-      resourceID: string,
-      isMintable: boolean,
-      isWrappedAsset: boolean
-    },
-    tokenAmount: string,
-    stableReserveAmount: string,
-    priceImpact: string,
-    tokenPath: string
-  }
-}
-```
-
-</details>
+:::note
+For transferring native assets, use the native token addresses given [here](../../configurations/native-assets).
+:::
 
 ## Sample Request and Response
 Getting a quote for transferring 10 USDC from Polygon to Fantom:
@@ -146,11 +68,7 @@ main()
     path: [],
     flags: [],
     priceImpact: '0',
-    bridgeFee: {
-      token: '0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4',
-      symbol: 'ROUTE',
-      amount: '375000000000000000'
-    },
+    bridgeFeeAmount: '2300',
     tokenPath: '',
     dataTx: [ '0x00' ]
   },
@@ -178,6 +96,8 @@ main()
     },
     tokenAmount: '10000000',
     stableReserveAmount: '10000000',
+    path: [],
+    flags: [],
     priceImpact: '0.00',
     tokenPath: 'USDC',
     dataTx: [ '0x00' ]

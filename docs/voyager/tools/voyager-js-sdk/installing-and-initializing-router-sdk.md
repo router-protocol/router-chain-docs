@@ -12,12 +12,6 @@ or if you prefer yarn, use:
 `yarn add @routerprotocol/router-js-sdk`
 
 After installing the module, import and initialize it into your code:
-```jsx
-import { RouterProtocol } from "@routerprotocol/router-js-sdk"
-
-const routerprotocol = new RouterProtocol("SDK_ID_HERE", "SOURCE_CHAIN_ID", "PROVIDER_HERE")
-await routerprotocol.initialize()
-```
 
 **Example**
 ```jsx
@@ -27,6 +21,7 @@ import { ethers } from "ethers";
 let SDK_ID = 24 // get your unique sdk id by contacting us on Telegram
 let chainId = 137
 const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com", chainId)
+
 const routerprotocol = new RouterProtocol(SDK_ID, chainId, provider)
 await routerprotocol.initialize()
 ```

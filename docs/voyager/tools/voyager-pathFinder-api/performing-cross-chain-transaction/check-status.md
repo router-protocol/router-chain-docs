@@ -41,8 +41,8 @@ const main = async () => {
     }
     
     let params = {
-    txHash: tx.hash,
-    networkId: args.fromTokenChainId // args were defined in step 1 to fetch data from the pathfinder
+        txHash: tx.hash,
+        networkId: args.fromTokenChainId // args were defined in step 1 to fetch data from the pathfinder
     }
     
    setTimeout(async function() {

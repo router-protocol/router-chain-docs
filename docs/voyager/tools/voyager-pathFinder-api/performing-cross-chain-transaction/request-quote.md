@@ -36,8 +36,7 @@ const main = async () => {
         'fromTokenChainId': 137, // Polygon
         'toTokenChainId': 250, // Fantom
         'userAddress': 'YOUR_WALLET_ADDRESS',
-        'feeTokenAddress': '0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4', // ROUTE on Polygon
-        'slippageTolerance': 2,
+        'slippageTolerance': 2, // slippage tolerance percentage
         'widgetId': 24, // get your unique wdiget id by contacting us on Telegram
     }
     

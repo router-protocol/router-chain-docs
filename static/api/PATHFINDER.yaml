@@ -3,7 +3,7 @@ info:
   title: Pathfinder API
   description: API details for using the pathfinder API to do a cross-chain transfer/swap of tokens
 servers:
-  - url: https://api.pathfinder.routerprotocol.com/api
+  - url: https://app.staging2.thevoyager.io/api
     description: Router protocol mainnet
 tags:
   - name: Quote
@@ -13,7 +13,7 @@ tags:
 paths:
   /quote:
     get:
-      summary: Returns a path for executing a cross-chain txn
+      summary: Returns a quote and txn data for executing a cross-chain txn
       tags:
         - Quote
       operationId: quote
@@ -24,64 +24,57 @@ paths:
           required: true
           schema:
             type: string
-          example: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+          example: "0x0FA8781a83E46826621b3BC094Ea2A0212e71B23"
           description: Token address of the asset you wish to transfer from the source chain.
         - in: query
           name: toTokenAddress
           required: true
           schema:
             type: string
-          example: "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75"
+          example: "0x5B4edAd1eE1A3328c113dbae3CB5aE061fBBcD84"
           description: Token address of the asset you wish to receive on the destination chain.
         - in: query
           name: amount
           required: true
           schema:
             type: string
-          example: "10000000"
-          description: "Decimal-adjusted amount of the token to be transferred (for eg: if you want to transfer 1 USDC, you need to send 1000000). You can use ethers.utils.parseUnits function to calculate the decimal-adjusted amount of the source token."
+          example: "3000000000000000000"
+          description: "Decimal-expanded amount of the token to be transferred (for eg: if you want to transfer 1 USDC, you need to send 1000000). You can use ethers.utils.parseUnits function to calculate the decimal-adjusted amount of the source token."
         - in: query
           name: fromTokenChainId
           required: true
           schema:
             type: string
-          example: "137"
-          description: "Network ID of the source chain (eg: 1 for Ethereum, 56 for BNB Chain)"
+          example: "80001"
+          description: "Network ID of the source chain (eg: 80001 for mumbai testnet, 43113 for fuji)"
         - in: query
           name: toTokenChainId
           required: true
           schema:
             type: string
-          example: "250"
+          example: "43113"
           description: Token address of the asset you wish to receive on the destination chain.
-        - in: query
-          name: userAddress
-          required: true
-          schema:
-            type: string
-          example: "0x6F764aFdDFb229986d085C44aBFf6a0225164ad4"
-          description: Wallet address initiating the transaction.
         - in: query
           name: slippageTolerance
           required: false
           schema:
             type: string
           example: "2"
-          description: Percentage change in price at the time of confirmation and the actual price that you are willing to accept. By default, this is set to 1.5.
+          description: Amount of price slippage that you are willing to accept for the trade. By default, it is set to 1.5.
         - in: query
-          name: feeTokenAddress
-          required: false
+          name: userAddress
+          required: true
           schema:
             type: string
-          example: "0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4"
-          description: "Address of the token to use to pay the bridge fees. By default, this is set to the source chain's native gas asset (eg: AVAX on Avalanche)."
+          example: "0x6F764aFdDFb229986d085C44aBFf6a0225164ad4"
+          description: Wallet address initiating the transaction. If userAddress is omitted, only quote is returned without data txn.
         - in: query
           name: destReceiverAddress
           required: false
           schema:
             type: string
           example: "0x6F764aFdDFb229986d085C44aBFf6a0225164ad4"
-          description: Address of the user on the destination chain. By default, this is set the same as userAddress. Required only if you want to transfer the funds to a different address on the destination chain.
+          description: Address of the user on the destination chain. By default, it is set the same as userAddress.
       responses:
         "200":
           description: Empty
@@ -97,7 +90,7 @@ paths:
                 $ref: "#/components/schemas/QuoteErrorResponse"
   /status:
     get:
-      summary: Returns the status of the cross-chain txn
+      summary: Returns the status of a cross-chain txn
       tags:
         - Status
       operationId: status
@@ -108,15 +101,15 @@ paths:
           required: true
           schema:
             type: string
-          example: "0xdfdd98403f4d62d06be7b2116d1a3883317e96f5c7ce51145d1ee41061684207"
+          example: "0x0fac92a29bfa71c4c37e1e3ea8f90ac3dc8457e29268b554f056bc29cf38259d"
           description: Transaction hash of the successfully mined source chain transaction.
         - in: query
           name: networkId
           required: true
           schema:
             type: string
-          example: "56"
-          description: "Network ID of the source chain, i.e. where the transaction was initiated (eg: 137 for Polygon, 56 for BNB Chain)."
+          example: "80001"
+          description: "Network ID of the source chain, i.e. where the transaction was initiated (eg: 80001 for mumbai testnet)."
       responses:
         "200":
           description: Empty
@@ -178,7 +171,7 @@ components:
               properties:
                 decimals:
                   type: int
-                  example: 6
+                  example: 18
                 symbol:
                   type: string
                   example: "USDC"
@@ -187,13 +180,13 @@ components:
                   example: "USDC"
                 chainId:
                   type: int
-                  example: 137
+                  example: 80001
                 address:
                   type: string
-                  example: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+                  example: "0xe91E3aEfEAd645eea8a9007CEe7F64C0c913285F"
                 resourceID:
                   type: string
-                  example: "0x00000000000000000000002791bca1f2de4661ed88a30c99a7a9449aa8417400"
+                  example: "0x0000000000000000000000c25902c1c5c16b9bf73702a8902e26bb0b8da37800"
                 isMintable:
                   type: bool
                   example: false
@@ -211,7 +204,7 @@ components:
                   properties:
                     decimals:
                       type: int
-                      example: 6
+                      example: 18
                     symbol:
                       type: string
                       example: "USDC"
@@ -220,10 +213,10 @@ components:
                       example: "USDC"
                     chainId:
                       type: int
-                      example: 137
+                      example: 80001
                     address:
                       type: string
-                      example: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+                      example: "0xe91E3aEfEAd645eea8a9007CEe7F64C0c913285F"
             stableReserveAsset:
               type: object
               required:
@@ -250,10 +243,10 @@ components:
                   example: 137
                 address:
                   type: string
-                  example: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+                  example: "0xe91E3aEfEAd645eea8a9007CEe7F64C0c913285F"
                 resourceID:
                   type: string
-                  example: "0x00000000000000000000002791bca1f2de4661ed88a30c99a7a9449aa8417400"
+                  example: "0x0000000000000000000000c25902c1c5c16b9bf73702a8902e26bb0b8da37800"
                 isMintable:
                   type: bool
                   example: false
@@ -262,10 +255,10 @@ components:
                   example: false
             tokenAmount:
               type: string
-              example: "10000000"
+              example: "2000000000000000000"
             stableReserveAmount:
               type: string
-              example: "10000000"
+              example: "2000000000000000000"
             path:
               type: array
               example: []
@@ -275,9 +268,9 @@ components:
             priceImpact:
               type: string
               example: "0"
-            bridgeFee:
+            bridgeFeeAmount:
               type: int
-              example: 0
+              example: '1080420000000000000'
             tokenPath:
               type: string
               example: ""
@@ -309,7 +302,7 @@ components:
               properties:
                 decimals:
                   type: int
-                  example: 6
+                  example: 18
                 symbol:
                   type: string
                   example: "USDC"
@@ -318,13 +311,13 @@ components:
                   example: "USD Coin"
                 chainId:
                   type: int
-                  example: 250
+                  example: 43113
                 address:
                   type: string
-                  example: "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75"
+                  example: "0x685A94e520CfA0AdF6b48dF42Fb1AeF8C024EAf5"
                 resourceID:
                   type: string
-                  example: "0x00000000000000000000002791bca1f2de4661ed88a30c99a7a9449aa8417400"
+                  example: "0x0000000000000000000000c25902c1c5c16b9bf73702a8902e26bb0b8da37800"
                 isMintable:
                   type: bool
                   example: false
@@ -342,7 +335,7 @@ components:
                   properties:
                     decimals:
                       type: int
-                      example: 6
+                      example: 18
                     symbol:
                       type: string
                       example: "USDC"
@@ -351,10 +344,10 @@ components:
                       example: "USD Coin"
                     chainId:
                       type: int
-                      example: 250
+                      example: 43113
                     address:
                       type: string
-                      example: "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75"
+                      example: "0x685A94e520CfA0AdF6b48dF42Fb1AeF8C024EAf5"
             stableReserveAsset:
               type: object
               required:
@@ -369,7 +362,7 @@ components:
               properties:
                 decimals:
                   type: int
-                  example: 6
+                  example: 18
                 symbol:
                   type: string
                   example: "USDC"
@@ -378,13 +371,13 @@ components:
                   example: "USDC"
                 chainId:
                   type: int
-                  example: 137
+                  example: 43113
                 address:
                   type: string
-                  example: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+                  example: "0x685A94e520CfA0AdF6b48dF42Fb1AeF8C024EAf5"
                 resourceID:
                   type: string
-                  example: "0x00000000000000000000002791bca1f2de4661ed88a30c99a7a9449aa8417400"
+                  example: "0x0000000000000000000000c25902c1c5c16b9bf73702a8902e26bb0b8da37800"
                 isMintable:
                   type: bool
                   example: false
@@ -393,16 +386,16 @@ components:
                   example: false
             tokenAmount:
               type: string
-              example: "10000000"
+              example: "2000000000000000000"
             stableReserveAmount:
               type: string
-              example: "10000000"
+              example: "2000000000000000000"
             path:
               type: array
               example: []
             path:
               type: array
-              example: ["17716742144"]
+              example: ["2"]
             priceImpact:
               type: string
               example: "0"
@@ -414,12 +407,8 @@ components:
               example: ""
         txn:
           required:
-            - "feeToken"
             - "execution"
           properties:
-            feeToken:
-              type: string
-              example: "0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4"
             execution:
               type: object
               required:
@@ -431,16 +420,16 @@ components:
               properties:
                 from:
                   type: string
-                  example: "0xD29D5603edc7666dD99328b1e205bD2F33B441f6"
+                  example: "0xB00BC9e04698A3315B6038225a2E9e42D63C7669"
                 to:
                   type: string
-                  example: "0xf18aCC02628009231d7BAAF9a7a24C0860Dda6cb"
+                  example: "0x98Ef834a3415f8651A99a87929b6244D0c81A8d2"
                 data:
                   type: string
                   example: "0x"
                 value:
                   type: string
-                  example: "0"
+                  example: "0x00"
                 gasLimit:
                   type: string
                   example: "0x0f4240"
@@ -493,13 +482,13 @@ components:
           example: 1
         src_chain_id:
           type: string
-          example: "137"
+          example: "80001"
         dest_chain_id:
           type: string
-          example: "56"
+          example: "43113"
         src_tx_hash:
           type: string
-          example: "0x0d52f66fc13b5d7c1c24d856293effa399bb8189f0a6e2f495400ff5f6eb8966"
+          example: "0x0fac92a29bfa71c4c37e1e3ea8f90ac3dc8457e29268b554f056bc29cf38259d"
         dest_tx_hash:
           type: string
-          example: "0x563f4c5bf6b606b38f7d5e4c906902e95e53da18bc1ee348daec733a720e5cab"
+          example: "0x41f23c9bd5853af4805f04da5ac719b1bcbd3fcd193c08168cb4aead2d2626b7"
