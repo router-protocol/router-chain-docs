@@ -28,7 +28,6 @@ import GuidesSection from '../components/GuidesSection';
 
 export default function Homepage() {
   const router = useHistory();
-
   return (
     <Layout
       description="The Router blockchain is a decentralized network built using the Cosmos SDK. Router leverages Tendermint's consensus engine and is run by a network of validators with economic incentives to act honestly."
