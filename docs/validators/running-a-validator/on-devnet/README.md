@@ -13,6 +13,6 @@ The initial miniumum recommended hardware specifications is provided below. This
 
 ## Running a Validator on Router Devnet
 To run a validator on Router chain's Devnet, you will need to go through the below 3 steps -
-- [Sentry node on devnet](./sentry-node-devnet)
-- [Becoming a Validator](./becoming-validator)
-- [Configure and run orchestrator](./configure-run-orchestrator)
+- [Sentry node on devnet](../../../validators/running-a-validator/on-devnet/sentry-node-devnet)
+- [Becoming a Validator](../../../validators/running-a-validator/on-devnet/becoming-validator)
+- [Configure and run orchestrator](../../../validators/running-a-validator/on-devnet/configure-run-orchestrator)
