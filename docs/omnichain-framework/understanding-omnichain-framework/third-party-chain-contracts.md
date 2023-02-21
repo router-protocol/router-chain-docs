@@ -12,14 +12,18 @@ In addition to calling the aforementioned function, the recipient contract on th
 ```jsx
 function requestToRouter(
 	bytes memory payload, 
-	string memory routerBridgeContract
+	string memory routerBridgeContract,
+	uint64 gasLimit,
+	address feePayer
 ) external returns (uint64)
 ```
 
 This is a function on the Router’s Gateway contracts. This function creates a request to send a payload to the middleware contract on the Router Chain. It takes the following arguments: 
 
-1. ****payload:** The payload to be sent. It should be in bytes format. You can send anything as a payload and handle it accordingly on the middleware.
+1. **payload:** The payload to be sent. It should be in bytes format. You can send anything as a payload and handle it accordingly on the middleware.
 2. **routerBridgeContract:** Address of your middleware contract on the Router Chain.
+3. **gasLimit:** The gas limit required to execute the request on the Router chain.
+4. **feePayer:** Address on the Router chain from which the cross-chain fee will be deducted. It can be either one of the three: (a) the user address, (b) the application contract address, or (c) `NONE`. If the `feePayer` address is set to `NONE`, then any entity on the Router chain can act as the feePayer. 
 
 This function returns a nonce that serves as an identifier to your call to the Gateway contract. In this way, one can create a request to interact with the middleware contract on the Router Chain.
 

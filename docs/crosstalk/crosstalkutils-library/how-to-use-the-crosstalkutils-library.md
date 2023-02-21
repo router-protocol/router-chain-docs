@@ -22,7 +22,7 @@ Consider an application that allows users to transfer their ERC20 tokens from on
 ```javascript
 function singleRequestWithoutAcknowledgement(
     address gatewayContract,
-    uint64 expiryTimestamp,
+    Utils.RequestArgs memory requestArgs, 
     Utils.DestinationChainParams memory destChainParams, 
     bytes memory destinationContractAddress, 
     bytes memory payload
@@ -38,7 +38,7 @@ function singleRequestWithoutAcknowledgement(
  ```javascript
  uint64 nonce = CrossTalkUtils.singleRequestWithoutAcknowledgement(
 	gatewayContractAddress, // in address format
-	expiryTimestamp, // uint64
+     requestArgs, // format given in point 2 below
 	destinationChainParams, // format given in point 3 below
 	destinationContractAddress, // in bytes
 	payload // bytes
@@ -47,7 +47,14 @@ function singleRequestWithoutAcknowledgement(
 While calling the **`singleRequestWithoutAcknowledgement`** function on the CrossTalkUtils library, we need to pass the following parameters:
 
 1.  **gatewayContractAddress:** The address of the Router's Gateway contract.
-2. **expiryTimestamp:** The timestamp by which your cross-chain call will expire. If your call is not executed on the destination chain by this time, it will be reverted. If you don't want any expiry timestamp, pass **`type(uint64).max`** as the expiryTimestamp.
+2. **requestArgs:** Relevant subparameters for the function call:
+```javascript
+    struct Utils.RequestArgs(
+        uint64 expTimestamp,
+        bool isAtomicCalls, // optional, since it doesn't matter in a single request
+		address feePayer
+)
+```
 3.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, and the chain ID here.
 ```javascript
     struct Utils.DestinationChainParams(
@@ -103,7 +110,7 @@ Consider an application that allows users to send a message (ping) from the sour
 ```javascript
 function singleRequestWithAcknowledgement(
     address gatewayContract,
-    uint64 expiryTimestamp,
+    Utils.RequestArgs memory requestArgs, 
     Utils.AckType ackType,
     Utils.AckGasParams memory ackGasParams,
     Utils.DestinationChainParams memory destChainParams, 
@@ -121,10 +128,10 @@ function singleRequestWithAcknowledgement(
  ```javascript
 uint64 nonce = CrossTalkUtils.singleRequestWithAcknowledgement(
 	gatewayContract, // in address format
-	expiryTimestamp, // uint64
-	ackType, // Format given in point 3 below
-  ackGasParams, // Format given in point 4 below
-	destinationChainParams, // Format given in point 5 below
+     requestArgs, // format given in point 2 below
+	ackType, // format given in point 3 below
+    ackGasParams, // format given in point 4 below
+	destinationChainParams, // format given in point 5 below
 	destinationContractAddress, // in bytes
 	payload // in bytes
 );
@@ -132,7 +139,14 @@ uint64 nonce = CrossTalkUtils.singleRequestWithAcknowledgement(
 While calling the **`singleRequestWithAcknowledgement`** function on the CrossTalkUtils library, we need to pass the following parameters:
 
 1.  **gatewayContractAddress:** The address of the Router's Gateway contract.
-2. **expiryTimestamp:** The timestamp by which your cross-chain call will expire. If your call is not executed on the destination chain by this time, it will be reverted. If you don't want any expiry timestamp, pass **`type(uint64).max`** as the expiryTimestamp.
+2. **requestArgs:** Relevant subparameters for the function call:
+```javascript
+    struct Utils.RequestArgs(
+        uint64 expTimestamp,
+        bool isAtomicCalls, // optional, since it doesn't matter in a single request
+		address feePayer
+)
+```
 3.  **ackType:**
     1. Set this to **ACK_ON_SUCCESS** if you only want to get acknowledgment when the execution on the destination chain is successful.
     2. Set this to **ACK_ON_ERROR** if you only want to get acknowledgment when the execution on the destination chain failed.
@@ -207,8 +221,7 @@ Consider an application that allows users to transfer multiple ERC20 tokens or m
 ```javascript
 function multipleRequestsWithoutAcknowledgement(
     address gatewayContract,
-    uint64 expiryTimestamp,
-    bool isAtomicCalls,
+    Utils.RequestArgs memory requestArgs, 
     Utils.DestinationChainParams memory destChainParams, 
     bytes[] memory destinationContractAddresses, 
     bytes[] memory payloads
@@ -224,9 +237,8 @@ function multipleRequestsWithoutAcknowledgement(
  ```javascript
     uint64 nonce = CrossTalkUtils.multipleRequestsWithoutAcknowledgement(
 	gatewayContract, // in address format
-	expiryTimestamp, // uint64
-	isAtomicCalls, // bool 
-	destinationChainParams, // format given in point 4 below
+     requestArgs, // format given in point 2 below
+	destinationChainParams, // format given in point 3 below
 	destinationContractAddresses, // in bytes array format
 	payloads // in bytes array format
 );
@@ -234,9 +246,15 @@ function multipleRequestsWithoutAcknowledgement(
 While calling the **`multipleRequestsWithoutAcknowledgement`** function on the CrossTalkUtils library, we need to pass the following parameters:
 
 1.  **gatewayContractAddress:** The address of the Router's Gateway contract.
-2. **expiryTimestamp:** The timestamp by which your cross-chain call will expire. If your call is not executed on the destination chain by this time, it will be reverted. If you don't want any expiry timestamp, pass **`type(uint64).max`** as the expiryTimestamp.
-3. **isAtomicCalls**: Set it to true if you want to ensure that either all your contract calls are executed or none of them are executed. Set it to false if you do not require atomicity. 
-4.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, and the chain ID here.
+2. **requestArgs:** Relevant subparameters for the function call:
+```javascript
+    struct Utils.RequestArgs(
+        uint64 expTimestamp,
+        bool isAtomicCalls, // set it to true if you want the calls to be atomic
+		address feePayer
+)
+```
+3.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, and the chain ID here.
 ```javascript
     struct Utils.DestinationChainParams(
 		uint64 gasLimit, 
@@ -245,7 +263,7 @@ While calling the **`multipleRequestsWithoutAcknowledgement`** function on the C
 		string memory destChainId
 )
 ```
-5.  **destinationContractAddresses:** Addresses of the contracts on the destination chain to which the individual payloads should be sent. These addresses should be in bytes format. You can use the **`toBytes`** function in the library to convert the address to bytes format. The array of destination contract addresses can be created in the following way:
+4.  **destinationContractAddresses:** Addresses of the contracts on the destination chain to which the individual payloads should be sent. These addresses should be in bytes format. You can use the **`toBytes`** function in the library to convert the address to bytes format. The array of destination contract addresses can be created in the following way:
     ```javascript
     bytes memory destinationContractAddress1 = toBytes(contractAddress1);
     bytes memory destinationContractAddress2 = toBytes(contractAddress2);
@@ -254,7 +272,7 @@ While calling the **`multipleRequestsWithoutAcknowledgement`** function on the C
     destinationContractAddresses[1] = destinationContractAddress2;
     ```
     For simplicity, we have only used two destination contract addresses in this example. You can send as many addresses as you want.
-6.  **payload:** The payloads you want to send to the respective destination contract addresses. These should be of type bytes. The array of payloads can be created in the following way:
+5.  **payload:** The payloads you want to send to the respective destination contract addresses. These should be of type bytes. The array of payloads can be created in the following way:
     ```javascript
     bytes[] memory payloads = new bytes[](2);
     payloads[0] = payload1;
@@ -294,7 +312,7 @@ function handleCrossTalkAck(
 </details>
 
 
-#### (c) Multiple Calls with Acknowledgment
+#### (d) Multiple Calls with Acknowledgment
 Consider an application that allows users to send multiple messages (pings) from the source chain and receive a message in response (pong) to all those messages from the destination chain. In this case, the requirements are as follows:
 
 1.  We need to send multiple contract calls for execution to the destination chain contract.
@@ -303,8 +321,7 @@ Consider an application that allows users to send multiple messages (pings) from
 ```javascript
 function multipleRequestsWithAcknowledgement(
     address gatewayContract,
-    uint64 expiryTimestamp,
-    bool isAtomicCalls,
+    Utils.RequestArgs memory requestArgs, 
     Utils.AckType ackType,
     Utils.AckGasParams memory ackGasParams,
     Utils.DestinationChainParams memory destChainParams, 
@@ -322,9 +339,8 @@ function multipleRequestsWithAcknowledgement(
  ```javascript
     uint64 nonce = CrossTalkUtils.multipleRequestsWithoutAcknowledgement(
 	gatewayContract, // in address format
-	expiryTimestamp, // uint64
-	isAtomicCalls, // bool 
-	destinationChainParams, // format given in point 4 below
+     requestArgs, // format given in point 2 below
+	destinationChainParams, // format given in point 3 below
 	destinationContractAddresses, // in bytes array format
 	payloads // in bytes array format
 );
@@ -332,9 +348,15 @@ function multipleRequestsWithAcknowledgement(
 While calling the **`multipleRequestsWithAcknowledgement`** function on the CrossTalkUtils library, we need to pass the following parameters:
 
 1.  **gatewayContractAddress:** The address of the Router's Gateway contract.
-2. **expiryTimestamp:** The timestamp by which your cross-chain call will expire. If your call is not executed on the destination chain by this time, it will be reverted. If you don't want any expiry timestamp, pass **`type(uint64).max`** as the expiryTimestamp.
-3. **isAtomicCalls**: Set it to true if you want to ensure that either all your contract calls are executed or none of them are executed. Set it to false if you do not require atomicity. 
-4.  **ackType:**
+2. **requestArgs:** Relevant subparameters for the function call:
+```javascript
+    struct Utils.RequestArgs(
+        uint64 expTimestamp,
+        bool isAtomicCalls, // set it to true if you want the calls to be atomic
+		address feePayer
+)
+```
+3.  **ackType:**
     1. Set this to **ACK_ON_SUCCESS** if you only want to get acknowledgment when the execution on the destination chain is successful.
     2. Set this to **ACK_ON_ERROR** if you only want to get acknowledgment when the execution on the destination chain failed.
     3. Set this to **ACK_ON_BOTH** if you want to get acknowledgment in both the cases (success and failure).
@@ -343,7 +365,7 @@ While calling the **`multipleRequestsWithAcknowledgement`** function on the Cros
     ```javascript
     enum Utils.AckType(NO_ACK, ACK_ON_SUCCESS, ACK_ON_ERROR, ACK_ON_BOTH)
     ```
-5.  **ackGasParams:**
+4.  **ackGasParams:**
     1. **ackGasLimit:** Gas limit for execution of the function **`handleCrossTalkAck`** on the source chain.
     2. **ackGasPrice:** Gas price with which you want to execute the aforementioned function on the source chain.
 
@@ -351,7 +373,7 @@ While calling the **`multipleRequestsWithAcknowledgement`** function on the Cros
     ```javascript
     struct Utils.AckGasParams(uint64 ackGasLimit, uint64 ackGasPrice)
     ```
-6.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, and the chain ID here.
+5.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, and the chain ID here.
 ```javascript
     struct Utils.DestinationChainParams(
 		uint64 gasLimit, 
@@ -360,7 +382,7 @@ While calling the **`multipleRequestsWithAcknowledgement`** function on the Cros
 		string memory destChainId
 )
 ```
-7.  **destinationContractAddresses:** Addresses of the contracts on the destination chain to which the individual payloads should be sent. These addresses should be in bytes format. You can use the **`toBytes`** function in the library to convert the address to bytes format. The array of destination contract addresses can be created in the following way:
+6.  **destinationContractAddresses:** Addresses of the contracts on the destination chain to which the individual payloads should be sent. These addresses should be in bytes format. You can use the **`toBytes`** function in the library to convert the address to bytes format. The array of destination contract addresses can be created in the following way:
     ```javascript
     bytes memory destinationContractAddress1 = toBytes(contractAddress1);
     bytes memory destinationContractAddress2 = toBytes(contractAddress2);

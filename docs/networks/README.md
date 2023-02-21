@@ -3,7 +3,8 @@ sidebar_position: 1
 ---
 # Public Endpoints
 
-These following API's are recommended for development purposes. For maximun control and reliability it's recommended to run your own Router node. This can be easily accomplished by following the intstruction given in this [git repository](https://github.com/router-protocol/router-chain).
+The following API's are recommended for development purposes.
+<!-- For maximum control and reliability, it's recommended to run your own Router node. This can be easily accomplished by following the intstruction given in this [git repository](https://github.com/router-protocol/router-chain). -->
 
 ## Official Public Endpoints 
 

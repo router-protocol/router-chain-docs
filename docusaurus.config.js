@@ -252,7 +252,7 @@ const config = {
             items: [
               {
                 label: 'Whitepaper',
-                href: 'https://www.notion.so/Whitepaper-6ff260cc05424b6ca2ea30e6dc59ab2b',
+                href: 'https://www.routerprotocol.com/whitepaper',
               },
               {
                 label: 'Developer Portal',

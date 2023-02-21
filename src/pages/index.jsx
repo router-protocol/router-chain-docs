@@ -55,7 +55,7 @@ export default function Homepage() {
             />
             <Card
               title="Choosing the Right Cross-chain Framework"
-              description="Router Protocol provides a host of cross-chain solutions. Go through this guide to understand which one's the right one for you."
+              description="Router Protocol provides a host of cross-chain solutions. Go through this guide to understand which one's right for you."
               to="/overview/choosing-the-right-framework"
             />
             {/* <Card
@@ -91,7 +91,7 @@ export default function Homepage() {
   /> */}
               <Card
                 title="Installing Prerequisites"
-                description="Setting up the machine for developing on the Router Chain"
+                description="Set up your machine to start developing on the Router Chain"
                 to="/router-core/installing-prerequisites"
                 icon={<IDEIcon />}
               />

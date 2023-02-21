@@ -1,9 +1,7 @@
 # On Devnet 
 
 ## Hardware Specification
-Validators should expect to provision one or more data center locations with redundant power, networking, firewalls, HSMs and servers.
-
-The initial miniumum recommended hardware specifications is provided below. This might rise as network usage increases.
+Validators should be able to host one or more data center locations with redundant power, networking, firewalls, HSMs, and servers. The initial minimum recommended hardware specifications are specified below. These may change as network usage increases.
 
 ```jsx
 4+ vCPU x64 2.0+ GHz
@@ -12,7 +10,7 @@ The initial miniumum recommended hardware specifications is provided below. This
 ```
 
 ## Running a Validator on Router Devnet
-To run a validator on Router chain's Devnet, you will need to go through the below 3 steps -
-- [Sentry node on devnet](./sentry-node-devnet)
-- [Becoming a Validator](./becoming-validator)
-- [Configure and run orchestrator](./configure-run-orchestrator)
+To run a validator on Router chain's Devnet, follow these 3 steps:
+- [Run a Sentry Node on Devnet](./on-devnet/run-a-sentry-node-on-devnet)
+- [Create a Validator Account](./on-devnet/create-a-validator-account)
+- [Configure and Run an Orchestrator Instance](./on-devnet/configure-and-run-an-orchestrator-instance)

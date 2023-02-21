@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkrouter_docs=self.webpackChunkrouter_docs||[]).push([[2309],{46672:s=>{s.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"osmojs"}')}}]);
