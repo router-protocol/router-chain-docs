@@ -11,6 +11,8 @@ import {
   ChainIcon,
   IDEIcon,
   TerminalIcon,
+  APIReferenceIcon,
+  Telescope,
   ModulesIcon,
   RelayerIcon,
   AssetIcon,
@@ -48,6 +50,18 @@ The guides on this page will explain the process of developing on Router's Cross
     description="Learning how to execute different types of cross-chain requests using CrossTalk."
     to="/crosstalk/different-types-of-requests"
     icon={<ModulesIcon />}
+  />
+  <Card
+    title="Fee Management"
+    description="Gaining a deeper understanding of how the CrossTalk fee is computed"
+    to="/crosstalk/fee-management"
+    icon={<AssetIcon />}
+  />
+    <Card
+    title="Cross-chain Read Requests"
+    description="Learning how to query data from different chains in a decentralized manner"
+    to="/crosstalk/cross-chain-read-requests"
+    icon={<Telescope />}
   />
   </Section>
 

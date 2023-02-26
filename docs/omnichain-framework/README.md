@@ -11,6 +11,7 @@ import {
   ChainIcon,
   IDEIcon,
   TerminalIcon,
+  APIReferenceIcon,
   ModulesIcon,
   RelayerIcon,
   AssetIcon,
@@ -42,6 +43,18 @@ The guides on this page will explain the process of developing cross-chain appli
     to="/omnichain-framework/understanding-omnichain-framework"
     icon={<OsmosisCore />}
   /> 
+    <Card
+    title="Fee Management"
+    description="Gaining a deeper understanding of how the OmniChain fee is computed"
+    to="/omnichain-framework/fee-management"
+    icon={<AssetIcon />}
+  />
+    <Card
+    title="Cross-chain Meta Transactions"
+    description="Understanding how Router enables meta transactions in a cross-chain environment"
+    to="/omnichain-framework/cross-chain-meta-transactions"
+    icon={<APIReferenceIcon />}
+  />
   </Section>
 
   </Section>

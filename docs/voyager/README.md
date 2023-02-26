@@ -47,6 +47,12 @@ The guides on this page will explain the process of developing using Voyager. If
     to="/voyager/building-different-use-cases"
     icon={<ModulesIcon />}
   />
+      <Card
+    title="Fee Model"
+    description="Gaining a deeper understanding of how the Voyager fee is computed"
+    to="/voyager/fee-model"
+    icon={<AssetIcon />}
+  />
   </Section>
 
   </Section>
