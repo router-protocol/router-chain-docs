@@ -35,18 +35,10 @@ The flow is almost the same as that of token transfers. The main difference here
     No need to worry. We provide a replay function on our bridge contract on the Router Chain which can be called by any user to replay a failed request. You can fix the issues and call this replay function to replay your transaction on the destination chain. Your funds are safe!
     
 
-### Fee Mechanism for Token Transfers/Swaps
+### Fee Mechanism
 
 The fee is calculated on the bridge contract on the Router Chain based on the source chain, destination chain, the transaction volume and some other parameters. The fee consists of a flat fee and an additional bips based fee based on the transaction volume. 
 
 The fee is deducted directly from the tokens transferred to the Voyager Deposit Handler on the source chain and the remaining amount of tokens are transferred to the recipient on the destination chain.
 
 If the fee required for transaction is greater than the amount being transferred and the cost of reverting it is lesser than the amount transferred, the transaction will be reverted back on the source chain by a request from the bridge contract on the Router Chain.
-
-### Fee Mechanism for Arbitrary Instructions along with Token Transfers/Swaps
-
-The fee mechanism for arbitrary instructions transfer along with the funds differs from that of normal fund transfers across chains because with arbitrary instructions, the user wants the same amount of tokens to be credited on the destination chain as were deducted on the source chain. 
-
-The fees here entails the fees for token transfer plus the amount of gas limit passed for arbitrary instruction transfer to the destination chain. The fees will be deducted in the form of WRoute tokens on the Voyager middleware contract on the Router Chain from an account which will be known as fee payer. 
-
-For this, the application has to register with Voyager by contacting the Voyager team to set an account as a fee payer admin for the application. This fee payer admin can then set any account on Router chain as the fee payer for requests originating from that application. Also the fee payer has to confirm on the Voyager middleware that it indeed wants to pay the fees for this application. This is a one time process and once done, fees for every request that originates from that application will be paid by the fee payer account. The fee payer admin can also change the fee payer address in the future by following the similar process.

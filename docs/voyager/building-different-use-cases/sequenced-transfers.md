@@ -88,49 +88,33 @@ This gives us the arbitrary data which can be used to call the functions of the 
 
 ```javascript
 address public voyagerDepositHandler = "address of voyager deposit handler";
-// depositReserveTokenAndExecute(bool,bytes,bytes,bytes)
-bytes4 public constant DEPOSIT_RESERVE_AND_EXECUTE_SELECTOR = 0x2dc2ab1d;
-// depositNonReserveTokenAndExecute(bool,bytes,bytes,bytes)
-bytes4 public constant DEPOSIT_NON_RESERVE_AND_EXECUTE_SELECTOR = 0x2c191edd;
-// depositLPTokenAndExecute(bytes,bytes,bytes)
-bytes4 public constant DEPOSIT_LP_AND_EXECUTE_SELECTOR = 0x1c117a77;
+// depositReserveTokenAndExecute(bool,bool,bytes,bytes,bytes)
+bytes4 public constant DEPOSIT_RESERVE_AND_EXECUTE_SELECTOR = 0xf64d944a;
+// depositNonReserveTokenAndExecute(bool,bool,bytes,bytes,bytes)
+bytes4 public constant DEPOSIT_NON_RESERVE_AND_EXECUTE_SELECTOR = 0x79334b17;
+// depositLPTokenAndExecute(bool,bytes,bytes,bytes)
+bytes4 public constant DEPOSIT_LP_AND_EXECUTE_SELECTOR = 0xe18cfa35;
 
 function callVoyager(
-    bytes4 depositFunctionSelector, 
-    bytes calldata dataForTokenTransfer, 
+    bytes4 selector,
+    bool isSourceNative,
+    bool isAppTokenPayer,
+    bytes memory swapData,
+    bytes memory executeData,
     bytes memory arbitraryData
 ) public 
 {
 	bool success;
-	bytes memory data;
-	if(
-		depositFunctionSelector == DEPOSIT_RESERVE_AND_EXECUTE_SELECTOR ||
-		depositFunctionSelector == DEPOSIT_NON_RESERVE_AND_EXECUTE_SELECTOR 
-	) {
-		(bool isSourceNative, bytes memory swapData, bytes memory executeData) 
-				= abi.decode(data, (bool, bytes, bytes));
-		(success, data) = voyagerDepositHandler.call(
-				abi.encodeWithSelector(
-                    depositFunctionSelector, 
-                    isSourceNative, 
-                    swapData, 
-                    executeData,
-                    arbitraryData
-                )
-		);
-	} else if(depositFunctionSelector == DEPOSIT_LP_AND_EXECUTE_SELECTOR ) {
-		(bytes memory swapData, bytes memory executeData) 
-				= abi.decode(data, (bytes, bytes));
-		(success, data) = voyagerDepositHandler.call(
-				abi.encodeWithSelector(
-                    DEPOSIT_LP_AND_EXECUTE_SELECTOR, 
-                    swapData, 
-                    executeData,
-                    arbitraryData
-                )
-		 );
-	
-	}
+
+    if (selector == DEPOSIT_RESERVE_AND_EXECUTE_SELECTOR || selector == DEPOSIT_NON_RESERVE_AND_EXECUTE_SELECTOR) {
+        (success, ) = voyagerDepositHandler.call{ value: msg.value }(
+            abi.encodeWithSelector(selector, isSourceNative, isAppTokenPayer, swapData, executeData, arbitraryData)
+        );
+    } else {
+        (success, ) = voyagerDepositHandler.call{ value: msg.value }(
+            abi.encodeWithSelector(selector, isAppTokenPayer, swapData, executeData, arbitraryData)
+        );
+    }
 
 	require(success == true, "Voyager deposit failed");
 } 
@@ -207,3 +191,5 @@ function stake(
 ```
 
 In this way, you can handle cross-chain requests from the Voyager on the destination chain.
+
+- [Cross-chain Staking Dapp](./crosschain-staking)
