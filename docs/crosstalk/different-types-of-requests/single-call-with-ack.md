@@ -16,10 +16,10 @@ To implement such functionality using Router CrossTalk, follow these steps:
 We will initiate a cross-chain request from the source chain by calling the `requestToDest` function on Router's source chain Gateway contract.
 ```javascript
 gatewayContract.requestToDest(
-    Utils.RequestArgs(expiryTimstamp, isAtomicCalls, feePayer),
+    Utils.RequestArgs(expiryTimstamp, isAtomicCalls),
 	Utils.AckType.ACK_ON_BOTH,
 	Utils.AckGasParams(ackGasLimit,ackGasPrice),
-	Utils.DestinationChainParams(destGasLimit, destGasPrice, chainType, chainId),
+	Utils.DestinationChainParams(destGasLimit, destGasPrice, chainType, chainId, asmAddress),
 	Utils.ContractCalls(payloads, addresses)
 );
 ```
@@ -29,7 +29,6 @@ While calling the **`requestToDest`** function on the Gateway contract, we need 
 1. **requestArgs:**
     - **expiryTimestamp:** If you want to add a specific expiry timestamp, you can mention it against this parameter. Your request will get reverted if it is not executed before the expiryTimestamp. If you don't want any expiryTimestamp, you can use **`type(uint64).max`** as the expiryTimestamp.
     -  **isAtomicCalls:** Set it to false, as there is only one call, so there is no difference in atomic or non-atomic calls.
-    - **feePayer:** Set it either to the sender address, the contract address initiating the request or to `NONE`. If set to `NONE`, anyone can act as the fee payer for the request. 
 
 2.  **ackType:**
     1. Set this to **ACK_ON_SUCCESS** if you only want to get acknowledgment when the execution on the destination chain is successful.
@@ -39,7 +38,7 @@ While calling the **`requestToDest`** function on the Gateway contract, we need 
     1. **ackGasLimit:** Gas limit for execution of the function **`handleCrossTalkAck`** on the source chain.
     2. **ackGasPrice:** Gas price with which you want to execute the aforementioned function on the source chain.
 
-4.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, and the chain ID here.
+4.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM Module here.
 
 5.  **contractCalls:** Encode the payload and the destination contract address in byte arrays and pass them in this function. The payload consists of the ABI-encoded data you want to send to the other chain. The destinationContractAddress is the address of the recipient contract on the destination chain that will handle the cross-chain request. It can be created in the following way:
 

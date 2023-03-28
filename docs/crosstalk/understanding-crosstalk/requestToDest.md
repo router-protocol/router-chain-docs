@@ -21,7 +21,6 @@ A struct comprising of the following subparameters:
 2. **isAtomicCalls:** Since users can use **`requestToDest`** to send multiple cross-chain calls in one go, isAtomicCalls boolean value ensures whether the calls are atomic.
   -  If this variable is set to **true**, either all the contract calls will be executed on the destination chain or none of them will be executed.
   -  If this variable is set to **false**, even if some of the contracts calls fail on the destination chain, other calls won't be affected.
-3. **feePayer:** This specifies the address on the Router chain from which the cross-chain fee will be deducted. 
 
 
 ### 2. ackType
@@ -58,12 +57,14 @@ struct DestinationChainParams {
     uint64 gasPrice;
     uint64 destChainType;
     string destChainId;
+    bytes asmAddress
 }
 ```
 1.  **gasLimit:** Gas limit required to execute the cross-chain request on the destination chain.
 2.  **gasPrice:** Gas price to be passed on the destination chain.
 3.  **destChainType:** This represents the type of chain. The values for chain types can be found [here](./chainTypes).
 4.  **destChainId:** Chain ID of the destination chain in string format.
+5.  **asmAddress:** Address of AddOnShield Module (ASM) contract that acts as a plugin which enables users to seamlessly integrate their own security mechanism into their DApp.
 
 ### 5. contractCalls
 ```

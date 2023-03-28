@@ -10,7 +10,8 @@ In this section we will go through how a cross-chain ERC-1155 NFT can be created
 
 Install the evm-gateway contracts with the following command:
 
-`yarn add evm-gateway-contract`  or  `npm install evm-gateway-contract`
+`yarn add @routerprotocol/evm-gateway-contracts`  or  `npm install @routerprotocol/evm-gateway-contracts`
+- Make sure you're using version `1.0.4`.
 
 Install the openzeppelin contracts library with the following command:
 
@@ -19,11 +20,12 @@ Install the openzeppelin contracts library with the following command:
 ### Instantiating the contract:
 
 ```javascript
+//SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.0 <0.9.0;
 
-import "evm-gateway-contract/contracts/IGateway.sol";
-import "evm-gateway-contract/contracts/ICrossTalkApplication.sol";
-import "evm-gateway-contract/contracts/Utils.sol";
+import "@routerprotocol/evm-gateway-contracts/contracts/IGateway.sol";
+import "@routerprotocol/evm-gateway-contracts/contracts/ICrossTalkApplication.sol";
+import "@routerprotocol/evm-gateway-contracts/contracts/Utils.sol";
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 
 contract XERC1155 is ERC1155, ICrossTalkApplication {
@@ -50,14 +52,19 @@ struct TransferParams {
 }
 
 constructor(
-    string memory uri,
-	address payable gatewayAddress, 
-	uint64 _destGasLimit
-) ERC1155(uri) {
-    gatewayContract = IGateway(gatewayAddress);
-	destGasLimit = _destGasLimit;
-	admin = msg.sender;
-}
+	  string memory uri,
+		address payable gatewayAddress, 
+		uint64 _destGasLimit
+	) ERC1155(uri) {
+	  gatewayContract = IGateway(gatewayAddress);
+		destGasLimit = _destGasLimit;
+		admin = msg.sender;
+        uint256[] memory _ids = new uint256[](1);
+        uint256[] memory _amounts = new uint256[](1);
+        _ids[0] = 1;
+        _amounts[0] = 10;
+        _mintBatch(msg.sender, _ids, _amounts, "0x");
+	}
 ```
 
 1. Create a variable **admin** of type address which stores the address of the admin. This address will be used for access control purposes.
@@ -85,7 +92,18 @@ constructor(
     2. **nftAmounts:** An array of amounts of the respective NFT Ids to be transferred to the recipient on the destination chain.
     3. **nftData:** Arbitrary data to be used while minting the NFT. You can send `0x00` if you don’t want to send any data while minting the NFT.
     4. **recipient:** Address (in bytes format) of the recipient of the NFTs on the destination chain.
-6. Create the constructor with the URI of the NFT metadata, address of gateway contract and the destination gas limit and set these variables inside the constructor. Also initialise the ERC1155 contract by passing it the URI with the constructor as shown above. Also set the admin as msg sender inside the constructor so that the deployer is the admin.
+6. Create the constructor with the URI of the NFT metadata, address of gateway contract and the destination gas limit and set these variables inside the constructor. Also initialise the ERC1155 contract by passing it the URI with the constructor as shown above. Also set the admin as msg sender inside the constructor so that the deployer is the admin. After that, mint some nfts to the deployer so that the cross-chain transfer functionality can be taken into action.
+
+### Setting the fee payer address through setDappMetadata function
+```javascript
+function setDappMetadata(
+    string memory FeePayer
+    ) public {
+    require(msg.sender == owner, "Only owner can set the metadata");
+    gatewayContract.setDappMetadata(FeePayer);
+  }
+```
+We have a function `setDappMetadata` in our gateway contract that takes the address of the fee payer on router chain from which the cross-chain fee will be deducted. User has to call the function as shown in the code snippet above. After the fee payer address is set, the fee payer has to provide approval on the router chain that this address is willing to pay fees for this Dapp thus enabling the Dapp to actually perform the cross-chain transaction. Note that all the fee refunds will be credited to this fee payer address.
 
 ### Transferring an NFT from a source chain to a destination chain
 
@@ -93,51 +111,55 @@ constructor(
 function transferCrossChain(
     uint64 chainType,
     string memory chainId,
-    uint64 expiryDurationInSeconds,
+	uint64 expiryDurationInSeconds,
     uint64 destGasPrice,
-    TransferParams memory transferParams
+    TransferParams memory transferParams,
+    bytes memory asmAddress
   ) public payable {
 		// burning the NFTs from the address of the user calling this function
     _burnBatch(msg.sender, transferParams.nftIds, transferParams.nftAmounts);
 
-    bytes memory payload = abi.encode(transferParams);
-    uint64 expiryTimestamp = uint64(block.timestamp) + expiryDurationInSeconds;
+	  bytes memory payload = abi.encode(transferParams);
+		uint64 expiryTimestamp = uint64(block.timestamp) + expiryDurationInSeconds;
 
-    bytes[] memory addresses = new bytes[](1);
-    // fetching the address of NFT contract address on the destination chain 
-    addresses[0] = ourContractOnChains[chainType][chainId];
+	  bytes[] memory addresses = new bytes[](1);
+		// fetching the address of NFT contract address on the destination chain 
+	  addresses[0] = ourContractOnChains[chainType][chainId];
 
-    bytes[] memory payloads = new bytes[](1);
-    payloads[0] = payload;
-
-    sendCrossChain(
-        addresses, 
-        payloads, 
-        Utils.DestinationChainParams(
-            destGasLimit, 
-            destGasPrice, 
-            chainType, 
-            chainId
-        ), 
-        expiryTimestamp
-    );
+	  bytes[] memory payloads = new bytes[](1);
+	  payloads[0] = payload;
+	
+		sendCrossChain(
+			addresses, 
+			payloads, 
+			Utils.DestinationChainParams(
+				destGasLimit, 
+				destGasPrice, 
+				chainType, 
+				chainId,
+                asmAddress
+			), 
+			Utils.RequestArgs(
+                expiryTimestamp,
+                false
+            )
+		);
   }
 
-function sendCrossChain(
-	bytes[] memory addresses, 
-	bytes[] memory payloads, 
-	Utils.DestinationChainParams memory destChainParams,
-	uint64 expiryTimestamp
-) internal {
-    gatewayContract.requestToDest(
-		expiryTimestamp,
-		false,
-		Utils.AckType.NO_ACK,
-    Utils.AckGasParams(0,0),
-    destChainParams,
-    Utils.ContractCalls(payloads, addresses)
-  );
-}
+	function sendCrossChain(
+		bytes[] memory addresses, 
+		bytes[] memory payloads, 
+		Utils.DestinationChainParams memory destChainParams,
+		Utils.RequestArgs memory requestArgs
+	) internal {
+	  gatewayContract.requestToDest(
+			requestArgs,
+			Utils.AckType.NO_ACK,
+	    Utils.AckGasParams(0,0),
+	    destChainParams,
+	    Utils.ContractCalls(payloads, addresses)
+	  );
+	}
 ```
 
 1. Create a function with whatever name you want to call it. Here, we will call it the transferCrossChain function which accepts five parameters: 
@@ -156,6 +178,7 @@ function sendCrossChain(
     })
     ```
     5. **transferParams:** The struct of type TransferParams which receives the NFT Ids and the respective amounts the user wants to transfer to the destination chain. It also receives the arbitrary data to be used while minting the NFT on the destination chain and the address of recipient in bytes.
+	6. **asmModuleAddress:** The address (in bytes format) of AddOnShield Module (ASM) contract that acts as a plugin which enables users to seamlessly integrate their own security mechanism into their DApp.
 2. **Burning the NFTs from user’s account:** The user must own the NFTs to be able to transfer them to the destination chain. We will burn those NFTs from user’s account before creating a cross-chain communication request to the destination chain using the **_burnBatch** method defined in ERC-1155 contract of the Openzeppelin library.
 3. **Create the payload:** Here, we only want to send the transfer params to the destination chain. That is why we will just abi encode the transferParams and set it as the payload. 
 4. **Calculating the expiry timestamp:** As you must have already guessed, the expiry timestamp will be the <code>block.timestamp + expiryDurationInSeconds</code>.
@@ -221,11 +244,12 @@ In this way, we can create a contract for cross-chain ERC-1155 NFTs using the Ro
 <summary><b>Full Contract Example</b></summary>
 
 ```javascript
+//SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.0 <0.9.0;
 
-import "evm-gateway-contract/contracts/IGateway.sol";
-import "evm-gateway-contract/contracts/ICrossTalkApplication.sol";
-import "evm-gateway-contract/contracts/Utils.sol";
+import "@routerprotocol/evm-gateway-contracts/contracts/IGateway.sol";
+import "@routerprotocol/evm-gateway-contracts/contracts/ICrossTalkApplication.sol";
+import "@routerprotocol/evm-gateway-contracts/contracts/Utils.sol";
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 
 contract XERC1155 is ERC1155, ICrossTalkApplication {
@@ -250,6 +274,11 @@ contract XERC1155 is ERC1155, ICrossTalkApplication {
 	  gatewayContract = IGateway(gatewayAddress);
 		destGasLimit = _destGasLimit;
 		admin = msg.sender;
+        uint256[] memory _ids = new uint256[](1);
+        uint256[] memory _amounts = new uint256[](1);
+        _ids[0] = 1;
+        _amounts[0] = 10;
+        _mintBatch(msg.sender, _ids, _amounts, "0x");
 	}
 
 	function setContractOnChain(
@@ -261,12 +290,20 @@ contract XERC1155 is ERC1155, ICrossTalkApplication {
 		ourContractOnChains[chainType][chainId] = toBytes(contractAddress);
 	}
 
+    function setDappMetadata(
+    string memory FeePayer
+    ) public {
+    require(msg.sender == admin, "Only owner can set the metadata");
+    gatewayContract.setDappMetadata(FeePayer);
+  }
+
 	function transferCrossChain(
     uint64 chainType,
     string memory chainId,
-		uint64 expiryDurationInSeconds,
+	uint64 expiryDurationInSeconds,
     uint64 destGasPrice,
-    TransferParams memory transferParams
+    TransferParams memory transferParams,
+    bytes memory asmAddress
   ) public payable {
 		// burning the NFTs from the address of the user calling this function
     _burnBatch(msg.sender, transferParams.nftIds, transferParams.nftAmounts);
@@ -288,9 +325,13 @@ contract XERC1155 is ERC1155, ICrossTalkApplication {
 				destGasLimit, 
 				destGasPrice, 
 				chainType, 
-				chainId
+				chainId,
+                asmAddress
 			), 
-			expiryTimestamp
+			Utils.RequestArgs(
+                expiryTimestamp,
+                false
+            )
 		);
   }
 
@@ -298,11 +339,10 @@ contract XERC1155 is ERC1155, ICrossTalkApplication {
 		bytes[] memory addresses, 
 		bytes[] memory payloads, 
 		Utils.DestinationChainParams memory destChainParams,
-		uint64 expiryTimestamp
+		Utils.RequestArgs memory requestArgs
 	) internal {
 	  gatewayContract.requestToDest(
-			expiryTimestamp,
-			false,
+			requestArgs,
 			Utils.AckType.NO_ACK,
 	    Utils.AckGasParams(0,0),
 	    destChainParams,
@@ -367,8 +407,8 @@ contract XERC1155 is ERC1155, ICrossTalkApplication {
 <details>
 <summary><b>Deployed Contracts for Reference</b></summary>
 
-**Polygon Mumbai Testnet:** [https://mumbai.polygonscan.com/address/0x7F4459a68AE7C0546812Ca178EE2B291d7366F99](https://mumbai.polygonscan.com/address/0x7F4459a68AE7C0546812Ca178EE2B291d7366F99)
+**Polygon Mumbai Testnet:** []()
 
-**Avalanche Fuji Testnet:** [https://testnet.snowtrace.io/address/0xAdC1247871b11eaaEb498e8D7F6A769B42460022](https://testnet.snowtrace.io/address/0xAdC1247871b11eaaEb498e8D7F6A769B42460022)
+**Avalanche Fuji Testnet:** []()
 
 </details>

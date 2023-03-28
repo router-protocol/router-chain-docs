@@ -16,10 +16,10 @@ To implement such functionality using Router CrossTalk, follow these steps:
 We will initiate a cross-chain request from the source chain by calling the `requestToDest` function on Router's source chain Gateway contract.
 ```javascript
 gatewayContract.requestToDest(
-  Utils.RequestArgs(expiryTimstamp, isAtomicCalls, feePayer),
+  Utils.RequestArgs(expiryTimstamp, isAtomicCalls),
 	Utils.AckType.NO_ACK,
 	Utils.AckGasParams(0,0),
-	Utils.DestinationChainParams(destGasLimit, destGasPrice, chainType, chainId),
+	Utils.DestinationChainParams(destGasLimit, destGasPrice, chainType, chainId, asmAddress),
 	Utils.ContractCalls(payloads, addresses)
 );
 ```
@@ -29,13 +29,12 @@ While calling the **`requestToDest`** function on the Gateway contract, we need 
 1. **requestArgs:**
     1. **expiryTimestamp:** If you want to add a specific expiry timestamp, you can mention it against this parameter. Your request will get reverted if it is not executed before the expiryTimestamp. If you don't want any expiryTimestamp, you can use **`type(uint64).max`** as the expiryTimestamp.
     2. **isAtomicCalls:** Set it to false, as there is only one call, so there is no difference in atomic or non-atomic calls.
-    3. **feePayer:** Set it either to the sender address, the contract address initiating the request or to `NONE`. If set to `NONE`, anyone can act as the fee payer for the request. 
 
 2.  **ackType:** Since we don't need an acknowledgment, set it to **NO_ACK**.
 
 3.  **ackGasParams:** Since we are not requesting an acknowledgment, send **`(0,0)`** as the gas limit and gas price for ackGasParams.
 
-4.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, and the chain ID here.
+4.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM Module here.
 
 5.  **contractCalls:** Encode the payload and the destination contract address in byte arrays and pass them in this function. The payload consists of the ABI-encoded data you want to send to the other chain. The destinationContractAddress is the address of the recipient contract on the destination chain that will handle the cross-chain request. It can be created in the following way:
 

@@ -8,20 +8,21 @@ In this section we will go through how a simple cross-chain ping-pong dApp can b
 
 ### Installing the dependencies
 Install the evm-gateway contracts with the following command:
-`yarn add evm-gateway-contract`  or  `npm install evm-gateway-contract`
+`yarn add @routerprotocol/evm-gateway-contracts`  or  `npm install @routerprotocol/evm-gateway-contracts`
+- Make sure you're using version `1.0.4`.
 
 ### Instantiating the contract
 ``` javascript
 pragma solidity >=0.8.0 <0.9.0;
 
-import "evm-gateway-contract/contracts/IGateway.sol";
-import "evm-gateway-contract/contracts/ICrossTalkApplication.sol";
-import "evm-gateway-contract/contracts/Utils.sol";
+import "@routerprotocol/evm-gateway-contracts/contracts/IGateway.sol";
+import "@routerprotocol/evm-gateway-contracts/contracts/ICrossTalkApplication.sol";
+import "@routerprotocol/evm-gateway-contracts/contracts/Utils.sol";
 
 contract PingPong is ICrossTalkApplication {
 }
 ```
-1. Import the IGateway.sol, ICrossTalkApplication.sol and Utils.sol from `evm-gateway-contract/contracts`.
+1. Import the IGateway.sol, ICrossTalkApplication.sol and Utils.sol from `@routerprotocol/evm-gateway-contracts/contracts`.
 2. Inherit the ICrossTalkApplication contract into your main contract (PingPong).
 
 ### Creating state variables and the constructor
@@ -33,6 +34,8 @@ uint64 public destGasLimit;
 uint64 public ackGasLimit;
 
 error CustomError(string message);
+event ExecutionStatus(uint64 eventIdentifier, bool isSuccess);
+event ReceivedSrcChainIdAndType(uint64 chainType, string chainID);
 
 constructor(
 	address payable gatewayAddress, 
@@ -54,6 +57,17 @@ constructor(
 8. Create an event **ReceivedSrcChainIdAndType** with parameters uint64 chainType and string chainID. We will use it to emit event when we handle the acknowledgement coming back to the source chain from the destination chain.
 9. Create the constructor with the address of gateway contract, the destination gas limit and the ack gas limit and set these variables inside the constructor.
 
+### Setting the fee payer address through setDappMetadata function
+```javascript
+function setDappMetadata(
+    string memory FeePayer
+    ) public {
+    require(msg.sender == owner, "Only owner can set the metadata");
+    gatewayContract.setDappMetadata(FeePayer);
+  }
+```
+We have a function `setDappMetadata` in our gateway contract that takes the address of the fee payer on router chain from which the cross-chain fee will be deducted. User has to call the function as shown in the code snippet above. After the fee payer address is set, the fee payer has to provide approval on the router chain that this address is willing to pay fees for this Dapp thus enabling the Dapp to actually perform the cross-chain transaction. Note that all the fee refunds will be credited to this fee payer address.
+
 ### Sending a ping to the destination chain
 ``` javascript
 function pingDestination(
@@ -63,24 +77,24 @@ function pingDestination(
   uint64 ackGasPrice,
   address destinationContractAddress,
   string memory str,
-  uint64 expiryDurationInSeconds
+  uint64 expiryDurationInSeconds,
+  bytes memory asmModuleAddress
 ) public payable returns (uint64) {
   bytes memory payload = abi.encode(str);
-  uint64 expiryTimestamp = uint64(block.timestamp) + expiryDurationInSeconds;
   bytes[] memory addresses = new bytes[](1);
   addresses[0] = toBytes(destinationContractAddress);
   bytes[] memory payloads = new bytes[](1);
   payloads[0] = payload;
-  _pingDestination(
-    expiryTimestamp,
+  return _pingDestination(
+    uint64(block.timestamp) + expiryDurationInSeconds,
     destGasPrice,
     ackGasPrice,
     chainType,
     chainId,
     payloads,
-    addresses
+    addresses,
+    asmModuleAddress
   );
-}
 
 function _pingDestination(
   uint64 expiryTimestamp,
@@ -89,21 +103,28 @@ function _pingDestination(
   uint64 chainType,
   string memory chainId,
   bytes[] memory payloads,
-  bytes[] memory addresses
+  bytes[] memory addresses,
+  bytes memory asmModuleAddress
 ) internal {
-  lastEventIdentifier = gatewayContract.requestToDest(
-    expiryTimestamp,
-    false,
-    Utils.AckType.ACK_ON_SUCCESS,
-    Utils.AckGasParams(ackGasLimit, ackGasPrice),
-    Utils.DestinationChainParams(
-      destGasLimit,
-      destGasPrice,
-      chainType,
-      chainId
-    ),
-    Utils.ContractCalls(payloads, addresses)
-  );
+    Utils.RequestArgs memory requestArgs = Utils.RequestArgs(
+      uint64(block.timestamp) + expiryTimestamp,
+      false
+    );
+    Utils.DestinationChainParams memory destChainParams = Utils
+      .DestinationChainParams(
+        destGasLimit,
+        destGasPrice,
+        chainType,
+        chainId,
+        asmModuleAddress
+      );
+    lastEventIdentifier = gatewayContract.requestToDest(
+      requestArgs,
+      Utils.AckType.ACK_ON_SUCCESS,
+      Utils.AckGasParams(ackGasLimit, ackGasPrice),
+      destChainParams,
+      Utils.ContractCalls(payloads, addresses)
+    );
 }
 ```
 1. Create a function with whatever name you want to call it. Here, we will call it the pingDestination function which accepts seven parameters: 
@@ -127,6 +148,7 @@ function _pingDestination(
     5. **destinationContractAddress:** Address of the contract that will handle the payload on the destination chain. Basically the address on the destination chain which we are going to ping.
     6. **str:** This is just the string that we want to send as payload to the destination contract. You can send any kind of data as per your requirements.
     7. **expiryDurationInSeconds:** The duration in seconds for which the cross-chain request created after calling this function remains valid. If the expiry duration elapses before the request is executed on the destination chain contract, the request will fail. If you don’t want to keep any expiry timestamp, just send a very large number (a trillion will do) and your request will never expire.
+    8. **asmModuleAddress:** The address (in bytes format) of AddOnShield Module (ASM) contract that acts as a plugin which enables users to seamlessly integrate their own security mechanism into their DApp. 
 2. **Create the payload:** Here, we only want to send a ping with a message. That is why we will just abi encode the string we want to send and set it as the payload. However, you are not limited to just sending a string, you can send any kind of data you want. Just abi encode those data and set it as payload.
 3. **Calculating the expiry timestamp:** As you must have already guessed, the expiry timestamp will be the <code>block.timestamp + expiryDurationInSeconds</code>.
 4. **Creating the array of destination contract addresses:** With each cross-chain request, you can send multiple payloads to multiple destination chain contracts. The addresses to the recipient contracts on the destination chains need to be encoded into bytes format and sent as an array. To encode the address into bytes, you can use the function specified [here](../../understanding-crosstalk/requestToDest#6-contractcalls).
@@ -144,7 +166,7 @@ Now since we know how we can create a cross-chain communication request from the
 
 ```javascript
 function handleRequestFromSource(
-  bytes memory srcContractAddress,
+  bytes memory, //srcContractAddress,
   bytes memory payload,
   string memory srcChainId,
   uint64 srcChainType
@@ -217,13 +239,15 @@ In this way, we can create a simple ping pong smart contract using the Router Cr
 <summary><b>Full Contract Example</b></summary>
 
 ```javascript
+//SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.0 <0.9.0;
 
-import "evm-gateway-contract/contracts/IGateway.sol";
-import "evm-gateway-contract/contracts/ICrossTalkApplication.sol";
-import "evm-gateway-contract/contracts/Utils.sol";
+import "@routerprotocol/evm-gateway-contracts/contracts/IGateway.sol";// version 1.0.4
+import "@routerprotocol/evm-gateway-contracts/contracts/ICrossTalkApplication.sol";// version 1.0.4
+import "@routerprotocol/evm-gateway-contracts/contracts/Utils.sol";// version 1.0.4
 
 contract PingPong is ICrossTalkApplication {
+  address public owner;
 	IGateway public gatewayContract;
 	string public greeting;
 	uint64 public lastEventIdentifier;
@@ -239,63 +263,81 @@ contract PingPong is ICrossTalkApplication {
 		uint64 _destGasLimit, 
 		uint64 _ackGasLimit
 	) {
+    owner = msg.sender;
 	  gatewayContract = IGateway(gatewayAddress);
 		destGasLimit = _destGasLimit;
 		ackGasLimit = _ackGasLimit;
 	}
+
+  function setDappMetadata(
+    string memory FeePayer
+    ) public {
+    require(msg.sender == owner, "Only owner can set the metadata");
+    gatewayContract.setDappMetadata(FeePayer);
+  }
 	
 	function pingDestination(
-    uint64 chainType,
-    string memory chainId,
-    uint64 destGasPrice,
-    uint64 ackGasPrice,
-    address destinationContractAddress,
-    string memory str,
-    uint64 expiryDurationInSeconds
-  ) public payable returns (uint64) {
-    bytes memory payload = abi.encode(str);
-    uint64 expiryTimestamp = uint64(block.timestamp) + expiryDurationInSeconds;
-    bytes[] memory addresses = new bytes[](1);
-    addresses[0] = toBytes(destinationContractAddress);
-    bytes[] memory payloads = new bytes[](1);
-    payloads[0] = payload;
-    _pingDestination(
-      expiryTimestamp,
-      destGasPrice,
-      ackGasPrice,
-      chainType,
-      chainId,
-      payloads,
-      addresses
-    );
-  }
+  uint64 chainType,
+  string memory chainId,
+  uint64 destGasPrice,
+  uint64 ackGasPrice,
+  address destinationContractAddress,
+  string memory str,
+  uint64 expiryDurationInSeconds,
+  bytes memory asmModuleAddress
+) public payable returns (uint64) {
+  bytes memory payload = abi.encode(str);
+  bytes[] memory addresses = new bytes[](1);
+  addresses[0] = toBytes(destinationContractAddress);
+  bytes[] memory payloads = new bytes[](1);
+  payloads[0] = payload;
+  return _pingDestination(
+    uint64(block.timestamp) + expiryDurationInSeconds,
+    destGasPrice,
+    ackGasPrice,
+    chainType,
+    chainId,
+    payloads,
+    addresses,
+    asmModuleAddress
+  );
+}
 
-  function _pingDestination(
-    uint64 expiryTimestamp,
-    uint64 destGasPrice,
-    uint64 ackGasPrice,
-    uint64 chainType,
-    string memory chainId,
-    bytes[] memory payloads,
-    bytes[] memory addresses
-  ) internal {
-    lastEventIdentifier = gatewayContract.requestToDest(
+function _pingDestination(
+  uint64 expiryTimestamp,
+  uint64 destGasPrice,
+  uint64 ackGasPrice,
+  uint64 chainType,
+  string memory chainId,
+  bytes[] memory payloads,
+  bytes[] memory addresses,
+  bytes memory asmModuleAddress
+) internal returns(uint64){
+    Utils.RequestArgs memory requestArgs = Utils.RequestArgs(
       expiryTimestamp,
-      false,
-      Utils.AckType.ACK_ON_SUCCESS,
-      Utils.AckGasParams(ackGasLimit, ackGasPrice),
-      Utils.DestinationChainParams(
+      false
+    );
+    Utils.DestinationChainParams memory destChainParams = Utils
+      .DestinationChainParams(
         destGasLimit,
         destGasPrice,
         chainType,
-        chainId
-      ),
+        chainId,
+        asmModuleAddress
+      );
+    lastEventIdentifier = gatewayContract.requestToDest(
+      requestArgs,
+      Utils.AckType.ACK_ON_SUCCESS,
+      Utils.AckGasParams(ackGasLimit, ackGasPrice),
+      destChainParams,
       Utils.ContractCalls(payloads, addresses)
     );
-  }
+
+    return lastEventIdentifier;
+}
 
 	function handleRequestFromSource(
-	  bytes memory srcContractAddress,
+	  bytes memory, //srcContractAddress,
 	  bytes memory payload,
 	  string memory srcChainId,
 	  uint64 srcChainType
@@ -317,7 +359,7 @@ contract PingPong is ICrossTalkApplication {
     uint64 eventIdentifier,
     bool[] memory execFlags,
     bytes[] memory execData
-  ) external view override {
+  ) external override {
     require(lastEventIdentifier == eventIdentifier);
 		bytes memory _execData = abi.decode(execData[0], (bytes));
 
@@ -345,10 +387,10 @@ contract PingPong is ICrossTalkApplication {
 </details>
 
 <details>
-<summary><b>Deployed Contracts for Reference</b></summary>
+<summary><b>Deployed Contracts(Using Router's Alpha Devnet) for Reference</b></summary>
 
-**Polygon Mumbai Testnet:** [https://mumbai.polygonscan.com/address/0x40d97308497e692280fdCEa2895265d4703ee195](https://mumbai.polygonscan.com/address/0x40d97308497e692280fdCEa2895265d4703ee195)
+**Polygon Mumbai Testnet:** [https://mumbai.polygonscan.com/address/0x224421Dd050d73Bd8742A6953B07a0a8eEb68e79](https://mumbai.polygonscan.com/address/0x224421Dd050d73Bd8742A6953B07a0a8eEb68e79)
 
-**Avalanche Fuji Testnet:** [https://testnet.snowtrace.io/address/0xa4c21D61B79E4F7C00B2c6910982EE137E3572af](https://testnet.snowtrace.io/address/0xa4c21D61B79E4F7C00B2c6910982EE137E3572af)
+**Avalanche Fuji Testnet:** [https://testnet.snowtrace.io/address/0x7320402be5866120bBe487B9a92078cC368de013](https://testnet.snowtrace.io/address/0x7320402be5866120bBe487B9a92078cC368de013)
 
 </details>

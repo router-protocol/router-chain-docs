@@ -9,6 +9,7 @@ pragma solidity 0.8.x;
 import "@routerprotocol/router-crosstalk-utils/contracts/CrossTalkUtils.sol";
 contract MyContract {}
 ```
+- Make sure you're using version `1.0.4` of `router-crosstalk-utils`
 
 ### 2) Call the Required Function
 Demonstration for different kinds of requests:
@@ -51,17 +52,17 @@ While calling the **`singleRequestWithoutAcknowledgement`** function on the Cros
 ```javascript
     struct Utils.RequestArgs(
         uint64 expTimestamp,
-        bool isAtomicCalls, // optional, since it doesn't matter in a single request
-		address feePayer
+        bool isAtomicCalls // optional, since it doesn't matter in a single request
 )
 ```
-3.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, and the chain ID here.
+3.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM Module here.
 ```javascript
     struct Utils.DestinationChainParams(
 		uint64 gasLimit, 
 		uint64 gasPrice, 
 		uint64 destChainType, 
-		string memory destChainId
+		string memory destChainId,
+        bytes memory asmAddress
 )
 ```
 4.  **destinationContractAddress:** Address of the contract on the destination chain to which the payload should be sent. This address should be in bytes format. You can use the **`toBytes`** function in the library to convert the address to bytes format.
@@ -143,8 +144,7 @@ While calling the **`singleRequestWithAcknowledgement`** function on the CrossTa
 ```javascript
     struct Utils.RequestArgs(
         uint64 expTimestamp,
-        bool isAtomicCalls, // optional, since it doesn't matter in a single request
-		address feePayer
+        bool isAtomicCalls // optional, since it doesn't matter in a single request
 )
 ```
 3.  **ackType:**
@@ -164,13 +164,14 @@ While calling the **`singleRequestWithAcknowledgement`** function on the CrossTa
     ```javascript
     struct Utils.AckGasParams(uint64 ackGasLimit, uint64 ackGasPrice)
     ```
-5.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, and the chain ID here.
+5.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM Module here.
 ```javascript
     struct Utils.DestinationChainParams(
 		uint64 gasLimit, 
 		uint64 gasPrice, 
 		uint64 destChainType, 
-		string memory destChainId
+		string memory destChainId,
+        bytes memory asmAddress
 )
 ```
 6.  **destinationContractAddress:** Address of the contract on the destination chain to which the payload should be sent. This address should be in bytes format. You can use the **`toBytes`** function in the library to convert the address to bytes format.
@@ -250,17 +251,17 @@ While calling the **`multipleRequestsWithoutAcknowledgement`** function on the C
 ```javascript
     struct Utils.RequestArgs(
         uint64 expTimestamp,
-        bool isAtomicCalls, // set it to true if you want the calls to be atomic
-		address feePayer
+        bool isAtomicCalls // set it to true if you want the calls to be atomic
 )
 ```
-3.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, and the chain ID here.
+3.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and address of ASM Module here.
 ```javascript
     struct Utils.DestinationChainParams(
 		uint64 gasLimit, 
 		uint64 gasPrice, 
 		uint64 destChainType, 
-		string memory destChainId
+		string memory destChainId,
+        bytes memory asmAddress
 )
 ```
 4.  **destinationContractAddresses:** Addresses of the contracts on the destination chain to which the individual payloads should be sent. These addresses should be in bytes format. You can use the **`toBytes`** function in the library to convert the address to bytes format. The array of destination contract addresses can be created in the following way:
@@ -352,8 +353,7 @@ While calling the **`multipleRequestsWithAcknowledgement`** function on the Cros
 ```javascript
     struct Utils.RequestArgs(
         uint64 expTimestamp,
-        bool isAtomicCalls, // set it to true if you want the calls to be atomic
-		address feePayer
+        bool isAtomicCalls // set it to true if you want the calls to be atomic
 )
 ```
 3.  **ackType:**
@@ -373,13 +373,14 @@ While calling the **`multipleRequestsWithAcknowledgement`** function on the Cros
     ```javascript
     struct Utils.AckGasParams(uint64 ackGasLimit, uint64 ackGasPrice)
     ```
-5.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, and the chain ID here.
+5.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM Module here.
 ```javascript
     struct Utils.DestinationChainParams(
 		uint64 gasLimit, 
 		uint64 gasPrice, 
 		uint64 destChainType, 
-		string memory destChainId
+		string memory destChainId,
+        bytes memory asmAddress
 )
 ```
 6.  **destinationContractAddresses:** Addresses of the contracts on the destination chain to which the individual payloads should be sent. These addresses should be in bytes format. You can use the **`toBytes`** function in the library to convert the address to bytes format. The array of destination contract addresses can be created in the following way:
@@ -429,3 +430,22 @@ function handleCrossTalkAck(
 ```
 
 </details>
+
+### 3) Call the set Dapp Metadata function
+For making cross-chain transactions, you need to pay the fees on the router chain. For this, we have a function `setDappMetadata` in our gateway contract that takes the address of the fee payer on router chain from which the cross-chain fee will be deducted. After the fee payer address is set, the fee payer has to provide approval on the router chain that this address is willing to pay fees for this Dapp thus enabling the Dapp to actually perform the cross-chain transaction. Note that all the fee refunds will be credited to this fee payer address.
+
+```javascript
+function setDappMetadata(
+    string memory feePayerAddress
+    ) external returns (uint64)
+```
+
+<summary><b>To implement this function, you can call it in the following manner:</b></summary>
+
+```javascript
+function setDappMetadata(
+    string memory FeePayer
+    ) public onlyOwner {
+    gatewayContract.setDappMetadata(FeePayer);
+  }
+```
