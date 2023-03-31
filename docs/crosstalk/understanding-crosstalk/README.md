@@ -9,7 +9,8 @@ import {
 } from '../../../src/components/HomepageComponents';
 
 import {
-  ChainIcon
+  NearIcon,
+  EthereumIcon
 } from '../../../src/icons';
 
 ## High Level Architecture
@@ -26,13 +27,13 @@ Below is a high level architecture diagram for Router CrossTalk.
   title="EVM Guide"
   description="Undestanding the crosstalk functions for EVM contracts"
   to="/crosstalk/understanding-crosstalk/evm_guides"
-  icon={<ChainIcon />}
+  icon={<EthereumIcon />}
   />
   <Card
   title="Near Guide"
   description="Undestanding the crosstalk functions for Near chain"
   to="/crosstalk/understanding-crosstalk/near_guides"
-  icon={<ChainIcon />}
+  icon={<NearIcon />}
   />
   </Section>
   </Section>
