@@ -34,7 +34,7 @@ While calling the **`requestToDest`** function on the Gateway contract, we need 
 
 3.  **ackGasParams:** Since we are not requesting an acknowledgment, send **`(0,0)`** as the gas limit and gas price for ackGasParams.
 
-4.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM Module here.
+4.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM here.
 
 5.  **contractCalls:** Encode the payload and the destination contract address in byte arrays and pass them in this function. The payload consists of the ABI-encoded data you want to send to the other chain. The destinationContractAddress is the address of the recipient contract on the destination chain that will handle the cross-chain request. It can be created in the following way:
 

@@ -11,7 +11,7 @@ In this section we will go through how a cross-chain ERC-1155 NFT can be created
 Install the evm-gateway contracts with the following command:
 
 `yarn add @routerprotocol/evm-gateway-contracts`  or  `npm install @routerprotocol/evm-gateway-contracts`
-- Make sure you're using version `1.0.4`.
+- Make sure you're using version `1.0.5`.
 
 Install the openzeppelin contracts library with the following command:
 
@@ -178,7 +178,7 @@ function transferCrossChain(
     })
     ```
     5. **transferParams:** The struct of type TransferParams which receives the NFT Ids and the respective amounts the user wants to transfer to the destination chain. It also receives the arbitrary data to be used while minting the NFT on the destination chain and the address of recipient in bytes.
-	6. **asmModuleAddress:** The address (in bytes format) of AddOnShield Module (ASM) contract that acts as a plugin which enables users to seamlessly integrate their own security mechanism into their DApp.
+	6. **asmAddress:** The address (in bytes format) of Additional Security Module (ASM) contract that acts as a plugin which enables users to seamlessly integrate their own security mechanism into their DApp.  If user has not integrated ASM into his DApp , this field can be passed with empty bytes string like this ("0x")
 2. **Burning the NFTs from user’s account:** The user must own the NFTs to be able to transfer them to the destination chain. We will burn those NFTs from user’s account before creating a cross-chain communication request to the destination chain using the **_burnBatch** method defined in ERC-1155 contract of the Openzeppelin library.
 3. **Create the payload:** Here, we only want to send the transfer params to the destination chain. That is why we will just abi encode the transferParams and set it as the payload. 
 4. **Calculating the expiry timestamp:** As you must have already guessed, the expiry timestamp will be the <code>block.timestamp + expiryDurationInSeconds</code>.
@@ -401,14 +401,5 @@ contract XERC1155 is ERC1155, ICrossTalkApplication {
 	}
 }
 ```
-
-</details>
-
-<details>
-<summary><b>Deployed Contracts for Reference</b></summary>
-
-**Polygon Mumbai Testnet:** []()
-
-**Avalanche Fuji Testnet:** []()
 
 </details>

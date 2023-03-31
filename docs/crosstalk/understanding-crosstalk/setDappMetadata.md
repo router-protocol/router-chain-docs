@@ -1,5 +1,5 @@
 ---
-title: requestToDest
+title: setDappMetadata
 sidebar_position: 4
 ---
 

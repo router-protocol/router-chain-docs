@@ -21,7 +21,7 @@ In this parameter, users can specify the gas they are willing to pay to execute 
 - **gasPrice:** The gas price that the user is willing to pay for the execution of the request.
 - **destChainId:** Chain ID of the destination chain in string format.
 - **destChainType:** This represents the type of chain. The values for chain types are given <a href="/crosstalk/understanding-crosstalk/chainTypes" target="_blank">here</a>.
-- **asmModuleAddress:** The address of AddOnShield Module (ASM) contract that acts as a plugin which enables users to seamlessly integrate their own security mechanism into their DApp.
+- **asmAddress:** The address of Additional Security Module (ASM) contract that acts as a plugin which enables users to seamlessly integrate their own security mechanism into their DApp.
 
 ### 4. ackGasParams
 Once the cross-chain read request is executed on the destination chain, the requested data is sent back to the source chain as an acknowledgment. To handle this acknowledgment, users need to include a callback function (discussed <a href="./handling-the-acknowledgment-on-the-source-chain" target="_blank">here</a>). The ackGasParams parameter includes the `gasLimit` and `gasPrice` required to execute the callback function on the source chain when the acknowledgment is received. The gas limit depends on the complexity of the callback function, and the gas price depends on the source chain congestion. The gas limit can easily be calculated using the hardhat-gas-reporter plugin. For the gas price, you can use web3/ethers library’s `provider.getGasPrice()` function.

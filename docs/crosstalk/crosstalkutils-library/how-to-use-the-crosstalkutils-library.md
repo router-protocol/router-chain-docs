@@ -9,7 +9,7 @@ pragma solidity 0.8.x;
 import "@routerprotocol/router-crosstalk-utils/contracts/CrossTalkUtils.sol";
 contract MyContract {}
 ```
-- Make sure you're using version `1.0.4` of `router-crosstalk-utils`
+- Make sure you're using version `1.0.5` of `router-crosstalk-utils`
 
 ### 2) Call the Required Function
 Demonstration for different kinds of requests:
@@ -55,7 +55,7 @@ While calling the **`singleRequestWithoutAcknowledgement`** function on the Cros
         bool isAtomicCalls // optional, since it doesn't matter in a single request
 )
 ```
-3.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM Module here.
+3.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM here.
 ```javascript
     struct Utils.DestinationChainParams(
 		uint64 gasLimit, 
@@ -164,7 +164,7 @@ While calling the **`singleRequestWithAcknowledgement`** function on the CrossTa
     ```javascript
     struct Utils.AckGasParams(uint64 ackGasLimit, uint64 ackGasPrice)
     ```
-5.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM Module here.
+5.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM here.
 ```javascript
     struct Utils.DestinationChainParams(
 		uint64 gasLimit, 
@@ -254,7 +254,7 @@ While calling the **`multipleRequestsWithoutAcknowledgement`** function on the C
         bool isAtomicCalls // set it to true if you want the calls to be atomic
 )
 ```
-3.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and address of ASM Module here.
+3.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and address of ASM here.
 ```javascript
     struct Utils.DestinationChainParams(
 		uint64 gasLimit, 
@@ -348,7 +348,7 @@ function multipleRequestsWithAcknowledgement(
 ```
 While calling the **`multipleRequestsWithAcknowledgement`** function on the CrossTalkUtils library, we need to pass the following parameters:
 
-1.  **gatewayContractAddress:** The address of the Router's Gateway contract.
+1. **gatewayContractAddress:** The address of the Router's Gateway contract.
 2. **requestArgs:** Relevant subparameters for the function call:
 ```javascript
     struct Utils.RequestArgs(
@@ -373,7 +373,7 @@ While calling the **`multipleRequestsWithAcknowledgement`** function on the Cros
     ```javascript
     struct Utils.AckGasParams(uint64 ackGasLimit, uint64 ackGasPrice)
     ```
-5.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM Module here.
+5.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM here.
 ```javascript
     struct Utils.DestinationChainParams(
 		uint64 gasLimit, 

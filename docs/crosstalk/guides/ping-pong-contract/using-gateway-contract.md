@@ -9,7 +9,7 @@ In this section we will go through how a simple cross-chain ping-pong dApp can b
 ### Installing the dependencies
 Install the evm-gateway contracts with the following command:
 `yarn add @routerprotocol/evm-gateway-contracts`  or  `npm install @routerprotocol/evm-gateway-contracts`
-- Make sure you're using version `1.0.4`.
+- Make sure you're using version `1.0.5`.
 
 ### Instantiating the contract
 ``` javascript
@@ -78,7 +78,7 @@ function pingDestination(
   address destinationContractAddress,
   string memory str,
   uint64 expiryDurationInSeconds,
-  bytes memory asmModuleAddress
+  bytes memory asmAddress
 ) public payable returns (uint64) {
   bytes memory payload = abi.encode(str);
   bytes[] memory addresses = new bytes[](1);
@@ -93,7 +93,7 @@ function pingDestination(
     chainId,
     payloads,
     addresses,
-    asmModuleAddress
+    asmAddress
   );
 
 function _pingDestination(
@@ -104,7 +104,7 @@ function _pingDestination(
   string memory chainId,
   bytes[] memory payloads,
   bytes[] memory addresses,
-  bytes memory asmModuleAddress
+  bytes memory asmAddress
 ) internal {
     Utils.RequestArgs memory requestArgs = Utils.RequestArgs(
       uint64(block.timestamp) + expiryTimestamp,
@@ -116,7 +116,7 @@ function _pingDestination(
         destGasPrice,
         chainType,
         chainId,
-        asmModuleAddress
+        asmAddress
       );
     lastEventIdentifier = gatewayContract.requestToDest(
       requestArgs,
@@ -148,7 +148,7 @@ function _pingDestination(
     5. **destinationContractAddress:** Address of the contract that will handle the payload on the destination chain. Basically the address on the destination chain which we are going to ping.
     6. **str:** This is just the string that we want to send as payload to the destination contract. You can send any kind of data as per your requirements.
     7. **expiryDurationInSeconds:** The duration in seconds for which the cross-chain request created after calling this function remains valid. If the expiry duration elapses before the request is executed on the destination chain contract, the request will fail. If you don’t want to keep any expiry timestamp, just send a very large number (a trillion will do) and your request will never expire.
-    8. **asmModuleAddress:** The address (in bytes format) of AddOnShield Module (ASM) contract that acts as a plugin which enables users to seamlessly integrate their own security mechanism into their DApp. 
+    8. **asmAddress:** The address (in bytes format) of Additional Security Module (ASM) contract that acts as a plugin which enables users to seamlessly integrate their own security mechanism into their DApp.  If user has not integrated ASM into his DApp , this field can be passed with empty bytes string like this ("0x")
 2. **Create the payload:** Here, we only want to send a ping with a message. That is why we will just abi encode the string we want to send and set it as the payload. However, you are not limited to just sending a string, you can send any kind of data you want. Just abi encode those data and set it as payload.
 3. **Calculating the expiry timestamp:** As you must have already guessed, the expiry timestamp will be the <code>block.timestamp + expiryDurationInSeconds</code>.
 4. **Creating the array of destination contract addresses:** With each cross-chain request, you can send multiple payloads to multiple destination chain contracts. The addresses to the recipient contracts on the destination chains need to be encoded into bytes format and sent as an array. To encode the address into bytes, you can use the function specified [here](../../understanding-crosstalk/requestToDest#6-contractcalls).
@@ -242,9 +242,9 @@ In this way, we can create a simple ping pong smart contract using the Router Cr
 //SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.0 <0.9.0;
 
-import "@routerprotocol/evm-gateway-contracts/contracts/IGateway.sol";// version 1.0.4
-import "@routerprotocol/evm-gateway-contracts/contracts/ICrossTalkApplication.sol";// version 1.0.4
-import "@routerprotocol/evm-gateway-contracts/contracts/Utils.sol";// version 1.0.4
+import "@routerprotocol/evm-gateway-contracts/contracts/IGateway.sol";// version 1.0.5
+import "@routerprotocol/evm-gateway-contracts/contracts/ICrossTalkApplication.sol";// version 1.0.5
+import "@routerprotocol/evm-gateway-contracts/contracts/Utils.sol";// version 1.0.5
 
 contract PingPong is ICrossTalkApplication {
   address public owner;
@@ -284,7 +284,7 @@ contract PingPong is ICrossTalkApplication {
   address destinationContractAddress,
   string memory str,
   uint64 expiryDurationInSeconds,
-  bytes memory asmModuleAddress
+  bytes memory asmAddress
 ) public payable returns (uint64) {
   bytes memory payload = abi.encode(str);
   bytes[] memory addresses = new bytes[](1);
@@ -299,7 +299,7 @@ contract PingPong is ICrossTalkApplication {
     chainId,
     payloads,
     addresses,
-    asmModuleAddress
+    asmAddress
   );
 }
 
@@ -311,7 +311,7 @@ function _pingDestination(
   string memory chainId,
   bytes[] memory payloads,
   bytes[] memory addresses,
-  bytes memory asmModuleAddress
+  bytes memory asmAddress
 ) internal returns(uint64){
     Utils.RequestArgs memory requestArgs = Utils.RequestArgs(
       expiryTimestamp,
@@ -323,7 +323,7 @@ function _pingDestination(
         destGasPrice,
         chainType,
         chainId,
-        asmModuleAddress
+        asmAddress
       );
     lastEventIdentifier = gatewayContract.requestToDest(
       requestArgs,
@@ -383,14 +383,5 @@ function _pingDestination(
 	}
 }
 ```
-
-</details>
-
-<details>
-<summary><b>Deployed Contracts(Using Router's Alpha Devnet) for Reference</b></summary>
-
-**Polygon Mumbai Testnet:** [https://mumbai.polygonscan.com/address/0x224421Dd050d73Bd8742A6953B07a0a8eEb68e79](https://mumbai.polygonscan.com/address/0x224421Dd050d73Bd8742A6953B07a0a8eEb68e79)
-
-**Avalanche Fuji Testnet:** [https://testnet.snowtrace.io/address/0x7320402be5866120bBe487B9a92078cC368de013](https://testnet.snowtrace.io/address/0x7320402be5866120bBe487B9a92078cC368de013)
 
 </details>

@@ -11,12 +11,12 @@ In this section we will go through how a simple cross-chain ping-pong dApp can b
 Install the evm-gateway contracts with the following command:
 
 `yarn add @routerprotocol/evm-gateway-contracts`  or  `npm install @routerprotocol/evm-gateway-contracts`
-- Make sure you're using version `1.0.4`.
+- Make sure you're using version `1.0.5`.
 
 and 
 
 `yarn add @routerprotocol/router-crosstalk-utils`  or  `npm install @routerprotocol/router-crosstalk-utils`
-- Make sure you're using version `1.0.4`.
+- Make sure you're using version `1.0.5`.
 
 ### Instantiating the contract:
 
@@ -26,11 +26,11 @@ pragma solidity >=0.8.0 <0.9.0;
 import "@routerprotocol/evm-gateway-contracts/contracts/ICrossTalkApplication.sol";
 import "@routerprotocol/router-crosstalk-utils/contracts/CrossTalkUtils.sol";
 
-contract PingPong is ICrossTalkApplication {
+contract PingPong is ICrossTalkApplication, IAdditionalSecurityModule {
 }
 ```
 
-1. Import the ICrossTalkApplication.sol and Utils.sol from `@routerprotocol/evm-gateway-contracts/contracts`.
+1. Import the ICrossTalkApplication.sol from `@routerprotocol/evm-gateway-contracts/contracts`.
 2. Import CrossTalkUtils.sol from `@routerprotocol/router-crosstalk-utils/contracts`
 3. Inherit the ICrossTalkApplication contract into your main contract <code>PingPong</code>.
 
@@ -104,7 +104,7 @@ function pingDestination(
     address destinationContractAddress,
     string memory str,
     uint64 expiryDurationInSeconds,
-    bytes memory asmModuleAddress
+    bytes memory asmAddress
   ) public payable {
     currentRequestId++;
     // creating the payload to be sent to the destination chain
@@ -116,7 +116,7 @@ function pingDestination(
         destGasPrice,
         chainType,
         chainId,
-        asmModuleAddress
+        asmAddress
       );
 
     Utils.AckGasParams memory ackGasParams = Utils.AckGasParams(
@@ -164,7 +164,7 @@ function pingDestination(
     5. **destinationContractAddress:** Address of the contract that will handle the payload on the destination chain. Basically the address on the destination chain which we are going to ping. This should be in bytes format. To convert contract address to bytes in solidity, check this [function](../../understanding-crosstalk/requestToDest#6-contractcalls).
     6. **str:** This is just the string that we want to send as payload to the destination contract. You can send any kind of data as per your requirements.
     7. **expiryDurationInSeconds:** The duration in seconds for which the cross-chain request created after calling this function remains valid. If the expiry duration elapses before the request is executed on the destination chain contract, the request will fail. If you don’t want to keep any expiry timestamp, just send a very large number (a trillion will do) and your request will never expire.
-    8. **asmModuleAddress:** The address (in bytes format) of AddOnShield Module (ASM) contract that acts as a plugin which enables users to seamlessly integrate their own security mechanism into their DApp. 
+    8. **asmAddress:** The address (in bytes format) of Additional Security Module (ASM) contract that acts as a plugin which enables users to seamlessly integrate their own security mechanism into their DApp. If user has not integrated ASM into his DApp , this field can be passed with empty bytes string like this ("0x")
 2. **Create the payload:** Here, we only want to send a ping with a message. That is why we will just abi encode the string we want to send and set it as the payload. However, you are not limited to just sending a string, you can send any kind of data you want. Just abi encode those data and set it as payload.
 3. **Calling the CrossTalk Utils library’s function to generate a cross-chain communication request:** Now the time has come for us to generate a cross-chain communication request to the destination chain. Since we want to create only a single request to the destination chain, we will call the **singleRequestWithAcknowledgement** function of the CrossTalk Utils library with the required parameters which in turn will call the **requestToDest** function of the Gateway contract. The documentation for this function can be found [here](../../understanding-crosstalk/requestToDest).
     
@@ -303,7 +303,7 @@ contract PingPong is ICrossTalkApplication {
     address destinationContractAddress,
     string memory str,
     uint64 expiryDurationInSeconds,
-    bytes memory asmModuleAddress
+    bytes memory asmAddress
   ) public payable {
     currentRequestId++;
     // creating the payload to be sent to the destination chain
@@ -315,7 +315,7 @@ contract PingPong is ICrossTalkApplication {
         destGasPrice,
         chainType,
         chainId,
-        asmModuleAddress
+        asmAddress
       );
 
     Utils.AckGasParams memory ackGasParams = Utils.AckGasParams(
@@ -392,14 +392,5 @@ contract PingPong is ICrossTalkApplication {
 }
 
 ```
-
-</details>
-
-<details>
-<summary><b>Deployed Contracts(Using Router's Alpha Devnet) for Reference</b></summary>
-
-**Polygon Mumbai Testnet:** [https://mumbai.polygonscan.com/address/0x9237757aa7f2ab6c6a4b3dc017bb9512c9a591ef](https://mumbai.polygonscan.com/address/0x9237757aa7f2ab6c6a4b3dc017bb9512c9a591ef)
-
-**Avalanche Fuji Testnet:** [https://testnet.snowtrace.io/address/0x1f2bF7EE92f15A6bd6C6bE7DC42FD7bF3B77a108](https://testnet.snowtrace.io/address/0x1f2bF7EE92f15A6bd6C6bE7DC42FD7bF3B77a108)
 
 </details>

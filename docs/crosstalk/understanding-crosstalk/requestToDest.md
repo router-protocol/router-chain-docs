@@ -64,7 +64,7 @@ struct DestinationChainParams {
 2.  **gasPrice:** Gas price to be passed on the destination chain.
 3.  **destChainType:** This represents the type of chain. The values for chain types can be found [here](./chainTypes).
 4.  **destChainId:** Chain ID of the destination chain in string format.
-5.  **asmAddress:** Address of AddOnShield Module (ASM) contract that acts as a plugin which enables users to seamlessly integrate their own security mechanism into their DApp.
+5.  **asmAddress:** Address of Additional Security Module (ASM) contract that acts as a plugin which enables users to seamlessly integrate their own security mechanism into their DApp.
 
 ### 5. contractCalls
 ```
