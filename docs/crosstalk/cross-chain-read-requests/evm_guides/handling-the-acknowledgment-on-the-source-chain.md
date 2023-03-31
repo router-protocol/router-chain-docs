@@ -1,6 +1,6 @@
 ---
 title: Handling the Acknowledgment on the Source Chain
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 Once the read request is executed on the destination chain, the requested data is sent along with an acknowledgment to the source chain. To handle the acknowledgment, developers need to include a `handleCrossTalkAck()` function in their contract. This function will have three parameters, namely:

@@ -16,7 +16,8 @@ To implement such functionality using Router CrossTalk, follow these steps:
 We will initiate a cross-chain request from the source chain by calling the `requestToDest` function on Router's source chain Gateway contract.
 ```javascript
 gatewayContract.requestToDest(
-  Utils.RequestArgs(expiryTimstamp, isAtomicCalls, feePayer),
+	expiryTimestamp, 
+	false,
 	Utils.AckType.NO_ACK,
 	Utils.AckGasParams(0,0),
 	Utils.DestinationChainParams(destGasLimit, destGasPrice, chainType, chainId),
@@ -26,19 +27,17 @@ gatewayContract.requestToDest(
 
 While calling the **`requestToDest`** function on the Gateway contract, we need to pass the following parameters:
 
-1. **requestArgs:**
-    1. **expiryTimestamp:** If you want to add a specific expiry timestamp, you can mention it against this parameter. Your request will get reverted if it is not executed before the expiryTimestamp. If you don't want any expiryTimestamp, you can use **`type(uint64).max`** as the expiryTimestamp.
-    2. **isAtomicCalls:** Set it to true if you want to ensure that either all your contract calls are executed or none of them are executed. Set it to false if you do not require atomicity. 
-    3. **feePayer:** Set it either to the sender address, the contract address initiating the request or to `NONE`. If set to `NONE`, anyone can act as the fee payer for the request. 
+1.  **expiryTimestamp:** If you want to add a specific expiry timestamp, you can mention it against this parameter. Your request will get reverted if it is not executed before the expiryTimestamp. If you don't want any expiryTimestamp, you can use **`type(uint64).max`** as the expiryTimestamp.
 
+2.  **isAtomicCalls:** Set it to true if you want to ensure that either all your contract calls are executed or none of them are executed. Set it to false if you do not require atomicity. 
 
-2.  **ackType:** Since we don't need an acknowledgment, set it to **NO_ACK**.
+3.  **ackType:** Since we don't need an acknowledgment, set it to **NO_ACK**.
 
-3.  **ackGasParams:** Since we are not requesting an acknowledgment, send **`(0,0)`** as the gas limit and gas price for ackGasParams.
+4.  **ackGasParams:** Since we are not requesting an acknowledgment, send **`(0,0)`** as the gas limit and gas price for ackGasParams.
 
-4.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, and the chain ID here.
+5.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, and the chain ID here.
 
-5.  **contractCalls:** Encode the payloads and the destination contract addresses in byte arrays and pass them in this function. The payload consist of the ABI-encoded data you want to send to the other chain. The destinationContractAddress is the address of the recipient contract on the destination chain that will handle the cross-chain request. In this case, we want to different payloads to different destination contracts.
+6.  **contractCalls:** Encode the payloads and the destination contract addresses in byte arrays and pass them in this function. The payload consist of the ABI-encoded data you want to send to the other chain. The destinationContractAddress is the address of the recipient contract on the destination chain that will handle the cross-chain request. In this case, we want to different payloads to different destination contracts.
 
     ```javascript
     bytes[] memory addresses = new bytes[](3);

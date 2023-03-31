@@ -7,7 +7,8 @@ sidebar_position: 1
 
 ```javascript
 function requestToDest(
-    Utils.RequestArgs memory requestArgs,
+    uint64 expTimestamp,
+    bool isAtomicCalls,
     Utils.AckType,
     Utils.AckGasParams memory ackGasParams,
     Utils.DestinationChainParams memory destChainParams,
@@ -15,16 +16,15 @@ function requestToDest(
   ) external returns (uint64);
 ```
 By setting the parameters per their requirements, users can use this function to exercise a wide range of functionalities when it comes to cross-chain message passing. These parameters include:
-### 1. requestArgs
-A struct comprising of the following subparameters:
-1. **expiryTimestamp:** The timestamp by which your cross-chain call will expire. If your call is not executed on the destination chain by this time, it will be reverted. If you don't want any expiry timestamp, pass **`type(uint64).max`** as the expiryTimestamp.
-2. **isAtomicCalls:** Since users can use **`requestToDest`** to send multiple cross-chain calls in one go, isAtomicCalls boolean value ensures whether the calls are atomic.
+### 1. expiryTimestamp
+The timestamp by which your cross-chain call will expire. If your call is not executed on the destination chain by this time, it will be reverted. If you don't want any expiry timestamp, pass **`type(uint64).max`** as the expiryTimestamp.
+
+### 2. isAtomicCalls
+Since users can use **`requestToDest`** to send multiple cross-chain calls in one go, isAtomicCalls boolean value ensures whether the calls are atomic.
   -  If this variable is set to **true**, either all the contract calls will be executed on the destination chain or none of them will be executed.
   -  If this variable is set to **false**, even if some of the contracts calls fail on the destination chain, other calls won't be affected.
-3. **feePayer:** This specifies the address on the Router chain from which the cross-chain fee will be deducted. 
 
-
-### 2. ackType
+### 3. ackType
 When the contract calls are executed on the destination chain, the Router chain receives an acknowledgment from the destination chain, which specifies whether the execution was successful or did it result in some error. We provide users the option to get this acknowledgment from the Router chain to the source chain and perform some operations based on that acknowledgment.
   ```javascript
   enum AckType {
@@ -39,7 +39,7 @@ When the contract calls are executed on the destination chain, the Router chain 
   3.  **ackType = ACK_ON_ERROR:** You only want to receive the acknowledgment on the source chain in case the calls failed on the destination chain.
   4.  **ackType = ACK_ON_BOTH:** You want to receive the acknowledgment on the source chain in both cases (success and error).
 
-### 3. ackGasParams
+### 4. ackGasParams
 If you opted to receive the acknowledgment on the source chain, you would need to write a callback function (discussed [here](./handleCrossTalkAck)) to handle the acknowledgment. The ackGasParams parameter includes the gas limit and gas price required to execute the callback function on the source chain when the acknowledgment is received. The gas limit depends on the complexity of the callback function, and the gas price depends on the source chain congestion.
 
 ```javascript
@@ -51,7 +51,7 @@ struct AckGasParams {
 
 If the user does not want to handle the acknowledgment, i.e., the ackType is **NO_ACK**, then the gas limit and gas price for ackGasParams should be zero.
 
-### 4. destinationChainParams
+### 5. destinationChainParams
 ```javascript
 struct DestinationChainParams {
     uint64 gasLimit;
@@ -65,7 +65,7 @@ struct DestinationChainParams {
 3.  **destChainType:** This represents the type of chain. The values for chain types can be found [here](./chainTypes).
 4.  **destChainId:** Chain ID of the destination chain in string format.
 
-### 5. contractCalls
+### 6. contractCalls
 ```
 struct ContractCalls {
     bytes[] payloads;
