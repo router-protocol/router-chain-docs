@@ -4,22 +4,23 @@ sidebar_position: 1
 ---
 
 import {
-  HomepageCard as Card,
-  HomepageSection as Section,
+HomepageCard as Card,
+HomepageSection as Section,
 } from '../../../src/components/HomepageComponents';
 
 import {
-  NearIcon,
-  EthereumIcon
+NearIcon,
+EthereumIcon
 } from '../../../src/icons';
 
 ## High Level Architecture
+
 Below is a high level architecture diagram for Router CrossTalk.
 
 <center><img src={require('../../../src/images/RouterCrossTalk.png').default} alt="Router CrossTalk Architecture" style={{width: "100%", marginBottom: 12}}/></center>
 
-
 ## Crosstalk Functions
+
   <Section title="Understanding Crosstalk Functions" id="web-sdks" hasSubSections >
 
   <Section>
