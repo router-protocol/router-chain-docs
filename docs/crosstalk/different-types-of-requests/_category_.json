@@ -1,4 +1,7 @@
 {
     "label": "Different Types of Requests",
-    "position": 4
+    "position": 4,
+    "link": {
+      "type": "generated-index"
+    }
   }

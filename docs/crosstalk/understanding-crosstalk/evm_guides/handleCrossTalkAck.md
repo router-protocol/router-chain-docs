@@ -4,7 +4,9 @@ sidebar_position: 3
 ---
 
 # `handleCrossTalkAck` Function
+
 Once the **`handleRequestFromSource`** function is executed, an acknowledgment is generated from Router's destination chain Gateway contract, which will specify whether the calls were successful. Since we inherited the ICrossTalkApplication contract, we need to implement a **`handleCrossTalkAck`** function in our contract with the following schema.
+
 ```javascript
 function handleCrossTalkAck(
   uint64 eventIdentifier,
@@ -12,19 +14,27 @@ function handleCrossTalkAck(
   bytes[] memory execData
 ) external
 ```
+
 If you have opted not to receive the acknowledgement, you can implement an empty function in its place in the following way:
+
 ```javascript
 function handleCrossTalkAck(
-  uint64, //eventIdentifier
-  bool[] memory, //execFlags
-  bytes[] memory //execData
+  uint64 eventIdentifier,
+  bool[] memory execFlags,
+  bytes[] memory execData
 ) external {}
 ```
+
 If you've opted to receive the acknowledgment, you need to handle the acknowledgment inside this function. This function receives the following params:
+
 ### 1. eventIdentifier
+
 This is the nonce you received when while calling the **`requestToDest`** function on the source chain Gateway contract. Using this nonce, you can verify whether a particular request was executed on the destination chain.
+
 ### 2. execFlags
+
 Since you can send multiple payloads to multiple contract addresses on the destination chain, the execFlags is an array of boolean values that tells you the status of the individual requests.
+
 <details>
 <summary><b>a) If the calls were atomic:</b></summary>
 
@@ -38,11 +48,12 @@ Since the calls were atomic, none of the calls will actually get executed. Howev
 // function to get if the calls were executed on destination chain
 function getTxStatusForAtomicCall(
 	  bool[] memory execFlags
-	) internal returns (bool) 
+	) internal returns (bool)
 {
 	return execFlags[execFlags.length - 1] == true;
-} 
+}
 ```
+
 </details>
 
 <details>
@@ -51,6 +62,7 @@ If you sent 3 payloads while initiating the request on the source chain and letâ
 </details>
 
 ### 3. execData
+
 Since you can send multiple payloads to multiple contract addresses on the destination chain, the execData is an array of bytes that provides you the return values of the **`handleRequestFromSource`** (on the destination chain) from each of these calls. You can decode this data and process it on the source chain. The decoding for this data is shown with example in the [Ping-Pong contract](../guides/ping-pong-contract/using-gateway-contract#handling-the-acknowledgement-received-from-destination-chain).
 
 <details>
