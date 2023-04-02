@@ -27,9 +27,9 @@ gatewayContract.requestToDest(
 While calling the **`requestToDest`** function on the Gateway contract, we need to pass the following parameters:
 
 1. **requestArgs:**
-    - **expiryTimestamp:** If you want to add a specific expiry timestamp, you can mention it against this parameter. Your request will get reverted if it is not executed before the expiryTimestamp. If you don't want any expiryTimestamp, you can use **`type(uint64).max`** as the expiryTimestamp.
-    -  **isAtomicCalls:** Set it to false, as there is only one call, so there is no difference in atomic or non-atomic calls.
-    - **feePayer:** Set it either to the sender address, the contract address initiating the request or to `NONE`. If set to `NONE`, anyone can act as the fee payer for the request. 
+    1. **expiryTimestamp:** If you want to add a specific expiry timestamp, you can mention it against this parameter. Your request will get reverted if it is not executed before the expiryTimestamp. If you don't want any expiryTimestamp, you can use **`type(uint64).max`** as the expiryTimestamp.
+    2. **isAtomicCalls:** Set it to false, as there is only one call, so there is no difference in atomic or non-atomic calls.
+    3. **feePayer:** Set it either to the sender address, the contract address initiating the request or to `NONE`. If set to `NONE`, anyone can act as the fee payer for the request. 
 
 2.  **ackType:**
     1. Set this to **ACK_ON_SUCCESS** if you only want to get acknowledgment when the execution on the destination chain is successful.

@@ -51,7 +51,7 @@ rustup update stable
 ```bash
 rustup target list --installed
 # if wasm32 is not listed after running the aforementioned command, run the following:
-rustup target add wasm32-unknown-unknowne
+rustup target add wasm32-unknown-unknown
 ```
 </details>
 
