@@ -10,7 +10,9 @@ sidebar_position: 5
 
 ## CrossTalk Fee Model
 
-The application has to call a function `setDappMetadata` on the Gateway address with the address of fee payer which should be an address on the Router Chain. This fee payer address will then have to approve the application on the Router Chain by doing a fee payer approval transaction. This is to stop anyone from using someone else's address as the fee payer. This address will be responsible for paying fees for the crosstalk requests originating from that Dapp. Also, all the fee refunds will be processed and credited to this account only. The application can change the fee payer address anytime by calling the `setDappMetadata` function on the Gateway contract.
+The application has to call a function `setDappMetadata` on the Gateway address with the address of fee payer which should be an address on the Router Chain. This fee payer address will then have to approve the application on the Router Chain by doing a fee payer approval transaction. This is to stop anyone from using someone else's address as the fee payer.
+
+This address will be responsible for paying fees for the crosstalk requests originating from that Dapp. Also, all the fee refunds will be processed and credited to this account only. The application can change the fee payer address anytime by calling the `setDappMetadata` function on the Gateway contract.
 
 ```javascript
 function setDappMetadata(

@@ -478,7 +478,7 @@ For making cross-chain transactions, you need to pay the fees on the router chai
 ```javascript
 function setDappMetadata(
     string memory feePayerAddress
-    ) external returns (uint64)
+) external returns (uint64)
 ```
 
 <summary><b>To implement this function, you can call it in the following manner:</b></summary>
@@ -486,7 +486,7 @@ function setDappMetadata(
 ```javascript
 function setDappMetadata(
     string memory FeePayer
-    ) public onlyOwner {
+) public onlyOwner {
     gatewayContract.setDappMetadata(FeePayer);
-  }
+}
 ```
