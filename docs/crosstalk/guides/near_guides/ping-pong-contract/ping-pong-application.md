@@ -595,3 +595,5 @@ Create a function by the name `handle_crosstalk_ack` with the parameters shown i
      Now we will set the `ack_from_destination` mapping with this data. We will also emit the `exec_status_event` and the `ack_from_destination_event` in this function along with the required parameters.
 
 In this way, we can create a simple ping pong smart contract using the Router CrossTalk Utils library.
+
+> **Note:** The full contract can be found in [this](https://github.com/router-protocol/crosstalk-sample-near) repository.

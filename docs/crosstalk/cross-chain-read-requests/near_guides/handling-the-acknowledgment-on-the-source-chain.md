@@ -25,3 +25,7 @@ Since multiple payloads can be sent to multiple contract addresses on the destin
 ### 3. exec_data
 
 The `exec_data` parameter is an array of bytes that provides the return values from every read call included in the read request. Based on the application's requirement, this data can be decoded and processed on the source chain.
+
+<br/>
+
+> **Note:** More details about this function can be found [here](../../understanding-crosstalk/near_guides/handleCrossTalkAck).
