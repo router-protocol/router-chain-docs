@@ -6,62 +6,89 @@ To leverage the capabilities of the Router Robot framework, you can use the `rou
 
 ### Installing the Latest Release
 ```bash
-go install github.com/router-protocol/router-robot@alpha15.0
+go install github.com/router-protocol/router-robot@latest
 ```
 
-### Generating a Template
+## Generate Code
+Generate a [GoLang](https://go.dev/) boilerplate code for cross-chain testing through Router Chain.
 
-**Step 1)** Create a config. json file with your application name.
-```json
-{
-"appName": "testapp"
-}
-```
+`router-robot codegen --project-name <project name>`
 
-**Step 2)** Pass this config.json to the router-robot cli command to generate a template codebase wherein you can write your own test cases.
+- **Directory structure**
+    
+    ![Here, `helloworld` is your project-name.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1fbc3473-afde-4c8a-ace3-7247cbfc4449/Screenshot_2023-02-17_at_1.05.01_AM.png)
+    
+    Here, `helloworld` is your project-name.
+    
+
+Starting point of the project is `robot_suite_test.go`
+
+## Testing
+
+You can write test cases with the help of [Ginkgo framework](https://github.com/onsi/ginkgo).
+
+Ginkgo is a popular BDD-style testing framework for the Go programming language. Here are some common CLI commands that you can use to run tests with Ginkgo:
+
+1. `ginkgo`: This command runs all the tests in the current directory and its subdirectories. By default, Ginkgo looks for test files with the suffix `_test.go` and executes all the tests in those files.
+2. `ginkgo -r`: This command recursively runs all the tests in the current directory and its subdirectories.
+    
+    Please refer to Ginkgo [docs](https://pkg.go.dev/github.com/onsi/ginkgo/ginkgo) for more commands.
+    
+### Steps to setup cross-chain testing:
+
+1. Generate boilerplate code
 ```bash
-router-robot config --file=config.json
+go install github.com/router-protocol/router-robot@latest
+``` 
+2. Add private keys in `networkconfig.json` (This file is added in .gitignore)
+3. Add artifacts for Router chain and other third party chains.
+    1. For Router chain: Get the artifacts (.wasm files) generated during contract deployment on Router chain.
+    2. For EVM chain: Generate artifacts.
+    Copy these artifacts into `contract-wrapper` folder
+        
+4. Write your test cases with Ginkgo testing framework and test. 
+Add test cases in `robot_test.go` or create new files suffixed with `_test.go`.
+5. Run `go build` command to build the project. Then use Ginkgo commands to run test cases.
+6. To track any inbound or outbound request you can use:
+`TrackInboundRequest()`, `TrackOutboundRequest()` methods provided via Robot instance.
+
+<aside>
+⭐ Make sure you have deployed your contracts on required chains.
+You can use these deployed contracts’ addresses during testing.
+
+</aside>
+    
+
+## Track a Transaction
+
+Provide a transaction hash to track its status from source chain.
+
+`router-robot track --chainId <source chain id> --chainType <source chain type> --txhash <source transaction hash>`
+
+Here, 
+
+`chainId`: source chain ID
+
+`chainType`: source chain type
+
+`txHash`: source tx hash
+
+## Logging and debugging
+
+For adding logs [logrus](https://pkg.go.dev/github.com/sirupsen/logrus#section-readme) library is configured inside router-robot itself.
+
+You can use `Logger` via Robot instance, initialized in `robot_suite_test.go`
+
+```go
+Logger.Info(”This is an information”)
+
+Logger.Warn(”This is a warning”)
+
+Logger.Fatal(”Fatal error occured”)
 ```
-We are using a dedicated config for initialization since more parameters might be required while initializing a template in the future.
- 
----
 
-## Sample Test App
+## Example
 
-Enable the sample flag to generate a sample test application:
-```bash
-router-robot config --sample=true
-```
+Sample repository created with router-robot tool can be found here.
 
-
-### Process Flow for the Sample Test App
-
-
-
-#### All test cases related to app are available in the following files:
-
--   `testapp_suite_test.go` - This file contains `BeforeSuite` where network configuration related to the test suite is bootstrapped. After the network config is created `InitializeHelloWorldApp` (available in `helloworld.go`) is called.
-
--   `helloworld_test.go` - Using this file, you can create `describe` test suites depending upon your test strategy. In this example, we created an inbound request and then call `TrackInboundRequest` function which is available in the router-robot library. Example usage:
-```bash
-testApp.TrackInboundRequest(testApp.HelloWorldApp.HelloWorldAppConfig.SourceChainType, testApp.HelloWorldApp.HelloWorldAppConfig.SourceChainID, txHash)
-```
-In the future, we will add integrate the tracking feature directly into the CLI which will allow users to track transaction status through different states on the Router chain using the following parameters:
-
--   `chainType` - Source chain type (EVM, Polkadot, etc.)
-
--   `chainID` - Source chain ID
-
--   `txHash` - Inbound txn hash on the Router chain
-
-#### All the business logic is available in the following files:
-
--   `testapp.go` - This file has a function `NewTestApp(networkConfigPath string),` which takes a path to the network configuration file as input and then initializes context JSON values.
-
--   `helloworld.go` - This file contains all the necessary business logic to run the following functions:
-
-    -   `DeployHelloWorldContract` - Deploys a contract on a given source chain (other than the Router chain)
-
-    -   `DeployHelloWorldMiddlewareContract` - Deploys a middleware contract on the Router chain, which acts as an application-specific bridge contract between two third-party chains
-
-    -   `SubmitHelloWorldInboundRequest`
+[https://github.com/router-protocol/Sample-cross-chain-tests](https://github.com/router-protocol/Sample-cross-chain-tests)
