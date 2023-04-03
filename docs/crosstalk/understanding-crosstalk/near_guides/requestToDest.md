@@ -86,3 +86,17 @@ pub struct ContractCalls {
 The contract_calls parameter includes an array of payloads and contract addresses to be sent to the destination chain. All the payloads will be sent to the respective contract addresses as specified in the arrays. The payload can include anything, i.e. you can pass whatever you want in this payload from the source chain and handle that payload on the destination chain. We would suggest passing the payload as abi encoded value so that it is easier to decode in all environments.
 
 > **Note:** We would suggest passing the payload as abi encoded value so that it is easier to decode in all environments.
+
+Please use the following format for passing the destination contract addresses:
+
+- For EVM chains as the destination chain:
+
+```javascript
+fn convert_evm_address_to_vec(evm_address: String) -> Vec<u8> {
+  let addr = evm_address.split_at(2).1;
+  let addr_as_vec = hex::decode(addr);
+
+  addr_as_vec.unwrap()
+}
+
+```
