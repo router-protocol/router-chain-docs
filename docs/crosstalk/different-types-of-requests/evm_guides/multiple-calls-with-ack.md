@@ -38,6 +38,8 @@ While calling the **`requestToDest`** function on the Gateway contract, we need 
    1. **expiryTimestamp:** If you want to add a specific expiry timestamp, you can mention it against this parameter. Your request will get reverted if it is not executed before the expiryTimestamp. If you don't want any expiryTimestamp, you can use **`type(uint64).max`** as the expiryTimestamp.
    2. **isAtomicCalls:** Set it to true if you want to ensure that either all your contract calls are executed or none of them are executed. Set it to false if you do not require atomicity.
 
+> **Note:** The NEAR blockchain does not support atomic transactions. So, whenever you send a request to the NEAR blockchain, make sure that the requests are non-atomic. Setting the `isAtomicCalls` to `true` won't make any difference in the case when the destination chain is NEAR.
+
 2. **ackType:**
 
    1. Set this to **ACK_ON_SUCCESS** if you only want to get acknowledgment when the execution on the destination chain is successful.

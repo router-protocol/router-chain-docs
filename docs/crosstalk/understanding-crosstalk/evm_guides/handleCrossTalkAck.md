@@ -19,9 +19,9 @@ If you have opted not to receive the acknowledgement, you can implement an empty
 
 ```javascript
 function handleCrossTalkAck(
-  uint64 eventIdentifier,
-  bool[] memory execFlags,
-  bytes[] memory execData
+  uint64, // eventIdentifier
+  bool[] memory, // execFlags
+  bytes[] memory // execData
 ) external {}
 ```
 
