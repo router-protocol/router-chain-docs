@@ -66,7 +66,7 @@ pub fn get_tx_status_for_atomic_call(
 If you sent 3 payloads while initiating the request on the source chain and let’s say the second one failed, you will receive: [true, false, true]. This means that the first and the third call executed successfully while the second one failed.
 </details>
 
-### 3. execData
+### 3. exec_data
 
 Since you can send multiple payloads to multiple contract addresses on the destination chain, the exec_data is an array of bytes that provides you the return values of the **`handle_request_from_source`** (on the destination chain) from each of these calls. You can decode this data and process it on the source chain. The decoding for this data is shown with example in the [Ping-Pong contract](../guides/ping-pong-contract/using-gateway-contract#handling-the-acknowledgement-received-from-destination-chain).
 

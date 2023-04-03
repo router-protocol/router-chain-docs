@@ -19,7 +19,7 @@ pub fn request_to_dest(
 
 By setting the parameters per their requirements, users can use this function to exercise a wide range of functionalities when it comes to cross-chain message passing. These parameters include:
 
-### **1. request_args:**
+### 1. request_args:
 
 1. **exp_timestamp:** If you want to add a specific expiry timestamp, you can mention it against this parameter. Your request will get reverted if it is not executed before the expiryTimestamp.
 2. **is_atomic_calls:** Set it to true if you want to ensure that either all your contract calls are executed or none of them are executed. Set it to false if you do not require atomicity.
@@ -34,7 +34,7 @@ pub struct RequestArgs {
 }
 ```
 
-### **2. ack_type:**
+### 2. ack_type:
 
 When the contract calls are executed on the destination chain, the Router chain receives an acknowledgment from the destination chain, which specifies whether the execution was successful or did it result in some error. We provide users the option to get this acknowledgment from the Router chain to the source chain and perform some operations based on that acknowledgment.
 
@@ -43,7 +43,7 @@ When the contract calls are executed on the destination chain, the Router chain 
 3.  **ack_type = 2:** You only want to receive the acknowledgment on the source chain in case the calls failed on the destination chain.
 4.  **ack_type = 3:** You want to receive the acknowledgment on the source chain in both cases (success and error).
 
-### **3. ack_gas_params:**
+### 3. ack_gas_params:
 
 If you opted to receive the acknowledgment on the source chain, you would need to write a callback function (discussed [here](./handleCrossTalkAck.md)) to handle the acknowledgment. The ack_gas_params parameter includes the gas limit and gas price required to execute the callback function on the source chain when the acknowledgment is received. The gas limit depends on the complexity of the callback function, and the gas price depends on the source chain congestion.
 
@@ -56,7 +56,7 @@ pub struct AckGasParams {
 
 If the user does not want to handle the acknowledgment, i.e., the ackType is **0**, then the gas limit and gas price for ack_gas_params should be zero.
 
-### **4. destination_chain_params:**
+### 4. destination_chain_params:
 
 ```javascript
 pub struct DestinationChainParams {
@@ -74,7 +74,7 @@ pub struct DestinationChainParams {
 4.  **dest_chain_id:** Chain ID of the destination chain in string format.
 5.  **asm_address:** Address of Additional Security Module (ASM) contract that acts as a plugin which enables users to seamlessly integrate their own security mechanism into their DApp.
 
-### **5. contract_calls:**
+### 5. contract_calls:
 
 ```
 pub struct ContractCalls {
@@ -83,7 +83,7 @@ pub struct ContractCalls {
 }
 ```
 
-The contract_calls parameter includes an array of payloads and contract addresses to be sent to the destination chain. All the payloads will be sent to the respective contract addresses as specified in the arrays. The payload can include anything, i.e. you can pass whatever you want in this payload from the source chain and handle that payload on the destination chain. We would suggest passing the payload as abi encoded value so that it is easier to decode in all environments.
+The contract_calls parameter includes an array of payloads and contract addresses to be sent to the destination chain. All the payloads will be sent to the respective contract addresses as specified in the arrays. The payload can include anything, i.e. you can pass whatever you want in this payload from the source chain and handle that payload on the destination chain.
 
 > **Note:** We would suggest passing the payload as abi encoded value so that it is easier to decode in all environments.
 

@@ -20,7 +20,7 @@ function setDappMetadata(
 ) external payable returns (uint64)
 ```
 
-Note that this function is named `set_dapp_metadata` in the NEAR ecosystem.
+> **Note:** that this function is named `set_dapp_metadata` in the NEAR ecosystem.
 
 ### Deducting Fee
 
