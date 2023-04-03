@@ -40,11 +40,9 @@ While calling the **`requestToDest`** function on the Gateway contract, we need 
 
 2. **ackType:** Since we don't need an acknowledgment, set it to **NO_ACK**.
 
-3. **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM here.
+3. **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM here. Read more about ASM [here](../../understanding-crosstalk/additionalSecurityModule.md)
 
-4. **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, and the chain ID here.
-
-5. **contractCalls:** Encode the payload and the destination contract address in byte arrays and pass them in this function. The payload consists of the ABI-encoded data you want to send to the other chain. The destinationContractAddress is the address of the recipient contract on the destination chain that will handle the cross-chain request. It can be created in the following way:
+4. **contractCalls:** Encode the payload and the destination contract address in byte arrays and pass them in this function. The payload consists of the ABI-encoded data you want to send to the other chain. The destinationContractAddress is the address of the recipient contract on the destination chain that will handle the cross-chain request. It can be created in the following way:
 
    ```javascript
    bytes[] memory addresses = new bytes[](1);

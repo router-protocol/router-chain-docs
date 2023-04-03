@@ -63,7 +63,7 @@ While calling the **`singleRequestWithoutAcknowledgement`** function on the Cros
 )
 ```
 
-3.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM here.
+3.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM here. You can find elaboration on ASM [here](../../additionalSecurityModule.md).
 
 ```javascript
     struct Utils.DestinationChainParams(
@@ -185,7 +185,7 @@ While calling the **`singleRequestWithAcknowledgement`** function on the CrossTa
     struct Utils.AckGasParams(uint64 ackGasLimit, uint64 ackGasPrice)
     ```
 
-5.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM here.
+5.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM here. You can find elaboration on ASM [here](../../additionalSecurityModule.md).
 
 ```javascript
     struct Utils.DestinationChainParams(
@@ -280,7 +280,7 @@ While calling the **`multipleRequestsWithoutAcknowledgement`** function on the C
 )
 ```
 
-3.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and address of ASM here.
+3.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and address of ASM here. You can find elaboration on ASM [here](../../additionalSecurityModule.md).
 
 ```javascript
     struct Utils.DestinationChainParams(
@@ -411,7 +411,7 @@ While calling the **`multipleRequestsWithAcknowledgement`** function on the Cros
     struct Utils.AckGasParams(uint64 ackGasLimit, uint64 ackGasPrice)
     ```
 
-5.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM here.
+5.  **destinationChainParams:** We need to pass the destination chain gas limit, gas price, chain type, the chain ID and the address of ASM here. You can find elaboration on ASM [here](../../additionalSecurityModule.md).
 
 ```javascript
     struct Utils.DestinationChainParams(

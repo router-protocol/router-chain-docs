@@ -1,6 +1,6 @@
 ---
-title: Cross-Chain Staking Contracts using Voyager
-sidebar_position: 3
+title: Staking Contract using Voyager
+sidebar_position: 1
 ---
 
 # Cross-Chain Staking Dapp
@@ -232,7 +232,7 @@ It is the `voyagerReceive` function that:
 1. Requires that the caller of the function is Voyager Execute Handler only.
 2. Checks if the cross-chain request was initiated from our counterpart on the source chain or not.
 3. Checks if the selector is of the same function that we need to call on destination chain. Here it is the selector of `receiveStakeCrossChain` function.
-4. Decodes the data that we encoded (recipient address) at the time of initiating the cross-chain transfer.
+4. Decodes the data that we encoded (recipient address )at the time of initiating the cross-chain transfer.
 5. Calls the `receiveStakeCrossChain` function with its parameters.
 
 </details>

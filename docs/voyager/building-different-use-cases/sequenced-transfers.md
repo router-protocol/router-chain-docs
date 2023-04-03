@@ -192,4 +192,4 @@ function stake(
 
 In this way, you can handle cross-chain requests from the Voyager on the destination chain.
 
-- [Cross-chain Staking Dapp](./crosschain-staking)
+- [Cross-chain Staking Dapp](../guides/crosschain-staking.md)
