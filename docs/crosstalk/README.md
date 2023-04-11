@@ -74,7 +74,7 @@ The guides on this page will explain the process of developing on Router's Cross
     <Card
     title="CrossTalkUtils Library"
     description="Plug-and-play library for easier integration of Router CrossTalk"
-    to="/crosstalk/crosstalkutils-library"
+    to="/crosstalk/understanding-crosstalk/evm_guides/crosstalkutils-library"
     icon={<ChainIcon />}
   />
   </Section>
@@ -87,13 +87,13 @@ The guides on this page will explain the process of developing on Router's Cross
       <Card
     title="Deploying a Cross-chain Ping Pong Contract"
     description="Learn how to deploy your first cross-chain dApp using Router's CrossTalk framework"
-  to="/crosstalk/guides/ping-pong-contract"
+  to="/crosstalk/guides/evm_guides/ping-pong-contract/"
     icon={<Guide />}
   />
      <Card
     title="Deploying a Cross-chain NFT (ERC-1155)"
     description="Learn how to deploy a cross-chain NFT using Router's CrossTalk framework"
-  to="/crosstalk/guides/cross-chain-nft"
+  to="/crosstalk/guides/evm_guides/cross-chain-nft"
     icon={<Guide />}
   />
   </Section>
