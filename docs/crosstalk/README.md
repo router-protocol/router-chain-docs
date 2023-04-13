@@ -48,7 +48,7 @@ The guides on this page will explain the process of developing on Router's Cross
  <Card
     title="Different Types of Requests"
     description="Learning how to execute different types of cross-chain requests using CrossTalk."
-    to="/crosstalk/different-types-of-requests"
+    to="/crosstalk/category/different-types-of-requests"
     icon={<ModulesIcon />}
   />
   <Card
