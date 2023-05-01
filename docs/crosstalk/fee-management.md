@@ -5,7 +5,7 @@ sidebar_position: 5
 
 ## Gas and Fee Payer Considerations
 
-- Unlike the OmniChain framework, in the case of CrossTalk, users are required to specify both the `gasPrice` and `gasLimit` in their request. This is because the gas parameters and the fee payer specified in a CrossTalk request are used for the execution of the request on the destination chain. In case the `gasPrice` is set to 0, it will be estimated by the gas price oracle module on the Router chain.
+- Unlike the OmniChain framework, in the case of CrossTalk, users are required to specify both the `gasPrice` and `gasLimit` in their request metadata. This is because the gas parameters and the fee payer specified in a CrossTalk request are used for the execution of the request on the destination chain. In case the `gasPrice` is set to 0, it will be estimated by the gas price oracle module on the Router chain.
 - For a CrossTalk request, relayers might not need to estimate the gas price since the request itself will contain a `gasPrice` parameter. However, applications running their custom relayers might pass the `gasPrice` as 0, in which case, the custom relayer will have to estimate the gas price.
 
 ## CrossTalk Fee Model

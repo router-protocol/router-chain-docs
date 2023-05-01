@@ -17,7 +17,7 @@ While you can definitely integrate only one of these functionalities into your c
 
 We will provide an API for the developers which will provide you the calldata for the swap directly. You won’t need to do anything, just call the API, get the data and call the Voyager using that data for token transfers. For the arbitrary instructions, we will demonstrate how you can create the arbitrary data too in this section.
 
-The params for the API call to get data for the swap are: 
+The params for the API call to get data for the swap are:
 
 1. **fromTokenAddress:** Address of the token to be transferred from the source chain.
 2. **toTokenAddress:** Address of the token to be received on the destination chain.
@@ -37,11 +37,11 @@ Arbitrary instructions are custom pieces of code which are executed on the desti
 
 Let’s start with a simple token transfer and stake functionality where user will call a function which will transfer the tokens to another chain and then call the stake function to stake the tokens received into the contract.
 
-Let’s say you want to create a function to transfer your funds and then stake it on another chain, then you will need to create a function to create that request on the source chain and a function to handle that request on the destination chain. 
+Let’s say you want to create a function to transfer your funds and then stake it on another chain, then you will need to create a function to create that request on the source chain and a function to handle that request on the destination chain.
 
 Let’s create a function to create that request on the source chain. For the details regarding the Arbitrary Data that needs to be generated, please check [this](../understanding-voyager/transfer-reserve-token-arbitrary-instruction#arbitrary-data).
 
-The arbitrary data consists of six fields: 
+The arbitrary data consists of six fields:
 
 1. Destination contract address which will handle the request.
 2. The selector to the function which has the logic for handling the request.
@@ -72,17 +72,17 @@ function createDataForStaking(
     bytes memory data = abi.encode(recipient);
 
     return abi.encode(
-        destContractAddress, 
-        STAKE_FUNCTION_SELECTOR, 
-        data, 
-        refundAddress, 
-        gasLimit, 
+        destContractAddress,
+        STAKE_FUNCTION_SELECTOR,
+        data,
+        refundAddress,
+        gasLimit,
         gasPrice
     );
 }
 ```
 
-This gives us the arbitrary data which can be used to call the functions of the Deposit Handler. 
+This gives us the arbitrary data which can be used to call the functions of the Deposit Handler.
 
 ### Calling the Voyager Deposit function
 
@@ -102,7 +102,7 @@ function callVoyager(
     bytes memory swapData,
     bytes memory executeData,
     bytes memory arbitraryData
-) public 
+) public
 {
 	bool success;
 
@@ -117,29 +117,29 @@ function callVoyager(
     }
 
 	require(success == true, "Voyager deposit failed");
-} 
+}
 ```
 
 ### Handling the request on the destination chain contract
 
-The entry point of the cross-chain request for arbitrary instructions is the **voyagerReceive**  function which needs to be implemented on each contract that wants to handle an arbitrary instruction from the Voyager. The detailed explanation for this function can be found [here](../understanding-voyager/transfer-reserve-token-arbitrary-instruction#voyagerreceive).
+The entry point of the cross-chain request for arbitrary instructions is the **voyagerReceive** function which needs to be implemented on each contract that wants to handle an arbitrary instruction from the Voyager. The detailed explanation for this function can be found [here](../understanding-voyager/transfer-reserve-token-arbitrary-instruction#voyagerreceive).
 
 ```javascript
 function voyagerReceive(
-	address sourceSenderAddress, 
-	bytes32 srcChainIdBytes, 
-	bytes4 selector, 
-	bytes memory data, 
-	address settlementToken, 
+	address sourceSenderAddress,
+	bytes32 srcChainIdBytes,
+	bytes4 selector,
+	bytes memory data,
+	address settlementToken,
 	uint256 settlementAmount
-) external; 
+) external;
 ```
 
 This function is called by the Voyager Execute Handler, so make sure that only the Execute Handler can call this contract by using access control or a modifier otherwise the contract can be potentially exploited. Similarly also put a check on the source sender addresses so that only your contracts on different chains can call this function.
 
-The function receives the following parameters: 
+The function receives the following parameters:
 
-1. The address of the contract which initiated the request on the source chain. 
+1. The address of the contract which initiated the request on the source chain.
 2. The identifier for the source chain.
 3. The selector to the function passed to the contract from the source chain.
 4. The data variable sent from the source chain.
@@ -166,10 +166,10 @@ function voyagerReceive(
     require(msg.sender == voyagerExecuteHandler, "only voyager execute handler");
 		// Checking if the request initiated by our contract only from the source chain
     require(
-            sourceContractAddress == sourceSenderAddress, 
+            sourceContractAddress == sourceSenderAddress,
             "source sender does not match"
 		);
-		
+
     // Checking the selector that was passed from the source chain
     if (selector == stake.selector) {
         // decoding the data we sent from the source chain
@@ -185,7 +185,7 @@ function stake(
     address token,
     address amount
 ) internal {
-    // Updating the staked balances mapping 
+    // Updating the staked balances mapping
     stakedBalance[user][token] += amount;
 }
 ```
