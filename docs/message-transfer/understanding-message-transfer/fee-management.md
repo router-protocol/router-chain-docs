@@ -1,6 +1,6 @@
 ---
 title: Fee Management
-sidebar_position: 5
+sidebar_position: 3
 ---
 
 ## Gas and Fee Payer Considerations

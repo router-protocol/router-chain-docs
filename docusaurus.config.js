@@ -40,7 +40,7 @@ const SECTIONS = [
   defineSection('router-core'),
   defineSection('networks'),
   // defineSection('cosmwasm'),
-  defineSection('crosstalk'),
+  defineSection('message-transfer'),
   // defineSection('frontend'),
   // defineSection('beaker'),
   defineSection('telescope'),
@@ -152,7 +152,7 @@ const config = {
           },
           {
             label: 'Develop',
-            to: '/crosstalk',
+            to: '/message-transfer',
             position: 'left',
             // className: 'new-badge',
             // activeBaseRegex: '(.*ui-kit|.*web-core)',

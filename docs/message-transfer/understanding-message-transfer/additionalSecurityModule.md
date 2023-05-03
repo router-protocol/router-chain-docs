@@ -1,6 +1,6 @@
 ---
 title: Additional Security Module (ASM)
-sidebar_position: 5
+sidebar_position: 4
 ---
 
 # Additional Security Module (ASM)

@@ -37,8 +37,8 @@ const SECTIONS = [
     section: 'core',
   },
   {
-    name: 'CrossTalk',
-    id: 'crosstalk',
+    name: 'Message Transfer',
+    id: 'message-transfer',
     icon: Network,
     section: 'core',
   },
