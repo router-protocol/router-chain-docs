@@ -1,5 +1,5 @@
 ---
-title: Using Gateway Contract Directly
+title: Cross-Chain NFT
 sidebar_position: 1
 description: A cross-chain NFT (ERC-1155) contract using Router Gateway contracts
 ---

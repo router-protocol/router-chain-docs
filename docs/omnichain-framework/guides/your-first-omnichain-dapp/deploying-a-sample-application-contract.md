@@ -11,7 +11,6 @@ sidebar_position: 2
 
 <center><img src={require('./images/deploying-a-sample-application-contract/step-2.png').default} alt="Step 2" style={{width: 300, marginBottom: 12}} /></center>
 
-
 **Step 3)** Under the template option, choose **Blank**, give your workspace an appropriate name and then click on **OK**.
 
 <center><img src={require('./images/deploying-a-sample-application-contract/step-3.png').default} alt="Step 3" style={{width: 300, marginBottom: 12}} /></center>
@@ -26,49 +25,62 @@ sidebar_position: 2
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
-import "evm-gateway-contract/contracts/IGateway.sol";
-import "evm-gateway-contract/contracts/IApplication.sol";
+import "@routerprotocol/evm-gateway-contracts@1.1.11/contracts/IGateway.sol";
+import "hardhat/console.sol";
 
-contract HelloRouter is IApplication {
+contract HelloRouter {
+    address public owner;
     IGateway public gatewayContract;
     string public greeting;
 
-    event RequestFromRouterEvent(string indexed bridgeContract, bytes data);
+    error CustomError(string message);
 
-    constructor(address payable gatewayAddress) {
+    constructor(address payable gatewayAddress, string memory _feePayer) {
+        owner = msg.sender;
         gatewayContract = IGateway(gatewayAddress);
+        setDappMetadata(_feePayer);
     }
 
-    function sendStringPayloadToRouter(
-        string memory sampleString,
-        string memory routerBridgeContract
-    ) external payable {
-        bytes memory stringPaylaod = abi.encode(sampleString);
-        bytes memory payload = abi.encode(1, stringPaylaod);
-        gatewayContract.requestToRouter(payload, routerBridgeContract);
+    function setDappMetadata(string memory FeePayer) public {
+        require(msg.sender == owner, "Only Owner can set fee payer");
+        gatewayContract.setDappMetadata(FeePayer);
     }
-    
-    function sendRequestToRouter(
-        uint64 chainType,
-        string memory chainId,
-        address destinationContractAddress,
-        string memory str,
-        string memory routerBridgeContract
+
+    function iSend(
+    string calldata destChainId,
+    string calldata destinationContractAddress,
+    string calldata str,
+    bytes calldata requestMetadata
     ) public payable {
-        bytes memory innerPayload = abi.encode(chainType, chainId, str, destinationContractAddress);
-        bytes memory payload = abi.encode(2, innerPayload);
-        gatewayContract.requestToRouter(payload, routerBridgeContract);
+    bytes memory packet = abi.encode(str);
+    bytes memory requestPacket = abi.encode(destinationContractAddress, packet);
+    gatewayContract.iSend{ value: msg.value }(
+      1,
+      0,
+      string(""),
+      destChainId,
+      requestMetadata,
+      requestPacket
+    );
     }
 
-    function handleRequestFromRouter(string memory sender, bytes memory payload) override external {
-        // This check is to ensure that the contract is called from the Gateway only.
-        require(msg.sender == address(gatewayContract));
-        (string memory sampleStr) = abi.decode(payload, (string));
-
-        require(keccak256(abi.encodePacked(sampleStr)) != keccak256(abi.encodePacked("")));
-        greeting = sampleStr;
-        emit RequestFromRouterEvent(sender, payload);
+    function iReceive(
+    string memory ,//requestSender,
+    bytes memory packet,
+    string memory //srcChainId
+  ) external returns (string memory) {
+    require(msg.sender == address(gatewayContract), "only gateway");
+    greeting = abi.decode(
+      packet,
+      (string)
+    );
+    if (
+      keccak256(abi.encodePacked(greeting)) == keccak256(abi.encodePacked(""))
+    ) {
+      revert CustomError("String should not be empty");
     }
+    return greeting;
+  }
 
     receive() external payable {}
 }
@@ -80,7 +92,7 @@ contract HelloRouter is IApplication {
 
 Once compiled, you should see a green tick mark over the **Solidity compiler** icon.
 
----------------------------------
+---
 
 ## Part 2: Deploying a Compiled Contract
 
@@ -90,9 +102,9 @@ Once compiled, you should see a green tick mark over the **Solidity compiler** i
 
 **Step 2)** A MetaMask window will pop up following the previous step. Connect the account that we set up in the guide given [here](./setting-up-routers-evm-devnet#part-2-importing-a-wallet-to-interact-with-the-devnet).
 
-> **Warning:** Make sure you're connected to Router's EVM Devnet.
+> **Warning:** Make sure you're connected to Router's EVM Testnet.
 
-**Step 3)** Add the following gatewayAddress (a required constructor parameter): **`0xF744a7483cc04F2a224126ebCCf0c87214bD66D2`**, click on **Deploy** and sign the transaction in your MetaMask.
+**Step 3)** Add the gateway address for respective chain from [here](https://lcd.testnet.routerchain.dev/router-protocol/router-chain/multichain/chain_config), click on **Deploy** and sign the transaction in your MetaMask.
 
 <center><img src={require('./images/deploying-a-sample-application-contract/part-2-step-3.png').default} alt="Step 3" style={{ width: 300, marginBottom: 12 }} /></center>
 

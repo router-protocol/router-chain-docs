@@ -51,7 +51,7 @@ function getRequestMetadata(
    function currentVersion() external view returns (uint256)
    ```
 
-   This would change whenever the encoding of **requestMetadata** (parameter #5) changes. However the Router Chain will support earlier versions of encoding too for iDapps to always remain compatible.
+   This would change whenever the signature of iSend function or event ISendEvent will change. However the Router Chain will support earlier versions of encoding too for iDapps to always remain compatible.
 
 2. **routeAmount:** If one wants to transfer Route tokens along with the call, they will have to pass the amount of tokens to be transferred here.
 3. **routeRecipient:** If one wants to transfer Route tokens along with the call, they will have to pass the address of recipient on the destination chain to which Route tokens will be minted on destination chain.

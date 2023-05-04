@@ -46,12 +46,6 @@ The guides on this page will explain the process of developing on Router's Cross
     to="/crosstalk/understanding-crosstalk"
     icon={<ChainIcon />}
   />
- <Card
-    title="Different Types of Requests"
-    description="Learning how to execute different types of cross-chain requests using CrossTalk."
-    to="/crosstalk/different-types-of-requests"
-    icon={<ModulesIcon />}
-  />
   <Card
     title="Fee Management"
     description="Gaining a deeper understanding of how the CrossTalk fee is computed"
@@ -85,6 +79,18 @@ The guides on this page will explain the process of developing on Router's Cross
     title="Deploying a Cross-chain NFT (ERC-1155)"
     description="Learn how to deploy a cross-chain NFT using Router's CrossTalk framework"
   to="/crosstalk/guides/evm-guides/cross-chain-nft"
+    icon={<Guide />}
+  />
+     <Card
+    title="Deploying a Cross-chain Read Request sample contract"
+    description="Learn how to deploy a Cross-chain Read Request sample contractusing Router's CrossTalk framework"
+  to="/crosstalk/guides/evm-guides/read-request" 
+    icon={<Guide />}
+  />
+     <Card
+    title="Integrating ASM into your dapp"
+    description="Learn how to integrate Additional Security Module into your Dapp"
+  to="/crosstalk/guides/evm-guides/ASM"
     icon={<Guide />}
   />
   </Section>

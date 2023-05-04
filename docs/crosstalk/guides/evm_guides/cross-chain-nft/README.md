@@ -12,4 +12,4 @@ We will be using the standard ERC-1155 contract from Openzeppelin and add some e
 
 We will also create a mapping that will store the addresses of our contracts on different chains so that we can match whether the request on the destination was originated from our contract on the source chain.
 
-- [How to make a cross-chain ERC-1155 smart contract](./cross-chain-nft/using-gateway-contract)
+- [How to make a cross-chain ERC-1155 smart contract](../cross-chain-nft/cross-chain-nft.md)

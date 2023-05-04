@@ -187,7 +187,7 @@ function sendReadRequest(
    ```
 
 3. **Creating request-packet:** We will just abi-encode the destination contract address that we got in our parameters and the payload packet we created in the previous step and set it as the request packet.
-4. **Calling the gateway Contract to generate a cross-chain read request:** Now the time has come for us to generate a cross-chain read request to the destination chain. Now we will call the <code>sendReadRequest</code> function of the gateway contract with the required parameters. The documentation for this function can be found [here](./creating-and-sending-a-cross-chain-read-request.md).
+4. **Calling the gateway Contract to generate a cross-chain read request:** Now the time has come for us to generate a cross-chain read request to the destination chain. Now we will call the <code>sendReadRequest</code> function of the gateway contract with the required parameters. The documentation for this function can be found [here](../../../understanding-crosstalk/evm_guides/iSend.md).
 
 ### Handling the Acknowledgement
 
@@ -205,9 +205,9 @@ function iAck(
   }
 ```
 
-1. Create a function named **iAck** and here, the name matters. The function signature, i.e. the name and the parameters it receive has to be the same since this function is called by the Gateway contract on the destination chain and if the name or the parameters to this function changes, the call will fail. The details about the parameters to this function is explained [here](./creating-and-sending-a-cross-chain-read-request.md) in detail.
+1. Create a function named **iAck** and here, the name matters. The function signature, i.e. the name and the parameters it receive has to be the same since this function is called by the Gateway contract on the destination chain and if the name or the parameters to this function changes, the call will fail. The details about the parameters to this function is explained [here](../../../understanding-crosstalk/evm_guides/iAck.md) in detail.
 2. In the **requestIdentifier** we receive the nonce which was returned from the Gateway contract when the request originated from source chain.
-3. If the execution was successful on the destination chain, we will get <code>[true]</code> in execFlag and <code>(abi.encode(uint256))</code> in execData as the function that we read from on the contract on destination chain returned uint256 value to us in IAck function.
+3. If the execution was successful on the destination chain, we will get <code>true</code> in execFlag and <code>(abi.encode(uint256))</code> in execData as the function that we read from on the contract on destination chain returned uint256 value to us in IAck function.
 
 Since, we already knew that encoded uint256 value is going to come up as our return value from the destination chain, we can decode it here in **iAck** function.
 

@@ -26,7 +26,7 @@ Current version of Gateway contract which can be queried from the Gateway contra
 function currentVersion() external view returns (uint256)
 ```
 
-This would change whenever the encoding of **requestMetadata** (parameter #5) changes. However the Router Chain will support earlier versions of encoding too for iDapps to always remain compatible.
+This would change whenever the signature of iSend function or event ISendEvent will change. However the Router Chain will support earlier versions of encoding too for iDapps to always remain compatible.
 
 ### **2. routeAmount:**
 
