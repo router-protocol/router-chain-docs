@@ -18,6 +18,7 @@
     "test": "jest --passWithNoTests"
   },
   "dependencies": {
+    "@cmfcmf/docusaurus-search-local": "^1.1.0",
     "@docusaurus/core": "^2.3.1",
     "@docusaurus/preset-classic": "^2.3.1",
     "@docusaurus/remark-plugin-npm2yarn": "^2.3.1",
@@ -26,6 +27,7 @@
     "@dytesdk/react-web-core": "file:./modules/dytesdk-react-web-core-1.5.1-stripped.1.tgz",
     "@dytesdk/ui-kit": "^1.21.0",
     "@dytesdk/web-core": "file:./modules/dytesdk-web-core-0.28.2-stripped.5.tgz",
+    "@easyops-cn/docusaurus-search-local": "^0.35.0",
     "@mdx-js/react": "^1.6.22",
     "@radix-ui/react-icons": "^1.1.1",
     "@radix-ui/react-select": "^0.1.1",
