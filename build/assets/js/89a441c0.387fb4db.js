@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkrouter_docs=self.webpackChunkrouter_docs||[]).push([[2746],{83159:(e,t,a)=>{a.r(t),a.d(t,{default:()=>c});var r=a(67294),s=a(76775);function c(){const e=(0,s.k6)();return r.createElement(s.l_,{to:{pathname:"/api",search:"v=v2",hash:e.location.hash}})}}}]);
