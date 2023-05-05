@@ -1,7 +1,4 @@
 {
-    "label": "Near Guides",
-    "position": 2,
-    "link": {
-      "type": "generated-index"
-    }
+  "label": "Near Guides",
+  "position": 2
 }

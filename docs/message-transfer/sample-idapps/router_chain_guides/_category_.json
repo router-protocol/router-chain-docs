@@ -1,7 +1,4 @@
 {
-  "label": "Omni-chain Guides",
-  "position": 3,
-  "link": {
-    "type": "generated-index"
-  }
+  "label": "Router Chain Guides",
+  "position": 3
 }
