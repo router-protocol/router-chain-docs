@@ -27,7 +27,10 @@ Guide,
 
 # Introduction
 
-The guides on this page will explain the process of developing on Router's CrossTalk framework. This framework leverages Router's infrastructure to allow contracts on one chain to send intructions to contracts deployed on some other chain. The framework is structured in a way that it can be integrated seamlessly into your development environment without any overhead. If you're new here or you're not sure if CrossTalk is compatible with your requirements, check out <a href="../overview/choosing-the-right-framework" target="_blank">this guide</a> to figure out the best cross-chain framework for your dApp.
+Router Protocol's Message Transfer aka Crosstalk feature enables seamless interaction between contracts deployed on different chains, allowing them to exchange messages and execute cross-chain transactions. This feature can be integrated into a development environment without any additional overhead, providing a smooth experience for developers.
+
+Moreover, Crosstalk allows for contracts on third-party chains to interact with contracts on the Router chain, making it possible to build applications with stateful bridging logic using the Router chain contract as the bridge contract. This stateful bridging functionality is what Router Protocol refers to as its Omnichain framework.
+
 
 ## Get Started
 

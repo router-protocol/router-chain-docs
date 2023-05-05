@@ -1,8 +1,8 @@
 # EVM Chain CrossTalk Functions
 
-Router’s Gateway contracts have a function named **`iSend`** that facilitates the transmission of a cross-chain message. Whenever users want to execute a cross-chain request, they can call this function by passing the payload to be transferred from the source to the destination chain along with the required parameters.
+The transmission of a cross-chain message is facilitated through the `iSend` function in Router's Gateway contracts. When initiating a cross-chain request, users can call this function and pass the required parameters along with the payload that needs to be transferred from the source to the destination chain.
 
-In addition to calling the aforementioned function, CrossTalk users will also have to implement two functions on their contracts:
-
-1. To handle a cross-chain request on the destination chain, users are required to include a **`iReceive`** function on their destination chain contracts.
-2. To process the acknowledgment of their requests on the source chain, user will have to implement a **`iAck`** function on their source chain contracts.
+However, to complete the cross-chain communication process, CrossTalk users must also implement two functions on their contracts:
+1. An `iReceive` function must be included in the destination chain contracts to handle cross-chain requests.
+2. To process the acknowledgment of their requests on the source chain, users must implement an `iAck` function in their source chain contracts.
+3. The `setDappMetadata` function facilitates the assignment of the fee payer for a DApp.
