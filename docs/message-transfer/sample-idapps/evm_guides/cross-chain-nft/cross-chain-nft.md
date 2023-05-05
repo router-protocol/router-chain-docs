@@ -4,7 +4,7 @@ sidebar_position: 1
 description: A cross-chain NFT (ERC-1155) contract using Router Gateway contracts
 ---
 
-In this section we will go through how a cross-chain ERC-1155 NFT can be created by integrating the Router gateway contracts.
+Creating a cross-chain ERC-1155 NFT using the Router's CrossTalk.
 
 ### Installing the dependencies:
 
@@ -12,7 +12,7 @@ Install the evm-gateway contracts with the following command:
 
 `yarn add @routerprotocol/evm-gateway-contracts` or `npm install @routerprotocol/evm-gateway-contracts`
 
-- Make sure you're using latest version of the gateway contracts.
+- Make sure to use the latest version of the gateway contracts.
 
 Install the openzeppelin contracts library with the following command:
 
@@ -54,7 +54,7 @@ contract XERC1155 is ERC1155, IDapp {
   constructor(
     string memory _uri,
     address payable gatewayAddress,
-	string memory feePayerAddress
+	  string memory feePayerAddress
   ) ERC1155(_uri) {
     gatewayContract = IGateway(gatewayAddress);
     owner = msg.sender;
@@ -87,20 +87,23 @@ contract XERC1155 is ERC1155, IDapp {
    2. **nftAmounts:** An array of amounts of the respective NFT Ids to be transferred to the recipient on the destination chain.
    3. **nftData:** Arbitrary data to be used while minting the NFT. You can send `0x00` if you don’t want to send any data while minting the NFT.
    4. **recipient:** Address (in bytes format) of the recipient of the NFTs on the destination chain.
-5. Create the constructor with the URI of the NFT metadata, address of gateway contract and address of the fee payer and set these variables inside the constructor. Also initialise the ERC1155 contract by passing it the URI with the constructor as shown above. Also set the owner as msg sender inside the constructor so that the deployer is the admin, mint some nfts to the deployer so that the cross-chain transfer functionality can be taken into action and set the Dapp metadata(explained in the next section) with the fee payer address as shown in the code snippet.
+5. Create the constructor with the URI of the NFT metadata, address of gateway contract and address of the fee payer and set these variables inside the constructor. Also initialise the ERC1155 contract by passing it the URI with the constructor as shown above.
+6. Set the owner as msg sender inside the constructor so that the deployer is the admin, mint some nfts to the deployer so that the cross-chain transfer functionality can be taken into action and set the Dapp metadata(explained in the next section) with the fee payer address as shown in the code snippet.
 
 ### Setting the fee payer address through setDappMetadata function
 
 ```javascript
-function setDappMetadata(
-    string memory FeePayer
-    ) public {
-    require(msg.sender == owner, "Only owner can set the metadata");
-    gatewayContract.setDappMetadata(FeePayer);
-  }
+function setDappMetadata(string memory FeePayer) public {
+  require(msg.sender == owner, "Only owner can set the metadata");
+  gatewayContract.setDappMetadata(FeePayer);
+}
 ```
 
-We have a function `setDappMetadata` in our gateway contract that takes the address of the fee payer on router chain from which the cross-chain fee will be deducted. User has to call the function as shown in the code snippet above. After the fee payer address is set, the fee payer has to provide approval on the router chain that this address is willing to pay fees for this Dapp thus enabling the Dapp to actually perform the cross-chain transaction. Note that all the fee refunds will be credited to this fee payer address.
+To enable the Dapp to perform cross-chain transactions, the application must specify the fee payer address on the Router chain from which the fee for such transactions will be deducted.
+
+This can be done by calling the setDappMetadata function in the gateway contract, and passing the fee payer address as a parameter. Once the fee payer address is set, the fee payer must provide approval on the Router chain to confirm their willingness to pay fees for the Dapp.
+
+It's important to note that any fee refunds will be credited to the fee payer address specified in the setDappMetadata function.
 
 ### Setting the gateway address through setGateway function
 
@@ -156,27 +159,27 @@ function transferCrossChain(
 
       ```jsx
       function getRequestMetadata(
-                 uint64 destGasLimit,
-                 uint64 destGasPrice,
-                 uint64 ackGasLimit,
-                 uint64 ackGasPrice,
-                 uint128 relayerFees,
-                 uint8 ackType,
-                 bool isReadCall,
-                 bytes memory asmAddress
-               ) public pure returns (bytes memory) {
-                 bytes memory requestMetadata = abi.encodePacked(
-                   destGasLimit,
-                   destGasPrice,
-                   ackGasLimit,
-                   ackGasPrice,
-                   relayerFees,
-                   ackType,
-                   isReadCall,
-                   asmAddress
-                 );
-                 return requestMetadata;
-               }
+        uint64 destGasLimit,
+        uint64 destGasPrice,
+        uint64 ackGasLimit,
+        uint64 ackGasPrice,
+        uint128 relayerFees,
+        uint8 ackType,
+        bool isReadCall,
+        bytes memory asmAddress
+      ) public pure returns (bytes memory) {
+        bytes memory requestMetadata = abi.encodePacked(
+          destGasLimit,
+          destGasPrice,
+          ackGasLimit,
+          ackGasPrice,
+          relayerFees,
+          ackType,
+          isReadCall,
+          asmAddress
+        );
+        return requestMetadata;
+      }
       ```
 
       Request metadata includes eight parameters which are to be Abi-encoded and sent along with the transferCrossChain function to generate a cross-chain communication request.
