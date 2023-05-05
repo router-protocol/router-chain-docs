@@ -2,6 +2,7 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/vsDark');
+const worker = require('node:worker_threads');
 
 // const UIKitReferencePlugins = require('./plugins/ui-kit-reference-plugin.cjs');
 const { webpackPlugin } = require('./plugins/webpack-plugin.cjs');
@@ -34,7 +35,6 @@ function defineSection(section, options = {}) {
     }),
   ];
 }
-
 
 const SECTIONS = [
   defineSection('router-core'),
@@ -119,7 +119,21 @@ const config = {
     // posthogPlugin,
   ],
 
-  themes: ['@docusaurus/theme-live-codeblock'],
+  themes: ['@docusaurus/theme-live-codeblock',
+  [
+    require.resolve("@easyops-cn/docusaurus-search-local"),
+    /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
+    ({
+      // ... Your options.
+      // `hashed` is recommended as long-term-cache of index file is possible.
+      hashed: true,
+      // For Docs using Chinese, The `language` is recommended to set to:
+      // ```
+      // language: ["en", "zh"],
+      // ```
+      docsRouteBasePath: '/'
+    }),
+  ]],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -210,7 +224,6 @@ const config = {
             position: 'right',
             className: 'dev-portal-signup dev-portal-link',
           },
-        
         ],
       },
       footer: {
@@ -298,7 +311,8 @@ const config = {
             ],
           },
         ],
-        copyright: 'Copyright © Router Protocol since 2022. All rights reserved.',
+        copyright:
+          'Copyright © Router Protocol since 2022. All rights reserved.',
       },
       prism: {
         theme: lightCodeTheme,
