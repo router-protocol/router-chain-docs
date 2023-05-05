@@ -16,11 +16,11 @@ function iSend(
  ) external payable returns (uint256);
 ```
 
-By setting the parameters per their requirements, users can use this function to exercise a wide range of functionalities when it comes to cross-chain message passing. These parameters include:
+This function allows users to configure various aspects of cross-chain message passing based on their specific needs. Some of the parameters that can be set using this function include:
 
 ### **1. version:**
 
-Current version of Gateway contract which can be queried from the Gateway contract using the following function.
+The current version of the Gateway contract which can be obtained by calling a specific function within the contract.
 
 ```javascript
 function currentVersion() external view returns (uint256)
@@ -30,11 +30,11 @@ This would change whenever the encoding of **requestMetadata** (parameter #5) ch
 
 ### **2. routeAmount:**
 
-If one wants to transfer Route tokens along with the call, they will have to pass the amount of tokens to be transferred here.
+To transfer Route tokens along with the call, one must specify the amount of tokens to be transferred in this field.
 
 ### **3. routeRecipient:**
 
-If one wants to transfer Route tokens along with the call, they will have to pass the address of recipient on the destination chain to which Route tokens will be minted on destination chain.
+To transfer Route tokens along with the call, users will need to provide the recipient's address on the destination chain to which the Route tokens will be minted.
 
 ### **4. destChainId:**
 
@@ -42,7 +42,7 @@ Chain ID of the destination chain in string format.
 
 ### **5. requestMetadata:**
 
-Some static information for the request. This is created so that iDapps don’t have to encode it on-chain, they can just send it as a parameter to their iDapp depending on the destination chain Id passed by the user. The request metadata is a bytes encoded string consisting of the following parameters:
+To avoid encoding on-chain, the Router chain allows iDapps to send static information for a request as a parameter to their iDapp, depending on the destination chain ID provided by the user. This information is packaged into a byte-encoded string, known as the `request metadata` which includes the following parameters:
 
 ```javascript
 uint64 destGasLimit;
@@ -55,7 +55,7 @@ bool isReadCall;
 string asmAddress;
 ```
 
-It can be acheived by adding following function in your contract:
+It can be achieved by adding following function in your contract:
 
 ```javascript
 function getRequestMetadata(
@@ -99,18 +99,18 @@ function getRequestMetadata(
 
 3. **ackGasLimit:** Gas limit required for execution of the acknowledgement coming from the destination chain back on the source chain. This can be calculated using tools like [hardhat-gas-reporter](https://www.npmjs.com/package/hardhat-gas-reporter).
 4. **ackGasPrice:** Gas price of the destination chain. This can be calculated using the RPC of source chain as shown in the above [snippet](https://www.notion.so/EVM-to-Other-Chain-Flow-de922b13e0fa4d7b8c3c24590ff8ef65).
-5. **relayerFees:** This is similar to priority fees that one pays on other chains. Router chain relayers execute your requests on the destination chain. So if you want your request to be picked up by relayer faster, this should be set to a higher number. If you pass really low amount, the Router chain will adjust it to some minimum amount.
+5. **relayerFees:** This parameter functions similarly to priority fees on other blockchain networks. Since Router chain relayers handle the execution of cross-chain requests on the destination chain, setting a higher gas price will increase the likelihood of your request being prioritized by relayers. Conversely, if a very low gas price is specified, the Router chain will automatically adjust it to a minimum amount.
 6. **ackType:** When the contract calls have been executed on the destination chain, the iDapp has the option to get an acknowledgement back to the source chain.
 
    We provide the option to the user to be able to get this acknowledgement from the router chain to the source chain and perform some operation based on it.
 
-   1. **ackType = 0:** You don’t want the acknowledgement to be forwarded back to the source chain.
-   2. **ackType = 1:** You only want to receive the acknowledgement back to the source chain in case the calls executed successfully on the destination chain and perform some operation after that.
-   3. **ackType = 2:** You only want to receive the acknowledgement back to the source chain in case the calls errored on the destination chain and perform some operation after that.
-   4. **ackType = 3:** You only want to receive the acknowledgement back to the source chain in both the cases (success and error) and perform some operation after that.
+   1. **ackType = 0:** The user doesn't want the acknowledgement to be forwarded back to the source chain.
+   2. **ackType = 1:** The acknowledgement is expected to be received only if the calls were successfully executed on the destination chain, and the user intends to perform some operation after receiving it on the source chain.
+   3. **ackType = 2:** If an acknowledgment is only needed in case of an error occurring on the destination chain, enabling this functionality allows for performing certain operations afterward.
+   4. **ackType = 3:** If an acknowledgment is needed from the destination chain regardless of whether the call succeeds or fails, and some operations need to be performed afterward, this can be specified.
 
-7. **isReadCall:** We provide you the option to query a contract from another chain and get the data back on the source chain through acknowledgement. If you just want to query a contract on destination chain, set this to `true`.
-8. **asmAddress:** We also provide modular security framework for creating an additional layer of security on top of the security provided by Router Chain. These will be in the form of smart contracts on destination chain. The address of this contract needs to be passed in the form of bytes in this variable. Documentation for ASM can be found [here](../additionalSecurityModule.md)
+7. **isReadCall:** An option is provided to query a contract from another chain and receive the data back on the source chain via acknowledgement. If the intention is only to query a contract on the destination chain, then set this option to `true`.
+8. **asmAddress:** A modular security framework is available to add an extra layer of security on top of the security already provided by the Router Chain. These contracts will be in the form of smart contracts on the destination chain, and their addresses should be passed as bytes in this variable. Documentation for ASM can be found [here](../additionalSecurityModule.md)
 
 ### **6. requestPacket:**
 

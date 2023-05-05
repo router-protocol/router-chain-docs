@@ -5,7 +5,7 @@ sidebar_position: 3
 
 # `iAck` Function
 
-Once the **`iReceive`** function is executed, an acknowledgment is generated from Router's destination chain Gateway contract, which will specify whether the calls were successful. Since we inherited the IDapp contract, we need to implement a **`iAck`** function in our contract with the following schema.
+After executing the `iReceive` function, an acknowledgment is generated from Router's destination chain Gateway contract that specifies whether the calls were successful. To handle this acknowledgment, it is necessary to implement an `iAck` function in the contract. The schema for the function is as follows, since the IDapp contract has been inherited:
 
 ```javascript
 function iAck(
@@ -15,7 +15,7 @@ function iAck(
   ) external
 ```
 
-If you have opted not to receive the acknowledgement, you can implement an empty function in its place in the following way:
+If the user chooses not to receive the acknowledgement, they can create an empty function with the following schema to replace it:
 
 ```javascript
 function iAck(
@@ -25,11 +25,12 @@ function iAck(
   ) external {}
 ```
 
-If you've opted to receive the acknowledgment, you need to handle the acknowledgment inside this function. This function receives the following params:
+If acknowledgment reception is opted for, handling the acknowledgment inside the function is necessary. The function has the following parameters:
 
 ### 1. requestIdentifier
 
-This is the same nonce you receive while calling the `iSend()` function on the source chain Gateway contract. Using this nonce, you can verify whether a particular request was executed on the destination chain.
+The nonce received while calling the `iSend()` function on the source chain Gateway contract is the same nonce that is passed to this function. With this nonce, you can verify whether a specific request was executed on the destination chain.
+
 
 ### 2. execFlag
 
@@ -37,4 +38,4 @@ This is the same nonce you receive while calling the `iSend()` function on the s
 
 ### 3. execData
 
-The `execData` parameter is the data in bytes that provides the abi encoded return value from the `iReceive` call on the destination chain. Based on the application's requirement, this data can be decoded and processed on the source chain.
+The `execData` parameter of the `iAck` function represents the encoded return value from the `iReceive` function on the destination chain, delivered as bytes. After decoding this data, it can be processed on the source chain based on the requirements of the application.

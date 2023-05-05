@@ -10,7 +10,7 @@ function iAck(
     uint256 requestIdentifier,
     bool execFlag,
     bytes memory execData
-  ) {}
+  )
 ```
 
 This function will have three parameters, namely:
@@ -21,8 +21,8 @@ This is the same nonce you receive while calling the `iSend()` function on the s
 
 ### 2. execFlag
 
-`execFlag` is a boolean value that tells you the status of your call or request.
+`execFlag` is a boolean value that tells you the status of your read call.
 
 ### 3. execData
 
-The `execData` parameter is the data in bytes that provides the return value from the read call included in the read request. Based on the application's requirement, this data can be decoded and processed on the source chain.
+The `execData` parameter contains the result of the read call made in the read request, encoded in bytes. Depending on the needs of the application, this data can be decoded and processed on the source chain.

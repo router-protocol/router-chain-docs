@@ -5,7 +5,7 @@ sidebar_position: 2
 
 # `iReceive` Function
 
-The cross-chain request initiated from the source chain will deliver the payload to the destination contract address specified in the contractCalls parameter. On the destination contract, a function needs to be implemented to handle this payload:
+Once a cross-chain request is initiated from the source chain, the payload will be delivered to the contract address specified in the `contractCalls` parameter on the destination chain. To handle this payload, a function must be implemented on the destination contract:
 
 ```javascript
 function iReceive(
@@ -15,6 +15,6 @@ function iReceive(
   ) external returns (bytes memory)
 ```
 
-In this function, you will get the address of the contract that initiated this request from the source chain, the payload you created on the source chain and the source chain ID. After receiving this information, you can process your payload and complete your cross-chain transaction.
+The `iReceive` function implemented on the destination chain contract receives the payload initiated from the source chain, along with some information such as the address of the contract that initiated the request, the payload itself, and the source chain ID. With this information, one can process the payload and complete the cross-chain transaction.
 
-> **Warning:** This function is necessary to implement on your contract on the destination chain if you have inherited `IDapp.sol` file from `@routerprotocol/evm-gateway-contracts/contracts`; otherwise, the call will fail.
+> **Warning:** If the IDapp.sol file from `@routerprotocol/evm-gateway-contracts/contracts` has been inherited, it is necessary to implement this function on the destination chain contract to ensure successful execution of the cross-chain request. Otherwise, the call will fail.
