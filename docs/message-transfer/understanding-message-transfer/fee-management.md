@@ -5,59 +5,34 @@ sidebar_position: 3
 
 ## Gas and Fee Payer Considerations for Crosstalk Flow
 
-- Users are required to specify both the `gasPrice` and `gasLimit` in their request metadata. This is because the gas parameters and the fee payer specified in a CrossTalk request are used for the execution of the request on the destination chain. In case the `gasPrice` is set to 0, it will be estimated by the gas price oracle module on the Router chain.
-- For a CrossTalk request, relayers might not need to estimate the gas price since the request itself will contain a `gasPrice` parameter. However, applications running their custom relayers might pass the `gasPrice` as 0, in which case, the custom relayer will have to estimate the gas price.
+## Fee Payer
+For cross-chain transactions, the fee is paid on the Router chain from the address of the fee payer, which is designated by the dApp for all integrated chains. This address is responsible for paying the fees associated with cross-chain requests initiated by the dApp, and any fee refunds will also be credited to this account.
 
-## CrossTalk Fee Model
+* To designate the fee payer on the Gateway address, the application must invoke the `setDappMetadata` function, providing a valid address on the Router Chain.
+* To prevent unauthorized usage of someone else's address as the fee payer, the designated fee payer address must perform a fee payer approval transaction on the Router Chain.
+* The fee payer address on the Gateway contract can be modified by the application at any time using the `setDappMetadata` function.
 
-The application has to call a function `setDappMetadata` on the Gateway address with the address of fee payer which should be an address on the Router Chain. This fee payer address will then have to approve the application on the Router Chain by doing a fee payer approval transaction. This is to stop anyone from using someone else's address as the fee payer. This address will be responsible for paying fees for the crosstalk requests originating from that Dapp. Also, all the fee refunds will be processed and credited to this account only. The application can change the fee payer address anytime by calling the `setDappMetadata` function on the Gateway contract.
+### How to provide approval for fee payer
+* The approval as a fee payer can be provided by accessing the explorer (More > Fee Payer).
+* The user can search for the dApp address or the fee payer address in explorer to view all the pending approvals.
+* After connecting the wallet, the user can approve all pending requests.
 
-```javascript
-function setDappMetadata(
-    string memory feePayerAddress
-) external payable returns (uint64)
-```
+## Gas Considerations
+* To ensure proper execution of the CrossTalk request on the destination chain, users must specify both the `gasPrice` and `gasLimit` in their request metadata. This information, along with the fee payer address, is used to calculate the fees required for the transaction. 
+**Note -** If the `gasPrice` is not specified, the gas price oracle module on the Router chain will estimate it.
+* If an application intends to run its own relayer, it can set the `gasLimit` parameter to 0 in the CrossTalk request. However, in such a scenario, the application's relayer must estimate the `gasLimit` required for executing the transaction on the destination chain.
 
-Note that this function is named `set_dapp_metadata` in the NEAR ecosystem.
+## Deducting Fee
 
-### Deducting Fee
-
-CrossTalk works on a prepaid fee model. Upon receiving the CrossTalk Request, the Router chain will calculate the estimated fee for executing the transaction on the destination chain in terms of ROUTE tokens and deduct the fee plus incentive from the `feePayer` address upfront.
-
-```javascript
-EstimatedFeeInRoute = EstimatedFeeInDestNativeToken * PriceRatio;
-EstimatedFeeInDestNativeToken = DestGasLimit * GasPriceInDestNativeToken;
-PriceRatio = DestNativeTokenPrice / RouteTokenPrice;
-```
+CrossTalk operates on a prepaid fee model where the Router chain calculates the estimated fee for executing a transaction on the destination chain in terms of ROUTE tokens upon receiving the CrossTalk Request. To cover relayer incentives and validation costs, the Router chain deducts the estimated fee and incentive amount upfront from the fee payer address.
 
 **Important Notes**
 
-1. Fee and relayer incentive for any cross-chain request on Router have to be paid in ROUTE tokens only.
-2. To prevent Sybil attacks on the Router chain, Router's Gateway contract on the source chain charges a minimal fee from the application contract to cover the cost of orchestrator validation. This fee is paid in the source chain's native token.
+1. The payment of fees and relayer incentives for any cross-chain request on the Router chain must be made exclusively in $ROUTE tokens.
+2. To thwart Sybil attacks on the Router chain, a minimal fee is charged by the Router's Gateway contract on the source chain. This fee covers the cost of orchestrator validation and is paid in the native token of the source chain by the application contract.
 
-### Handling Refunds
+## Handling Refunds
 
-Once the Router chain receives the CrossTalkAck generated by the destination chain's Gateway contract, it (a) pays the relayer address the incentive + fee used from the already deducted fee, and (b) refunds the `feePayer` address the extra fee deducted. This mechanism ensures the following:
-
-- The relayer receives its incentive automatically without any delay.
-- The applications can send extra gas limit as a buffer since they will get automatic refunds in case of a surplus fee.
-
-## Gas and Fee Payer Considerations for Omnichain flow
-
-- The gas price for the execution of inbound transactions on the Router chain is decided via governance and included directly in the chain configuration.
-- In the case of OmniChain framework, the `gasLimit`, `gasPrice` and `feePayer` addresses specified by the user on the source chain in the `requestMetadata` are used for executing the inbound request on Router's bridge contract.
-- Since we are using the ECDSA, an EVM-based address can easily be converted to a Router chain address and vice versa, which means that the sender address will have a corresponding address on the Router chain. Therefore, the `senderAddress` can also be set as the `feePayer` address.
-- While exercising the option to run their own relayer, applications might want to leave the task of gas limit estimation to the relayers. In such a scenario, they can pass the `gasLimit` as 0 in requestMetadata.
-- For an outbound request coming via the OmniChain framework, relayers are required to estimate the gas price for executing the transaction on the destination chain.
-
-## OmniChain Framework Fee Model
-
-As discussed in the previous sections, the OmniChain flow on the Router chain is divided into two parts - inbound and outbound, each of which has a fee associated with it.
-
-### Inbound Request Fee Structure
-
-To execute an inbound request on the Router chain, users are required to configure a `gasLimit` and `gasPrice` parameter in their cross-chain request. This `gasLimit` is multiplied by the `gasPrice` present to calculate the amount of ROUTE tokens to be deducted from the user-specified `feePayer` address. This fee is used to cover the cost of transaction execution (bridge contract call) on the Router chain. Note that if your `feePayer` does not have sufficient ROUTE balance, the transaction will not be executed. You will have to top up the `feePayer` address to ensure the execution of your request. Note that, we have a function named `setDappMetadata` that can be used to change the `feePayer` address from the source chain.
-
-### Outbound Request Fee Structure
-
-The bridge contract must pass reasonable `gasPrice` and `gasLimit` parameters to cover the cost of executing the outbound leg of the cross-chain request on the destination chain. Once the outbound module receives the outbound request, it queries the oracle module for the latest price of the ROUTE token and the native gas token of the specified destination chain. It uses the gas price fetched using the gas price oracle, and the token prices fetched using the token price oracle to convert the gas cost involved in the execution of the outbound request from the destination chain native token to the ROUTE token.
+Upon receiving the CrossTalkAck from the Gateway contract on the destination chain, the Router chain performs two actions: (a) paying the relayer's address the incentive and fee that were used from the already deducted fee, and (b) refunding the extra fee deducted to the fee payer address. This mechanism ensures the following:
+* The relayer receives its incentive without delay.
+* Applications have the option to send extra gas limit as a buffer, as they will receive automatic refunds in case of a surplus fee.
