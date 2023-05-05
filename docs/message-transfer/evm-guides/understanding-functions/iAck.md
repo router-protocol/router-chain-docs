@@ -37,4 +37,4 @@ This is the same nonce you receive while calling the `iSend()` function on the s
 
 ### 3. execData
 
-The `execData` parameter is the data in bytes that provides the return value from the read call included in the read request. Based on the application's requirement, this data can be decoded and processed on the source chain.
+The `execData` parameter is the data in bytes that provides the abi encoded return value from the `iReceive` call on the destination chain. Based on the application's requirement, this data can be decoded and processed on the source chain.

@@ -1,9 +1,9 @@
 ---
-title: i_Send
+title: i_send
 sidebar_position: 1
 ---
 
-# `i_Send` Function
+# `i_send` Function
 
 ```javascript
 #[payable]
@@ -28,11 +28,11 @@ pub fn get_current_version(&self) -> U128
 
 This would change whenever the encoding of **request_metadata** (parameter #5) changes. However the Router Chain will support earlier versions of encoding too for iDapps to always remain compatible.
 
-### **3. dest_chain_id:**
+### **2. dest_chain_id:**
 
 Chain ID of the destination chain in string format.
 
-### **5. request_metadata:**
+### **3. request_metadata:**
 
 Some static information for the request. This is created so that iDapps don't have to encode it on-chain, they can just send it as a parameter to their iDapp depending on the destination chain Id passed by the user. The request metadata is a bytes encoded string consisting of the following parameters:
 
@@ -97,7 +97,7 @@ fn get_request_metadata(
 7. **is_read_call:** We provide you the option to query a contract from another chain and get the data back on the source chain through acknowledgement. If you just want to query a contract on destination chain, set this to `true`.
 8. **asm_address:** We also provide modular security framework for creating an additional layer of security on top of the security provided by Router Chain. These will be in the form of smart contracts on destination chain. The address of this contract needs to be passed in the form of bytes in this variable. Documentation for ASM can be found [here](../additionalSecurityModule.md)
 
-### **6. request_packet:**
+### **4. request_packet:**
 
 This is bytes encoded string consisting of two parameters:
 

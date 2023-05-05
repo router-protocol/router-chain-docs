@@ -1,13 +1,13 @@
 ---
-title: i_Receive
-sidebar_position: 2
+title: i_receive
+sidebar_position: 3
 ---
 
-# `i_Receive` Function
+# `i_receive` Function
 
 The cross-chain request initiated from the source chain will deliver the payload to the destination contract address specified in the contractCalls parameter. On the destination contract, a function needs to be implemented to handle this payload:
 
-```rust
+```javascript
 fn i_receive(&self, request_sender: String, packet: Vec<u8>, src_chain_id: String) -> Vec<u8>;
 ```
 
