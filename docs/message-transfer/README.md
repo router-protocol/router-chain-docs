@@ -36,32 +36,44 @@ The guides on this page will explain the process of developing on Router's Cross
    <Section>
   <Card
     title="Overview"
-    description="What is CrossTalk and why is it required?"
+    description="What is CrossTalk and Omnichain framework"
     to="/message-transfer/overview"
     icon={<IDEIcon />}
   />
     <Card
-    title="Understanding CrossTalk"
+    title="Understanding Message transfer"
     description="Dissecting different functions and parameters associated with CrossTalk"
     to="/message-transfer/understanding-message-transfer"
     icon={<ChainIcon />}
   />
  <Card
-    title="Different Types of Requests"
-    description="Learning how to execute different types of cross-chain requests using CrossTalk."
-    to="/message-transfer/different-types-of-requests"
+    title="EVM-Guides"
+    description="Learning how to execute different types of cross-chain requests in EVM Chains"
+    to="/message-transfer/evm-guides"
+    icon={<ModulesIcon />}
+  />
+ <Card
+    title="Near-Guides"
+    description="Learning how to execute different types of cross-chain requests in Near"
+    to="/message-transfer/near-guides"
+    icon={<ModulesIcon />}
+  />
+ <Card
+    title="Router-chain-Guides"
+    description="Learning how to execute different types of cross-chain requests from or to Router chain"
+    to="/message-transfer/near-guides"
     icon={<ModulesIcon />}
   />
   <Card
     title="Fee Management"
-    description="Gaining a deeper understanding of how the CrossTalk fee is computed"
+    description="Gaining a deeper understanding of how the CrossTalk and Omnichain Fee is computed"
     to="/message-transfer/fee-management"
     icon={<AssetIcon />}
   />
     <Card
     title="Cross-chain Read Requests"
     description="Learning how to query data from different chains in a decentralized manner"
-    to="/message-transfer/cross-chain-read-requests"
+    to="/message-transfer/evm-guides/evm-read-calls"
     icon={<Telescope />}
   />
   </Section>
@@ -84,7 +96,7 @@ The guides on this page will explain the process of developing on Router's Cross
      <Card
     title="Deploying a Cross-chain NFT (ERC-1155)"
     description="Learn how to deploy a cross-chain NFT using Router's CrossTalk framework"
-  to="/message-transfer/sample-idapps/evm-guides/cross-chain-nft"
+  to="/message-transfer/sample-idapps/evm_guides/cross-chain-nft"
     icon={<Guide />}
   />
   </Section>

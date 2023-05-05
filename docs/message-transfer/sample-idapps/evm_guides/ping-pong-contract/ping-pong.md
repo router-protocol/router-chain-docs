@@ -1,5 +1,5 @@
 ---
-title: Using Gateway Contract Directly
+title: Ping-Pong
 sidebar_position: 1
 description: A simple ping pong contract using Router Gatway contracts
 ---
