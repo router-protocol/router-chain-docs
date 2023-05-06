@@ -114,7 +114,7 @@ function setGateway(address gateway) external {
 }
 ```
 
-This is an administrative function which sets the address of the gateway contract. This can be used in case when the gateway address with which you deployed your contract initially has now been changed.
+This is an administrative function which sets the address of the gateway contract. This function should be invoked whenever the Router's Gateway contract gets updated.
 
 ### Transferring an NFT from a source chain to a destination chain
 

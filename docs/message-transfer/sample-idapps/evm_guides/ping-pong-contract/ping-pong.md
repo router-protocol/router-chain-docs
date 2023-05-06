@@ -100,7 +100,7 @@ function setGateway(address gateway) external {
   }
 ```
 
-This is an administrative function which sets the address of the gateway contract. This function will be invoked whenever the Router's Gateway contract gets updated.
+This is an administrative function which sets the address of the gateway contract. This function should be invoked whenever the Router's Gateway contract gets updated.
 
 ### Sending a ping to the destination chain
 
