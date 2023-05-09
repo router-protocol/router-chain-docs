@@ -3,6 +3,6 @@ title: Supported Chains
 sidebar_position: 2
 ---
 
-## Testnet
-
-The addresses to the gateway contracts on various chains can be found [here](https://lcd.testnet.routerchain.dev/router-protocol/router-chain/multichain/chain_config)
+The chain config for all the networks supported by Router including the gateway contract addresses can be found at the following links:
+- [For testnet](https://lcd.testnet.routerchain.dev/router-protocol/router-chain/multichain/chain_config)
+- [For devnet](https://devnet.lcd.routerprotocol.com/router-protocol/router-chain/multichain/chain_config)

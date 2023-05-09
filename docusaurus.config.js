@@ -212,15 +212,15 @@ const config = {
           {
             href: 'https://discord.gg/yjM2fUUHvN',
             className: 'pseudo-icon discord-icon',
+            position: 'right'
+          },
+          {
+            type: 'search',
             position: 'right',
           },
-          // {
-          //   type: 'search',
-          //   position: 'right',
-          // },
           {
-            label: 'Launch Router Devnet',
-            href: 'https://devnet-router-station.routerprotocol.com/',
+            label: 'Launch Router Testnet',
+            href: 'https://station.testnet.routerchain.dev/',
             position: 'right',
             className: 'dev-portal-signup dev-portal-link',
           },

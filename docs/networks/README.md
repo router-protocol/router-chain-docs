@@ -10,17 +10,15 @@ The following API's are recommended for development purposes.
 
 ## Official Public Endpoints
 
-| Network               | Devnet                                         |
-| --------------------- | ---------------------------------------------- |
-| **Chain ID**          | router-1                                       |
-| **gRPC endpoint**     | devnet.grpc.routerprotocol.com:443             |
-| **gRPC-gateway**      | https://devnet.grpc.routerprotocol.com         |
-| **TM endpoint**       | https://devnet.tm.routerprotocol.com           |
-| **LCD endpoint**      | https://devnet.lcd.routerprotocol.com          |
-| **Faucet UI**         | https://devnet-faucet.routerprotocol.com       |
-| **Faucet endpoint**   | https://devnet-faucet-api.routerprotocol.com   |
-| **Explorer UI**       | https://devnet-explorer.routerprotocol.com     |
-| **Explorer endpoint** | https://devnet-explorer-api.routerprotocol.com |
+| Network               | Testnet                                        | Devnet                                         |
+| --------------------- | ---------------------------------------------- | ---------------------------------------------- |
+| **Chain ID**          | router_9000-1                                  | router_9000-1                                  |
+| **gRPC-gateway**      | https://grpc.testnet.routerchain.dev           | https://devnet.grpc.routerprotocol.com         |
+| **TM endpoint**       | https://tm.rpc.testnet.routerchain.dev         | https://devnet.tm.routerprotocol.com           |
+| **LCD endpoint**      | https://lcd.testnet.routerchain.dev            | https://devnet.lcd.routerprotocol.com          |
+| **Faucet UI**         | https://faucet.testnet.routerchain.dev         | https://devnet-faucet.routerprotocol.com       |
+| **Explorer UI**       | https://explorer.testnet.routerchain.dev       | https://devnet-explorer.routerprotocol.com     |
+| **Explorer endpoint** | https://explorer-api.testnet.routerchain.dev   | https://devnet-explorer-api.routerprotocol.com |
 
 <!-- ### API Docs
 

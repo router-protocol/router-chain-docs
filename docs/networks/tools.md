@@ -2,16 +2,21 @@
 
 The following is a list of tools available for the Router chain. Please make sure to contribute to this page if any tools are missing.
 
-## Testnet
 
-#### Block Explorer
+### Block Explorer
 
-- [Router Explorer](https://devnet-explorer.routerprotocol.com/)
+- [Router Testnet Explorer](https://explorer.testnet.routerchain.dev/)
+- [Router Devnet Explorer](https://devnet-explorer.routerprotocol.com/)
 
-#### Faucet
+### Faucet
 
-- [Router Faucet](https://devnet-faucet.routerprotocol.com/)
+- [Router Testnet Faucet](https://faucet.testnet.routerchain.dev/)
+- [Router Devnet Faucet](https://devnet-faucet.routerprotocol.com/)
 
-#### Web Application to Interact with the Router Chain
+### Web Application to Interact with the Router Chain
 
-- [Router Station](https://devnet-router-station.routerprotocol.com/)
+- [Router Testnet Station](https://station.testnet.routerchain.dev/)
+- [Router Devnet Station](https://devnet-router-station.routerprotocol.com/)
+
+
+
