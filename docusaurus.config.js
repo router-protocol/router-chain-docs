@@ -165,11 +165,21 @@ const config = {
             position: 'left',
           },
           {
+            label: 'Router Core',
+            to: '/router-core',
+            position: 'left',
+          },
+          {
             label: 'Develop',
             to: '/message-transfer',
             position: 'left',
             // className: 'new-badge',
             // activeBaseRegex: '(.*ui-kit|.*web-core)',
+          },
+          {
+            label: 'Tooling',
+            to: '/infra',
+            position: 'left',
           },
           {
             label: 'Networks',

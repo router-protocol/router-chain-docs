@@ -59,7 +59,7 @@ routerd q bank balances <validator-router-address>
 </details>
 
 <details>
-<summary><b>Step 3) Create validator account</b></summary>
+<summary><b>Step 2.3) Set the staking parameters and run your validator account</b></summary>
 
 Obtain your node's tendermint validator Bech32 encoded PubKey consensus address.
 
@@ -110,14 +110,14 @@ routerd tx staking create-validator \
 
 Extra `create-validator` options to consider:
 
-```jsx
+```bash
 --identity=             The optional identity signature (ex. UPort or Keybase)
 --pubkey=               The Bech32 encoded PubKey of the validator
---security-contact=     The validator's (optional) security contact email
---website=              The validator's (optional) website
+--security-contact=     Security contact email (optional) of the validator
+--website=              Website (optional) of the validator
 ```
 
-Verify that the validator was successfully setup by checking the [staking dashboard](https://devnet-hub.routerprotocol.com/staking) or by entering the CLI command given below.
+Verify that the validator was successfully setup by checking the [staking dashboard](https://devnet-hub.routerprotocol.com/staking) or by entering the CLI command given below.
 
 ```bash
 routerd q staking validators

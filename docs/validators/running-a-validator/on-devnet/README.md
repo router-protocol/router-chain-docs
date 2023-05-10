@@ -14,3 +14,6 @@ To run a validator on Router chain's Devnet, follow these 3 steps:
 - [Run a Sentry Node on Devnet](./on-devnet/run-a-sentry-node)
 - [Setup a Validator Account](./on-devnet/setup-a-validator-account)
 - [Configure and Run an Orchestrator Instance](./on-devnet/configure-and-run-an-orchestrator-instance)
+
+
+
