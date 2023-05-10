@@ -63,14 +63,14 @@ routerd q bank balances <validator-router-address>
 
 Obtain your node's tendermint validator Bech32 encoded PubKey consensus address.
 
-```jsx
+```bash
 VALIDATOR_PUBKEY=$(routerd tendermint show-validator)
 echo $VALIDATOR_PUBKEY
 
 # Example: {"@type":"/cosmos.crypto.ed25519.PubKey","key":"ayAh1DfEkV2r2tglb/yWKlk67Xc5VFPFLdWb2zfoR5o="}
 ```
 
-Now, create a new validator initialized with a self-delegation of ROUTE tokens. Most critically, you will need to decide on the values of the validator's staking parameters.
+Now, initialize new validator with a self-delegation of ROUTE tokens. Most critically, you will need to decide on the values of the validator's staking parameters.
 
 - `moniker` - Validator's name
 - `amount` - Validator's initial amount of ROUTE to bond

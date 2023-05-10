@@ -72,6 +72,6 @@ cd ~/.router-orchestrator
 router-orchestrator start --reset --config ~/.router-orchestrator/config.json
 ```
 
-After executing the aforementioned command, your orchestrator instance will start running. 
+After executing the aforementioned commands, your orchestrator instance will start running. 
 
 </details>

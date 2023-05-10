@@ -1,6 +1,6 @@
 ---
-title: Router Station
-sidebar_position: 2
+title: Router Sandbox
+sidebar_position: 5
 ---
 
 # Overview
@@ -37,7 +37,7 @@ To use the Router Station UI for any operation related to the contract life-cycl
 
 You can add an existing cosmwasm contract in the Router Station. To add an existing contract address, you need to click on the “+Add contract” button.  A pop-up shows up. The router contract address can be added in the Import contract text field and can be imported for further action.
 
-<center><img src={require('../../src/images/add-existing-contract.png').default} alt="Add an existing contract" style={{width: 640, marginBottom: 12}}/></center>
+<center><img src={require('../../../src/images/add-existing-contract.png').default} alt="Add an existing contract" style={{width: 640, marginBottom: 12}}/></center>
 
 
 </details>

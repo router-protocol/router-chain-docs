@@ -51,8 +51,7 @@ const SECTIONS = [
   defineSection('apis'),
   defineSection('voyager'),
   defineSection('omnichain-framework'),
-  defineSection('utils'),
-  defineSection('infra'),
+  defineSection('tooling'),
 ];
 
 /** @type {import('@docusaurus/types').Config} */
@@ -178,7 +177,7 @@ const config = {
           },
           {
             label: 'Tooling',
-            to: '/infra',
+            to: '/tooling',
             position: 'left',
           },
           {

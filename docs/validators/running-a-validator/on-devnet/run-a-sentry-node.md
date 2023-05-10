@@ -33,7 +33,7 @@ Running the aforementioned commands will create `routerd` default configuratio
 <details>
 <summary><b>Step 1.3) Prepare configuration to join the devnet</b></summary>
 
-Validators need to update the default configuration using Devnet's genesis file and application config file, as well as configure their persistent peers with a seed node.
+Validators need to update the default configuration using devnet's genesis file and application config file, as well as configure their persistent peers with a seed node.
 
 ```bash
 git clone https://github.com/router-protocol/network-config

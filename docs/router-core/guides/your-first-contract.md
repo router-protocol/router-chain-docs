@@ -12,20 +12,18 @@ If you haven't already, [kindly install the required tools/technologies to inter
 
 
 ## Step 2) Setting up an Account
-Before setting up an account to interact with the Router chain, verify that the devnet is live and the following links are working for you:
+Before setting up an account to interact with the Router chain, verify that the testnet is live and the following links are working for you:
 
--   RPC Endpoint - <https://devnet-alpha.lcd.routerprotocol.com/>
+-   [RPC Endpoint](https://lcd.testnet.routerchain.dev)
 
--   REST Endpoint - <https://devnet-alpha.tm.routerprotocol.com>
+-   [Faucet](https://faucet.testnet.routerchain.dev)
 
--   Faucet - <https://devnet-faucet.routerprotocol.com/>
-
--   Block Explorer - <https://devnet-explorer.routerprotocol.com/>
+-   [Block Explorer](https://explorer.testnet.routerchain.dev)
 
 <details>
 <summary><b>Method 1: Via the UI</b></summary>
 
-**Step 1)** Go directly to the [Router station](https://devnet-router-station.routerprotocol.com/) and click on **Add account**.
+**Step 1)** Go directly to the [Router station](https://station.testnet.routerchain.dev/) and click on **Add account**.
 
 <center><img src={require('./img/setting-up-an-account/step-1.png').default} alt="Step 1" style={{width: 300, marginBottom: 12}}/></center>
 
@@ -41,13 +39,13 @@ Before setting up an account to interact with the Router chain, verify that the 
 Following this step, a new account will be created and displayed under the **Accounts** section.
 <center><img src={require('./img/setting-up-an-account/check-your-account.png').default} alt="Accounts" style={{width: 300, marginBottom: 12}}/></center>
 
-**Step 4)** Now, you can go to this [faucet](https://devnet-faucet.routerprotocol.com/) to get some devnet tokens on the address generated in the previous step. 
+**Step 4)** Now, you can go to this [faucet](https://faucet.testnet.routerchain.dev/) to get some devnet tokens on the address generated in the previous step. 
 </details>
 
 <details>
 <summary><b>Method 2: Via Router CLI</b></summary>
 
-If you are more comfortable with CLI commands and you will be deploying contracts directly using the CLI, this method should be preferred. To set up a wallet, follow these steps:
+If you are more comfortable with CLI commands and you will be deploying contracts directly using the CLI, this method should be preferred. Before starting, ensure that you have `routerd` installed and updated to the latest version. If not, follow the guide given [here](../routerd#quick-start) to install `routerd`. Now, to set up a wallet using CLI, follow these steps:
 
 **Step 1)** Set up a wallet address using the following command:
 ```bash
@@ -71,9 +69,9 @@ It is the only way to recover your account if you ever forget your password.
 state maple method glory expire draw eagle motor you kiss legend wild permit tank stumble seminar flag urge whisper edit arrow potato peasant height
 ```
 
-**Step 3)** Now, you can go to this [faucet](https://devnet-faucet.routerprotocol.com/) to get some devnet tokens on the address generated in the previous step.
+**Step 3)** Now, you can go to this [faucet](https://faucet.testnet.routerchain.dev/) to get some devnet tokens on the address generated in the previous step.
 
-**Step 4) [Optional]** Add this account to the [Router station](https://devnet-router-station.routerprotocol.com/) by clicking on "Add account" and entering your mnemonic.
+**Step 4) [Optional]** Add this account to the [Router station](https://station.testnet.routerchain.dev/) by clicking on "Add account" and entering your mnemonic.
 </details>
 
 
@@ -83,11 +81,10 @@ In this section, we will download the code for a sample contract and compile it 
 
 ### Compiling the Contract Code
 
-Let's download the repository in which we keep [`cw-contracts`](https://github.com/deus-labs/cw-contracts) and compile the existing code for a simple name service contract that mimics a name service marketplace.
+Let's clone the repository in which we keep [`cw-contracts`](https://github.com/deus-labs/cw-contracts) and compile the existing code for a simple name service contract that mimics a name service marketplace.
 
-First, clone the repo and try to build the wasm bundle:
 ```bash
-# Download the repository
+# cloning the repository
 git clone https://github.com/InterWasm/cw-contracts
 cd cw-contracts
 git checkout main
@@ -132,43 +129,44 @@ test result: ok. 15 passed;  0 failed;  0 ignored;  0 measured;  0 filtered out;
 ### Optimized Compilation
 
 To reduce gas costs, the binary size should be as small as possible. This will result in a less costly deployment and lower fees for every interaction. Luckily, there is tooling to help with this. You can **optimize production code** using the [rust-optimizer](https://github.com/CosmWasm/rust-optimizer). `rust-optimizer` produces reproducible builds of CosmWasm smart contracts. This means third parties can verify that the contract is actually the claimed code.
-
-> **Warning:** You will need [Docker](https://www.docker.com/) installed in order to run `rust-optimizer`.
+:::caution
+You will need [Docker](https://www.docker.com/) installed in order to run `rust-optimizer`.
+:::
 
 Naviaget to the project root (`cw-contracts/contracts/nameservice`) and make sure your Docker is running before initiating the following command:
 
 <details>
-<summary>On Mac/Linux</summary>
+<summary><b>On Mac/Linux</b></summary>
 
 ```bash
 docker run --rm -v "$(pwd)":/code \
   --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/workspace-optimizer:0.12.6
+  cosmwasm/workspace-optimizer:0.12.13
 ```
 
 </details>
 
 <details>
-<summary>On an arm64 Machine (e.g. Apple's M1, M2)</summary>
+<summary><b>On an arm64 Machine (e.g. Apple's M1, M2)</b></summary>
 
 ```bash
 docker run --rm -v "$(pwd)":/code \
   --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/workspace-optimizer-arm64:0.12.6
+  cosmwasm/workspace-optimizer-arm64:0.12.13
 ```
 
 </details>
 
 <details>
-<summary>On Windows 10</summary>
+<summary><b>On Windows 10</b></summary>
 
 ```bash
 docker run --rm -v ${pwd}:/code `
   --mount type=volume,source="$("$(Split-Path -Path $pwd -Leaf)")_cache",target=/code/target `
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry `
-  cosmwasm/rust-optimizer:0.12.6e
+  cosmwasm/rust-optimizer:0.12.13e
 ```
 
 </details>
@@ -182,7 +180,7 @@ Now that we have the wasm binary ready, we can deploy it to the devnet and start
 <summary><b>Method 1: Via the UI</b></summary>
 
 ### Deploying and Instantiating the Contract
-**Step 1)** Go to the [Router station](https://devnet-router-station.routerprotocol.com/) and click on **Add contract**.
+**Step 1)** Go to the [Router station](https://station.testnet.routerchain.dev/) and click on **Add contract**.
 
 <center><img src={require('./img/deploying-a-contract/step-1.png').default} alt="Step 1" style={{width: 300, marginBottom: 12}}/></center>
 
@@ -198,11 +196,13 @@ Now that we have the wasm binary ready, we can deploy it to the devnet and start
 **Step 4)** Click on the **Upload and Instantiate** button.
 <center><img src={require('./img/deploying-a-contract/step-4.png').default} alt="Step 4" style={{width: 300, marginBottom: 12}}/></center>
 
-> **Warning:** Please do not cancel/refresh while the contract gets deployed and instantiated. 
+:::caution
+Please do not cancel/refresh while the contract gets deployed and instantiated. 
+:::
 
 ---
 ### Instantiating an Already Deployed Contract
-**Step 1)** Go to the [Router station](https://devnet-router-station.routerprotocol.com/) and click on **Add contract**.
+**Step 1)** Go to the [Router station](https://station.testnet.routerchain.dev/) and click on **Add contract**.
 
 **Step 2)** Choose the **From code** option and add your contract Code Id.
 <center><img src={require('./img/instantiating-a-contract/step-2.png').default} alt="Step 2" style={{width: 500, marginBottom: 12}}/></center>
@@ -226,7 +226,7 @@ Following this step, your newly instantiated contract will be visible under the 
 **Step 1)** Store the bytecode on the Router chain and acquire the Code Id. The Code Id will later be used to create an instance of the cw_namespace contract.
 
 ```bash
-RES=$(routerd tx wasm store cw_nameservice.wasm --from wallet --node https://devnet-alpha.tm.routerprotocol.com:443 --chain-id router-1 --gas-prices 225000router --gas auto --gas-adjustment 1.3 -y --output json -b block)
+RES=$(routerd tx wasm store cw_nameservice.wasm --from wallet --node https://tm.rpc.testnet.routerchain.dev:443 --chain-id router-1 --gas-prices 225000router --gas auto --gas-adjustment 1.3 -y --output json -b block)
 # The response contains the Code Id of the uploaded wasm binary.
 echo  $RES
 ```
@@ -234,7 +234,7 @@ echo  $RES
 **Step 2)** Check the list of contracts instantiated using the Code Id above.
 
 ```bash
-routerd query wasm list-contract-by-code <your-code-id> --node https://devnet-alpha.tm.routerprotocol.com:443 --output json
+routerd query wasm list-contract-by-code <your-code-id> --node https://tm.rpc.testnet.routerchain.dev:443 --output json
 ```
 
 The response should be an empty list, as we have not instantiated any contract yet:
@@ -245,7 +245,7 @@ The response should be an empty list, as we have not instantiated any contract y
 **Step 3)** Before we instantiate a contract with the Code Id and interact with it, let us check if the code stored on the blockchain is indeed the cw_namespace.wasm binary we uploaded.
 ```bash
 # Download the wasm binary from the chain and compare it to the original one
-routerd query wasm code <your-code-id> --node https://devnet-alpha.tm.routerprotocol.com:443 download.wasm
+routerd query wasm code <your-code-id> --node https://tm.rpc.testnet.routerchain.dev:443 download.wasm
 # The two binaries should be identical (first change directory to go the to the folder which has the cw_nameservice.wasm file, then run the following command)
 diff cw_nameservice.wasm download.wasm
 ```
@@ -262,7 +262,7 @@ INIT='{"purchase_price":{"amount":"100","denom":"router"},"transfer_price":{"amo
 
 **Step 2)** Instantiate the contract
 ```bash
-NODE=(--node https://devnet-alpha.tm.routerprotocol.com:443)
+NODE=(--node https://tm.rpc.testnet.routerchain.dev:443)
 TXFLAG=($NODE --chain-id router-1 --gas-prices 225000router --gas auto --gas-adjustment 1.3)
 routerd tx wasm instantiate <your-code-id>  "$INIT" --from wallet --label "name service"  $TXFLAG -y --no-admin
 ```
