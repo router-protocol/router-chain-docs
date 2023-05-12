@@ -14,6 +14,7 @@ routerd keys add my-orchestrator-key --chain-id router_9000-1 --keyring-backend 
 ```
 
 The aforementioned command will create a new wallet with name `my-orchestrator-key` and will ask you to set a password. 
+
 :::caution
 Remember the password used or store it in a safe place. 
 :::
@@ -123,7 +124,7 @@ routerd tx attestation set-orchestrator-address $(routerd keys show my-orchestra
 
 `EVM-KEY-FOR-SIGNING-TXNS` should be a new private key for signing transactions on EVM chains. This key should be different from the key you created for the orchestrator.
 
-:::tip
+:::info
 Ensure that the address corresponding to this private key has balance for all the configured EVM chains.
 :::
 

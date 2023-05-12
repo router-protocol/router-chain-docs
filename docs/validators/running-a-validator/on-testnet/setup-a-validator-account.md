@@ -15,6 +15,7 @@ routerd keys add my-validator-key--chain-id router_9000-1 --keyring-backend file
 ```
 
 The aforementioned command will create a new wallet with name `my-validator-key` and will ask you to set a password. 
+
 :::caution
 Remember the password used or store it in a safe place. 
 :::

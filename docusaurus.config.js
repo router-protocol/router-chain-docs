@@ -40,7 +40,7 @@ const SECTIONS = [
   defineSection('router-core'),
   defineSection('networks'),
   // defineSection('cosmwasm'),
-  defineSection('message-transfer'),
+  // defineSection('message-transfer'),
   // defineSection('frontend'),
   // defineSection('beaker'),
   defineSection('telescope'),
@@ -49,7 +49,8 @@ const SECTIONS = [
   defineSection('validators'),
   defineSection('overview'),
   defineSection('apis'),
-  defineSection('voyager'),
+  // defineSection('voyager'),
+  defineSection('develop'),
   defineSection('omnichain-framework'),
   defineSection('tooling'),
 ];
@@ -170,7 +171,7 @@ const config = {
           },
           {
             label: 'Develop',
-            to: '/message-transfer',
+            to: '/develop',
             position: 'left',
             // className: 'new-badge',
             // activeBaseRegex: '(.*ui-kit|.*web-core)',

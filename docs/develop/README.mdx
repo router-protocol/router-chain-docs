@@ -1,0 +1,220 @@
+---
+title: Introduction
+sidebar_position: 1
+---
+
+import {
+HomepageCard as Card,
+HomepageSection as Section,
+} from '../../src/components/HomepageComponents';
+
+import {
+ChainIcon,
+IDEIcon,
+TerminalIcon,
+APIReferenceIcon,
+Telescope,
+ModulesIcon,
+RelayerIcon,
+AssetIcon,
+KeysIcon,
+Osmojs,
+Transaction,
+OsmosisCore,
+Contribute,
+Guide,
+} from '../../src/icons';
+
+# Introduction
+
+The guides on this page will explain the process of developing on Router's CrossTalk and Voyager framework. The CrossTalk framework 
+leverages Router's infrastructure to allow contracts on one chain to send intructions to contracts deployed on some other chain. On the other hand,
+Voyager is the native cross-chain asset-transfer bridge built using Router. It acts as the gateway to the liquidity managed by Router Protocol and allows
+projects to execute cross-chain transactions which involve both fund transfer and instruction transfer.
+
+If you're new here or you're not sure if CrossTalk is compatible with your requirements, check out [this guide](../overview/choosing-the-right-framework) to figure out 
+the best cross-chain framework for your dApp.
+
+## Message Transfer via CrossTalk
+
+<Section title="Theoretical Concepts" id="web-sdks" hasSubSections >
+
+   <Section>
+  <Card
+    title="Overview"
+    description="What is CrossTalk and Omnichain framework"
+    to="/message-transfer/overview"
+    icon={<IDEIcon />}
+  />
+    <Card
+    title="Understanding Message transfer"
+    description="Dissecting different functions and parameters associated with CrossTalk"
+    to="/message-transfer/understanding-message-transfer"
+    icon={<ChainIcon />}
+  />
+  <Card
+    title="Fee Management"
+    description="Gaining a deeper understanding of how the CrossTalk and Omnichain Fee is computed"
+    to="/message-transfer/fee-management"
+    icon={<AssetIcon />}
+  />
+
+  </Section>
+
+  </Section>
+
+
+<Section title="Guides" id="web-sdks" hasSubSections >
+   <Section>
+  <Card
+    title="EVM-Guides"
+    description="Learning how to execute different types of cross-chain requests in EVM Chains"
+    to="/develop/message-transfer/evm-guides"
+    icon={<ModulesIcon />}
+  />
+ <Card
+    title="Near-Guides"
+    description="Learning how to execute different types of cross-chain requests in Near"
+    to="/develop/message-transfer/near-guides"
+    icon={<ModulesIcon />}
+  />
+ <Card
+    title="Router-chain-Guides"
+    description="Learning how to execute different types of cross-chain requests from or to Router chain"
+    to="/develop/message-transfer/near-guides"
+    icon={<ModulesIcon />}
+  />
+    </Section>
+
+  </Section>
+
+   <Section title="Sample iDapps" id="sample-idapps" hasSubSections >
+
+   <Section>
+      <Card
+    title="Deploying a Cross-chain Ping Pong Contract"
+    description="Learn how to deploy your first cross-chain dApp using Router's CrossTalk framework"
+  to="/message-transfer/sample-idapps/evm_guides/ping-pong-contract"
+    icon={<Guide />}
+  />
+     <Card
+    title="Deploying a Cross-chain NFT (ERC-1155)"
+    description="Learn how to deploy a cross-chain NFT using Router's CrossTalk framework"
+  to="/message-transfer/sample-idapps/evm_guides/cross-chain-nft"
+    icon={<Guide />}
+  />
+  </Section>
+
+  </Section>
+
+
+
+  <Section title="Understanding Functions" id="web-sdks" hasSubSections >
+
+  <Section>
+  <Card
+  title="EVM Guide"
+  description="Understanding the crosstalk functions for EVM contracts"
+  to="/message-transfer/evm-guides/understanding-functions"
+  icon={<EthereumIcon />}
+  />
+  <Card
+  title="Near Guide"
+  description="Understanding the crosstalk functions for Near chain"
+  to="/message-transfer/near-guides/understanding-functions"
+  icon={<NearIcon />}
+  />
+  </Section>
+  </Section>
+
+
+
+## Asset Transfer via Voyager
+   <Section title="Developers" id="web-sdks" hasSubSections >
+
+   <Section>
+  <Card
+    title="Overview"
+    description="What is Voyager and why is it required?"
+    to="/voyager/overview"
+    icon={<IDEIcon />}
+  />
+    <Card
+    title="Understanding Voyager"
+    description="Dissecting different functions and parameters associated with Voyager"
+    to="/voyager/understanding-voyager"
+    icon={<ChainIcon />}
+  />
+ <Card
+    title="Different Use-cases"
+    description="Learning how to build different types of applications by using features enabled by Voyager"
+    to="/voyager/building-different-use-cases"
+    icon={<ModulesIcon />}
+  />
+      <Card
+    title="Fee Model"
+    description="Gaining a deeper understanding of how the Voyager fee is computed"
+    to="/voyager/fee-model"
+    icon={<AssetIcon />}
+  />
+  </Section>
+
+  </Section>
+
+   <Section title="Developers" id="web-sdks" hasSubSections >
+  <Section>
+  <Card
+    title="Voyager Widget"
+    description="Widget to integrate cross-chain swaps on your website"
+    to="/voyager/tools/voyager-widget"
+    icon={<Guide />}
+  />
+    <Card
+    title="Voyager PathFinder API"
+    description="An API to integrate Voyager's cross-chain swap functionality"
+    to="/voyager/tools/voyager-pathfinder-api"
+    icon={<Guide />}
+  />
+ <Card
+    title="Voyager JS SDK"
+    description="SDK to integrate Voyager's cross-chain swap functionality"
+    to="/voyager/tools/voyager-js-sdk"
+    icon={<Guide />}
+  />
+</Section>
+  
+  </Section>
+
+   <Section title="Guides" id="guides" hasSubSections >
+
+   <Section>
+      <Card
+    title="Deploying a Cross-chain Staking Contract"
+    description="Learn how to deploy your first cross-chain staking dApp using Voyager"
+  to="/voyager/guides/staking-contract"
+    icon={<Guide />}
+  />
+  </Section>
+
+  </Section>
+
+<Section title="Cross-chain Transfer/Swap APIs" id="web-sdks" hasSubSections >
+
+   <Section>
+  <Card
+    title="API endpoints"
+    description="Voyager Pathfinder API endpoints"
+    to="/api/?v=PATHFINDER"
+    icon={<Tscodegen />}
+    svgFile="/icons/api.svg"
+  />
+  <Card
+    title="Getting Started"
+    description="How to interact with Pathfinder API"
+    to="/voyager/tools/voyager-pathfinder-api/performing-cross-chain-transaction"
+    icon={<Tscodegen />}
+    svgFile="/icons/api.svg"
+  />
+  </Section>
+
+  </Section>

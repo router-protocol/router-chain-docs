@@ -129,7 +129,8 @@ test result: ok. 15 passed;  0 failed;  0 ignored;  0 measured;  0 filtered out;
 ### Optimized Compilation
 
 To reduce gas costs, the binary size should be as small as possible. This will result in a less costly deployment and lower fees for every interaction. Luckily, there is tooling to help with this. You can **optimize production code** using the [rust-optimizer](https://github.com/CosmWasm/rust-optimizer). `rust-optimizer` produces reproducible builds of CosmWasm smart contracts. This means third parties can verify that the contract is actually the claimed code.
-:::caution
+
+:::info
 You will need [Docker](https://www.docker.com/) installed in order to run `rust-optimizer`.
 :::
 

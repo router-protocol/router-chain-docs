@@ -11,12 +11,10 @@ Once all the required dependencies are installed, download the script and run it
 python3 validator_onboard.py
 ```
 
-:::tip
+:::info
 After running the script, you'll be prompted to choose one of the following two options: 
-
-**1. Install Router -** Installs both the orchestrator and the validator.
-
-**2. Install Orchestrator -** Installs just the orchestrator.
+- **Option 1) Install Router -** Installs both the orchestrator and the validator.
+- **Option 2) Install Orchestrator -** Installs just the orchestrator.
 
 In case you are following this setup for the first time, select **option 1**.
 :::

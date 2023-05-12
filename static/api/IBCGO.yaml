@@ -819,7 +819,7 @@ paths:
                                         NOTE: The amount field is an Int which implements the custom method
                                         signatures required by gogoproto.
                                   ack_fee:
-                                    title: the packet acknowledgement fee
+                                    title: the packet acknowledgment fee
                                     type: array
                                     items:
                                       type: object
@@ -1420,7 +1420,7 @@ paths:
                                       NOTE: The amount field is an Int which implements the custom method
                                       signatures required by gogoproto.
                                 ack_fee:
-                                  title: the packet acknowledgement fee
+                                  title: the packet acknowledgment fee
                                   type: array
                                   items:
                                     type: object
@@ -1597,7 +1597,7 @@ paths:
     get:
       tags:
       - Query
-      summary: TotalAckFees returns the total acknowledgement fees for a packet given
+      summary: TotalAckFees returns the total acknowledgment fees for a packet given
         its identifier
       operationId: TotalAckFees
       parameters:
@@ -1631,7 +1631,7 @@ paths:
                 type: object
                 properties:
                   ack_fees:
-                    title: the total packet acknowledgement fees
+                    title: the total packet acknowledgment fees
                     type: array
                     items:
                       type: object
@@ -2492,7 +2492,7 @@ paths:
                                         NOTE: The amount field is an Int which implements the custom method
                                         signatures required by gogoproto.
                                   ack_fee:
-                                    title: the packet acknowledgement fee
+                                    title: the packet acknowledgment fee
                                     type: array
                                     items:
                                       type: object
@@ -7971,12 +7971,12 @@ paths:
                               "@type": "type.googleapis.com/google.protobuf.Duration",
                               "value": "1.212s"
                             }
-  /ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_acknowledgements:
+  /ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_acknowledgments:
     get:
       tags:
       - Query
       summary: |-
-        PacketAcknowledgements returns all the packet acknowledgements associated
+        PacketAcknowledgements returns all the packet acknowledgments associated
         with a channel.
       operationId: PacketAcknowledgements
       parameters:
@@ -8058,7 +8058,7 @@ paths:
                   Query/QueryPacketAcknowledgements RPC method
                 type: object
                 properties:
-                  acknowledgements:
+                  acknowledgments:
                     type: array
                     items:
                       type: object
@@ -8080,9 +8080,9 @@ paths:
                           format: byte
                       description: |-
                         PacketState defines the generic type necessary to retrieve and store
-                        packet commitments, acknowledgements, and receipts.
+                        packet commitments, acknowledgments, and receipts.
                         Caller is responsible for knowing the context necessary to interpret this
-                        state as a commitment, acknowledgement, or a receipt.
+                        state as a commitment, acknowledgment, or a receipt.
                   pagination:
                     title: pagination response
                     type: object
@@ -8267,7 +8267,7 @@ paths:
     get:
       tags:
       - Query
-      summary: PacketAcknowledgement queries a stored packet acknowledgement hash.
+      summary: PacketAcknowledgement queries a stored packet acknowledgment hash.
       operationId: PacketAcknowledgement
       parameters:
       - name: channel_id
@@ -8301,7 +8301,7 @@ paths:
                   proof was retrieved
                 type: object
                 properties:
-                  acknowledgement:
+                  acknowledgment:
                     title: packet associated with the request fields
                     pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
                     type: string
@@ -8564,9 +8564,9 @@ paths:
                           format: byte
                       description: |-
                         PacketState defines the generic type necessary to retrieve and store
-                        packet commitments, acknowledgements, and receipts.
+                        packet commitments, acknowledgments, and receipts.
                         Caller is responsible for knowing the context necessary to interpret this
-                        state as a commitment, acknowledgement, or a receipt.
+                        state as a commitment, acknowledgment, or a receipt.
                   pagination:
                     title: pagination response
                     type: object
@@ -8752,7 +8752,7 @@ paths:
       tags:
       - Query
       summary: |-
-        UnreceivedAcks returns all the unreceived IBC acknowledgements associated
+        UnreceivedAcks returns all the unreceived IBC acknowledgments associated
         with a channel and sequences.
       operationId: UnreceivedAcks
       parameters:
@@ -8770,7 +8770,7 @@ paths:
           type: string
       - name: packet_ack_sequences
         in: path
-        description: list of acknowledgement sequences
+        description: list of acknowledgment sequences
         required: true
         style: simple
         explode: false
@@ -8792,7 +8792,7 @@ paths:
                 type: object
                 properties:
                   sequences:
-                    title: list of unreceived acknowledgement sequences
+                    title: list of unreceived acknowledgment sequences
                     type: array
                     items:
                       type: string
@@ -10417,7 +10417,7 @@ components:
         NOTE: The amount field is an Int which implements the custom method
         signatures required by gogoproto.
     ibc.applications.fee.v1.Fee:
-      title: Fee defines the ICS29 receive, acknowledgement and timeout fees
+      title: Fee defines the ICS29 receive, acknowledgment and timeout fees
       type: object
       properties:
         recv_fee:
@@ -10436,7 +10436,7 @@ components:
               NOTE: The amount field is an Int which implements the custom method
               signatures required by gogoproto.
         ack_fee:
-          title: the packet acknowledgement fee
+          title: the packet acknowledgment fee
           type: array
           items:
             type: object
@@ -10524,7 +10524,7 @@ components:
                         NOTE: The amount field is an Int which implements the custom method
                         signatures required by gogoproto.
                   ack_fee:
-                    title: the packet acknowledgement fee
+                    title: the packet acknowledgment fee
                     type: array
                     items:
                       type: object
@@ -10587,7 +10587,7 @@ components:
                   NOTE: The amount field is an Int which implements the custom method
                   signatures required by gogoproto.
             ack_fee:
-              title: the packet acknowledgement fee
+              title: the packet acknowledgment fee
               type: array
               items:
                 type: object
@@ -10714,7 +10714,7 @@ components:
                             NOTE: The amount field is an Int which implements the custom method
                             signatures required by gogoproto.
                       ack_fee:
-                        title: the packet acknowledgement fee
+                        title: the packet acknowledgment fee
                         type: array
                         items:
                           type: object
@@ -10808,7 +10808,7 @@ components:
                               NOTE: The amount field is an Int which implements the custom method
                               signatures required by gogoproto.
                         ack_fee:
-                          title: the packet acknowledgement fee
+                          title: the packet acknowledgment fee
                           type: array
                           items:
                             type: object
@@ -10902,7 +10902,7 @@ components:
                               NOTE: The amount field is an Int which implements the custom method
                               signatures required by gogoproto.
                         ack_fee:
-                          title: the packet acknowledgement fee
+                          title: the packet acknowledgment fee
                           type: array
                           items:
                             type: object
@@ -10952,7 +10952,7 @@ components:
       type: object
       properties:
         ack_fees:
-          title: the total packet acknowledgement fees
+          title: the total packet acknowledgment fees
           type: array
           items:
             type: object
@@ -13270,9 +13270,9 @@ components:
           format: byte
       description: |-
         PacketState defines the generic type necessary to retrieve and store
-        packet commitments, acknowledgements, and receipts.
+        packet commitments, acknowledgments, and receipts.
         Caller is responsible for knowing the context necessary to interpret this
-        state as a commitment, acknowledgement, or a receipt.
+        state as a commitment, acknowledgment, or a receipt.
     ibc.core.channel.v1.QueryChannelClientStateResponse:
       title: |-
         QueryChannelClientStateResponse is the Response type for the
@@ -13962,7 +13962,7 @@ components:
         proof was retrieved
       type: object
       properties:
-        acknowledgement:
+        acknowledgment:
           title: packet associated with the request fields
           pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
           type: string
@@ -13997,7 +13997,7 @@ components:
         Query/QueryPacketAcknowledgements RPC method
       type: object
       properties:
-        acknowledgements:
+        acknowledgments:
           type: array
           items:
             type: object
@@ -14019,9 +14019,9 @@ components:
                 format: byte
             description: |-
               PacketState defines the generic type necessary to retrieve and store
-              packet commitments, acknowledgements, and receipts.
+              packet commitments, acknowledgments, and receipts.
               Caller is responsible for knowing the context necessary to interpret this
-              state as a commitment, acknowledgement, or a receipt.
+              state as a commitment, acknowledgment, or a receipt.
         pagination:
           title: pagination response
           type: object
@@ -14131,9 +14131,9 @@ components:
                 format: byte
             description: |-
               PacketState defines the generic type necessary to retrieve and store
-              packet commitments, acknowledgements, and receipts.
+              packet commitments, acknowledgments, and receipts.
               Caller is responsible for knowing the context necessary to interpret this
-              state as a commitment, acknowledgement, or a receipt.
+              state as a commitment, acknowledgment, or a receipt.
         pagination:
           title: pagination response
           type: object
@@ -14221,7 +14221,7 @@ components:
       type: object
       properties:
         sequences:
-          title: list of unreceived acknowledgement sequences
+          title: list of unreceived acknowledgment sequences
           type: array
           items:
             type: string

@@ -16,6 +16,7 @@ routerd keys add $VALIDATOR_KEY_NAME
 ```
 
 This will derive a new private key and encrypt it to disk. 
+
 :::caution
 Remember the password used or store it in a safe place. 
 :::

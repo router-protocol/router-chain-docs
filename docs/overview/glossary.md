@@ -11,7 +11,11 @@ Use this glossary to learn about terms used in Router and the Cosmos ecosystem. 
 
 A predefined number of top validators that participate in consensus and receive rewards. We'll start with 30 validators in the active set and scale up later. 
 
+## Additional Security Module (ASM)
+
+
 ## Atomicity
+
 If an operation is atomic, it will either be seen as yet to be started or as completed and not in any partially completed state. In other words, either all the sub-operations in that operation will be successful, or none of them will be successful.
 <!-- ## Air drops
 
@@ -28,6 +32,7 @@ An unchangeable ledger of transactions copied among a network of independent com
 Groups of information stored on a blockchain. Each block contains transactions that are grouped, verified, and signed by validators.
 
 ## Block headers
+
 The part of the block which includes all the metadata, including block height, block hash, the Merkle root of all the transactions included in the block, and the timestamp at which the block was mined, amongst other things. They act as a summary of the block.
 
 ## Bonded validator
