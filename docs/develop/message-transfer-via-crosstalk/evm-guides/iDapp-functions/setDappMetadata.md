@@ -11,6 +11,8 @@ function setDappMetadata(
     ) external returns (uint64)
 ```
 
-- For executing cross-chain transactions, you need to pay the fees on the Router chain. For this, we have a function `setDappMetadata` in our Gateway contracts that takes a `feePayerAddress` as its parameter. This fee payer account will be responsible for paying the transaction fee of any cross-chain requests originating from your dApp. 
-- After the `feePayerAddress` is set, the fee payer has accept the request to act as the fee payer on the Router chain. If the approval for this is not given by the fee payer account, dApps won't be able to execute any cross-chain transaction.
-- Note that all the fee refunds will be credited to the dApp's `feePayerAddress` on the Router chain.
+- To facilitate cross-chain transactions, it is necessary to pay the fees on the Router chain. This can be achieved using the `setDappMetadata` function available in the Gateway contracts. The function takes a `feePayerAddress` parameter, which represents the account responsible for covering the transaction fees for any cross-chain requests originating from the dApp.
+
+- Once the `feePayerAddress` is set, the designated fee payer must approve the request to act as the fee payer on the Router chain. Without this approval, dApps will not be able to execute any cross-chain transactions.
+
+- It's important to note that any fee refunds resulting from these transactions will be credited back to the dApp's `feePayerAddress` on the Router chain.

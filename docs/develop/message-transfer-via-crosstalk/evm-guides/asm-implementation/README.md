@@ -11,9 +11,9 @@ The function signature named `verifyCrossChainRequest` is present in the `IAddit
 
 ```javascript
 function verifyCrossChainRequest(
-      uint256 eventNonce,
+      uint256 requestIdentifier,
       uint256 requestTimestamp,
-      string calldata srcContractAddress,
+      string calldata requestSender,
       string calldata srcChainId,
       bytes calldata packet,
       address handler
@@ -33,13 +33,13 @@ require(msg.sender == <the Gateway contract address>, "Caller is not Gateway");
 ```
 
 In this function selector, there are 6 arguments. Within this function, any possible business logic or validation can be added in these arguments. Each argument has its own purpose in the `verifyCrossChainRequest` request:
-  1. `eventNonce` - The event nonce is a unique identifier of the request. It is added by the source chain's Gateway contract.
-  2. `requestTimestamp` - This is the request timestamp when a request is added/verified on the Router chain.
-  3. `srcContractAddress` - This is the address of the application's contract on the source chain in string format.
-  4. `srcChainId` - This is the chain ID of the chain from which the request to the Router chain was initiated.
-  5. `packet` - This is the payload, i.e., the data to be transferred to the destination chain.
-  6. `handler` - This is the address of the application's smart contract on the destination chain in address format.
 
+1. `requestIdentifier` - The event nonce is a unique identifier of the request. It is added by the source chain's Gateway contract.
+2. `requestTimestamp` - This is the request timestamp when a request is added/verified on the Router chain.
+3. `requestSender` - This is the address of the application's contract on the source chain in string format.
+4. `srcChainId` - This is the chain ID of the chain from which the request to the Router chain was initiated.
+5. `packet` - This is the payload, i.e., the data to be transferred to the destination chain.
+6. `handler` - This is the address of the application's smart contract on the destination chain in address format.
 
 ### Important Notes
 
@@ -52,5 +52,6 @@ In this function selector, there are 6 arguments. Within this function, any poss
   ```bash
   npm install @routerprotocol/evm-gateway-contracts@1.1.11
   ```
+
 - `IAdditionalSecurityModule` is the interface that contains selectors for the `verifyCrossChainRequest` functions.
 - Add your business logic into these functions and you're done. You just need to provide the address for this ASM contract deployed on the destination chain while initiating the cross-chain request on the source chain.
