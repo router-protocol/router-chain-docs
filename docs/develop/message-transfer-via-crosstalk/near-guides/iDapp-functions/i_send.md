@@ -22,7 +22,7 @@ pub fn i_send(
 
 This function allows users to configure various aspects of cross-chain message passing based on their requirements. Some of the parameters that can be configured while calling this function include:
 
-### 1. `version`
+### 1) `version`
 
 The current version of the Gateway contract which can be obtained by calling a specific function within the Gateway contract.
 
@@ -32,11 +32,11 @@ pub fn get_current_version(&self) -> U128
 
 This would change whenever the encoding of `request_metadata` (parameter #5) changes. However, to remain compatible with iDapps configured to work with previous versions, Router will also support earlier versions of encoding.
 
-### 2. `dest_chain_id`
+### 2) `dest_chain_id`
 
 Chain ID of the destination chain in string format.
 
-### 5. `request_metadata`
+### 3) `request_metadata`
 
 To avoid encoding on-chain, Router allows iDapps to send static information for a request as a parameter to their iDapp, which depends upon the destination chain ID provided by the user. This information is packaged into a byte-encoded string, known as the `request_metadata` which includes the following parameters:
 
@@ -84,27 +84,27 @@ fn get_request_metadata(
 }
 ```
 
-**1. `dest_gas_limit` -** Gas limit required for execution of the request on the destination chain.
+**3.1) `dest_gas_limit` -** Gas limit required for execution of the request on the destination chain.
 
-**2. `dest_gas_price` -** Gas price of the destination chain. This can be calculated using the RPC of destination chain. If you don’t want to calculate it, just send **0** in its place and the Router chain will estimate the real time gas price for you.
+**3.2) `dest_gas_price` -** Gas price of the destination chain. This can be calculated using the RPC of destination chain. If you don’t want to calculate it, just send **0** in its place and the Router chain will estimate the real time gas price for you.
 
-**3. `ack_gas_limit` -** Gas limit required for the execution of the acknowledgment on the source chain. This can be calculated using tools like [hardhat-gas-reporter](https://www.npmjs.com/package/hardhat-gas-reporter).
+**3.3) `ack_gas_limit` -** Gas limit required for the execution of the acknowledgment on the source chain. This can be calculated using tools like [hardhat-gas-reporter](https://www.npmjs.com/package/hardhat-gas-reporter).
 
-**4. `ack_gas_price` -** Gas price of the source chain. This can be calculated using the RPC of source chain.
+**3.4) `ack_gas_price` -** Gas price of the source chain. This can be calculated using the RPC of source chain.
 
-**5. `relayer_fees` -** This parameter functions similarly to the priority fees on other blockchain networks. Since the Router chain relayers handle the execution of cross-chain requests on the destination chain, setting a higher `relayer_fees` will increase the likelihood of your request being prioritized by relayers. If a very low `relayer_fees` is provided, the Router chain will automatically adjust it to the minimum required amount to ensure that it is executed. 
+**3.5) `relayer_fees` -** This parameter functions similarly to the priority fees on other blockchain networks. Since the Router chain relayers handle the execution of cross-chain requests on the destination chain, setting a higher `relayer_fees` will increase the likelihood of your request being prioritized by relayers. If a very low `relayer_fees` is provided, the Router chain will automatically adjust it to the minimum required amount to ensure that it is executed. 
 
-**6. `ack_type` -** When the contract calls have been executed on the destination chain, the destination chain Gateway contract sends an acknowledgent back to the Router chain. iDapps have the option to get this acknowledgment from the Router chain to the source chain and execute some operations based on the ack.
+**3.6) `ack_type` -** When the contract calls have been executed on the destination chain, the destination chain Gateway contract sends an acknowledgent back to the Router chain. iDapps have the option to get this acknowledgment from the Router chain to the source chain and execute some operations based on the ack.
    - If `ack_type` = 0, the user doesn't want the acknowledgment to be forwarded back to the source chain.
    - If `ack_type` = 1, the acknowledgment is expected to be received only if the calls were successfully executed on the destination chain, and the user intends to perform some operation on the source chain after receiving the ack.
    - If `ack_type` = 2, an acknowledgment is needed only in case of an error occurring on the destination chain. This options also allows for execution of certain operations after receiving the ack.
    - If `ack_type` = 3, an acknowledgment is needed from the destination chain regardless of whether the call succeeds or fails, and some operations need to be performed based on the ack. 
 
-**7. `is_read_call` -** Router provides dApps an option to query a contract on another chain and receive the data back on the source chain as an acknowledgment. If the intention is only to query a contract on the destination chain and not perform any write operation there, then set this option to `true`.
+**3.7) `is_read_call` -** Router provides dApps an option to query a contract on another chain and receive the data back on the source chain as an acknowledgment. If the intention is only to query a contract on the destination chain and not perform any write operation there, then set this option to `true`.
 
-**8. `asm_address` -** As part of Router's modular security framework, developers can integrate an ASM module to add an extra layer of security on top of the infra-level security provided by the Router Chain. These modules will be in the form of smart contracts on the destination chain, and their addresses should be passed as bytes in this variable. Documentation for ASM can be found [here](../../key-concepts/additional-security-modules).
+**3.8) `asm_address` -** As part of Router's modular security framework, developers can integrate an ASM module to add an extra layer of security on top of the infra-level security provided by the Router Chain. These modules will be in the form of smart contracts on the destination chain, and their addresses should be passed as bytes in this variable. Documentation for ASM can be found [here](../../key-concepts/additional-security-modules).
 
-### 6. `request_packet`
+### 4) `request_packet`
 
 This is bytes encoded string consisting of two parameters:
 
@@ -113,9 +113,9 @@ dest_contract_address: String,
 payload: Vec<u8>
 ```
 
-**1. `dest_contract_address` -** This is the address of the destination chain's smart contract that will handle the payload sent from the source chain to the destination chain.
+**4.1) `dest_contract_address` -** This is the address of the destination chain's smart contract that will handle the payload sent from the source chain to the destination chain.
 
-**2. `payload` -** Bytes containing the payload that you want to send to the destination chain. This can be anything depending on your utility. For example, in the case of NFT transfers, it can contain the NFT ID, the recipient address etc. 
+**4.2) `payload` -** Bytes containing the payload that you want to send to the destination chain. This can be anything depending on your utility. For example, in the case of NFT transfers, it can contain the NFT ID, the recipient address etc. 
 
 
 In other words, payload is the data that you will receive on the destination chain as packet. For transferring an NFT with a specific NFT ID and recipient address, the request packet can be created using the following code:

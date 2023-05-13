@@ -140,11 +140,11 @@ function sendReadRequest(
 
 The parameters:
 
-**1. `destChainId` -** Chain ID of the destination chain in string format.
+**1) `destChainId` -** Chain ID of the destination chain in string format.
 
-**2. `destinationContractAddress` -** Address of the contract on the destination chain in string format.
+**2) `destinationContractAddress` -** Address of the contract on the destination chain in string format.
 
-**3. `requestMetadata` -** The detailed documentation for the `requestMetadata` function can be found [here](../iDapp-functions/iSend#5-requestmetadata).
+**3) `requestMetadata` -** The detailed documentation for the `requestMetadata` function can be found [here](../iDapp-functions/iSend#5-requestmetadata).
   
 
 To create a read request payload packet, one can encode the function call using the `abi.encodeCall` function in the way provided in the above snippet. Now, to create the final request packet, just `abi.encode` the destination contract address along with the payload packet. Once this is done, we can generate a cross-chain read request by calling the `iSend` function of the Gateway contract with the required parameters. 

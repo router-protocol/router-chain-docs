@@ -27,15 +27,15 @@ function iAck(
 
 If you have opted to receive the acknowledgment, it is necessary to handle it inside the `iAck` function. The function has the following parameters:
 
-### 1. `requestIdentifier`
+### 1) `requestIdentifier`
 
-The nonce received while calling the `iSend()` function on the source chain Gateway contract is the same nonce that is passed to this function. With this nonce, you can verify whether a specific request was executed on the destination chain.
+The nonce received while calling the `iSend()` function on the source chain Gateway contract is the same nonce that is passed to this function. With this nonce, you can map the acknowledgment to a specific request.
 
 
-### 2. `execFlag`
+### 2) `execFlag`
 
 `execFlag` is a boolean value that tells you the status of your call or request.
 
-### 3. `execData`
+### 3) `execData`
 
 The `execData` parameter of the `iAck` function represents the encoded return value from the `iReceive` function on the destination chain, delivered as bytes. After decoding this data, it can be processed on the source chain based on the requirements of the application.

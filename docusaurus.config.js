@@ -193,12 +193,12 @@ const config = {
             position: 'left',
             // className: 'new-badge',
           },
-          {
-            label: 'Learn',
-            to: '/learn',
-            position: 'left',
-            // className: 'new-badge',
-          },
+          // {
+          //   label: 'Learn',
+          //   to: '/learn',
+          //   position: 'left',
+          //   // className: 'new-badge',
+          // },
           // {
           //   label: 'Integrate',
           //   to: 'overview/integrate',
@@ -212,18 +212,29 @@ const config = {
           // {
           //   label: 'API Reference',
           //   to: 'apis',
-          //   position: 'right',
+          //   position: 'left',
           // },
           {
-            href: 'https://github.com/router-protocol',
-            className: 'pseudo-icon github-icon',
-            position: 'right',
+            type: 'dropdown',
+            label: 'v2.0',
+            position: 'left',
+            items: [
+              {
+                label: 'v1.0',
+                href: 'https://v1.dev.routerprotocol.com',
+              }
+            ],
           },
-          {
-            href: 'https://discord.gg/yjM2fUUHvN',
-            className: 'pseudo-icon discord-icon',
-            position: 'right'
-          },
+          // {
+          //   href: 'https://github.com/router-protocol',
+          //   className: 'pseudo-icon github-icon',
+          //   position: 'right',
+          // },
+          // {
+          //   href: 'https://discord.gg/yjM2fUUHvN',
+          //   className: 'pseudo-icon discord-icon',
+          //   position: 'right'
+          // },
           {
             type: 'search',
             position: 'right',

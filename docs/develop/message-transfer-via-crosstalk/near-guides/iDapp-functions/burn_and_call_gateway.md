@@ -17,15 +17,15 @@ pub fn burn_and_call_gateway(
 
 This is a function in the ROUTE token contract on the NEAR chain. This is used to transfer ROUTE tokens from NEAR to another chain with or without instructions. These parameters include:
 
-### 1. `is_app_token_payer:`
+### 1) `is_app_token_payer`
 
 This boolean flag determines whether or not the the dApp's ROUTE tokens will be sent to the destination chain. If the flag is set to false, the end user who invokes the function will be responsible for paying for the ROUTE tokens. Conversely, if the flag is set to true, the application that calls the function will be responsible for paying for the ROUTE tokens.
 
-### **2. amount:**
+### 2) `amount`
 
 The amount of ROUTE tokens to be transferred to the destination chain.
 
-### **3. msg**
+### 3) `msg`
 
 This is a `base64` encoded string which consists of the `ISendParams` parameters to be sent to the Gateway. The `ISendParams` consists of the following parameters:
 

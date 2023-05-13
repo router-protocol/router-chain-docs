@@ -38,3 +38,10 @@ Any cross-chain request between two third-party chains is divided into two indep
 **Step 6)** After the **`iReceive()`** function execution is complete on the destination chain, the destination chain's Gateway contract emits an acknowledgment event that is listened to by the orchestrators on the Router chain.
 
 **Step 7)** The ack is then submitted to bridge contract ensuring the execution of Outbound Request. Upon receiving the ack, the bridge contract can mark the status of outbound request as completed and take required actions.
+
+
+
+Since the application developer is writing the application middleware contracts, they will have complete control over what kind of data is received in the payload. They can define the encoding and decoding of the data accordingly and perform any operation on the data.
+
+While writing the custom bridging logic, the developer can convert single or multiple incoming requests into single or multiple outbound requests.
+Also, while creating requests to other chains, the contract can be developed in such a way that multiple requests can be generated for different chains.

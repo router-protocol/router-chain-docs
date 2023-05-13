@@ -6,7 +6,7 @@ sidebar_position: 4
 After executing a cross-chain transaction, you can also check its status by querying the following API:
 
 :::info
-You can find the API information [**here**](../../../../api/?v=PATHFINDER).
+You can find the API information [**here**](../../../../../api/?v=PATHFINDER).
 :::
 
 

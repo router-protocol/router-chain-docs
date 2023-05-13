@@ -1,5 +1,5 @@
 ---
-title: Sample Contracts
+title: Helpful Repositories
 sidebar_position: 5
 ---
 
