@@ -5,5 +5,5 @@ One of the most underrated, albeit important, aspects of blockchain interoperabi
 ### Guides
 
 - [Creating and Sending a Cross-chain Read Request](./cross-chain-read-requests/creating-and-sending-a-cross-chain-read-request)
-- [Handling the Acknowledgment on the Source Chain](./handling-the-acknowledgment-on-the-source-chain)
-- [Sample Read Request Contract](./sample-read-request-contract)
+- [Handling the Acknowledgment on the Source Chain](./cross-chain-read-requests/handling-the-acknowledgment-on-the-source-chain)
+- [Sample Read Request Contract](./cross-chain-read-requests/sample-read-request-contract)

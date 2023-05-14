@@ -1,27 +1,45 @@
 ---
-title: Cross-Chain NFT
-sidebar_position: 1
-description: A cross-chain NFT (ERC-1155) contract using Router Gateway contracts
+title: Cross-chain NFT (ERC-1155)
+sidebar_position: 2
+description: A cross-chain ERC-1155 using Router CrossTalk
 ---
 
-Creating a cross-chain ERC-1155 NFT using the Router's CrossTalk.
+## Overview
+In this section, we will create a cross-chain ping pong dApp using Router CrossTalk. Using this dApp, you can send any message (ping) from an EVM-based source chain to an EVM-based destination chain and receive an acknowledgment (pong) back to the source chain. 
 
-### Installing the dependencies:
+In this section, we will create a cross-chain ERC-1155 NFT using Router CrossTalk. We will be using the burn-mint mechanism to transfer the NFTs across chains - NFTs will be burnt on the source chain from the user’s account and minted to the recipient's address on the destination chain.
 
-Install the evm-gateway contracts with the following command:
+For this guide, we will be using the standard ERC-1155 contract from Openzeppelin as the base and adding extra code to make it interoperable. Unlike the previous example, we will not be using the acknowledgment in this guide. This will give an idea on how the contract will look if we don’t want to handle the acknowledgment.
 
-`yarn add @routerprotocol/evm-gateway-contracts` or `npm install @routerprotocol/evm-gateway-contracts`
+We will also create a mapping that will store the addresses of our contracts on different chains so that we can match whether the request on the destination originated from our contract on the source chain.
 
-- Make sure to use the latest version of the gateway contracts.
+----
 
-Install the openzeppelin contracts library with the following command:
+## Step-by-Step Guide
+<details>
+<summary><b>Step 1) Installing the dependencies</b></summary>
 
-`yarn add @openzeppelin/contracts` or `npm install @openzeppelin/contracts`
+Install the `evm-gateway` contracts with either of the following commands:
+```bash
+yarn add @routerprotocol/evm-gateway-contracts
+```
 
-### Instantiating the contract:
+```bash
+npm install @routerprotocol/evm-gateway-contracts
+```
+
+:::tip
+Make sure you're using the latest version of the Gateway contracts.
+:::
+
+</details>
+
+
+<details>
+<summary><b>Step 2) Instantiating the contract</b></summary>
 
 ```javascript
-// SPDX-License-Identifier: Unlicensed
+//SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.0 <0.9.0;
 
 import "@routerprotocol/evm-gateway-contracts/contracts/IDapp.sol";
@@ -32,11 +50,16 @@ contract XERC1155 is ERC1155, IDapp {
 }
 ```
 
-1. Import the IGateway.sol and IDapp.sol from `@routerprotocol/evm-gateway-contracts/contracts`.
-2. Import the ERC1155.sol from `@openzeppelin/contracts/token/ERC1155`.
-3. Inherit the ERC1155 and IDapp contracts into the main contract (XERC1155).
+1. Import the `IGateway.sol` and `IDapp.sol` from `@routerprotocol/evm-gateway-contracts/contracts`.
+2. Import the `ERC1155.sol` from `@openzeppelin/contracts/token/ERC1155`.
+3. Inherit the `ERC1155` and `IDapp` contracts into the main contract (XERC1155).
 
-### Creating state variables and the constructor
+</details>
+
+
+
+<details>
+<summary><b>Step 3) Creating state variables and the constructor</b></summary>
 
 ```javascript
   address public owner;
@@ -66,10 +89,9 @@ contract XERC1155 is ERC1155, IDapp {
   }
 ```
 
-1. Create a variable named **owner** of type address which stores the address of the admin. This address will be used for access control purposes.
-2. Create an instance to the **gateway** contract of type IGateway. This will be the contract which will route your message to the Router Chain.
-3. Create a mapping named **ourContractOnChains** that takes key as Chain Id and fetches the address of the corresponding NFT contract on that chain Id.
-
+1. Create a variable `owner` of type `address` which will be used for access control.
+2. Create an instance to the `gatewayContract` of type `IGateway`. This will be the contract which will route your message to the Router Chain.
+3. Create a mapping `ourContractOnChains` that takes network ID as the key and returns the corresponding NFT on that chain. 
    To allow the contract admin to map an address with a chain ID, create a setter function using the following steps:
 
    ```jsx
@@ -81,31 +103,34 @@ contract XERC1155 is ERC1155, IDapp {
    	ourContractOnChains[chainId] = contractAddress;
    }
    ```
-
 4. Create a struct named **TransferParams** which will be used to transfer NFTs to the destination chain. This will contain:
-   1. **nftIds:** An array of NFT Ids a user wants to transfer to the destination chain.
-   2. **nftAmounts:** An array of amounts of the respective NFT Ids to be transferred to the recipient on the destination chain.
-   3. **nftData:** Arbitrary data to be sent with the NFT. The user can send `0x` if they don’t want to send any data while transferring the NFT.
-   4. **recipient:** Address (in bytes format) of the recipient of the NFTs on the destination chain.
-5. Create the constructor with the URI of the NFT metadata, address of gateway contract and address of the fee payer and set these variables inside the constructor. Also initialize the ERC1155 contract by passing it the URI with the constructor as shown above.
-6. Set the owner as msg sender inside the constructor so that the deployer is the admin, mint some nfts to the deployer so that the cross-chain transfer functionality can be taken into action and set the Dapp metadata(explained in the next section) with the fee payer address as shown in the code snippet.
+   - **`nftIds` -** An array of NFT ids that a user wants to transfer to the destination chain.
+   - **`nftAmounts` -** An array of amounts of the respective NFT ids to be transferred to the recipient on the destination chain.
+   - **`nftData` -** Arbitrary data to be sent with the NFT. The user can send `0x` if they don’t want to send any data while transferring the NFT.
+   - **`recipient` -** Address (in bytes format) of the recipient of the NFTs on the destination chain.
+5. Create the constructor with `gatewayAddress` and the `feePayerAddress` in string format. Also initialize the ERC1155 contract by passing the URI with the constructor as shown above.
+6. Set the owner as `msg.sender` inside the constructor so that the deployer is the admin, mint some NFTs to the deployer so that the cross-chain transfer functionality can be taken into action and set the dApp metadata( explained in the next section) with the `feePayerAddress` as shown in the code snippet.
 
-### Setting the fee payer address through setDappMetadata function
+</details>
+
+
+<details>
+<summary><b>Step 4) Setting the fee payer address</b></summary>
 
 ```javascript
 function setDappMetadata(string memory FeePayer) public {
   require(msg.sender == owner, "Only owner can set the metadata");
   gatewayContract.setDappMetadata(FeePayer);
 }
-```
 
-To enable the Dapp to perform cross-chain transactions, the application must specify the fee payer address on the Router chain from which the fee for such transactions will be deducted.
+- To facilitate cross-chain transactions, it is necessary to pay the fees on the Router chain. This can be achieved using the `setDappMetadata` function available in the Gateway contracts. The function takes a `feePayerAddress` parameter, which represents the account responsible for covering the transaction fees for any cross-chain requests originating from the dApp.
+- Once the `feePayerAddress` is set, the designated fee payer must approve the request to act as the fee payer on the Router chain. Without this approval, dApps will not be able to execute any cross-chain transactions.
+- It's important to note that any fee refunds resulting from these transactions will be credited back to the dApp's `feePayerAddress` on the Router chain.
 
-This can be done by calling the setDappMetadata function in the gateway contract, and passing the fee payer address as a parameter. Once the fee payer address is set, the fee payer must provide approval on the Router chain to confirm their willingness to pay fees for the Dapp.
+</details>
 
-It's important to note that any fee refunds will be credited to the fee payer address specified in the setDappMetadata function.
-
-### Setting the gateway address through setGateway function
+<details>
+<summary><b>Step 5) Setting the Gateway address</b></summary>
 
 ```javascript
 function setGateway(address gateway) external {
@@ -114,9 +139,16 @@ function setGateway(address gateway) external {
 }
 ```
 
-This is an administrative function which sets the address of the gateway contract. This function should be invoked whenever the Router's Gateway contract gets updated.
+This is an administrative function which sets the address of the Gateway contract. This function should be invoked whenever Router's Gateway contract gets updated.
 
-### Transferring an NFT from a source chain to a destination chain
+</details>
+
+
+
+
+
+<details>
+<summary><b>Step 6) Transferring an NFT to the destination chain</b></summary>
 
 ```javascript
 function transferCrossChain(
@@ -151,11 +183,15 @@ function transferCrossChain(
   }
 ```
 
-1. Create a function with whatever name you want to call it. Here, we will call it the **transferCrossChain** function which accepts five parameters:
+- **Create a function named `transferCrossChain`:** This will be used to send a ping (message) to the destination chain. The parameters for this function includes:
 
-   1. **destChainID:** Chain ID of the destination chain in string format.
-   2. **transferParams:** The struct of type TransferParams which receives the NFT Ids and the respective amounts the user wants to transfer to the destination chain. It also receives the arbitrary data to be used while minting the NFT on the destination chain and the address of recipient in bytes.
-   3. **requestMetadata:** Abi-encoded metadata based on the source and destination chains. To get the request metadata, the following function can be added to the contract:
+    **1) `destChainId` -** Network ID of the destination chain in string format.
+    
+    **2) `transferParams` -** The struct of type `TransferParams` which receives the NFT ids and the respective amounts that the user wants to transfer to the destination chain. It also receives the arbitrary data to be sent while minting the NFT on the destination chain as well as the address of the recipient in bytes.
+
+    **2) `destinationContractAddress` -** Address of the destination contract in `bytes` format.
+
+    **3) `requestMetadata` -** Abi-encoded metadata based on the source and destination chains. To get the request metadata, the following function can be used:
 
       ```jsx
       function getRequestMetadata(
@@ -181,18 +217,25 @@ function transferCrossChain(
         return requestMetadata;
       }
       ```
+       ```
 
-      More details on Request Metadata can be found [here](../../evm-guides/understanding-functions/iSend#5-requestmetadata).
+    More details on `requestMetadata` can be found [here](../../evm-guides/iDapp-functions/iSend#5-requestmetadata).
 
-2. Check if the mapping of NFTs contract addresses on the respective destination chains is set using the `setContractOnChain` function.
-3. **Burning the NFTs from user’s account:** The user must own the NFTs to be able to transfer them to the destination chain. Burn those NFTs from user’s account before creating a cross-chain communication request to the destination chain using the `burnBatch` method defined in ERC-1155 contract of the Openzeppelin library.
-4. **Create the payload packet:** The payload for the cross-chain communication request will contain transfer parameters that need to be delivered to the destination chain. To achieve this, ABI encode the transferParams and set the resulting encoded data as the payload for the request.
-5. **Create the request packet:** To create a request packet, simply ABI-encode the destination contract address along with the payload packet created in the previous step. Set this encoded data as the request packet to be sent to the destination chain.
-6. **Calling the gateway contract to generate a cross-chain communication request:** Call the <code>iSend</code> function of the gateway contract with the required parameters. The documentation for this function can be found [here](../../evm-guides/understanding-functions/iSend).
 
-### Handling a cross-chain request
+- **Check the mapping:** Check to see whether the mapping of NFTs contract addresses on the respective destination chains is set using the `setContractOnChain` function.
+- **Burn the NFTs from user’s account:** The user must own the NFTs to be able to transfer them to the destination chain. Burn those NFTs from the user’s account before creating a cross-chain communication request to the destination chain using the `burnBatch` method defined in `ERC-1155` contract of the Openzeppelin library.
+- **Create the payload packet:** The payload for the cross-chain communication request will contain transfer parameters that need to be delivered to the destination chain. To achieve this, ABI-encode the `transferParams` and set the resulting encoded data as the payload for the request.
+- **Create the request packet:** To create a request packet, simply ABI-encode the destination contract address along with the payload packet created in the previous step. Set this encoded data as the request packet to be sent to the destination chain.
+- **Call the Gateway contract to generate a cross-chain request:** Call the `iSend` function of the Gateway contract with the required parameters. The documentation for this function can be found [here](../../evm-guides/iDapp-functions/iSend).
 
-Now that a cross-chain communication request has been created a from the source chain, the application needs to handle the request on the destination chain. To achieve this, create an `iReceive` function with the following signature:
+</details>
+
+
+<details>
+<summary><b>Step 7) Handling a cross-chain request</b></summary>
+
+
+Now that we have setup the contract to send a ping from the source chain, we need to implement an `iReceive` function handle the request on the destination chain. The `iReceive` function will include the following signature:
 
 ```javascript
 function iReceive(
@@ -220,12 +263,12 @@ function iReceive(
 }
 ```
 
-1. It is important to name the function "iReceive" and ensure that its signature, including the name and parameters, remains the same. This is because the Gateway contract on the destination chain will call this function, and any changes to the name or parameters will result in a failed call. Further details on the parameters required for this function can be found [here](../../evm-guides/understanding-functions/iReceive).
-2. The first step is to ensure that only the Gateway contract can call the function, as no other contract or wallet should have access to it. Once this is confirmed, the payload can be decoded to obtain the transfer parameters, which are stored in a variable called transferParams.
+- It is important to name the function `iReceive` and ensure that its signature, including the name and parameters, remains the same. This is because the Gateway contract on the destination chain will call this function, and any changes to the name or parameters will result in a failed call. Further details on the parameters required for this function can be found [here](../../evm-guides/iDapp-functions/iReceive).
+- To ensure that the request is received only from the application contract on the source chain, the application can create a mapping of allowed contract addresses for each chain ID. Then, in the `iReceive` function, the application can check that the `requestSender` is the same as the address stored in the mapping for the specific chain ID. To keep this contract as simple as possible, this condition has not been implemented here.
+- Ensure that only the Gateway contract can call the function, as no other contract or wallet should have access to it. Once this is confirmed, the payload can be decoded to obtain the transfer parameters, which are stored in a variable called `transferParams`.
+- The burnt NFTs from the source chain can then be minted to the recipient on the destination chain using the `ERC-1155` contract's `mintBatch` function from the Openzeppelin library. It is necessary to convert the recipient's address from bytes back to address format for this process, which can be done using the `toAddress` function.
 
-   The burnt NFTs from the source chain can then be minted to the recipient on the destination chain using the ERC-1155 contract's mintBatch function from the Openzeppelin library. It is necessary to convert the recipient's address from bytes back to address format for this process, which can be done using the toAddress function.
-
-```jsx
+```javascript
 /// @notice Function to convert bytes to address
 /// @param _bytes bytes to be converted
 /// @return addr address pertaining to the bytes
@@ -238,11 +281,23 @@ function toAddress(bytes memory _bytes) internal pure returns (address addr) {
 }
 ```
 
-After the execution of this function is complete, a success acknowledgment will be triggered to the Router Chain.
+- After the execution of the `iReceive` function is complete, a success acknowledgment will be triggered to the Router Chain.
 
-After handling the request on the destination chain, the contract inherited from the IDapp must implement the iAck function, as it is required. However, if the acknowledgment on the source chain is not to be handled, an empty function can be implemented to satisfy the requirement. Further information about the function can be found in the documentation provided [here](../../evm-guides/understanding-functions/iAck)
 
-```jsx
+3. Decode the packet using abi decoding and store it in `requestId` and `sampleStr` variables.
+4. Check if the string received in non-empty. If it is empty, throw a custom error which will trigger a failure acknowledgment to the Router chain.
+5. Set the string message in `pingFromSource` mapping and emit the `PingFromSource` event with `srcChainId`, `requestId` and the string message. Finally, return the `requestId` and string message received with the function. This will trigger a success acknowledgment to the Router chain.
+
+
+</details>
+
+<details>
+<summary><b>Step 8) Handling the acknowledgment</b></summary>
+
+
+After handling the request on the destination chain, the contract inherited from the `IDapp` must implement the `iAck` function. However, if the acknowledgment on the source chain is not to be handled, an empty function can be implemented to satisfy the requirement. Further information about the function can be found in the documentation provided [here](../../evm-guides/iDapp-functions/iAck)
+
+```javascript
 function iAck(
     uint256 requestIdentifier,
     bool execFlag,
@@ -250,10 +305,11 @@ function iAck(
 ) external {}
 ```
 
-In this way, a contract for cross-chain ERC-1155 NFTs can be created using the Router CrossTalk.
+</details>
 
-<details>
-<summary><b>Full Contract Example</b></summary>
+----
+
+## Full Contract Example
 
 ```javascript
 // SPDX-License-Identifier: Unlicensed
@@ -449,5 +505,3 @@ contract XERC1155 is ERC1155, IDapp {
   }
 }
 ```
-
-</details>

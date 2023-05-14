@@ -16,7 +16,7 @@ yarn add @routerprotocol/evm-gateway-contracts
 npm install @routerprotocol/evm-gateway-contracts
 ```
 
-:::info
+:::tip
 Make sure you're using the latest version of the Gateway contracts.
 :::
 
@@ -57,7 +57,7 @@ constructor(
 }
 ```
 
-1. Create an instance of the Gateway contract of type `IGateway`. This will be the contract that will route the request to the destination chain.
+1. Create an instance of the `gatewayContract` of type `IGateway`. This will be the contract that will route the request to the destination chain.
 2. Create a variable `owner` of type `address` which will be used for access control.
 3. Create a variable `value` of type `uint256` which will be used for storing the value that we read from the destination chain. Note that one can read any kind of data from the destination chain contract. 
 4. Create an event `ReceivedData` with a parameter `value` of type `uint256`. It will be emitted when the data is received from the destination chain.

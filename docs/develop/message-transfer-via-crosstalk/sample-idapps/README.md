@@ -1,36 +1,12 @@
 ---
-title: Sample IDapps
+title: Overview
 sidebar_position: 1
+description: How to build truly cross-chain dApps using Router?
 ---
 
-import {
-HomepageCard as Card,
-HomepageSection as Section,
-} from '../../../../src/components/HomepageComponents';
+This section will include a step-by-step guide to building truly cross-chain dApps by leveraging Router's infra. We'll showcase this guide with the help of some basic cross-chain applications like cross-chain Ping Pong (message transfer) and cross-chain ERC1155 (NFT transfer). This guide will make use of the cross-chain communication framework described earlier and will include code snippets and explanations for each step involved in the process.
 
-import {
-NearIcon,
-EthereumIcon
-} from '../../../../src/icons';
+:::info
+Recognizing that different developers work on different tech stacks, we have included guides for all types of chains supported by Router.
+:::
 
-<Section title="A Guide on Building IDapps" id="web-sdks" hasSubSections >
-
-This section will showcase the process of building cross-chain Dapps across multiple chains. It will provide a step-by-step guide to creating contracts that can communicate with each other on different chains.
-
-It will cover the implementation of various functionalities such as transferring NFTs and sending messages across different chains. The demonstration will make use of the cross-chain communication framework described earlier and will include code snippets and explanations for each step involved in the process.
-
-<Section>
-<Card
-title="EVM Guides"
-description="Understanding the crosstalk functions for EVM contracts"
-to="/message-transfer/sample-idapps/evm_guides"
-icon={<EthereumIcon />}
-/>
-<Card
-title="Near Guides"
-description="Understanding the crosstalk functions for Near chain"
-to="/message-transfer/sample-idapps/near_guides"
-icon={<NearIcon />}
-/>
-</Section>
-</Section>

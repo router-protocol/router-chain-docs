@@ -269,15 +269,15 @@ const config = {
               },
               {
                 label: 'Explorer',
-                href: 'https://devnet-explorer.routerprotocol.com/',
+                href: 'https://explorer.testnet.routerchain.dev/',
               },
               {
                 label: 'Careers',
-                href: 'https://angel.co/company/router-protocol',
+                href: 'https://wellfound.com/company/router-protocol',
               },
               {
                 label: 'Ecosystem',
-                href: 'https://routerprotocol.com/',
+                href: 'https://www.routerprotocol.com/ecosystem',
               },
             ],
           },
@@ -286,11 +286,11 @@ const config = {
             items: [
               {
                 label: 'Whitepaper',
-                href: 'https://www.routerprotocol.com/whitepaper',
+                href: 'https://global-uploads.webflow.com/61d1382fe0e915f2953f9500/63ecc619fa7285237ea184f3_Router%20Chain%20Whitepaper.pdf',
               },
               {
                 label: 'Developer Portal',
-                href: '/router-core',
+                href: '/develop',
               },
               {
                 label: 'GitHub',
@@ -302,7 +302,7 @@ const config = {
               },
               {
                 label: 'Community',
-                href: 'https://forum.routerprotocol.com/',
+                href: 'https://discord.com/invite/yjM2fUUHvN',
               },
             ],
           },
@@ -333,7 +333,7 @@ const config = {
           },
         ],
         copyright:
-          'Copyright © Router Protocol since 2022. All rights reserved.',
+          'Copyright © Router Protocol since 2021. All rights reserved.',
       },
       prism: {
         theme: lightCodeTheme,

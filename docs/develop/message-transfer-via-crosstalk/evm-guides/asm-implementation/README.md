@@ -22,7 +22,7 @@ function verifyCrossChainRequest(
 
 When a request is received on the destination chain, the `verifyCrossChainRequest` function selector is called on the specified ASM address before executing the user's contract calls. The ASM implementation can return true/false for instantly validating/invalidating the request. However, if they require more time for request validation, they can revert the request from their ASM.
 
-As mentioned earlier, if this function returns `true`, the execution of the user contract calls will continue. If the return value is `false`, the user contract calls execution will be skipped. If the ASM implementation reverts the request, then the transaction will be reverted, and no state will be modified on the Gateway as well.
+As mentioned earlier, if this function returns `true`, the execution of the user contract calls will continue. If the return value is `false`, the execution of the user's contract calls will be skipped. If the ASM implementation reverts the request, then the transaction will be reverted, and no state will be modified on the Gateway as well.
 
 The ASM module can revert the request until it is able to validate/invalidate the request. This will ensure that the application-level validation is completed before a cross-chain request is executed on the Gateway contract and sent to the user's destination contract.
 
@@ -32,14 +32,19 @@ Since this function can called from the Gateway contract only, it must have the 
 require(msg.sender == <the Gateway contract address>, "Caller is not Gateway");
 ```
 
-In this function selector, there are 6 arguments. Within this function, any possible business logic or validation can be added in these arguments. Each argument has its own purpose in the `verifyCrossChainRequest` request:
+In this function selector, there are 6 arguments. Within this function, any possible business logic or validation can be added using these arguments. Each argument has its own purpose in the `verifyCrossChainRequest` request:
 
-1. `requestIdentifier` - The event nonce is a unique identifier of the request. It is added by the source chain's Gateway contract.
-2. `requestTimestamp` - This is the request timestamp when a request is added/verified on the Router chain.
-3. `requestSender` - This is the address of the application's contract on the source chain in string format.
-4. `srcChainId` - This is the chain ID of the chain from which the request to the Router chain was initiated.
-5. `packet` - This is the payload, i.e., the data to be transferred to the destination chain.
-6. `handler` - This is the address of the application's smart contract on the destination chain in address format.
+**1) `requestIdentifier` -** A unique identifier of the request. It is added by the source chain's Gateway contract.
+
+**2) `requestTimestamp` -** Timestamp when a request is added/verified on the Router chain.
+
+**3) `requestSender` -** Address of the application's contract on the source chain in string format.
+
+**4) `srcChainId` -** Network ID of the chain from which the request to the Router chain was initiated.
+
+**5) `packet` -** This is the payload, i.e., the data to be transferred to the destination chain.
+
+**6) `handler` -** Address of the application's smart contract on the destination chain in address format.
 
 ### Important Notes
 

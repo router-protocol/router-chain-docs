@@ -1,4 +1,7 @@
 {
-    "label": "Stateful Bridging (Omnichain Framework)",
-    "position": 5
+    "label": "Stateful (OmniChain) Bridging",
+    "position": 5,
+    "link":{
+      "type": "generated-index"
+    }
   }

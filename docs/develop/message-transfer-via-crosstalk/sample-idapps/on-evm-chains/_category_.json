@@ -1,6 +1,6 @@
 {
-  "label": "Sample iDapps",
-  "position": 7,
+  "label": "On EVM Chains",
+  "position": 1,
   "link": {
     "type": "generated-index"
   }

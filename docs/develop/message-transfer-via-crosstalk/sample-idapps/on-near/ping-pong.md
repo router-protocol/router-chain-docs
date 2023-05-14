@@ -1,21 +1,33 @@
 ---
-title: Ping Pong Application
+title: Cross-chain Ping Pong
 sidebar_position: 1
-description: A simple ping pong contract using Router Gatway contracts
+description: A simple ping pong dApp using Router CrossTalk
 ---
 
-In this section we will go through how a simple cross-chain ping-pong dApp can be created by integrating the Router Gateway contracts.
+## Overview
 
-### Cloning the NEAR Boilerplate code in Rust
+In this section, we will create a cross-chain ping pong dApp using Router CrossTalk. Using this dApp, you can send any message (ping) from a source chain to a destination chain and receive an acknowledgment (pong) back to the source chain. 
 
-Go to the terminal and clone the boilerplate repository using
-`git clone https://github.com/near/boilerplate-template-rs-dev`
+## Step-by-Step Guide
 
-Get into the folder using `cd ./boilerplate-template-rs-dev/contract`
+<details>
+<summary><b>Step 1) Cloning the NEAR Boilerplate code in Rust</b></summary>
+Go to the terminal and clone the boilerplate repository using the following command:
 
-### Installing the dependencies using Cargo
+```bash
+git clone https://github.com/near/boilerplate-template-rs-dev
+```
+After cloning the this repo, change your directory:
 
-Open the Cargo.toml file and paste the folowing:
+```bash
+cd ./boilerplate-template-rs-dev/contract
+```
+</details>
+
+<details>
+<summary><b>Step 2) Installing the dependencies using Cargo</b></summary>
+
+Open the `Cargo.toml` file and paste the folowing:
 
 ```javascript
 [package]
@@ -43,12 +55,13 @@ overflow-checks = true
 
 [workspace]
 members = []
-
 ```
+</details>
 
-### Starting with the contract
+<details>
+<summary><b>Step 3) Add state variables to the contract</b></summary>
 
-Go to the `src` folder using `cd ./src`. Now we will start with adding the state variables. Open the file `lib.rs` in your code editor and add the following code.
+Change your directory to the `src` folder and add the state variables. To do this, open the file `lib.rs` in your code editor and add the following code.
 
 ```javascript
 use near_sdk::{
@@ -76,13 +89,20 @@ pub struct PingPong {
 
 ```
 
-1. `owner`: AccountId of the owner of the contract. This is just for adding some access control mechanisms.
-2. `gateway`: This is the AccountId of the Router's Gateway contract.
-3. `current_request_id`: Request ID is a counter to count the requests. This is also used to index the messages sent and received across chains.
-4. `ping_from_source`: This is a mapping which takes the source chain ID and the request ID and gives the message received from that chain as the output.
-5. `ack_from_destination`: This is a mapping which takes the request ID and gives the message received as acknowledgement back from the destination chain.
+**1. `owner` -** Account address (known as `AccountId` on NEAR) of contract's owner. This is just for adding some access control mechanisms.
 
-### Implementing Default trait for the state variables:
+**2. `gateway` -** This is the account address of the Router's Gateway contract.
+
+**3. `current_request_id` -** A variable to maintain the count of the requests. This is also used to index the messages sent and received across chains.
+
+**4. `ping_from_source` -** This is a mapping that takes the source chain ID and the request ID and returns the message received from that chain as the output.
+
+**5. `ack_from_destination` -** This is a mapping which takes the request ID and gives the message received as acknowledgement back from the destination chain.
+
+</details>
+
+<details>
+<summary><b>Step 4) Implementing default trait for the state variables</b></summary>
 
 ```javascript
 impl Default for PingPong {
@@ -98,9 +118,11 @@ impl Default for PingPong {
 }
 ```
 
-Implementing the Default trait is necessary in the NEAR protocol, where default values for the states should be set within this function.
+Implementing the default trait is necessary on NEAR. Default values for the states should be set within the aforementioned function.
+</details>
 
-### Creating the Implementation of the contract and adding an initializer function:
+<details>
+<summary><b>Step 5) Creating the implementation of the contract and adding an initializer function</b></summary>
 
 ```javascript
 #[near_bindgen]
@@ -118,14 +140,17 @@ impl PingPong {
 }
 ```
 
-To initialize the contracts, we will create a `new` function decorated with `init`, indicating it as an initializer function. Within this function, we will pass the AccountId of the Gateway contract and perform the initialization process.
+To initialize the contracts, we will create a `new` function with `init` decorator, indicating it as an initializer function. Within this function, we will pass the account address of the Gateway contract and perform the initialization process.
 
-### Creating the helper functions to `set` and `get` data:
+</details>
 
-Below the new function, you can add the following functions to handle setting and fetching values of state variables in the contract:
+<details>
+<summary><b>Step 6) Creating helper functions</b></summary>
+
+Below the `new` function, you can add the following functions to handle setting and fetching values of state variables in the contract:
 
 ```javascript
-// Function to set the gateway account ID.
+// Function to set the Gateway account ID.
 // Only the owner account can call this function.
 pub fn set_gateway(&mut self, gateway: AccountId) {
     if env::predecessor_account_id() != self.owner.clone() {
@@ -169,7 +194,10 @@ pub fn get_owner(&self) -> AccountId {
 }
 ```
 
-### Creating the external function interface to call the gateway contract:
+</details>
+
+<details>
+<summary><b>Step 7) Creating an external function interface to call the Gateway contract</b></summary>
 
 Create another file `external.rs` in the `src` folder. Also add `mod external;` at the top of `lib.rs` file.
 In the file `external.rs`, add the following code:
@@ -194,12 +222,14 @@ trait GatewayContract {
 }
 ```
 
-We have already learnt about the `i_send` function in the [Understanding CrossTalk Section](../../../near-guides/iDapp-functions/i_send).
-Also we have learnt about the `set_dapp_metadata` function in the [Set Dapp Metadata Section](../../../near-guides/iDapp-functions/set_dapp_metadata).
+We have already learnt about the `i_send` function in the [i_send section](../../near-guides/iDapp-functions/i_send).
+Also we have learnt about the `set_dapp_metadata` function in the [set_dapp_metadata section](../../near-guides/iDapp-functions/set_dapp_metadata).
+</details>
 
-### Creating a file for defining events:
+<details>
+<summary><b>Step 8) Creating a file for defining events</b></summary>
 
-Also create another file for recording the events. Let us name it `events.rs`. Also add `mod events;` at the top of `lib.rs` file. Inside the `events.rs`, add the following events:
+Now, we'll create a file for recording the events. Let us name it `events.rs`. Also add `mod events;` at the top of `lib.rs` file. Inside the `events.rs`, add the following events:
 
 ```javascript
 use near_sdk::{
@@ -292,8 +322,10 @@ use events::{
 };
 use external::*;
 ```
+</details>
 
-### Creating the `set_dapp_metdata` function for setting fee payer address:
+<details>
+<summary><b>Step 9) Creating a function to set the fee payer address</b></summary>
 
 ```javascript
 #[payable]
@@ -305,11 +337,16 @@ pub fn set_dapp_metadata(&mut self, fee_payer_address: String) -> Promise {
 }
 ```
 
-Create a function `set_dapp_metadata` which takes the address of fee payer as a parameter and call the gateway contract's `set_dapp_metadata` function. Make this function payable by adding the decorator `payable` to it. This is because Router Gateway contract charges some minimal static fees to prevent Sybil attacks.
+Create a function `set_dapp_metadata` that takes the `fee_payer_address` as a parameter and calls the Gateway contract's `set_dapp_metadata` function. Make this function payable by adding the decorator `payable` to it. This is because Router Gateway contract charges some minimal fees to prevent Sybil attacks.
 
-> Note: This fee payer address should be an address on the Router Chain. Check [here](../../../near-guides/iDapp-functions/set_dapp_metadata) more details about this function.
+:::tip
+The fee payer address should be an address on the Router chain. Check [here](../../near-guides/iDapp-functions/set_dapp_metadata) more details about this function.
+:::
 
-### Creating the function to send a ping to another chain
+</details>
+
+<details>
+<summary><b>Step 10) Creating a function to send a ping to another chain</b></summary>
 
 Add these imports along with other imports:
 
@@ -317,7 +354,7 @@ Add these imports along with other imports:
 use router_wasm_bindings::ethabi::{decode, encode,ethereum_types::U256, ParamType, Token};
 ```
 
-Add this as a function below `set_dapp_metadata` function in the `lib.rs` file:
+Add this as a function below the `set_dapp_metadata` function in the `lib.rs` file:
 
 ```javascript
 #[payable]
@@ -361,25 +398,28 @@ pub fn i_ping(
 }
 ```
 
-Create a function named `i_ping` decorated with `payable` that enables sending a cross-chain request to another chain with a ping.
-Decorating with `payable` is necessary because the Router Gateway contract charges a minimal static fees to prevent Sybil attacks. The function accepts the following parameters:
+Create a function named `i_ping` decorated with `payable` that enables sending a message to another chain.  The function accepts the following parameters:
 
-1. **dest_chain_id:** Chain ID of the destination chain. Pass this as a string.
-2. **destination_contract_address:** This parameter represents the address of the contract on the destination chain that will handle the payload. It is the address that we are pinging on the destination chain. Pass this as a string.
-3. **str:** The message to be passed as ping to the destination chain.
-4. **request_metadata:** The request metadata consists of parameters related to source chain and destination chain including the gas limit and price, the relayer fees and so on. Details about this parameter can be found [here](../../../near-guides/iDapp-functions/i_send#5-request_metadata).
+**1) `dest_chain_id` -** Network ID of the destination chain in string format.
 
-The `i_ping` function starts by incrementing the request ID and creating the necessary parameters for the request_to_dest function. It then proceeds to create the packet by ABI encoding the request ID and the `str` string, resulting in a `packet`.
+**2) `destination_contract_address` -** This parameter represents the destination contract address that will handle the payload. Pass this as a string.
+
+**3) `str` -** The message to be passed as a ping to the destination chain.
+
+**4) `request_metadata` -** The `request_metadata` consists of parameters related based on the source chain and destination chain including the gas limit and price, the relayer fees, among others. Details about this parameter can be found [here](../../near-guides/iDapp-functions/i_send#5-request_metadata).
+
+The `i_ping` function starts by incrementing the `request_id` and creating the necessary parameters for the `i_ping` function. It then proceeds to create the `packet` by ABI encoding the `request_id `and the message string, resulting in a `packet`.
 
 Next, a `request_packet` is constructed using the `destination_contract_address` and the `packet`. This packet contains the necessary information for the cross-chain request.
 
-Next, the `NewPing` event should be emitted with the request ID.
+Next, the `NewPing` event should be emitted whenever a new request is generated.
 
-Finally, the `i_send` function of the Gateway contract is invoked, passing in the relevant parameters. A detailed explanation of the i_send function can be found [here](../../../near-guides/iDapp-functions/i_send).
+Finally, the `i_send` function of the Gateway contract is invoked, passing in the relevant parameters. A detailed explanation of the `i_send` function can be found [here](../../near-guides/iDapp-functions/i_send). This will create a cross-chain request to the destination chain with the abi-encoded packet.
 
-This will create a cross-chain request to the destination chain with the packet which is abi encoded argument containing request ID and the message string. A new function will now be implemented to receive a cross-chain request from another chain.
+</details>
 
-### Function to receive ping from another chain
+<details>
+<summary><b>Step 11) Function to receive a ping from the source chain</b></summary>
 
 ```javascript
 pub fn i_receive(
@@ -427,17 +467,21 @@ pub fn i_receive(
 
 ```
 
-Create a new function called `i_receive`, which is essential for receiving requests from another chain. Make sure to keep the signature of the function same otherwise the contract will not be able to receive requests from another chain. More about this function is explained here in [detail](../../../near-guides/iDapp-functions/i_receive).
+Create a new function called `i_receive`, which is essential to receive and handle requests coming from another chain. Make sure to keep the signature of the function same as above otherwise the contract will not be able to receive requests from another chain. More about this function is explained [here](../../near-guides/iDapp-functions/i_receive).
 
-1. **request_sender:** The address of the contract on source chain from where this request was created. You can use it to validate whether the request originated from your contract on the source chain.
-2. **packet:** The packet received from the source chain. Since the packet contains the `request_id` and the `message` string, it can be decoded accordingly. After decoding, set the `ping_from_source` mapping with it.
-3. **source_chain_id:** Chain ID of the source chain where the request was created.
+**1) `request_sender` -** The address of the contract on source chain from where this request was created. You can use it to validate whether the request originated from your contract on the source chain.
 
-In addition to handling the received cross-chain request, the `i_receive` function will emit a `PingFromSource` event. This event will include the source chain ID, request ID, and message as parameters. Furthermore, the function will return the `packet` as an acknowledgement, which will be sent back to the source chain.
+**2) `packet` -** The packet received from the source chain. Decode the packet and set the `ping_from_source` mapping in the decoded data.
+
+**3) `source_chain_id` -** Network ID of the source chain where the request was created.
+
+In addition to handling the incoming cross-chain request, the `i_receive` function will emit a `PingFromSource` event. This event will include the `source_chain_id`, `request_id`, and the message string. Furthermore, the function will return the `packet` as an acknowledgement, which will be sent back to the source chain.
 
 To handle the acknowledgement, a new function called `i_ack` needs to be implemented into the contract.
+</details>
 
-### Function to handle the acknowledgement back on the source chain
+<details>
+<summary><b>Step 12) Function to handle the acknowledgement on the source chain</b></summary>
 
 ```javascript
 pub fn i_ack(
@@ -483,24 +527,27 @@ pub fn i_ack(
 }
 ```
 
-Create a new function called `i_ack`, which is essential for receiving acknowledgment requests from the destination chain back on the source chain. Make sure to keep the signature of the function same otherwise the contract will not be able to receive acknowledgment requests. More about this function is explained here in [detail](../../../near-guides/iDapp-functions/i_ack).
+Create a new function called `i_ack`, which is essential to receive and handle acknowledgments on the source chain. Make sure to keep the signature of the function same as above otherwise the contract will not be able to receive acknowledgment requests. More about this function is explained [here](../../near-guides/iDapp-functions/i_ack).
 
-1. **request_identifier:** The event nonce emitted from Gateway contract when the request was created. This can be used this to track the status of the requests.
-2. **exec_flag:** The `exec_flag` tells about the status of execution of cross-chain request (`i_receive`) on destination chain.
-3. **exec_data:**: The `exec_data` consists of the value returned from the `i_receive` function on the destination chain.
+**1) `request_identifier` -** The event nonce emitted from Gateway contract when the request was created. This can be used this to track the status of the requests.
+**2) `exec_flag` -** The `exec_flag` is a boolean value that tells you the execution status of your request on destination chain.
+**3) `exec_data` -**: The `exec_data` parameter is the data in bytes that provides the abi-encoded return value from the `i_receive` call on the destination chain.
+   - **If the execution is successful on the destination chain:**  
+      - `exec_flag` - `[true]`
+      - `exec_data` - `(abi.encode(request_id, sample_string))`
 
-   - **if the execution was successful on the destination chain:**
+    Since the return value is `uint256`, this `execData` can be decoded using abi decoding in the following way:
 
-     execFlag: [true] execData: (abi.encode(request_id, sample_string))
+   - **If the execution fails on the destination chain:**
+      - `execFlag` - `[false]`
+      - `execData` - `(abi.encode(`error_bytes`))`
 
-   - **If the execution failed on the destination chain:**
+   Now decode the `exec_data` in the same format as done in the `i_receive` function since the same packet was returned from the destination chain.
 
-     execFlag: [false] execData: (abi.encode(`error_bytes`))
+   Set the `ack_from_destination` mapping with this data and emit the `exec_status_event` and the `ack_from_destination_event`.
 
-   Now decode the `exec_data` in the same format as done in the `i_receive` function since the same packet was returned from destination chain.
+</details>
 
-   Set the `ack_from_destination` mapping with this data. Also emit the `exec_status_event` and the `ack_from_destination_event` in this function along with the required parameters.
-
-In this way, A simple ping pong smart contract can be created using the Router CrossTalk library.
-
-> **Note:** The full contract can be found in [this](https://github.com/router-protocol/crosstalk-sample-near) repository.
+:::info
+The full contract can be found in [this repository](https://github.com/router-protocol/crosstalk-sample-near).
+:::
