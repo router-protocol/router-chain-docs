@@ -1,6 +1,6 @@
 ---
 title: Helpful Repositories
-sidebar_position: 8
+sidebar_position: 9
 ---
 
 Some repos have been provided below for reference to ease your development efforts while building an iDapp:

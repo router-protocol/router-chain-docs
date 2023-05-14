@@ -1,0 +1,125 @@
+---
+title: Message Transfer via Crosstalk
+sidebar_position: 1
+---
+
+import {
+  HomepageCard as Card,
+  HomepageSection as Section,
+} from '../../../src/components/HomepageComponents';
+
+import {
+  ChainIcon,
+  IDEIcon,
+  TerminalIcon,
+  APIReferenceIcon,
+  Telescope,
+  ModulesIcon,
+  RelayerIcon,
+  AssetIcon,
+  KeysIcon,
+  Osmojs,
+  Transaction,
+  OsmosisCore,
+  Contribute,
+  Guide,
+  EthereumIcon,
+  RouterIcon,
+  NearIcon,
+} from '../../../src/icons';
+
+This section of the documentation will provide an in-depth view of the CrossTalk framework.
+
+<Section title="Theoretical Concepts" id="web-sdks" hasSubSections >
+
+<Section>
+  <Card
+    title="Overview"
+    description="What is CrossTalk why is it required?"
+    to="message-transfer-via-crosstalk/overview"
+    icon={<IDEIcon />}
+  />
+    <Card
+    title="Key Concepts"
+    description="Dissecting different functions and parameters associated with CrossTalk"
+    to="message-transfer-via-crosstalk/key-concepts"
+    icon={<ChainIcon />}
+  />
+  <Card
+    title="Fee Management"
+    description="Gaining a deeper understanding of how the CrossTalk and Omnichain Fee is computed"
+    to="message-transfer-via-crosstalk/key-concepts/fee-management"
+    icon={<AssetIcon />}
+  />
+
+  </Section>
+
+  </Section>
+
+<Section title="Guides" id="web-sdks" hasSubSections >
+   <Section>
+  <Card
+    title="EVM-Guides"
+    description="Learning how to execute different types of cross-chain requests in EVM Chains"
+    to="message-transfer-via-crosstalk/evm-guides"
+    icon={<ModulesIcon />}
+  />
+ <Card
+    title="NEAR-Guides"
+    description="Learning how to execute different types of cross-chain requests in NEAR"
+    to="message-transfer-via-crosstalk/near-guides"
+    icon={<ModulesIcon />}
+  />
+ <Card
+    title="Router-chain-Guides"
+    description="Learning how to execute different types of cross-chain requests from or to Router chain"
+    to="message-transfer-via-crosstalk/router-chain-guides"
+    icon={<ModulesIcon />}
+  />
+    </Section>
+
+  </Section>
+
+   <Section title="Sample iDapps" id="sample-idapps" hasSubSections >
+
+<Section>
+  <Card
+    title="Deploying a Cross-chain Ping Pong Contract"
+    description="Learn how to deploy your first cross-chain dApp using Router's CrossTalk framework"
+    to="message-transfer-via-crosstalk/sample-idapps/on-evm-chains/ping-pong"
+    icon={<Guide />}
+  />
+  <Card
+    title="Deploying a Cross-chain NFT (ERC-1155)"
+    description="Learn how to deploy a cross-chain NFT using Router's CrossTalk framework"
+    to="message-transfer-via-crosstalk/sample-idapps/on-evm-chains/cross-chain-nft"
+    icon={<Guide />}
+  />
+</Section>
+
+  </Section>
+
+  <Section title="Understanding Functions" id="web-sdks" hasSubSections >
+
+  <Section>
+  <Card
+  title="EVM Guide"
+  description="Understanding the crosstalk functions for EVM contracts"
+  to="message-transfer-via-crosstalk/evm-guides/iDapp-functions"
+  icon={<EthereumIcon />}
+  />
+  <Card
+  title="NEAR Guide"
+  description="Understanding the crosstalk functions for Near chain"
+  to="message-transfer-via-crosstalk/near-guides/iDapp-functions"
+  icon={<NearIcon />}
+  />
+
+  <Card
+  title="Router Chain Guide"
+  description="Understanding the crosstalk functions for Router chain"
+  to="message-transfer-via-crosstalk/router-chain-guides/iDapp-functions"
+  icon={<RouterIcon />}
+  />
+  </Section>
+  </Section>
