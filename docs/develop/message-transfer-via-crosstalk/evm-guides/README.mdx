@@ -1,0 +1,49 @@
+---
+title: EVM Guides
+sidebar_position: 1
+---
+
+import {
+  HomepageCard as Card,
+  HomepageSection as Section,
+} from '../../../../src/components/HomepageComponents';
+
+import {
+  IDEIcon,
+  Transaction,
+  SwiftIcon,
+  Createapp
+} from '../../../../src/icons';
+
+This section will cover how the crosschain framework can be used for EVM contracts to build iDapps. It provides the details around various functions and how they can be implemented using some sample contracts.
+
+
+<Section title="Start with Building" id="web-sdks">
+  <Card
+    title="Build your first iDapp in 5 steps"
+    description="Build your first EVM iDapp in 5 simple steps. Beginning from writing the code to deployment."
+    to="evm-guides/your-first-crosschain-nft-contract"
+    icon={<IDEIcon />}
+  />
+</Section>
+<Section title="Theoretical Concepts" id="web-sdks">
+    <Card
+    title="iDapp Functions"
+    description="Understand the various functions Crosstalk provides to create your iDapp."
+    to="evm-guides/iDapp-functions"
+    icon={<Transaction />}
+  />
+  <Card
+    title="Cross-chain Read Requests"
+    description="Capability to read the state of contracts present on one chain from a different chain."
+    to="evm-guides/cross-chain-read-requests"
+    icon={<Createapp />}
+  />
+  <Card
+    title="Additional Security Module"
+    description="How iDapps can use ASM to add another layer of security as required."
+    to="evm-guides/asm-implementation"
+    icon={<SwiftIcon />}
+  />
+
+  </Section>

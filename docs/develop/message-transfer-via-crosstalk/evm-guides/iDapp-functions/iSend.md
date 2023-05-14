@@ -30,11 +30,11 @@ This would change whenever the encoding of `requestMetadata` (parameter #5) chan
 
 ### 2) `routeAmount`
 
-To transfer ROUTE tokens along with the message, one must specify the amount of tokens to be transferred in this field.
+To transfer ROUTE tokens along with the message, one must specify the amount of tokens to be transferred in this field. This value can be set as **0** in case ROUTE token transfer is not required. 
 
 ### 3) `routeRecipient`
 
-To transfer ROUTE tokens along with the call, users will need to provide the recipient's address on the destination chain.
+To transfer ROUTE tokens along with the call, users will need to provide the recipient's address on the destination chain. This value can be set as ***"" (Empty String)*** in case ROUTE token transfer is not required.
 
 ### 4) `destChainId`
 
@@ -82,6 +82,45 @@ function getRequestMetadata(
     }
 ```
 
+Alternatively, the `requestMetadata` parameter can be created in TypeScript or JavaScript using the following function:
+
+
+```javascript
+function getRequestMetadata(
+  destGasLimit: number,
+  destGasPrice: number,
+  ackGasLimit: number,
+  ackGasPrice: number,
+  relayerFees: string,
+  ackType: number,
+  isReadCall: boolean,
+  asmAddress: string
+): string {
+  return ethers.utils.solidityPack(
+    [
+      'uint64',
+      'uint64',
+      'uint64',
+      'uint64',
+      'uint128',
+      'uint8',
+      'bool',
+      'string',
+    ],
+    [
+      destGasLimit,
+      destGasPrice,
+      ackGasLimit,
+      ackGasPrice,
+      relayerFees,
+      ackType,
+      isReadCall,
+      asmAddress,
+    ]
+  );
+}
+```
+
 **5.1) `destGasLimit` -** Gas limit required for execution of the request on the destination chain. This can be calculated using tools like [hardhat-gas-reporter](https://www.npmjs.com/package/hardhat-gas-reporter).
 
 **5.2) `destGasPrice` -** Gas price of the destination chain. This can be calculated using the RPC of destination chain.
@@ -96,13 +135,13 @@ function getRequestMetadata(
    });
    ```
 
-   If you don’t want to calculate it, just send **0** in its place and the Router chain will estimate the real time gas price for you.
+   To avoid the need for calculation, it can be passed as 0. The Router chain will then estimate the real-time gas price for them.
 
 **5.3) `ackGasLimit` -** Gas limit required for the execution of the acknowledgment on the source chain. This can be calculated using tools like [hardhat-gas-reporter](https://www.npmjs.com/package/hardhat-gas-reporter).
 
-**5.4) `ackGasPrice` -** Gas price of the source chain. This can be calculated using the RPC of source chain as shown in the above [snippet](#5-requestmetadata).
+**5.4) `ackGasPrice` -** Gas price of the source chain. This can be calculated using the RPC of source chain as shown in the above [snippet](#5-requestmetadata). To avoid the need for calculation, it can be passed as 0. The Router chain will then estimate the real-time gas price for them.
 
-**5.5) `relayerFees` -** This parameter functions similarly to the priority fees on other blockchain networks. Since the Router chain relayers handle the execution of cross-chain requests on the destination chain, setting a higher `relayerFees` will increase the likelihood of your request being prioritized by relayers. If a very low `relayerFees` is provided, the Router chain will automatically adjust it to the minimum required amount to ensure that it is executed. 
+**5.5) `relayerFees` -** This parameter functions similarly to the priority fees on other blockchain networks. Since the Router chain relayers handle the execution of cross-chain requests on the destination chain, setting a higher `relayerFees` will increase the likelihood of your request being prioritized by relayers. If a very low `relayerFees` is provided, the Router chain will automatically adjust it to the minimum required amount to ensure that it is executed. If it is passed as 0, the Router chain will default it to the minimum set Relayer fee value.
 
 **5.6) `ackType` -** When the contract calls have been executed on the destination chain, the destination chain Gateway contract sends an acknowledgent back to the Router chain. iDapps have the option to get this acknowledgment from the Router chain to the source chain and execute some operations based on the ack.
    - If `ackType` = 0, the user doesn't want the acknowledgment to be forwarded back to the source chain.

@@ -23,6 +23,8 @@ import {
   Transaction,
   OsmosisCore,
   Contribute,
+  Network,
+  Omnichain,
 } from '../icons';
 import GuidesSection from '../components/GuidesSection';
 
@@ -36,16 +38,45 @@ export default function Homepage() {
       <div className="pad">
         <div className="center homepage-content">
           <div className='margin-bottom--lg'>
+            <div class="theme-admonition theme-admonition-info alert alert--info admonition_node_modules-@docusaurus-theme-classic-lib-theme-Admonition-styles-module">
+              <div class="admonitionHeading_node_modules-@docusaurus-theme-classic-lib-theme-Admonition-styles-module">
+                <span class="admonitionIcon_node_modules-@docusaurus-theme-classic-lib-theme-Admonition-styles-module"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_node_modules-@docusaurus-theme-classic-lib-theme-Admonition-styles-module">
+                  <p>The documentation provided below pertains to Router V2. If you require documentation for V1, please refer to the <b><a href="https://v1.dev.routerprotocol.com/">following link</a></b>.</p>
+              </div></div>
             <h2>Router Docs</h2>
             <p>
               The Router blockchain is a decentralized network built using the Cosmos SDK. Explore our docs and examples to quickly learn, develop & integrate with the Router blockchain.
             </p>
-            <DyteButton onClick={() => router.push('/router-core/')}>
+            <DyteButton onClick={() => router.push('/develop/')}>
               Get Started &rarr;
             </DyteButton>
           </div>
 
-
+          <Section title="Build your first iDapp"
+            description={
+              <>
+                Build your first iDapp using Router's crosstalk in 5 simple steps.
+              </>
+            }
+          >
+            <Card
+              title="iDapp using Stateless bridging"
+              description="Build your first iDapp in 5 steps using Router crosstalk's stateless bridging."
+              to="/develop/message-transfer-via-crosstalk/evm-guides/your-first-crosschain-nft-contract"
+              icon={<Network />}
+            />
+            <Card
+              title="iDapp using Stateful bridging"
+              description="Build your first Omnichain iDapp in 5 steps using Router crosstalk's stateful bridging."
+              to="/develop/message-transfer-via-crosstalk/stateful-bridging/your-first-omnichain-dapp"
+              icon={<Omnichain />}
+            />
+            {/* <Card
+              title="Router as an Interoperability Layer"
+              description="In addition to its functionalities as a blockchain network, the Router chain will serve as an interoperability framework."
+              to="/overview#router-chain-as-an-interoperability-layer"
+            /> */}
+          </Section>
 
           <Section title="Learn about Router">
             <Card
@@ -71,6 +102,56 @@ export default function Homepage() {
           </Section>
 
           <Section title="Developers" id="web-sdks" hasSubSections>
+            
+          <Section title="🛠 Build iDapps using Router" HeadingTag="h4">
+          <Card
+              title="Message Transfer"
+              description="Learn about the instruction transfer framework Crosstalk and convert your existing single/multi-chain applications to cross-chain applications."
+              to="/develop/message-transfer-via-crosstalk"
+              icon={<RelayerIcon />}
+            />
+            <Card
+              title="Asset Transfer"
+              description="Learn about asset transfer bridge Voyager and how to build other asset-transfer applications or sequenced cross-chain requests (asset + instruction)"
+              to="/develop/voyager"
+              icon={<AssetIcon />}
+            />
+
+          </Section>
+          
+          <Section title="🛠 Tools" HeadingTag="h4">
+            <Card
+              title="Router Scan"
+              description="A feature-rich block explorer for monitoring transactions on the Router chain."
+              to="/tooling/infra/router-scan"
+              icon={<ModulesIcon />}
+            />
+            <Card
+              title="Router Robot"
+              description="A cross-chain integration testing framework"
+              to="/tooling/infra/router-robot"
+              icon={<Osmojs />}
+            />
+            <Card
+              title="Router Station"
+              description="A web application that makes it easier to interact with the Router chain."
+              to="/tooling/infra/router-station"
+              icon={<Createapp />}
+            />       
+            <Card
+              title="Router Faucet"
+              description="Get funds to interact with the Router chain."
+              to="https://faucet.testnet.routerchain.dev/"
+              icon={<AssetIcon />}
+            />                 
+            <Card
+              title="Relayer"
+              description="Run a custom relayer to forward messages from Router to other chains."
+              to="/tooling/relayers"
+              icon={<RelayerIcon />}
+            />
+          </Section>
+
             <Section
               title="⚙️ Chain Development"
               id="core-sdks"
@@ -195,40 +276,6 @@ export default function Homepage() {
   />   
  
   </Section> */}
-
-
-          <Section title="🛠 Tools" HeadingTag="h4">
-            <Card
-              title="Router Scan"
-              description="A feature-rich block explorer for monitoring transactions on the Router chain."
-              to="/infra/router-scan"
-              icon={<ModulesIcon />}
-            />
-            <Card
-              title="Router Robot"
-              description="A cross-chain integration testing framework"
-              to="/infra/router-robot"
-              icon={<Osmojs />}
-            />
-            <Card
-              title="Router Station"
-              description="A web application that makes it easier to interact with the Router chain."
-              to="/infra/router-station"
-              icon={<Createapp />}
-            />       
-            <Card
-              title="Router Faucet"
-              description="Get funds to interact with the Router chain."
-              to="https://devnet-faucet.routerprotocol.com/"
-              icon={<AssetIcon />}
-            />                 
-            <Card
-              title="Relayer"
-              description="Run a custom relayer to forward messages from Router to other chains."
-              to="/infra/relayer"
-              icon={<RelayerIcon />}
-            />
-          </Section>
 
           {/* <Section title="📜 API Reference" HeadingTag="h4">
             <Card

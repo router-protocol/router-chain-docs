@@ -25,6 +25,7 @@ import {
   Guide,
   EthereumIcon,
   NearIcon,
+  RouterIcon
 } from '../../src/icons';
 
 # Introduction
@@ -45,13 +46,13 @@ the best cross-chain framework for your dApp.
   <Card
     title="Overview"
     description="What is CrossTalk why is it required?"
-    to="develop/message-transfer-via-crosstalk/"
+    to="develop/message-transfer-via-crosstalk/overview"
     icon={<IDEIcon />}
   />
     <Card
     title="Understanding Message transfer"
     description="Dissecting different functions and parameters associated with CrossTalk"
-    to="develop/message-transfer-via-crosstalk"
+    to="develop/message-transfer-via-crosstalk/key-concepts"
     icon={<ChainIcon />}
   />
   <Card
@@ -95,13 +96,13 @@ the best cross-chain framework for your dApp.
   <Card
     title="Deploying a Cross-chain Ping Pong Contract"
     description="Learn how to deploy your first cross-chain dApp using Router's CrossTalk framework"
-    to="develop/message-transfer-via-crosstalk/sample-idapps/evm_guides/ping-pong-contract"
+    to="develop/message-transfer-via-crosstalk/sample-idapps/on-evm-chains/ping-pong"
     icon={<Guide />}
   />
   <Card
     title="Deploying a Cross-chain NFT (ERC-1155)"
     description="Learn how to deploy a cross-chain NFT using Router's CrossTalk framework"
-    to="develop/message-transfer-via-crosstalk/sample-idapps/evm_guides/cross-chain-nft"
+    to="develop/message-transfer-via-crosstalk/sample-idapps/on-evm-chains/cross-chain-nft"
     icon={<Guide />}
   />
 </Section>
@@ -122,6 +123,12 @@ the best cross-chain framework for your dApp.
   description="Understanding the crosstalk functions for Near chain"
   to="develop/message-transfer-via-crosstalk/near-guides/iDapp-functions"
   icon={<NearIcon />}
+  />
+  <Card
+  title="Router Chain Guide"
+  description="Understanding the crosstalk functions for Router chain"
+  to="develop/message-transfer-via-crosstalk/router-chain-guides/iDapp-functions"
+  icon={<RouterIcon />}
   />
   </Section>
   </Section>

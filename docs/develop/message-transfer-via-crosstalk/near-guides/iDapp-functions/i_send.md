@@ -17,9 +17,6 @@ pub fn i_send(
 ```
 
 
-
-
-
 This function allows users to configure various aspects of cross-chain message passing based on their requirements. Some of the parameters that can be configured while calling this function include:
 
 ### 1) `version`
@@ -84,15 +81,53 @@ fn get_request_metadata(
 }
 ```
 
+Alternatively, the `request_metadata` parameter can be created in TypeScript or JavaScript using the following function:
+
+```javascript
+function getRequestMetadata(
+  destGasLimit: number,
+  destGasPrice: number,
+  ackGasLimit: number,
+  ackGasPrice: number,
+  relayerFees: string,
+  ackType: number,
+  isReadCall: boolean,
+  asmAddress: string
+): string {
+  return ethers.utils.solidityPack(
+    [
+      'uint64',
+      'uint64',
+      'uint64',
+      'uint64',
+      'uint128',
+      'uint8',
+      'bool',
+      'string',
+    ],
+    [
+      destGasLimit,
+      destGasPrice,
+      ackGasLimit,
+      ackGasPrice,
+      relayerFees,
+      ackType,
+      isReadCall,
+      asmAddress,
+    ]
+  );
+}
+```
+
 **3.1) `dest_gas_limit` -** Gas limit required for execution of the request on the destination chain.
 
 **3.2) `dest_gas_price` -** Gas price of the destination chain. This can be calculated using the RPC of destination chain. If you don’t want to calculate it, just send **0** in its place and the Router chain will estimate the real time gas price for you.
 
 **3.3) `ack_gas_limit` -** Gas limit required for the execution of the acknowledgment on the source chain. This can be calculated using tools like [hardhat-gas-reporter](https://www.npmjs.com/package/hardhat-gas-reporter).
 
-**3.4) `ack_gas_price` -** Gas price of the source chain. This can be calculated using the RPC of source chain.
+**3.4) `ack_gas_price` -** Gas price of the source chain. This can be calculated using the RPC of source chain. To avoid the need for calculation, it can be passed as 0. The Router chain will then estimate the real-time gas price for them.
 
-**3.5) `relayer_fees` -** This parameter functions similarly to the priority fees on other blockchain networks. Since the Router chain relayers handle the execution of cross-chain requests on the destination chain, setting a higher `relayer_fees` will increase the likelihood of your request being prioritized by relayers. If a very low `relayer_fees` is provided, the Router chain will automatically adjust it to the minimum required amount to ensure that it is executed. 
+**3.5) `relayer_fees` -** This parameter functions similarly to the priority fees on other blockchain networks. Since the Router chain relayers handle the execution of cross-chain requests on the destination chain, setting a higher `relayer_fees` will increase the likelihood of your request being prioritized by relayers. If a very low `relayer_fees` is provided, the Router chain will automatically adjust it to the minimum required amount to ensure that it is executed. If it is passed as 0, the Router chain will default it to the minimum set Relayer fee value.
 
 **3.6) `ack_type` -** When the contract calls have been executed on the destination chain, the destination chain Gateway contract sends an acknowledgent back to the Router chain. iDapps have the option to get this acknowledgment from the Router chain to the source chain and execute some operations based on the ack.
    - If `ack_type` = 0, the user doesn't want the acknowledgment to be forwarded back to the source chain.
