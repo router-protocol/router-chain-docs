@@ -62,7 +62,7 @@ export default function Homepage() {
             <Card
               title="iDapp using Stateless bridging"
               description="Build your first iDapp in 5 steps using Router crosstalk's stateless bridging."
-              to="/develop/message-transfer-via-crosstalk/evm-guides/your-first-crosschain-nft-contract/deploying-your-nft-contract"
+              to="/develop/message-transfer-via-crosstalk/evm-guides/your-first-crosschain-nft-contract"
               icon={<Network />}
             />
             <Card
