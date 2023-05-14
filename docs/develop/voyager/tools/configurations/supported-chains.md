@@ -7,10 +7,10 @@ sidebar_position: 1
 
 ## Testnet
 
-| Chain Name | Chain ID | Chain Type |
-| -------- | -------- | -------- |
-| Fuji | 43113 | 0 |
-| Mumbai | 80001 | 0 | 
+| Chain Name | Chain ID |
+| ---------- | -------- |
+| Fuji       | 43113    |
+| Mumbai     | 80001    |
 
 ## Mainnet
 
