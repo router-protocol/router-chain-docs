@@ -17,9 +17,6 @@ pub fn i_send(
 ```
 
 
-
-
-
 This function allows users to configure various aspects of cross-chain message passing based on their requirements. Some of the parameters that can be configured while calling this function include:
 
 ### 1) `version`
