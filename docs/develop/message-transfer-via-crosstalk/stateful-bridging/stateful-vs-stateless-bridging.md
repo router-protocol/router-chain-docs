@@ -1,6 +1,6 @@
 ---
 title: Stateful vs Stateless Bridging
-sidebar_position: 1
+sidebar_position: 2
 description: Difference between stateful and stateless bridging
 ---
 
