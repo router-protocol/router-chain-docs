@@ -21,7 +21,7 @@ import {
   Tscodegen,
   KeysIcon,
   Transaction,
-  OsmosisCore,
+  VoyagerIcon,
   Contribute,
   Network,
   Omnichain,
@@ -99,6 +99,61 @@ export default function Homepage() {
               description="The ROUTE token is a digital asset that will serve as the primary gas and governance token on the Router chain."
               to="/overview/route"
             />
+          </Section>
+
+          <Section title="Important Links" id="web-sdks" hasSubSections>
+            <Section title="🛠 iDapps" HeadingTag="h4">
+            <Card
+              title="Ping Pong"
+              description="A iDapp using which you can transfer message from one chain to another."
+              to="https://ping-pong.testnet.routerchain.dev/"
+              icon={<Network />}
+            />
+            <Card
+              title="Voyager"
+              description="An asset transfer dApp built using Router's omnichain framework providing seamless cross-chain swaps."
+              to="https://voyager.testnet.routerchain.dev/"
+              icon={<VoyagerIcon />}
+            />
+              <Card
+              title="Texchange"
+              description="An iDapp to exchange testnet tokens."
+              to="https://faucet.testnet.routerchain.dev/"
+              icon={<TerminalIcon />}
+            />
+            </Section>
+            <Section title="🛠 Tools" HeadingTag="h4">
+            <Card
+              title="Router Explorer"
+              description="A block explorer to monitor cross-chain transactions."
+              to="https://explorer.testnet.routerchain.dev/"
+              icon={<IDEIcon />}
+            />
+            <Card
+              title="Router Station"
+              description="A tool to manage contract lifecycle-related processes on the Router chain."
+              to="https://station.testnet.routerchain.dev/"
+              icon={<Transaction />}
+            />
+            <Card
+              title="Router Faucet"
+              description="A tool to get testnet tokens for performing tasks on Testnet."
+              to="https://faucet.testnet.routerchain.dev/"
+              icon={<AssetIcon />}
+            />
+            <Card
+              title="Router Hub"
+              description="An tool for delegating ROUTE tokens to validators."
+              to="https://hub.testnet.routerchain.dev/"
+              icon={<Contribute />}
+            /> 
+            <Card
+              title="Router Sandbox"
+              description="An easy-to-use prototyping environment for interoperable dApps built using Router."
+              to="https://sandbox.testnet.routerchain.dev/"
+              icon={<TerminalIcon />}
+            />
+            </Section>
           </Section>
 
           <Section title="Developers" id="web-sdks" hasSubSections>

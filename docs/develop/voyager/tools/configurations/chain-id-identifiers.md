@@ -5,11 +5,11 @@ sidebar_position: 4
 
 # Chain ID Identifiers(Bytes)
 
-| Chain  | Chain ID | Chain ID Identifier |
-| -------- | -------- | ---------- |
-| Polygon Mumbai | 80001 | `0x633c4789a3d1de2b8df790c87d38b7a9e094322d3e60812bce36adc281e8f191` |
-| Avalanche Fuji | 43113 | `0x7792205754b317caa15b7b30c5992074c756f3186cd8f38cf256f66e0ea47121` |
-| Goerli | 5 | `0xd70e7398dd25f5d5ab1cb1285e6cf101f72b0effd54b9e436cb1655dbc260678` |
+| Chain          | Chain ID | Chain ID Identifier                                                  |
+| -------------- | -------- | -------------------------------------------------------------------- |
+| Polygon Mumbai | 80001    | `0x7b99390f1c6d918668693a36b96f7ae248a34f6c2c3f20f8c87e04efb118a3a5` |
+| Avalanche Fuji | 43113    | `0xbeaa89a1abe3c361e015597858f91679d1af03bb442d2ee7cf0b07807c898339` |
+| Goerli         | 5        | `0x91cfcc4a139573b08646960be31b278152ef3480710ab15d9b39262be37038a1` |
 
 :::note
 Currently, only EVM is supported.
