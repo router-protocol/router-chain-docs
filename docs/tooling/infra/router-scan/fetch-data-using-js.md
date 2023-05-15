@@ -3,7 +3,7 @@ title: Fetch data using JS
 sidebar_position: 2
 ---
 
-For all the mentioned query examples in the previous section, you can also fetch the data using JS. Below is a code snippet on how data can be fetched using JS.
+To fetch the data using JavaScript for all the query examples mentioned in the previous section, the following code snippet demonstrates how it can be achieved.
 
 ```jsx
 const response = await axios.post(
@@ -20,10 +20,10 @@ const response = await axios.post(
     );
 ```
 
-Let’s assume you want to get the data for latest blocks. Here’s how you can define the variables.
+Suppose there is a need to obtain data for the latest blocks. Here is how one can define the variables.
 
 ```jsx
-var API_URL = 'https://devnet-explorer-api.routerprotocol.com/gql/query';
+var API_URL = 'https://explorer-api.testnet.routerchain.dev/gql/query';
 
 var queryTag = `query getLatestBlocks($limit: Int!, $offset: Int!) {
     paginatedBlock(sortBy:{_id:desc},limit:$limit,offset:$offset){
@@ -57,13 +57,13 @@ var options = {
 }
 ```
 
-The queryTag parameter is nothing but the query which was shared in the examples for querying data on GQL UI. So you can reuse the same queries to create your JS code.
+The queryTag parameter corresponds to the query shared in the examples for querying data on the GQL UI. Therefore, the same queries can be reused to create JavaScript code.
 
-To read the response you can use the below code snippet.
+To read the response, one can utilize the below code snippet.
 
 ```jsx
 console.log(response.data.data.paginatedBlock.totalRecords);
 console.log(response.data.data.paginatedBlock.blocks[0].hash);
 ```
 
-In this way, you can read the data from our explorer using JS as well.
+This approach allows for data retrieval from our explorer using JavaScript as well.
