@@ -5,6 +5,7 @@ import { DyteButton } from '@dytesdk/react-ui-kit';
 
 import {
   HomepageCard as Card,
+  DocVersion,
   HomepageSection as Section,
 } from '../components/HomepageComponents';
 import {
@@ -38,11 +39,7 @@ export default function Homepage() {
       <div className="pad">
         <div className="center homepage-content">
           <div className='margin-bottom--lg'>
-            <div class="theme-admonition theme-admonition-info alert alert--info admonition_node_modules-@docusaurus-theme-classic-lib-theme-Admonition-styles-module">
-              <div class="admonitionHeading_node_modules-@docusaurus-theme-classic-lib-theme-Admonition-styles-module">
-                <span class="admonitionIcon_node_modules-@docusaurus-theme-classic-lib-theme-Admonition-styles-module"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_node_modules-@docusaurus-theme-classic-lib-theme-Admonition-styles-module">
-                  <p>The documentation provided below pertains to Router V2. If you require documentation for V1, please refer to the <b><a href="https://v1.dev.routerprotocol.com/">following link</a></b>.</p>
-              </div></div>
+            <DocVersion />
             <h2>Router Docs</h2>
             <p>
               The Router blockchain is a decentralized network built using the Cosmos SDK. Explore our docs and examples to quickly learn, develop & integrate with the Router blockchain.
@@ -103,109 +100,109 @@ export default function Homepage() {
 
           <Section title="Important Links" id="web-sdks" hasSubSections>
             <Section title="🛠 iDapps" HeadingTag="h4">
-            <Card
-              title="Ping Pong"
-              description="A iDapp using which you can transfer message from one chain to another."
-              to="https://ping-pong.testnet.routerchain.dev/"
-              icon={<Network />}
-            />
-            <Card
-              title="Voyager"
-              description="An asset transfer dApp built using Router's omnichain framework providing seamless cross-chain swaps."
-              to="https://voyager.testnet.routerchain.dev/"
-              icon={<VoyagerIcon />}
-            />
               <Card
-              title="Texchange"
-              description="An iDapp to exchange testnet tokens."
-              to="https://faucet.testnet.routerchain.dev/"
-              icon={<TerminalIcon />}
-            />
+                title="Ping Pong"
+                description="A iDapp using which you can transfer message from one chain to another."
+                to="https://ping-pong.testnet.routerchain.dev/"
+                icon={<Network />}
+              />
+              <Card
+                title="Voyager"
+                description="An asset transfer dApp built using Router's omnichain framework providing seamless cross-chain swaps."
+                to="https://voyager.testnet.routerchain.dev/"
+                icon={<VoyagerIcon />}
+              />
+              <Card
+                title="Texchange"
+                description="An iDapp to exchange testnet tokens."
+                to="https://faucet.testnet.routerchain.dev/"
+                icon={<TerminalIcon />}
+              />
             </Section>
             <Section title="🛠 Tools" HeadingTag="h4">
-            <Card
-              title="Router Explorer"
-              description="A block explorer to monitor cross-chain transactions."
-              to="https://explorer.testnet.routerchain.dev/"
-              icon={<IDEIcon />}
-            />
-            <Card
-              title="Router Station"
-              description="A tool to manage contract lifecycle-related processes on the Router chain."
-              to="https://station.testnet.routerchain.dev/"
-              icon={<Transaction />}
-            />
-            <Card
-              title="Router Faucet"
-              description="A tool to get testnet tokens for performing tasks on Testnet."
-              to="https://faucet.testnet.routerchain.dev/"
-              icon={<AssetIcon />}
-            />
-            <Card
-              title="Router Hub"
-              description="An tool for delegating ROUTE tokens to validators."
-              to="https://hub.testnet.routerchain.dev/"
-              icon={<Contribute />}
-            /> 
-            <Card
-              title="Router Sandbox"
-              description="An easy-to-use prototyping environment for interoperable dApps built using Router."
-              to="https://sandbox.testnet.routerchain.dev/"
-              icon={<TerminalIcon />}
-            />
+              <Card
+                title="Router Explorer"
+                description="A block explorer to monitor cross-chain transactions."
+                to="https://explorer.testnet.routerchain.dev/"
+                icon={<IDEIcon />}
+              />
+              <Card
+                title="Router Station"
+                description="A tool to manage contract lifecycle-related processes on the Router chain."
+                to="https://station.testnet.routerchain.dev/"
+                icon={<Transaction />}
+              />
+              <Card
+                title="Router Faucet"
+                description="A tool to get testnet tokens for performing tasks on Testnet."
+                to="https://faucet.testnet.routerchain.dev/"
+                icon={<AssetIcon />}
+              />
+              <Card
+                title="Router Hub"
+                description="An tool for delegating ROUTE tokens to validators."
+                to="https://hub.testnet.routerchain.dev/"
+                icon={<Contribute />}
+              />
+              <Card
+                title="Router Sandbox"
+                description="An easy-to-use prototyping environment for interoperable dApps built using Router."
+                to="https://sandbox.testnet.routerchain.dev/"
+                icon={<TerminalIcon />}
+              />
             </Section>
           </Section>
 
           <Section title="Developers" id="web-sdks" hasSubSections>
-            
-          <Section title="🛠 Build iDapps using Router" HeadingTag="h4">
-          <Card
-              title="Message Transfer"
-              description="Learn about the instruction transfer framework Crosstalk and convert your existing single/multi-chain applications to cross-chain applications."
-              to="/develop/message-transfer-via-crosstalk"
-              icon={<RelayerIcon />}
-            />
-            <Card
-              title="Asset Transfer"
-              description="Learn about asset transfer bridge Voyager and how to build other asset-transfer applications or sequenced cross-chain requests (asset + instruction)"
-              to="/develop/voyager"
-              icon={<AssetIcon />}
-            />
 
-          </Section>
-          
-          <Section title="🛠 Tools" HeadingTag="h4">
-            <Card
-              title="Router Scan"
-              description="A feature-rich block explorer for monitoring transactions on the Router chain."
-              to="/tooling/infra/router-scan"
-              icon={<ModulesIcon />}
-            />
-            <Card
-              title="Router Robot"
-              description="A cross-chain integration testing framework"
-              to="/tooling/infra/router-robot"
-              icon={<Osmojs />}
-            />
-            <Card
-              title="Router Station"
-              description="A web application that makes it easier to interact with the Router chain."
-              to="/tooling/infra/router-station"
-              icon={<Createapp />}
-            />       
-            <Card
-              title="Router Faucet"
-              description="Get funds to interact with the Router chain."
-              to="https://faucet.testnet.routerchain.dev/"
-              icon={<AssetIcon />}
-            />                 
-            <Card
-              title="Relayer"
-              description="Run a custom relayer to forward messages from Router to other chains."
-              to="/tooling/relayers"
-              icon={<RelayerIcon />}
-            />
-          </Section>
+            <Section title="🛠 Build iDapps using Router" HeadingTag="h4">
+              <Card
+                title="Message Transfer"
+                description="Learn about the instruction transfer framework Crosstalk and convert your existing single/multi-chain applications to cross-chain applications."
+                to="/develop/message-transfer-via-crosstalk"
+                icon={<RelayerIcon />}
+              />
+              <Card
+                title="Asset Transfer"
+                description="Learn about asset transfer bridge Voyager and how to build other asset-transfer applications or sequenced cross-chain requests (asset + instruction)"
+                to="/develop/voyager"
+                icon={<AssetIcon />}
+              />
+
+            </Section>
+
+            <Section title="🛠 Tools" HeadingTag="h4">
+              <Card
+                title="Router Scan"
+                description="A feature-rich block explorer for monitoring transactions on the Router chain."
+                to="/tooling/infra/router-scan"
+                icon={<ModulesIcon />}
+              />
+              <Card
+                title="Router Robot"
+                description="A cross-chain integration testing framework"
+                to="/tooling/infra/router-robot"
+                icon={<Osmojs />}
+              />
+              <Card
+                title="Router Station"
+                description="A web application that makes it easier to interact with the Router chain."
+                to="/tooling/infra/router-station"
+                icon={<Createapp />}
+              />
+              <Card
+                title="Router Faucet"
+                description="Get funds to interact with the Router chain."
+                to="https://faucet.testnet.routerchain.dev/"
+                icon={<AssetIcon />}
+              />
+              <Card
+                title="Relayer"
+                description="Run a custom relayer to forward messages from Router to other chains."
+                to="/tooling/relayers"
+                icon={<RelayerIcon />}
+              />
+            </Section>
 
             <Section
               title="⚙️ Chain Development"
