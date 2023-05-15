@@ -3,15 +3,15 @@ title: Step 2) Setup a Validator Account
 sidebar_position: 2
 ---
 
-Before creating a validator account, make sure you run a sentry node as specified in this [guide](./run-a-sentry-node).
+Before creating a validator account, make sure you are running a Sentry node with the chain synced to the latest block as specified in this [step](./run-a-sentry-node). 
 
 <details>
 <summary><b>Step 2.1) Create a validator account</b></summary>
 
-To setup a validator account, validators need to first run the following command with their desired validator key name.
+To setup a validator account, run the following command with your desired validator key name.
 
 ```bash
-routerd keys add my-validator-key--chain-id router_9000-1 --keyring-backend file
+routerd keys add my-validator-key --chain-id router_9601-1 --keyring-backend file
 ```
 
 The aforementioned command will create a new wallet with name `my-validator-key` and will ask you to set a password. 
@@ -47,13 +47,12 @@ Remember the address starting from `router`, this is the address of your Router
 <details>
 <summary><b>Step 2.2) Obtain ROUTE tokens</b></summary>
 
-In order to proceed with the next step, validators will have to obtain ROUTE on the Router Chain.
-
-Funds can be requested from the [testnet faucet](https://faucet.testnet.routerchain.dev/).
+Obtain ROUTE tokens on the Router chain from the [testnet faucet](https://faucet.testnet.routerchain.dev/).
 
 After a few minutes, you can verify the deposit on the [explorer UI](https://explorer.testnet.routerprotocol.com). Alternatively, account balance can be queried using the `routerd` CLI with the following command:
+
 ```bash
-routerd query bank balances $(routerd keys show my-validator-key -a --keyring-backend file) --chain-id router_9000-1 --keyring-backend file
+routerd query bank balances $(routerd keys show my-validator-key -a --keyring-backend file) --chain-id router_9601-1 --keyring-backend file
 ```
 
 </details>
@@ -65,24 +64,25 @@ Now, initialize a new validator with a self-delegation of ROUTE tokens. Most cri
 
 ```bash
 routerd tx staking create-validator \
-  --amount=1000000route \
+  --amount=100000000000000000000route \
   --pubkey=$(routerd tendermint show-validator) \
   --moniker=val-node1 \
-  --chain-id=router_9000-1 \
+  --chain-id=router_9601-1 \
   --commission-rate="0.10" \
   --commission-max-rate="0.20" \
   --commission-max-change-rate="0.01" \
   --min-self-delegation="1000000" \
   --gas="auto" \
   --fees="100000000000000route" \
-  --from=val-node1 \
-  --gas-adjustment=1.5 
+  --from=my-validator-key \
+  --gas-adjustment=1.5 \
+  --keyring-backend=file
 ```
 
 - `amount` flag is the initial amount of ROUTE you're willing to bond
 - `pubkey` is the validator public key created earlier
 - `moniker` is the human readable name you choose for your validator
-- `chain-id` is the network id of the chain you are working with (in the case of Router testnet: `router_9000-1`)
+- `chain-id` is the network id of the chain you are working with (in the case of Router testnet: `router_9601-1`)
 - `commission-rate` is the initial commission rate you will charge your delegates 
 - `commission-max-rate` is the highest rate you are allowed to charge your delegates
 - `commission-max-change-rate` is how much you can increase your commission rate in a 24 hour period
@@ -92,7 +92,7 @@ routerd tx staking create-validator \
 Verify that the validator was successfully setup by checking the [staking dashboard](https://hub.testnet.routerchain.dev/staking) or by entering the CLI command given below.
 
 ```bash
-routerd query staking validator $(routerd keys show my-validator-key -a --keyring-backend file) --chain-id router_9000-1 --keyring-backend file
+routerd query staking validator $(routerd keys show my-validator-key -a --keyring-backend file) --chain-id router_9601-1 --keyring-backend file
 ```
 
 If you see your validator in the list of validators, then congratulations, you have officially joined the Router testnet as a staking validator! 🎉

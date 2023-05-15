@@ -1,7 +1,7 @@
 ---
 title: Fee Management
 sidebar_position: 2
-description: Gas and fee payer consideration for CrossTalk
+description: Gas and fee payer considerations for CrossTalk
 ---
 
 ## 1. Fee Payer

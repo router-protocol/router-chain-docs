@@ -22,8 +22,8 @@ Before running the RouterChain node, it is very important to initialize the chai
 ```bash
 # the argument <moniker> is the custom username of your node, it should be human-readable.
 export MONIKER=<moniker>
-# the Router devnet has a chain-id of "router_9000-1"
-routerd init $MONIKER --chain-id router_9000-1
+# the Router devnet has a chain-id of "router_9603-1"
+routerd init $MONIKER --chain-id router_9603-1
 ```
 
 Running the aforementioned commands will create `routerd` default configuration files at `~/.routerd`.

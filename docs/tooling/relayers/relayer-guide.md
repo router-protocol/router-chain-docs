@@ -89,7 +89,7 @@ In the `root` folder, a sample config file `config.example.json` has been provid
 * watcherTimer: Watcher is a service for monitoring Transaction Queue DB. watcherTimer determines the polling interval for service in seconds.
 * pollingTimer: Polling Timer is for listening interval for transaction from Router chain
 * reset: Reset is for resetting Transaction Queue DB, if `true` it will reset, if `false` in will not reset.
-* routerchainEnv:  routerchainEnv is router chain instance to connect with, it connects with network's gRPC and chainID; accepted values - `devnet` or `alpha-devnet` or `local-docker`
+* routerchainEnv:  routerchainEnv is router chain instance to connect with, it connects with network's gRPC and chainID; accepted values - `testnet` or `devnet` or `local-docker`
 
 #### Understanding chain config
 ```jsx

@@ -3,7 +3,7 @@ title: Step 2) Setup a Validator Account
 sidebar_position: 2
 ---
 
-Before creating a validator account, make sure you run a sentry node as specified in this [guide](./run-a-sentry-node).
+Before creating a validator account, make sure you run a Sentry node as specified in this [guide](./run-a-sentry-node).
 
 <details>
 <summary><b>Step 2.1) Create a validator account</b></summary>

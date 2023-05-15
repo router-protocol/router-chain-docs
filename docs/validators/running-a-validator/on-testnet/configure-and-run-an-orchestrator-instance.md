@@ -10,7 +10,7 @@ If you have followed the preceeding steps properly, you should already see an or
 <summary><b>Step 3.1) Create a new wallet for the orchestrator</b></summary>
 
 ```bash
-routerd keys add my-orchestrator-key --chain-id router_9000-1 --keyring-backend file
+routerd keys add my-orchestrator-key --chain-id router_9601-1 --keyring-backend file
 ```
 
 The aforementioned command will create a new wallet with name `my-orchestrator-key` and will ask you to set a password. 
@@ -49,12 +49,12 @@ Remember the address starting from `router`, this is the address of your Router
 Now, add funds to your orchestrator wallet as it will be used to pay for the gas fees:
 
 ```bash
-routerd tx bank send <validator-node-key-name> $(routerd keys show my-orchestrator-key -a --keyring-backend file) 1000000000000000000route --from val-node1 --chain-id router_9000-1 --fees 1000000000000000route --keyring-backend  file
+routerd tx bank send <validator-node-key-name> $(routerd keys show my-orchestrator-key -a --keyring-backend file) 1000000000000000000route --from my-validator-key --chain-id router_9601-1 --fees 1000000000000000route --keyring-backend  file
 ```
 
 After a few minutes, you can verify the deposit by querying the account balance using the following command:
 ```bash
-routerd query bank balances $(routerd keys show my-orchestrator-key -a --keyring-backend file) --chain-id router_9000-1 --keyring-backend file
+routerd query bank balances $(routerd keys show my-orchestrator-key -a --keyring-backend file) --chain-id router_9601-1 --keyring-backend file
 ```
 
 </details>
@@ -81,7 +81,8 @@ Add the relevant keys in `.router-orchestrator/config.json`:
         "dbPath": "processedblock.db",
         "ethPrivateKey": "<ETH_PRIVATE_KEY>",
         "cosmosPrivateKey": "<COSMOS_PRIVATE_KEY>",
-        "batchSize": 100
+        "batchSize": 100,
+        "batchWaitTime": 20
     }
 }
 ```
@@ -103,12 +104,41 @@ Add the relevant keys in `.router-orchestrator/config.json`:
     - `NETWORK_TYPE` - the network type, possible values are:
         `devnet`,
         `testnet`
-    - `ETH_PRIVATE_KEY` - the private key of the wallet you created for the validator
+    - `ETH_PRIVATE_KEY` - the private key of the wallet you created for the validator on EVM chains (not necessary to have have funds in this wallet, it will be used just for signing)
     - `COSMOS_PRIVATE_KEY` - the private key of the wallet you created for the validator
 
-
-
-After executing the aforementioned command, your orchestrator instance will start running. 
+Sample `.router-orchestrator/config.json`:
+```json
+{
+    "chains": [
+        {
+            "chainId": "80001",
+            "chainType": " CHAIN_TYPE_EVM",
+            "chainName": "Mumbai",
+            "chainRpc": "<RPC_URL>",
+            "blocksToSearch": 1000,
+            "blockTime": "10s"
+        },
+        {
+            "chainId": "43113",
+            "chainType": " CHAIN_TYPE_EVM",
+            "chainName": "Fuji",
+            "chainRpc": "<RPC_URL>",
+            "blocksToSearch": 1000,
+            "blockTime": "10s"
+        }
+    ],
+    "globalConfig": {
+        "mQEndpoint": "amqp://guest:guest@localhost",
+        "networkType": "testnet",
+        "dbPath": "processedblock.db",
+        "ethPrivateKey": "<PRIVATE_KEY>",
+        "cosmosPrivateKey": "<PRIVATE_KEY>",
+        "batchSize": 100,
+        "batchWaitTime": 20
+    }
+}
+```
 
 </details>
 
@@ -119,21 +149,18 @@ After executing the aforementioned command, your orchestrator instance will star
 Every orchestrator needs to be mapped with a validator. This is done by sending a transaction on the chain to map an orchestrator with a validator.
 
 ```bash
-routerd tx attestation set-orchestrator-address $(routerd keys show my-orchestrator-key -a --keyring-backend file) <EVM-KEY-FOR-SIGNING-TXNS> --from val-node1 --chain-id router_9000-1 --fees 1000000000000000route
+routerd tx attestation set-orchestrator-address $(routerd keys show my-orchestrator-key -a --keyring-backend file) <EVM-ADDRESS-FOR-SIGNING-TXNS> --from my-validator-key --chain-id router_9601-1 --fees 1000000000000000route
 ```
 
-`EVM-KEY-FOR-SIGNING-TXNS` should be a new private key for signing transactions on EVM chains. This key should be different from the key you created for the orchestrator.
-
-:::info
-Ensure that the address corresponding to this private key has balance for all the configured EVM chains.
-:::
+`EVM-KEY-FOR-SIGNING-TXNS` is the public address corresponding to the `ETH_PRIVATE_KEY` used in the orchestrator config in the previous step.
 
 </details>
 
 <details>
-<summary><b>Step 3.5) Start the orchestrator</b></summary>
+<summary><b>Step 3.5) Start the orchestrator and validator</b></summary>
 
 ```bash
+sudo systemctl daemon-reload
 sudo systemctl restart cosmovisor.service
 sudo systemctl restart router-orchestrator.service
 ```
