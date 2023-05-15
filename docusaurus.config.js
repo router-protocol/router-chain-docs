@@ -228,7 +228,7 @@ const config = {
             items: [
               {
                 label: 'v1.0',
-                href: 'https://v1.dev.routerprotocol.com',
+                href: 'https://v1.docs.routerprotocol.com',
               }
             ],
           },

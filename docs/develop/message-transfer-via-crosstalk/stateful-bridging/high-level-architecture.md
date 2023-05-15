@@ -1,6 +1,6 @@
 ---
 title: High Level Architecture
-sidebar_position: 2
+sidebar_position: 4
 description: Understanding the stateful bridging architecture 
 ---
 
