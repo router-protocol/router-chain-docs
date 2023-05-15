@@ -19,28 +19,24 @@ class RouterExplorer{
       this.applicationAddress = applicationAddress;
   }
 	
-	public async getLatestTransactions(limit:number, offset:number){
-	// Fetch latest txn related to the contract related to the application contract
+	public async getLatestTransactions(timeRange: number[], limit:number, offset:number){
+	// Fetch latest txns
 	}
 
 	public async getTransactionByHash(transactionHash:string){
 	//Fetch a particular txn with txn hash
 	}
+	
+	public async getLatestCrosschains(timeRange: number[], limit:number, offset:number){
+	//Fetch latest cross-chain txns
+	}
+	
+	public async getCrosschainBySearch(searchTerm: String, srcChainIds: string[], dstChainIds: string[], timeRange: number[], limit: Number, offset: Number){
+	// Fetch list of cross-chain txns filtered based on multiple params, only searchTerm is mandatory
+	}
 
-	public async getLatestInbounds(limit:number, offset:number){
-	//Fetch latest inbound txns related to application contract 
-	}
-	
-	public async getFilteredInbounds(searchTerm: String, limit: Number = 10, offset: Number = 1){
-	// Fetch list of inbound transactions filtered based on sourceTxHash and sourceSender
-	}
-	
-	public async getLatestOutbounds(limit:number, offset:number){
-	//Fetch latest outbound txns related to application contract 
-	}
-	
-	public async getFilteredOutbounds(destinationChainType: String,destinationChainId: String, chainId:ChainIdType, chainType:ChainTypeType){
-	// Fetch list of outbound transactions filtered based on destinationChainType and destinationChainId
+	public async getOutboundsForInbound(inboundId: String) {
+	//Fetch outbound transactions related to an inbound
 	}
 }
 ```

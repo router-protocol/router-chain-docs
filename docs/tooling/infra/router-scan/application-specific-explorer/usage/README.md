@@ -25,12 +25,12 @@ const latestTransactions = await explorer.getLatestTransactions([startEpochTimes
 // to get transaction by its hash
 const transaction = await explorer.getTransactionByHash("4716AB828DBE03896D52AE3B85941FC59237B24AFB02C3925771EC811346E54B")
 
-// to get the latest inbound events related to the application contract
+// to get the latest cross-chain transactions events related to the application contract
 const latestTransactions = await explorer.getLatestCrosschains([startEpochTimestamp, endEpochTimstamp], limit,offset)
-// limit and ofset mandatory....timstamps not necessary - can pass an empty array
+// limit and offset mandatory....timestamps not necessary - can pass an empty array
 
-// to get filtered inbound events based on the search term, which can be either sender's address or source transaction hash related to the application contract
-const filteredInbounds = await explorer.CrosschainBySearch('0xde23c5ffc7b045b48f0b85ada2c518d213d9e24f',10,1)
+// to get filtered cross-chain transactions events based on the search term, which can be either sender's address or source transaction hash related to the application contract
+const filteredInbounds = await explorer.getCrosschainBySearch('0xde23c5ffc7b045b48f0b85ada2c518d213d9e24f',10,1)
 
 // only search term is mandatory
 // optional: source chain Id, destination chain Id, and timeRange
