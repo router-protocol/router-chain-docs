@@ -40,10 +40,7 @@ To provide the credential access, a private key in plaintext needs to be provide
 
 **Ethereum Private Key (Unsafe)**
 
-Simply update the `ethPrivateKey` with a new Ethereum private key from a new account.
-:::info
-Ensure that the Ethereum addresss has balance for all the configured EVM chains. 
-:::
+Simply update the `ethPrivateKey` with an Ethereum private key from a new account.
 
 </details>
 
