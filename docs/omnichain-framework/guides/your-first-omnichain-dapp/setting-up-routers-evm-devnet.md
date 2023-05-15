@@ -32,7 +32,7 @@ To set up Router's EVM Testnet on your MetaMask wallet, you can use two approach
 | ------------------- | --------------------------------------- |
 | **Network name**    | Router EVM Testnet                      |
 | **New RPC URL**     | https://evm.rpc.testnet.routerchain.dev |
-| **Chain ID**        | 9000                                    |
+| **Chain ID**        | 9601                                    |
 | **Currency Symbol** | ROUTE                                   |
 
 > **Warning:** Leave the **Block explorer URL** blank.

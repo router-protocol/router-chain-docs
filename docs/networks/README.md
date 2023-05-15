@@ -12,7 +12,8 @@ The following APIs are recommended for development purposes.
 
 | Network               | Testnet                                        | Devnet                                         |
 | --------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| **Chain ID**          | router_9000-1                                  | router_9000-1                                  |
+| **Chain ID**          | router_9601-1                                  | router_9603-1                                  |
+| **RPC**               | https://evm.rpc.testnet.routerchain.dev        | https://devnet.evm.rpc.routerprotocol.com      |
 | **gRPC-gateway**      | https://grpc.testnet.routerchain.dev           | https://devnet.grpc.routerprotocol.com         |
 | **TM endpoint**       | https://tm.rpc.testnet.routerchain.dev         | https://devnet.tm.routerprotocol.com           |
 | **LCD endpoint**      | https://lcd.testnet.routerchain.dev            | https://devnet.lcd.routerprotocol.com          |
