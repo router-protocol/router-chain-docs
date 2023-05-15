@@ -47,6 +47,7 @@ const SECTIONS = [
   defineSection('osmojs'),
   defineSection('learn'),
   defineSection('validators'),
+  defineSection('discover'),
   defineSection('overview'),
   defineSection('apis'),
   // defineSection('voyager'),
@@ -190,6 +191,12 @@ const config = {
           {
             label: 'Validators',
             to: '/validators',
+            position: 'left',
+            // className: 'new-badge',
+          },
+          {
+            label: 'Discover',
+            to: '/discover',
             position: 'left',
             // className: 'new-badge',
           },

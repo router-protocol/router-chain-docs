@@ -1,0 +1,84 @@
+---
+title: Discover iDapps and Tools
+sidebar_position: 1
+---
+import {
+  HomepageCard as Card,
+  HomepageSection as Section,
+} from '../../src/components/HomepageComponents';
+
+import {
+  ChainIcon,
+  IDEIcon,
+  TerminalIcon,
+  ModulesIcon,
+  RelayerIcon,
+  AssetIcon,
+  KeysIcon,
+  Osmojs,
+  Transaction,
+  OsmosisCore,
+  Contribute,
+  Guide,
+  Network,
+  VoyagerIcon
+} from '../../src/icons';
+
+
+This section provides an overview of the different iDapps developed using Router's infrastructure. Additionally, you can access essential tools required for interacting with Router's infrastructure.
+
+ ## iDapps
+   <Section>
+  <Card
+    title="Ping Pong"
+    description="A iDapp using which you can transfer message from one chain to another."
+    to="https://ping-pong.testnet.routerchain.dev/"
+    icon={<Network />}
+  />
+ <Card
+    title="Voyager"
+    description="An asset transfer dApp built using Router's omnichain framework providing seamless cross-chain swaps."
+    to="https://voyager.testnet.routerchain.dev/"
+    icon={<VoyagerIcon />}
+  />
+    <Card
+    title="Texchange"
+    description="An iDapp to exchange testnet tokens."
+    to="https://faucet.testnet.routerchain.dev/"
+    icon={<TerminalIcon />}
+  />
+  </Section>
+
+   ## Tools
+   <Section>
+  <Card
+    title="Router Explorer"
+    description="A block explorer to monitor cross-chain transactions."
+    to="https://explorer.testnet.routerchain.dev/"
+    icon={<IDEIcon />}
+  />
+ <Card
+    title="Router Station"
+    description="A tool to manage contract lifecycle-related processes on the Router chain."
+    to="https://station.testnet.routerchain.dev/"
+    icon={<Transaction />}
+  />
+    <Card
+    title="Router Faucet"
+    description="A tool to get testnet tokens for performing tasks on Testnet."
+    to="https://faucet.testnet.routerchain.dev/"
+    icon={<AssetIcon />}
+  />
+    <Card
+    title="Router Hub"
+    description="An tool for delegating ROUTE tokens to validators."
+    to="https://hub.testnet.routerchain.dev/"
+    icon={<Contribute />}
+  /> 
+      <Card
+    title="Router Sandbox"
+    description="An easy-to-use prototyping environment for interoperable dApps built using Router."
+    to="https://sandbox.testnet.routerchain.dev/"
+    icon={<TerminalIcon />}
+  />
+  </Section>
