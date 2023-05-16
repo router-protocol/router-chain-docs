@@ -44,12 +44,11 @@ const SECTIONS = [
   // defineSection('frontend'),
   // defineSection('beaker'),
   defineSection('telescope'),
-  defineSection('osmojs'),
   defineSection('learn'),
   defineSection('validators'),
   defineSection('discover'),
   defineSection('overview'),
-  defineSection('apis'),
+  // defineSection('apis'),
   // defineSection('voyager'),
   defineSection('develop'),
   defineSection('omnichain-framework'),
@@ -59,7 +58,7 @@ const SECTIONS = [
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Router Docs',
-  tagline: 'Build on the leading decentralized Cosmos exchange. 🚀',
+  tagline: 'Build on a modular interoperability infrastrucutre. 🚀',
   // TODO: Update base url
   url: 'https://docs.routerprotocol.com',
   baseUrl: '/',
@@ -139,7 +138,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      image: '/img/osmosis-docs-card.png',
+      image: '/img/router-docs-card.png',
       colorMode: {
         defaultMode: 'dark',
       },
