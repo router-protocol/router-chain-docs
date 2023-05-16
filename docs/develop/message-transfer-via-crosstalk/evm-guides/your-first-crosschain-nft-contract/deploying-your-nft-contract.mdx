@@ -68,6 +68,12 @@ Go to https://faucet.testnet.routerchain.dev, connect your metamask wallet, sele
 
 Go to https://explorer.testnet.routerchain.dev/feePayer , connect your wallet and approve the pending request corresponding to your source dapp address.
 
+<center><img src={require('./images/deploying-a-sample-application-contract/part-4-step-2.png').default} alt="Step 1" style={{ marginBottom: 12 }} /></center>
+
+<center><img src={require('./images/deploying-a-sample-application-contract/part-4-step-2-a.png').default} alt="Step 1" style={{ marginBottom: 12 }} /></center>
+
+<center><img src={require('./images/deploying-a-sample-application-contract/part-4-step-2-b.png').default} alt="Step 1" style={{ marginBottom: 12 }} /></center>
+
 ### **3)** Set address for counterpart contract
 
 Let's say you deployed your contract on Polygon Mumbai and Avalanche Fuji, you need to set the address of the contract deployed on Fuji onto the contract deployed on Mumbai and vice-versa using the `setContractOnChain` function.
@@ -78,7 +84,7 @@ Let's say you deployed your contract on Polygon Mumbai and Avalanche Fuji, you n
 
 ### **1)** Get request metadata
 
-This function gets you the metadata to be used while initiating a cross-chain transfer request using `transferCrossChain` function. It includes gas limit for destination chain, gas price for destination chain, gas limit for source chain(ackGasLimit), gas price for source chain(ackGasPrice), relayer fees, acknowledgement type, bool if it is a read call and address for additional security module. To know more about request metadata parameters, kindly refer to this [page](../iDapp-functions/iSend.md#5-requestmetadata).
+This function gets you the metadata to be used while initiating a cross-chain transfer requestfrom source chain using `transferCrossChain` function. It includes gas limit for destination chain, gas price for destination chain, gas limit for source chain(ackGasLimit), gas price for source chain(ackGasPrice), relayer fees, acknowledgement type, bool if it is a read call and address for additional security module. To know more about request metadata parameters, kindly refer to this [page](../iDapp-functions/iSend.md#5-requestmetadata).
 
 Create the metadata like this:
 
@@ -99,5 +105,7 @@ You can track the status of your transaction on [Router Explorer](https://explor
 ### **4)** Successfully receive your NFTs on destination chain
 
 After the transaction is successfully executed, you should now be able to see your updated NFT balance on destination chain.
+
+<center><img src={require('./images/deploying-a-sample-application-contract/part-5-step-4.png').default} alt="Step 4" style={{  width: 300, marginBottom: 12 }} /></center>
 
 To know more about message transfer via Router's Crosstalk , kindly refer to EVM-guides [here](../../evm-guides/iDapp-functions/).

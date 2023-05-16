@@ -41,6 +41,7 @@ The mnemonic phrase is better backed up on a physical paper, storing it in cloud
 Remember the address starting from `router`, this is the address of your Router chain orchestrator account.
 :::
 
+
 </details>
 
 <details>
@@ -87,6 +88,9 @@ Add the relevant keys in `.router-orchestrator/config.json`:
 }
 ```
 
+To g
+routerd keys unsafe-export-eth-key my-orchestrator-key --keyring-backend file
+
 - `chains` is an array of objects including info about all the chains you want to listen to as an orchestrator. For each chain, you need to provide:
     - `chainId` - the chain id of the network
     - `chainType` - the type of chain, possible values are:
@@ -104,8 +108,15 @@ Add the relevant keys in `.router-orchestrator/config.json`:
     - `NETWORK_TYPE` - the network type, possible values are:
         `devnet`,
         `testnet`
-    - `ETH_PRIVATE_KEY` - the private key of the wallet you created for the validator on EVM chains (not necessary to have have funds in this wallet, it will be used just for signing)
-    - `COSMOS_PRIVATE_KEY` - the private key of the wallet you created for the validator
+    - `ETH_PRIVATE_KEY` - the private key of the wallet you created for the validator on EVM chains (not necessary to have have funds in this wallet, it will be used just for signing messages)
+    - `COSMOS_PRIVATE_KEY` - the private key of the wallet you created for the orchestrator
+
+
+To obtain the orchestrator's `COSMOS_PRIVATE_KEY`, run 
+```bash
+routerd keys unsafe-export-eth-key my-orchestrator-key --keyring-backend file
+```
+
 
 Sample `.router-orchestrator/config.json`:
 ```json
@@ -149,7 +160,7 @@ Sample `.router-orchestrator/config.json`:
 Every orchestrator needs to be mapped with a validator. This is done by sending a transaction on the chain to map an orchestrator with a validator.
 
 ```bash
-routerd tx attestation set-orchestrator-address $(routerd keys show my-orchestrator-key -a --keyring-backend file) <EVM-ADDRESS-FOR-SIGNING-TXNS> --from my-validator-key --chain-id router_9601-1 --fees 1000000000000000route
+routerd tx attestation set-orchestrator-address $(routerd keys show my-orchestrator-key -a --keyring-backend file) <EVM-ADDRESS-FOR-SIGNING-TXNS> --from my-validator-key --chain-id router_9601-1 --fees 1000000000000000route --keyring-backend file
 ```
 
 `EVM-KEY-FOR-SIGNING-TXNS` is the public address corresponding to the `ETH_PRIVATE_KEY` used in the orchestrator config in the previous step.
@@ -162,13 +173,13 @@ routerd tx attestation set-orchestrator-address $(routerd keys show my-orchestra
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl restart cosmovisor.service
-sudo systemctl restart router-orchestrator.service
+sudo systemctl restart orchestrator.service
 ```
 
 After executing the aforementioned commands, your orchestrator instance will start running. You can check the orchestrator and validator logs to see if everything is working fine.
 
 ```bash
-sudo journalctl -u router-orchestrator.service -f
+sudo journalctl -u orchestrator.service -f
 sudo journalctl -u cosmovisor.service -f
 ```
 

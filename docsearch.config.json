@@ -1,54 +1,44 @@
 {
   "index_name": "Docs",
-  "sitemap_urls": ["https://docs.osmosis.zone/sitemap.xml"],
+  "sitemap_urls": ["https://docs.routerptocol.com/sitemap.xml"],
   "start_urls": [
     {
-      "url": "https://docs.osmosis.zone/guides",
-      "tags": "guides",
-      "selectors_key": "guides"
+      "url": "https://docs.routerprotocol.com/develop",
+      "tags": "develop",
+      "selectors_key": "develop"
     },
     {
-      "url": "https://docs.osmosis.zone/router-core",
+      "url": "https://docs.routerprotocol.com/router-core",
       "tags": "router-core",
       "selectors_key": "router-core"
     },
     {
-      "url": "https://docs.osmosis.zone/cosmwasm",
-      "tags": "cosmwasm",
-      "selectors_key": "cosmwasm"
+      "url": "https://docs.routerprotocol.com/validators",
+      "tags": "validators",
+      "selectors_key": "validators"
     },
     {
-      "url": "https://docs.osmosis.zone/localrouter",
-      "tags": "localrouter",
-      "selectors_key": "localrouter"
+      "url": "https://docs.routerprotocol.com/learn",
+      "tags": "learn",
+      "selectors_key": "learn"
     },
     {
-      "url": "https://docs.osmosis.zone/networks",
+      "url": "https://docs.routerprotocol.com/tooling",
+      "tags": "tooling",
+      "selectors_key": "tooling"
+    },
+    {
+      "url": "https://docs.routerprotocol.com/networks",
       "tags": "networks",
       "selectors_key": "networks"
     },
-    {
-      "url": "https://docs.osmosis.zone/beaker",
-      "tags": "beaker",
-      "selectors_key": "beaker"
-    },
 
     {
-      "url": "https://docs.osmosis.zone/telescope",
-      "tags": "telescope",
-      "selectors_key": "telescope"
-    },
-    {
-      "url": "https://docs.osmosis.zone/osmojs",
-      "tags": "osmojs",
-      "selectors_key": "osmojs"
-    },
-    {
-      "url": "https://docs.osmosis.zone/overview",
+      "url": "https://docs.routerprotocol.com/overview",
       "tags": "overview",
       "selectors_key": "overview"
     },
-    "https://docs.osmosis.zone"
+    "https://docs.routerprotocol.com"
   ],
   "stop_urls": [],
 
@@ -137,11 +127,11 @@
       "lvl6": "article h6",
       "text": "article p, article li, article td:last-child"
     },
-    "osmojs": {
+    "router": {
       "lvl0": {
         "selector": "",
         "global": true,
-        "default_value": "osmojs"
+        "default_value": "router"
       },
       "lvl1": "article h1",
       "lvl2": "article h2",
