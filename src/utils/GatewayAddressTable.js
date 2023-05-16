@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const APIData = () => {
+const APIData = ({ apiUrl = 'https://lcd.testnet.routerchain.dev/router-protocol/router-chain/multichain/chain_config' }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -10,7 +10,7 @@ const APIData = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://lcd.testnet.routerchain.dev/router-protocol/router-chain/multichain/chain_config');
+      const response = await axios.get(apiUrl);
       setData(response.data.chainConfig);
     } catch (error) {
       console.log(error);
@@ -22,9 +22,9 @@ const APIData = () => {
       <table>
         <thead>
           <tr>
-            <th>Chain ID</th>
-            <th>Chain Name</th>
-            <th>Gateway Contract Address</th>
+            <th style={{ fontWeight: 'bold' }}>Chain ID</th>
+            <th style={{ fontWeight: 'bold' }}>Chain Name</th>
+            <th style={{ fontWeight: 'bold' }}>Gateway Contract Address</th>
           </tr>
         </thead>
         <tbody>

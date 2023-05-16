@@ -2,6 +2,8 @@
 title: 2) Deploying a Sample Application Contract
 sidebar_position: 2
 ---
+import APIData from '../../../../../src/utils/GatewayAddressTable' ;
+
 
 ## Part 1: Compiling our Application Contract
 
@@ -104,7 +106,11 @@ Once compiled, you should see a green tick mark over the **Solidity compiler** i
 
 > **Warning:** Make sure you're connected to Router's EVM Testnet.
 
-**Step 3)** Add the gateway address for respective chain from [here](https://lcd.testnet.routerchain.dev/router-protocol/router-chain/multichain/chain_config), click on **Deploy** and sign the transaction in your MetaMask.
+**Step 3)** Add the gateway address for the respective chain (mentioned in the table below), click on **Deploy** and sign the transaction in your MetaMask.
+
+<APIData />
+<p style={{ marginBottom: '50px' }}></p>
+
 
 <center><img src={require('./images/deploying-a-sample-application-contract/part-2-step-3.png').default} alt="Step 3" style={{ width: 300, marginBottom: 12 }} /></center>
 
