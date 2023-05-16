@@ -3,6 +3,8 @@ title: Deploying a Sample Cross-Chain NFT Contract
 sidebar_position: 2
 ---
 
+import DataTable from '../../../../../src/utils/GatewayAddressTable' ;
+
 This section describes how to deploy your NFT smart contract on different EVM-chains and test it by actually transferring your NFTs cross-chain.
 
 ## **STEP 3)** Deploy your NFT Contract
@@ -39,7 +41,14 @@ Once compiled, you should see a green tick mark over the **Solidity compiler** i
 
 **Step 2)** A MetaMask window will pop up following the previous step. Connect with your wallet and confirm.
 
-**Step 3)** Add the gateway address for respective chains from [here](https://lcd.testnet.routerchain.dev/router-protocol/router-chain/multichain/chain_config), your wallet address(it can be EVM wallet address or router wallet address) and URI for the NFT contract, click on **Deploy** and sign the transaction in your MetaMask.
+**Step 3)** Add the gateway address for respective chains (mentioned in the below table), your wallet address(it can be EVM wallet address or router wallet address) and URI for the NFT contract, click on **Deploy** and sign the transaction in your MetaMask.
+
+<DataTable />
+
+
+<p style={{ marginBottom: '50px' }}></p>
+
+
 
 <center><img src={require('./images/deploying-a-sample-application-contract/part-2-step-3.png').default} alt="Step 3" style={{ width: 300, marginBottom: 12 }} /></center>
 
