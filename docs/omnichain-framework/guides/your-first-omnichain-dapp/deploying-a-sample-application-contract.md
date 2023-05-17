@@ -106,7 +106,11 @@ Once compiled, you should see a green tick mark over the **Solidity compiler** i
 
 **Step 3)** Add the gateway address for respective chain from (mentioned in below table), click on **Deploy** and sign the transaction in your MetaMask.
 
-<APIData />
+<APIData
+  apiData={[
+    { apiUrl: 'https://lcd.testnet.routerchain.dev/router-protocol/router-chain/multichain/chain_config', networkType: 'Testnet' }
+  ]}
+/>
 <p style={{ marginBottom: '50px' }}></p>
 
 <center><img src={require('./images/deploying-a-sample-application-contract/part-2-step-3.png').default} alt="Step 3" style={{ width: 300, marginBottom: 12 }} /></center>

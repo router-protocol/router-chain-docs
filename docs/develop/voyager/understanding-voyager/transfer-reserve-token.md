@@ -2,6 +2,8 @@
 title: Transfer of Reserve Tokens
 sidebar_position: 2
 ---
+import RelayerAPIData from '../../../../src/utils/RelayerFees'
+
 
 ```javascript
 function depositReserveToken(
@@ -70,6 +72,15 @@ To avoid the need for calculation, it can be passed as 0. The Router chain will 
 4. **ackGasPrice:** Gas price of the source chain. This can be calculated using the RPC of source chain as shown in the above snippet. To avoid the need for calculation, it can be passed as 0. The Router chain will then estimate the real-time gas price for them.
 
 5. **relayerFees:** This parameter functions similarly to the priority fees on other blockchain networks. Since the Router chain relayers handle the execution of cross-chain requests on the destination chain, setting a higher `relayerFees` will increase the likelihood of your request being prioritized by relayers. If a very low `relayerFees` is provided, the Router chain will automatically adjust it to the minimum required amount to ensure that it is executed. If it is passed as 0, the Router chain will default it to the minimum set Relayer fee value.
+
+Minimum relayer fees based on network is given below -
+<RelayerAPIData
+  relayerApiData={[
+    { apiUrl: 'https://lcd.testnet.routerchain.dev/router-protocol/router-chain/crosschain/params', networkType: 'Testnet' }
+  ]}
+/>
+<p style={{ marginBottom: '30px' }}></p>
+
 
 6. **ackType:** When the contract calls have been executed on the destination chain, the destination chain Gateway contract sends an acknowledgent back to the Router chain. iDapps have the option to get this acknowledgment from the Router chain to the source chain and execute some operations based on the ack.
 

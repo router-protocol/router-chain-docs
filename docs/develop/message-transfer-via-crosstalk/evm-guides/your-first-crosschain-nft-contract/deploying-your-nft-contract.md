@@ -99,7 +99,11 @@ Lets say if you want to deploy your contract on Polygon Mumbai and Avalanche Fuj
 
 **Step 3)** Add the gateway address for respective chains (mentioned in the below table), your wallet address(it can be EVM wallet address or router wallet address) and URI for the NFT contract, click on **Deploy** and sign the transaction in your MetaMask.
 
-<APIData />
+<APIData
+  apiData={[
+    { apiUrl: 'https://lcd.testnet.routerchain.dev/router-protocol/router-chain/multichain/chain_config', networkType: 'Testnet' }
+  ]}
+/>
 
 <p style={{ marginBottom: '50px' }}></p>
 
