@@ -91,10 +91,9 @@ Add the relevant keys in `.router-orchestrator/config.json`:
 To g
 routerd keys unsafe-export-eth-key my-orchestrator-key --keyring-backend file
 
-- `chains` is an array of objects including info about all the chains you want to listen to as an orchestrator. For each chain, you need to provide:
+- `chains` is an array of objects including info about all the chains you want to listen to as an orchestrator. This needs to be done only for external chains i.e. Router chain will not be part of the orchestrator chains config. For each chain, you need to provide:
     - `chainId` - the chain id of the network
     - `chainType` - the type of chain, possible values are:
-        `CHAIN_TYPE_ROUTER`,
         `CHAIN_TYPE_EVM`,
         `CHAIN_TYPE_COSMOS`,
         `CHAIN_TYPE_POLKADOT`,
@@ -105,9 +104,7 @@ routerd keys unsafe-export-eth-key my-orchestrator-key --keyring-backend file
 
 
 - `globalConfig` includes global configuration details like:
-    - `NETWORK_TYPE` - the network type, possible values are:
-        `devnet`,
-        `testnet`
+    - `NETWORK_TYPE` - `testnet`
     - `ETH_PRIVATE_KEY` - the private key of the wallet you created for the validator on EVM chains (not necessary to have have funds in this wallet, it will be used just for signing messages)
     - `COSMOS_PRIVATE_KEY` - the private key of the wallet you created for the orchestrator
 
