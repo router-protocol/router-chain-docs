@@ -52,7 +52,7 @@ export default function Homepage() {
           <Section title="Build your first iDapp"
             description={
               <>
-                Build your first iDapp using Router's crosstalk in 5 simple steps.
+                Build your first iDapp (Interoperable dApp) using Router's crosstalk in 5 simple steps.
               </>
             }
           >
