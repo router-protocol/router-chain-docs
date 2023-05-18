@@ -1,20 +1,25 @@
 # Tools
 
-The following is a list of tools available for the Router chain. Please make sure to contribute to this page if any tools are missing.  
+The following is a list of tools available for the Router chain. Please make sure to contribute to this page if any tools are missing.
 
 
-## Devnet
-#### Block Explorer
-- [Router Explorer](https://devnet-explorer.routerprotocol.com/)
-#### Faucet
-- [Router Faucet](https://devnet-faucet.routerprotocol.com/)
-#### Web Application to Interact with the Router Chain
-- [Router Station](https://devnet-router-station.routerprotocol.com/)
+### Block Explorers
 
-## Testnet
-Coming soon...
-<!-- #### Block Explorers
-- [Mintscan](https://testnet.mintscan.io/osmosis-testnet)
+- [Router Testnet Explorer](https://explorer.testnet.routerchain.dev/)
+- [Router Devnet Explorer](https://devnet-explorer.routerprotocol.com/)
 
-#### Contract Explorers
-- [Code-explorer](https://osmosis-contracts.web.app/#/codes) -->
+### Faucets
+
+- [Router Testnet Faucet](https://faucet.testnet.routerchain.dev/)
+- [Router Devnet Faucet](https://devnet-faucet.routerprotocol.com/)
+
+### Web Applications to Interact with the Router Chain
+
+- [Router Testnet Station](https://station.testnet.routerchain.dev/)
+- [Router Devnet Station](https://devnet-router-station.routerprotocol.com/)
+
+
+### Sandbox Environments
+- [Router Sandbox](https://sandbox.testnet.routerchain.dev/)
+
+

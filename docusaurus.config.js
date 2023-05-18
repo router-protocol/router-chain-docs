@@ -2,6 +2,7 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/vsDark');
+const worker = require('node:worker_threads');
 
 // const UIKitReferencePlugins = require('./plugins/ui-kit-reference-plugin.cjs');
 const { webpackPlugin } = require('./plugins/webpack-plugin.cjs');
@@ -35,30 +36,29 @@ function defineSection(section, options = {}) {
   ];
 }
 
-
 const SECTIONS = [
   defineSection('router-core'),
   defineSection('networks'),
   // defineSection('cosmwasm'),
-  defineSection('crosstalk'),
+  // defineSection('message-transfer'),
   // defineSection('frontend'),
   // defineSection('beaker'),
   defineSection('telescope'),
-  defineSection('osmojs'),
   defineSection('learn'),
   defineSection('validators'),
+  defineSection('discover'),
   defineSection('overview'),
-  defineSection('apis'),
-  defineSection('voyager'),
+  // defineSection('apis'),
+  // defineSection('voyager'),
+  defineSection('develop'),
   defineSection('omnichain-framework'),
-  defineSection('utils'),
-  defineSection('infra'),
+  defineSection('tooling'),
 ];
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Router Docs',
-  tagline: 'Build on the leading decentralized Cosmos exchange. 🚀',
+  tagline: 'Build on a modular interoperability infrastrucutre. 🚀',
   // TODO: Update base url
   url: 'https://docs.routerprotocol.com',
   baseUrl: '/',
@@ -119,12 +119,26 @@ const config = {
     // posthogPlugin,
   ],
 
-  themes: ['@docusaurus/theme-live-codeblock'],
+  themes: ['@docusaurus/theme-live-codeblock',
+  [
+    require.resolve("@easyops-cn/docusaurus-search-local"),
+    /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
+    ({
+      // ... Your options.
+      // `hashed` is recommended as long-term-cache of index file is possible.
+      hashed: true,
+      // For Docs using Chinese, The `language` is recommended to set to:
+      // ```
+      // language: ["en", "zh"],
+      // ```
+      docsRouteBasePath: '/'
+    }),
+  ]],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      image: '/img/osmosis-docs-card.png',
+      image: '/img/router-docs-card.png',
       colorMode: {
         defaultMode: 'dark',
       },
@@ -151,11 +165,21 @@ const config = {
             position: 'left',
           },
           {
+            label: 'Router Core',
+            to: '/router-core',
+            position: 'left',
+          },
+          {
             label: 'Develop',
-            to: '/crosstalk',
+            to: '/develop',
             position: 'left',
             // className: 'new-badge',
             // activeBaseRegex: '(.*ui-kit|.*web-core)',
+          },
+          {
+            label: 'Tooling',
+            to: '/tooling',
+            position: 'left',
           },
           {
             label: 'Networks',
@@ -170,11 +194,17 @@ const config = {
             // className: 'new-badge',
           },
           {
-            label: 'Learn',
-            to: '/learn',
+            label: 'Discover',
+            to: '/discover',
             position: 'left',
             // className: 'new-badge',
           },
+          // {
+          //   label: 'Learn',
+          //   to: '/learn',
+          //   position: 'left',
+          //   // className: 'new-badge',
+          // },
           // {
           //   label: 'Integrate',
           //   to: 'overview/integrate',
@@ -188,29 +218,39 @@ const config = {
           // {
           //   label: 'API Reference',
           //   to: 'apis',
-          //   position: 'right',
+          //   position: 'left',
           // },
           {
-            href: 'https://github.com/router-protocol',
-            className: 'pseudo-icon github-icon',
-            position: 'right',
-          },
-          {
-            href: 'https://discord.gg/yjM2fUUHvN',
-            className: 'pseudo-icon discord-icon',
-            position: 'right',
+            type: 'dropdown',
+            label: 'v2.0',
+            position: 'left',
+            items: [
+              {
+                label: 'v1.0',
+                href: 'https://v1.docs.routerprotocol.com',
+              }
+            ],
           },
           // {
-          //   type: 'search',
+          //   href: 'https://github.com/router-protocol',
+          //   className: 'pseudo-icon github-icon',
           //   position: 'right',
           // },
+          // {
+          //   href: 'https://discord.gg/yjM2fUUHvN',
+          //   className: 'pseudo-icon discord-icon',
+          //   position: 'right'
+          // },
           {
-            label: 'Launch Router Devnet',
-            href: 'https://devnet-router-station.routerprotocol.com/',
+            type: 'search',
+            position: 'right',
+          },
+          {
+            label: 'Launch Router Testnet',
+            href: 'https://station.testnet.routerchain.dev/',
             position: 'right',
             className: 'dev-portal-signup dev-portal-link',
           },
-        
         ],
       },
       footer: {
@@ -235,15 +275,15 @@ const config = {
               },
               {
                 label: 'Explorer',
-                href: 'https://devnet-explorer.routerprotocol.com/',
+                href: 'https://explorer.testnet.routerchain.dev/',
               },
               {
                 label: 'Careers',
-                href: 'https://angel.co/company/router-protocol',
+                href: 'https://wellfound.com/company/router-protocol',
               },
               {
                 label: 'Ecosystem',
-                href: 'https://routerprotocol.com/',
+                href: 'https://www.routerprotocol.com/ecosystem',
               },
             ],
           },
@@ -252,11 +292,11 @@ const config = {
             items: [
               {
                 label: 'Whitepaper',
-                href: 'https://www.routerprotocol.com/whitepaper',
+                href: 'https://global-uploads.webflow.com/61d1382fe0e915f2953f9500/63ecc619fa7285237ea184f3_Router%20Chain%20Whitepaper.pdf',
               },
               {
                 label: 'Developer Portal',
-                href: '/router-core',
+                href: '/develop',
               },
               {
                 label: 'GitHub',
@@ -268,7 +308,7 @@ const config = {
               },
               {
                 label: 'Community',
-                href: 'https://forum.routerprotocol.com/',
+                href: 'https://discord.com/invite/yjM2fUUHvN',
               },
             ],
           },
@@ -298,7 +338,8 @@ const config = {
             ],
           },
         ],
-        copyright: 'Copyright © Router Protocol since 2022. All rights reserved.',
+        copyright:
+          'Copyright © Router Protocol since 2021. All rights reserved.',
       },
       prism: {
         theme: lightCodeTheme,

@@ -1,0 +1,22 @@
+---
+title: Overview
+sidebar_position: 1
+---
+# Relayers
+Basics about relayers on the Router chain
+
+
+## Intro to Router Relayers
+In the Router system, relayers are permissionless entities that relay executable proposals from the Router chain to a specific 
+destination chain. The Router chain has a set of relayers operated by various third parties, which distributes the 
+responsibility. In the set, each relayer listens to the Router chain and relays data to the
+destination chains as and when required. These relayers also carry out subsequent actions based on the
+events that have been transmitted.
+
+## Functionalities
+1. The relayer will be able to submit outbound/crosstalk requests to the destination chain.
+2. The relayer will be able to whitelist application bridge contract addresses and process only outbound requests originating from the whitelisted application bridge contract addresses.
+3. The relayer will be able to submit a ValsetUpdate request to all the destination chains configured
+on the multichain module.
+4. The relayer will be able to secure the keys of various chain types - EVM, Cosmos, and Substrate,
+among others.

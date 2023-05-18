@@ -9,10 +9,10 @@ export default function FooterLayout({ style, links, logo, copyright }) {
         'footer--dark': style === 'dark',
       })}>
       <div className="container container-fluid">
-        {logo && <div className="margin-bottom--sm">{logo}</div>}
 
         <div className="footer__row">
           <div className="footer__data">
+          {logo && <div className="margin-bottom--sm">{logo}</div>}
             <div className="footer__cta">
              
             </div>
