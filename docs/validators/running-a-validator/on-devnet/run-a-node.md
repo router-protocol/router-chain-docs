@@ -1,5 +1,5 @@
 ---
-title: Step 1) Run a Sentry Node
+title: Step 1) Run a Node
 sidebar_position: 1
 ---
 

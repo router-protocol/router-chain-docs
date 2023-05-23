@@ -3,7 +3,7 @@ title: Step 2) Setup a Validator Account
 sidebar_position: 2
 ---
 
-Before creating a validator account, make sure you are running a Sentry node with the chain synced to the latest block as specified in this [step](./run-a-sentry-node). 
+Before creating a validator account, make sure you are running a node with the chain synced to the latest block as specified in this [step](./run-a-node). 
 
 <details>
 <summary><b>Step 2.1) Create a validator account</b></summary>
