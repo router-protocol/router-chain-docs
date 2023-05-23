@@ -173,7 +173,12 @@ sudo systemctl restart cosmovisor.service
 sudo systemctl restart orchestrator.service
 ```
 
-After executing the aforementioned commands, your orchestrator instance will start running. You can check the orchestrator and validator logs to see if everything is working fine.
+After executing the aforementioned commands, your orchestrator instance will start running. You can query the orchestrator's health checkpoint using the command given below to see if everything is working fine:
+
+```bash
+curl localhost:8001/health
+```
+You can check the orchestrator and validator logs using the following commands:
 
 ```bash
 sudo journalctl -u orchestrator.service -f

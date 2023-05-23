@@ -1,13 +1,14 @@
 ---
-title: Step 1) Run a Sentry Node
+title: Step 1) Run a Node
 sidebar_position: 1
 ---
+import APIData from '../../../../src/utils/ReturnChecksum';
 
-Before running a Sentry node on , install the following prerequisites:
+Before running a node on the testnet, install the following prerequisites:
 - [Golang](https://go.dev/doc/install) (version > `1.19`)
 - [Python](https://www.python.org/downloads/) (version > `3.9.1`)
 
-Once all the required dependencies are installed, execute the following `curl` request from your terminal/command prompt to run a Sentry node on Router's testnet:
+Once all the required dependencies are installed, execute the following `curl` request from your terminal/command prompt to run a node on Router's testnet:
 
 ```bash
 curl -L https://bit.ly/3IdpohH > r.sh && bash r.sh
@@ -17,9 +18,14 @@ curl -L https://bit.ly/3IdpohH > r.sh && bash r.sh
 After running the script, you'll be prompted to choose one of the following two options: 
 - **Option 1) Install Router -** Installs both the orchestrator and the validator.
 - **Option 2) Install Orchestrator -** Installs just the orchestrator.
+:::
+
+:::tip
+You can verify the checksum of the `validator_onboard.py` script.
+<APIData />
+:::
 
 In case you are following this setup for the first time, select **option 1**.
-:::
 
 
 This script will automatically: 
