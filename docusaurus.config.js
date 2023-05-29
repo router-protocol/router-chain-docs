@@ -245,12 +245,12 @@ const config = {
             type: 'search',
             position: 'right',
           },
-          {
-            label: 'Launch Router Testnet',
-            href: 'https://station.testnet.routerchain.dev/',
-            position: 'right',
-            className: 'dev-portal-signup dev-portal-link',
-          },
+          // {
+          //   label: 'Launch Router Testnet',
+          //   href: 'https://station.testnet.routerchain.dev/',
+          //   position: 'right',
+          //   className: 'dev-portal-signup dev-portal-link',
+          // },
         ],
       },
       footer: {
