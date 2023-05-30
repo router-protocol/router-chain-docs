@@ -327,7 +327,7 @@ contract XERC1155 is ERC1155, IDapp {
   // address of the owner
   address public owner;
 
-  // address of the gateway contract
+  // address of the Gateway contract
   IGateway public gatewayContract;
 
   // chain type + chain id => address of our contract in bytes
@@ -364,7 +364,7 @@ contract XERC1155 is ERC1155, IDapp {
   }
 
   /// @notice function to set the Router Gateway Contract.
-  /// @param gateway address of the gateway contract.
+  /// @param gateway address of the Gateway contract.
   function setGateway(address gateway) external {
     require(msg.sender == owner, "only owner");
     gatewayContract = IGateway(gateway);

@@ -3,9 +3,7 @@ title: RouterMsg
 sidebar_position: 1
 ---
 
-The `RouterMsg` is an enum inside `router-wasm-bindings`. It contains one custom message type - `CrosschainCall`, which includes the destination chain ID & type, destination contract addresses, payload, the expiry timestamp for the request, the atomicity flag, among other things. 
-
-## Sample Implementation of `CrosschainCall`
+The `RouterMsg` is an enum inside `router-wasm-bindings`. It contains one custom message type - `CrosschainCall`.
 
 ```javascript
 // import router binding message

@@ -89,7 +89,7 @@ The sudo message `HandleIReceive` contains 4 arguments. This sudo function gets 
 
 1. **request_sender:** The application contract address on the source chain from which the request to the Router chain was sent.
 2. **source_chain_id:** The chain ID of the chain from which the inbound request to the Router chain has been initiated.
-3. **request_identifier:** The request identifier is a unique identifier of the request that is added by the source chain's gateway contract.
+3. **request_identifier:** The request identifier is a unique identifier of the request that is added by the source chain's Gateway contract.
 4. **payload:** The payload comes from the source chain contract.
 
 </details>

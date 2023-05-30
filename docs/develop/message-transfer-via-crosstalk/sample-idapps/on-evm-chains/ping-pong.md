@@ -63,7 +63,7 @@ contract PingPong {
   // requestId => ackMessage
   mapping(uint64 => string) public ackFromDestination;
 
-  // instance of the Router's gateway contract
+  // instance of the Router's Gateway contract
   IGateway public gatewayContract;
 
   // custom error so that we can emit a custom error message
@@ -302,7 +302,7 @@ contract PingPong {
   // requestId => ackMessage
   mapping(uint64 => string) public ackFromDestination;
 
-  // instance of the Router's gateway contract
+  // instance of the Router's Gateway contract
   IGateway public gatewayContract;
 
   // custom error so that we can emit a custom error message
@@ -336,7 +336,7 @@ contract PingPong {
   }
 
   /// @notice function to set the Router Gateway Contract.
-  /// @param gateway address of the gateway contract.
+  /// @param gateway address of the Gateway contract.
   function setGateway(address gateway) external {
     require(msg.sender == owner, "only owner");
     gatewayContract = IGateway(gateway);

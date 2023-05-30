@@ -221,7 +221,7 @@ Create the metadata like this:
 
 ### **2)** Transfer your NFTs crosschain
 
-As explained earlier, `transferCrossChain` function is responsible for creating a cross-chain NFT-transfer request. It first burns the NFT from contract on source chain, utilises gateway contracts' `ISend` function to send request to mint the NFT to the user on the destination chain. To know more about this function, kindly refer to Step-6 on this [page](../../sample-idapps/on-evm-chains/cross-chain-nft.md#step-by-step-guide)
+As explained earlier, `transferCrossChain` function is responsible for creating a cross-chain NFT-transfer request. It first burns the NFT from contract on source chain, utilises Gateway contracts' `ISend` function to send request to mint the NFT to the user on the destination chain. To know more about this function, kindly refer to Step-6 on this [page](../../sample-idapps/on-evm-chains/cross-chain-nft.md#step-by-step-guide)
 
 You need to call this function by putting the chain id for destination chain; tuple of transfer parameters that contain NFT ID to be transferred, amount of that NFT id, nft data and the address of the recipient of those NFTs on destination chain; and the request metadata that we created in previous step.
 

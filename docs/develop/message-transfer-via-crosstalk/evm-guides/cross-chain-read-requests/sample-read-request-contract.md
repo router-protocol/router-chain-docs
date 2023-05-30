@@ -228,7 +228,7 @@ contract ReadCall {
     }
 
     /// @notice function to set the Router Gateway Contract.
-    /// @param gateway address of the gateway contract.
+    /// @param gateway address of the Gateway contract.
     function setGateway(address gateway) external {
         require(msg.sender == owner, "only owner");
         gatewayContract = IGateway(gateway);

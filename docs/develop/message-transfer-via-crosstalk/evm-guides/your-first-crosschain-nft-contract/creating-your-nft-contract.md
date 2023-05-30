@@ -24,7 +24,7 @@ contract XERC1155 is ERC1155, IDapp {
   // address of the owner
   address public owner;
 
-  // address of the gateway contract
+  // address of the Gateway contract
   IGateway public gatewayContract;
 
   // chain type + chain id => address of our contract in string format
@@ -61,7 +61,7 @@ contract XERC1155 is ERC1155, IDapp {
   }
 
   /// @notice function to set the Router Gateway Contract.
-  /// @param gateway address of the gateway contract.
+  /// @param gateway address of the Gateway contract.
   function setGateway(address gateway) external {
     require(msg.sender == owner, "only owner");
     gatewayContract = IGateway(gateway);
@@ -201,7 +201,7 @@ contract XERC1155 is ERC1155, IDapp {
 
 ### **1)** transferCrossChain Function
 
-This function is responsible for creating a cross-chain NFT-transfer request. It first burns the NFT from contract on source chain, utilises gateway contracts' `ISend` function to send request to mint the NFT to the user on the destination chain.
+This function is responsible for creating a cross-chain NFT-transfer request. It first burns the NFT from contract on source chain, utilises Gateway contracts' `ISend` function to send request to mint the NFT to the user on the destination chain.
 
 ### **2)** IReceive Function
 
