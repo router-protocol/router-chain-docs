@@ -140,7 +140,7 @@ export default function Homepage() {
               />
               <Card
                 title="Router Hub"
-                description="An tool for delegating ROUTE tokens to validators."
+                description="A tool for delegating ROUTE tokens to validators."
                 to="https://hub.testnet.routerchain.dev/"
                 icon={<Contribute />}
               />
