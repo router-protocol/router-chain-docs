@@ -51,7 +51,7 @@ const SECTIONS = [
   // defineSection('apis'),
   // defineSection('voyager'),
   defineSection('develop'),
-  defineSection('omnichain-framework'),
+  // defineSection('omnichain-framework'),
   defineSection('tooling'),
 ];
 
