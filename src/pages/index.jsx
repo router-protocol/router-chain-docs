@@ -103,19 +103,19 @@ export default function Homepage() {
               <Card
                 title="Ping Pong"
                 description="A iDapp using which you can transfer message from one chain to another."
-                to="https://ping-pong.testnet.routerchain.dev/"
+                to="https://pingpong.routerprotocol.com"
                 icon={<Network />}
               />
               <Card
                 title="Voyager"
                 description="An asset transfer dApp built using Router's omnichain framework providing seamless cross-chain swaps."
-                to="https://voyager.testnet.routerchain.dev/"
+                to="https://voyager.routerprotocol.com"
                 icon={<VoyagerIcon />}
               />
               <Card
                 title="Texchange"
                 description="An iDapp to exchange testnet tokens."
-                to="https://faucet.testnet.routerchain.dev/"
+                to="https://texchange.routerprotocol.com"
                 icon={<TerminalIcon />}
               />
             </Section>
