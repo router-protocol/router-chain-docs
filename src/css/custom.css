@@ -746,6 +746,7 @@ img[src$='#terminal'] {
   gap: 10px;
   padding: 0.75rem;
   text-decoration: none;
+  justify-content: space-between;
   color: var(--docs-color-text);
 
   --ifm-link-hover-decoration: none;

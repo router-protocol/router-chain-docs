@@ -35,19 +35,22 @@ export function DocVersion(){
               </div></div>
   );
 }
-export function HomepageCard({ id, icon, svgFile, title, description, to }) {
+export function HomepageCard({ id, icon, svgFile, title, description, to, bottomText }) {
   return (
     <Link to={to} className="homepage-card">
-      {svgFile
+      <div className="detail">
+        {svgFile
         ?  <div className="icon"><img src={svgFile}/></div>
-        :  icon && <div className="icon">{icon}</div>
-      }
-      <div className="card-content">
-        <div className="title" id={id && paramCase(title)}>
-          {title}
-        </div>
-        <div className="description">{description}</div>
+        :  icon && <div className="icon" style={{paddingBottom: "10px", marginTop:"3px"}}>{icon}</div>
+        }
+        <div className="card-content">
+          <div className="title" id={id && paramCase(title)}>
+            {title}
+          </div>
+          <div className="description">{description}</div>
+          </div>
       </div>
+      <div className="bottomText" style={{textAlign: "center", color: "blue", margin: "0 auto"}}>{bottomText}</div>
     </Link>
   );
 }
