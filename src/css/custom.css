@@ -672,6 +672,7 @@ img[src$='#terminal'] {
 
 .pad {
   padding: 0 1rem;
+  display: flex;
 }
 
 .center {

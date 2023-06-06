@@ -92,7 +92,7 @@ routerd tx staking create-validator \
 Verify that the validator was successfully setup by checking the [staking dashboard](https://hub.testnet.routerchain.dev/staking) or by entering the CLI command given below.
 
 ```bash
-routerd query staking validator $(routerd keys show my-validator-key -a --keyring-backend file) --chain-id router_9601-1 --keyring-backend file
+routerd query staking validator $(routerd keys show my-validator-key -a --keyring-backend file --bech=val) --chain-id router_9601-1 --keyring-backend file
 ```
 
 If you see your validator in the list of validators, then congratulations, you have officially joined the Router testnet as a staking validator! 🎉

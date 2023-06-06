@@ -12,11 +12,11 @@ const APIData = ({ apiData }) => {
     try {
       const dataPromises = apiData.map(({ apiUrl }) => axios.get(apiUrl));
       const responses = await Promise.all(dataPromises);
-
+      console.log(responses)
       const combinedData = [];
       responses.forEach((response, index) => {
         const { networkType } = apiData[index];
-        const dataWithAdditionalColumn = response.data.chainConfig.map((item) => ({
+        const dataWithAdditionalColumn = response.data.contractConfig.map((item) => ({
           ...item,
           networkType: networkType,
         }));
@@ -36,8 +36,8 @@ const APIData = ({ apiData }) => {
           <tr>
             <th style={{ fontWeight: 'bold' }}>Network Type</th>
             <th style={{ fontWeight: 'bold' }}>Chain ID</th>
-            <th style={{ fontWeight: 'bold' }}>Chain Name</th>
             <th style={{ fontWeight: 'bold' }}>Gateway Contract Address</th>
+            {/* <th style={{ fontWeight: 'bold' }}>Fee Payer Address</th> */}
           </tr>
         </thead>
         <tbody>
@@ -45,8 +45,8 @@ const APIData = ({ apiData }) => {
             <tr key={item.chainId}>
               <td>{item.networkType}</td>
               <td>{item.chainId}</td>
-              <td>{item.chainName}</td>
-              <td>{item.gatewayContractAddress}</td>
+              <td>{item.contractAddress}</td>
+              {/* <td>Your Address</td> */}
             </tr>
           ))}
         </tbody>
