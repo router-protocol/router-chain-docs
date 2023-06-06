@@ -88,16 +88,13 @@ Add the relevant keys in `.router-orchestrator/config.json`:
 }
 ```
 
-To g
-routerd keys unsafe-export-eth-key my-orchestrator-key --keyring-backend file
-
 - `chains` is an array of objects including info about all the chains you want to listen to as an orchestrator. This needs to be done only for external chains i.e. Router chain will not be part of the orchestrator chains config. For each chain, you need to provide:
     - `chainId` - the chain id of the network
     - `chainType` - the type of chain, possible values are:
         `CHAIN_TYPE_EVM`,
         `CHAIN_TYPE_COSMOS`,
         `CHAIN_TYPE_POLKADOT`,
-        `CHAIN_TYPE_SOLANO`,
+        `CHAIN_TYPE_SOLANA`,
         `CHAIN_TYPE_NEAR`
     - `chainName` - the name of the chain
     - `chainRpc` - the RPC endpoint of the chain
@@ -105,7 +102,7 @@ routerd keys unsafe-export-eth-key my-orchestrator-key --keyring-backend file
 
 - `globalConfig` includes global configuration details like:
     - `NETWORK_TYPE` - `testnet`
-    - `ETH_PRIVATE_KEY` - the private key of the wallet you created for the validator on EVM chains (not necessary to have have funds in this wallet, it will be used just for signing messages)
+    - `ETH_PRIVATE_KEY` - create a new account on metamask, you can use the private key of this wallet (not necessary to have have funds in this wallet, it will be used just for signing messages)
     - `COSMOS_PRIVATE_KEY` - the private key of the wallet you created for the orchestrator
 
 
@@ -178,11 +175,21 @@ After executing the aforementioned commands, your orchestrator instance will sta
 ```bash
 curl localhost:8001/health
 ```
-You can check the orchestrator and validator logs using the following commands:
+
+In case your health check is not working or you face any issue, you can check the orchestrator and validator logs using the following commands:
 
 ```bash
 sudo journalctl -u orchestrator.service -f
 sudo journalctl -u cosmovisor.service -f
+```
+
+</details>
+
+<details>
+<summary><b>Step 3.6) Check the health of orchestrator and validator</b></summary>
+
+```bash
+validator_health.sh $(routerd keys show <validator-node-key-name> -a --keyring-backend file --bech=val)
 ```
 
 </details>
