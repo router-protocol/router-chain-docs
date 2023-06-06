@@ -101,9 +101,13 @@ Lets say if you want to deploy your contract on Polygon Mumbai and Avalanche Fuj
 
 <APIData
   apiData={[
-    { apiUrl: 'https://lcd.testnet.routerchain.dev/router-protocol/router-chain/multichain/chain_config', networkType: 'Testnet' }
+    { apiUrl: 'https://lcd.testnet.routerchain.dev/router-protocol/router-chain/multichain/contract_config', networkType: 'Testnet' }
   ]}
 />
+
+:::info
+You can pass your own address (either your `0x` address or the corresponding Router chain address) as the `feePayerAddress`. Just make sure you have funds on the Router chain testnet. If not, you can get funds from our [faucet](https://faucet.testnet.routerchain.dev/).
+:::
 
 <p style={{ marginBottom: '50px' }}></p>
 
