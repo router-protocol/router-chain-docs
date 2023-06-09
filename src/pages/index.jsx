@@ -129,19 +129,19 @@ export default function Homepage() {
               <Card
                 title="Router Station"
                 description="A tool to manage contract lifecycle-related processes on the Router chain."
-                to="https://station.testnet.routerchain.dev/"
+                to="https://station.routerprotocol.com/"
                 icon={<Transaction />}
               />
               <Card
                 title="Router Faucet"
                 description="A tool to get testnet tokens for performing tasks on Testnet."
-                to="https://faucet.testnet.routerchain.dev/"
+                to="https://faucet.routerprotocol.com/"
                 icon={<AssetIcon />}
               />
               <Card
                 title="Router Hub"
                 description="A tool for delegating ROUTE tokens to validators."
-                to="https://hub.testnet.routerchain.dev/"
+                to="https://hub.routerprotocol.com/"
                 icon={<Contribute />}
               />
               <Card
@@ -193,7 +193,7 @@ export default function Homepage() {
               <Card
                 title="Router Faucet"
                 description="Get funds to interact with the Router chain."
-                to="https://faucet.testnet.routerchain.dev/"
+                to="https://faucet.routerprotocol.com/"
                 icon={<AssetIcon />}
               />
               <Card

@@ -16,14 +16,14 @@ Before setting up an account to interact with the Router chain, verify that the 
 
 -   [RPC Endpoint](https://lcd.testnet.routerchain.dev)
 
--   [Faucet](https://faucet.testnet.routerchain.dev)
+-   [Faucet](https://faucet.routerprotocol.com/)
 
 -   [Block Explorer](https://explorer.testnet.routerchain.dev)
 
 <details>
 <summary><b>Method 1: Via the UI</b></summary>
 
-**Step 1)** Go directly to the [Router station](https://station.testnet.routerchain.dev/) and click on **Add account**.
+**Step 1)** Go directly to the [Router station](https://station.routerprotocol.com/) and click on **Add account**.
 
 <center><img src={require('./img/setting-up-an-account/step-1.png').default} alt="Step 1" style={{width: 300, marginBottom: 12}}/></center>
 
@@ -39,7 +39,7 @@ Before setting up an account to interact with the Router chain, verify that the 
 Following this step, a new account will be created and displayed under the **Accounts** section.
 <center><img src={require('./img/setting-up-an-account/check-your-account.png').default} alt="Accounts" style={{width: 300, marginBottom: 12}}/></center>
 
-**Step 4)** Now, you can go to this [faucet](https://faucet.testnet.routerchain.dev/) to get some devnet tokens on the address generated in the previous step. 
+**Step 4)** Now, you can go to this [faucet](https://faucet.routerprotocol.com/) to get some devnet tokens on the address generated in the previous step. 
 </details>
 
 <details>
@@ -69,9 +69,9 @@ It is the only way to recover your account if you ever forget your password.
 state maple method glory expire draw eagle motor you kiss legend wild permit tank stumble seminar flag urge whisper edit arrow potato peasant height
 ```
 
-**Step 3)** Now, you can go to this [faucet](https://faucet.testnet.routerchain.dev/) to get some devnet tokens on the address generated in the previous step.
+**Step 3)** Now, you can go to this [faucet](https://faucet.routerprotocol.com/) to get some devnet tokens on the address generated in the previous step.
 
-**Step 4) [Optional]** Add this account to the [Router station](https://station.testnet.routerchain.dev/) by clicking on "Add account" and entering your mnemonic.
+**Step 4) [Optional]** Add this account to the [Router station](https://station.routerprotocol.com/) by clicking on "Add account" and entering your mnemonic.
 </details>
 
 
@@ -181,7 +181,7 @@ Now that we have the wasm binary ready, we can deploy it to the devnet and start
 <summary><b>Method 1: Via the UI</b></summary>
 
 ### Deploying and Instantiating the Contract
-**Step 1)** Go to the [Router station](https://station.testnet.routerchain.dev/) and click on **Add contract**.
+**Step 1)** Go to the [Router station](https://station.routerprotocol.com/) and click on **Add contract**.
 
 <center><img src={require('./img/deploying-a-contract/step-1.png').default} alt="Step 1" style={{width: 300, marginBottom: 12}}/></center>
 
@@ -203,7 +203,7 @@ Please do not cancel/refresh while the contract gets deployed and instantiated.
 
 ---
 ### Instantiating an Already Deployed Contract
-**Step 1)** Go to the [Router station](https://station.testnet.routerchain.dev/) and click on **Add contract**.
+**Step 1)** Go to the [Router station](https://station.routerprotocol.com/) and click on **Add contract**.
 
 **Step 2)** Choose the **From code** option and add your contract Code Id.
 <center><img src={require('./img/instantiating-a-contract/step-2.png').default} alt="Step 2" style={{width: 500, marginBottom: 12}}/></center>

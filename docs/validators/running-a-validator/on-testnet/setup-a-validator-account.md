@@ -47,7 +47,7 @@ Remember the address starting from `router`, this is the address of your Router
 <details>
 <summary><b>Step 2.2) Obtain ROUTE tokens</b></summary>
 
-Obtain ROUTE tokens on the Router chain from the [testnet faucet](https://faucet.testnet.routerchain.dev/).
+Obtain ROUTE tokens on the Router chain from the [testnet faucet](https://faucet.routerprotocol.com/).
 
 After a few minutes, you can verify the deposit on the [explorer UI](https://explorer.testnet.routerprotocol.com). Alternatively, account balance can be queried using the `routerd` CLI with the following command:
 
@@ -89,7 +89,7 @@ routerd tx staking create-validator \
 - `min-self-delegation` is the lowest amount of personal funds the validator is required to have in their validator to stay bonded
 - `from` flag is the KEY_NAME you created while initializing the key on your keyring
 
-Verify that the validator was successfully setup by checking the [staking dashboard](https://hub.testnet.routerchain.dev/staking) or by entering the CLI command given below.
+Verify that the validator was successfully setup by checking the [staking dashboard](https://hub.routerprotocol.com/staking) or by entering the CLI command given below.
 
 ```bash
 routerd query staking validator $(routerd keys show my-validator-key -a --keyring-backend file --bech=val) --chain-id router_9601-1 --keyring-backend file

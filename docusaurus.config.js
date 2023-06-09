@@ -247,7 +247,7 @@ const config = {
           },
           // {
           //   label: 'Launch Router Testnet',
-          //   href: 'https://station.testnet.routerchain.dev/',
+          //   href: 'https://station.routerprotocol.com/',
           //   position: 'right',
           //   className: 'dev-portal-signup dev-portal-link',
           // },

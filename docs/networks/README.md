@@ -17,7 +17,7 @@ The following APIs are recommended for development purposes.
 | **gRPC-gateway**      | https://grpc.testnet.routerchain.dev           | https://devnet.grpc.routerprotocol.com         |
 | **TM endpoint**       | https://tm.rpc.testnet.routerchain.dev         | https://devnet.tm.routerprotocol.com           |
 | **LCD endpoint**      | https://lcd.testnet.routerchain.dev            | https://devnet.lcd.routerprotocol.com          |
-| **Faucet UI**         | https://faucet.testnet.routerchain.dev         | https://devnet-faucet.routerprotocol.com       |
+| **Faucet UI**         | https://faucet.routerprotocol.com/             | https://devnet-faucet.routerprotocol.com       |
 | **Explorer UI**       | https://explorer.testnet.routerchain.dev       | https://devnet-explorer.routerprotocol.com     |
 | **Explorer endpoint** | https://explorer-api.testnet.routerchain.dev   | https://devnet-explorer-api.routerprotocol.com |
 

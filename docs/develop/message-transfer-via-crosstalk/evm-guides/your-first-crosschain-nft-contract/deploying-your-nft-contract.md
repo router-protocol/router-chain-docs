@@ -106,7 +106,7 @@ Lets say if you want to deploy your contract on Polygon Mumbai and Avalanche Fuj
 />
 
 :::info
-You can pass your own address (either your `0x` address or the corresponding Router chain address) as the `feePayerAddress`. Just make sure you have funds on the Router chain testnet. If not, you can get funds from our [faucet](https://faucet.testnet.routerchain.dev/).
+You can pass your own address (either your `0x` address or the corresponding Router chain address) as the `feePayerAddress`. Just make sure you have funds on the Router chain testnet. If not, you can get funds from our [faucet](https://faucet.routerprotocol.com/).
 :::
 
 <p style={{ marginBottom: '50px' }}></p>
@@ -139,7 +139,7 @@ Sometimes the contract deployment fails due to low gas fees, so make sure to edi
 
 ### **1)** Get funds in your wallet from Router-faucet
 
-Go to https://faucet.testnet.routerchain.dev, connect your metamask wallet, select network as `Testnet`, select token as `ROUTE`, paste your wallet address and get test tokens into your account.
+Go to https://faucet.routerprotocol.com, connect your metamask wallet, select network as `Testnet`, select token as `ROUTE`, paste your wallet address and get test tokens into your account.
 
 <center>
   <img
