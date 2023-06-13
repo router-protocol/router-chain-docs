@@ -5,7 +5,7 @@ sidebar_position: 3
 
 ## Part 1: Cloning & Compiling our Bridge Contract
 
-**Step 1)** Make sure that you have installed all the prerequisites mentioned <a href="../../../router-core/installing-prerequisites" target="_blank">here</a>.
+**Step 1)** Make sure that you have installed all the prerequisites mentioned <a href="../../../../router-core/installing-prerequisites" target="_blank">here</a>.
 
 **Step 2)** Clone this [repository](https://github.com/router-protocol/routerchain-e2e-tests) on your system:
 
