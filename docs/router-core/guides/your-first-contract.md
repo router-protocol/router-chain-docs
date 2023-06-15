@@ -8,7 +8,7 @@ This section will provide a step-by-step guide for first-time users to compile a
 
 
 ## Step 1) Installing Prerequisites
-If you haven't already, [kindly install the required tools/technologies to interact with the Router chain](../installing-prerequisites).
+If you haven't already, kindly [install the required tools/technologies](../installing-prerequisites) to interact with the Router chain.
 
 
 ## Step 2) Setting up an Account

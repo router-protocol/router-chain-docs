@@ -26,7 +26,7 @@ As mentioned earlier, if this function returns `true`, the execution of the user
 
 The ASM module can revert the request until it is able to validate/invalidate the request. This will ensure that the application-level validation is completed before a cross-chain request is executed on the Gateway contract and sent to the user's destination contract.
 
-Since this function can called from the Gateway contract only, it must have the following security check.
+Since this function can be called from the Gateway contract only, it must have the following security check.
 
 ```javascript
 require(msg.sender == <the Gateway contract address>, "Caller is not Gateway");

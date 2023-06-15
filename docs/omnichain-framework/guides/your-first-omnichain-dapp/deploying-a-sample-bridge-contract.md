@@ -67,7 +67,7 @@ Following this command, a new wasm binary will be created under the folder `arti
 
 **Step 1)** To deploy our contract, we first need an account with some gas tokens on the Router chain. Follow the guide given <a href="../../../router-core/guides/your-first-contract#step-2-setting-up-an-account" target="_blank">here</a> to set up a working account.
 
-**Step 2)** Once the wallet is set up and has some funds, go to the [Router station](https://devnet-router-station.routerprotocol.com/) and click on **Add contract**.
+**Step 2)** Once the wallet is set up and has some funds, go to the [Router station](https://station.routerprotocol.com/) and click on **Add contract**.
 
 **Step 3)** Choose the **From file** option and upload your `hello_router-aarch64.wasm`  file.
 

@@ -4,6 +4,7 @@
 Validators should be able to host one or more data center locations with redundant power, networking, firewalls, HSMs, and servers. The initial minimum recommended hardware specifications are specified below. These may change as network usage increases.
 
 ```jsx
+-> Ubuntu 22.04.x
 -> 4+ vCPU x64 2.0+ GHz
 -> 32+ GB RAM
 -> 1TB+ SSD

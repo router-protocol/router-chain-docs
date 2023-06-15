@@ -56,7 +56,7 @@ Following the previous step, you should be able to see Router EVM Testnet as one
 
 ---
 
-## Part 2: Importing a Wallet to Interact with the Devnet
+## Part 2: Importing a Wallet to Interact with the Testnet
 
 Now that we have added our network, it's time to import a wallet to interact with it. To do so, follow these steps:
 
