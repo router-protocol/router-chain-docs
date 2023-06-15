@@ -123,7 +123,7 @@ export default function Homepage() {
               <Card
                 title="Router Explorer"
                 description="A block explorer to monitor cross-chain transactions."
-                to="https://explorer.testnet.routerchain.dev/"
+                to="https://routerscan.io/"
                 icon={<IDEIcon />}
               />
               <Card
