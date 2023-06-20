@@ -5,7 +5,7 @@ The following is a list of tools available for the Router chain. Please make sur
 
 ### Block Explorers
 
-- [Router Testnet Explorer](https://explorer.testnet.routerchain.dev/)
+- [Router Testnet Explorer](https://routerscan.io/)
 - [Router Devnet Explorer](https://devnet-explorer.routerprotocol.com/)
 
 ### Faucets
