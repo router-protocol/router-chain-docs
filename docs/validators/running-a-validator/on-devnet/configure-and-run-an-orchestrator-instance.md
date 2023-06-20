@@ -14,6 +14,65 @@ cp network-config/devnet/10001/orchestrator-config.json ~/.router-orchestrator/c
 cd ~/.router-orchestrator
 ```
 
+Here is how the `config.json` file will look like:
+```json
+{
+    "chains": [
+        {
+            "chainId": "80001",
+            "chainType": " CHAIN_TYPE_EVM",
+            "chainName": "Mumbai",
+            "chainRpc": "",
+            "blocksToSearch": 1000,
+            "blockTime": "10s"
+        },
+        {
+            "chainId": "43113",
+            "chainType": " CHAIN_TYPE_EVM",
+            "chainName": "Fuji",
+            "chainRpc": "",
+            "blocksToSearch": 1000,
+            "blockTime": "10s"
+        },
+                {
+            "chainId": "534353",
+            "chainType": " CHAIN_TYPE_EVM",
+            "chainName": "scrollTestnet",
+            "chainRpc": "",
+            "blocksToSearch": 1000,
+            "blockTime": "5s"
+        },
+        {
+            "chainId": "5001",
+            "chainType": " CHAIN_TYPE_EVM",
+            "chainName": "mantleTestnet",
+            "chainRpc": "",
+            "blocksToSearch": 1000,
+            "blockTime": "5s"
+        },
+        {
+            "chainId": "421613",
+            "chainType": " CHAIN_TYPE_EVM",
+            "chainName": "ArbitrumGoerli",
+            "chainRpc": "",
+            "blocksToSearch": 1000,
+            "blockTime": "10s"
+        }
+    ],
+    "globalConfig": {
+        "mQEndpoint": "amqp://guest:guest@localhost",
+        "networkType": "testnet",
+        "dbPath": "processedblock.db",
+        "evmAddress": "",
+        "cosmosAddress": "",
+        "ethPrivateKey": "",
+        "cosmosPrivateKey": "",
+        "batchSize": 100,
+        "batchWaitTime": 15
+    }
+}
+```
+
 Update the `chainRpc` in the `config.json` file with valid EVM RPC endpoints for all the chains.
 
 Orchestrator also requires access to the validator's Cosmos and Ethereum credentials to sign transactions for the corresponding networks.

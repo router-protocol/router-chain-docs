@@ -2,8 +2,66 @@
 title: Step 3) Configure and Run an Orchestrator Instance
 sidebar_position: 3
 ---
-If you have followed the preceeding steps properly, you should already see an orchestrator config created at `~/.router-orchestrator/config.json`. Now, let's configure and run an orchestrator instance.
+If you have followed the preceeding steps properly, you should already see an orchestrator config created at `~/.router-orchestrator/config.json`. Here is how the `config.json` file will look like:
+```json
+{
+    "chains": [
+        {
+            "chainId": "80001",
+            "chainType": " CHAIN_TYPE_EVM",
+            "chainName": "Mumbai",
+            "chainRpc": "",
+            "blocksToSearch": 1000,
+            "blockTime": "10s"
+        },
+        {
+            "chainId": "43113",
+            "chainType": " CHAIN_TYPE_EVM",
+            "chainName": "Fuji",
+            "chainRpc": "",
+            "blocksToSearch": 1000,
+            "blockTime": "10s"
+        },
+                {
+            "chainId": "534353",
+            "chainType": " CHAIN_TYPE_EVM",
+            "chainName": "scrollTestnet",
+            "chainRpc": "",
+            "blocksToSearch": 1000,
+            "blockTime": "5s"
+        },
+        {
+            "chainId": "5001",
+            "chainType": " CHAIN_TYPE_EVM",
+            "chainName": "mantleTestnet",
+            "chainRpc": "",
+            "blocksToSearch": 1000,
+            "blockTime": "5s"
+        },
+        {
+            "chainId": "421613",
+            "chainType": " CHAIN_TYPE_EVM",
+            "chainName": "ArbitrumGoerli",
+            "chainRpc": "",
+            "blocksToSearch": 1000,
+            "blockTime": "10s"
+        }
+    ],
+    "globalConfig": {
+        "mQEndpoint": "amqp://guest:guest@localhost",
+        "networkType": "testnet",
+        "dbPath": "processedblock.db",
+        "evmAddress": "",
+        "cosmosAddress": "",
+        "ethPrivateKey": "",
+        "cosmosPrivateKey": "",
+        "batchSize": 100,
+        "batchWaitTime": 15
+    }
+}
+```
 
+Now, let's configure and run an orchestrator instance.
 <!-- Before proceeding with this step, make sure that you are running a validator. If note, follow [this guide](./setup-a-validator-account) to become a validator. -->
 
 <details>
