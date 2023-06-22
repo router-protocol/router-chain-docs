@@ -13,7 +13,7 @@ solution to the problem of blockchain interoperability. Apart from validating st
 chain, validators running on the Router chain can also monitor state changes on other chains. Applications
 on the Router chain can write custom logic to trigger events in response to these external state changes.
 Additionally, applications on the Router chain can leverage a trustless network of relayers to update
-states on external chains. Simply put, the Router architecture allows contracts on one chain to interact
+states on external chains. The Router architecture allows contracts on one chain to interact
 with contracts on other chains in a secure and decentralized manner. 
 <!-- More details regarding the Router
 chain and how it enables cross-chain communication are given in the following sections. -->
