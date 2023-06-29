@@ -43,7 +43,7 @@ const SECTIONS = [
   // defineSection('message-transfer'),
   // defineSection('frontend'),
   // defineSection('beaker'),
-  defineSection('telescope'),
+  // defineSection('telescope'),
   defineSection('learn'),
   defineSection('validators'),
   defineSection('discover'),
@@ -357,16 +357,6 @@ const config = {
       liveCodeBlock: {
         playgroundPosition: 'bottom',
       },
-      // algolia: {
-      //   appId: '2CBDVP21VK',
-      //   apiKey: 'd983fd8603756b134758592e0334d240',
-      //   indexName: 'Docs',
-      //   contextualSearch: true,
-      //   searchParameters: {},
-      // },
-      // posthog: {
-      //   apiKey: '00',
-      // },
     }),
 };
 

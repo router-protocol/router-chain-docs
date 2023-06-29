@@ -54,18 +54,6 @@ Following the previous step, you should be able to see Router EVM Testnet as one
 
 ---
 
-## Part 2: Importing a Wallet to Interact with the Devnet
+## Part 2: Creating a Wallet to Interact with the Devnet
 
-Now that we have added our network, it's time to import a wallet to interact with it. To do so, follow these steps:
-
-**Step 1)** Click on **Import Account**.
-
-**Step 2)** Paste the private key given below and click on **Import**.
-
-```
-{
-    PRIVATE_KEY: 982e38580b1d24d1c7de91de112f89f200e09e31395837dfbaf5a62d9fbe44f7
-}
-```
-
-Post this step, you should be able to see this account in your MetaMask wallet: `0x33B4A007EcC80Bc99578c18Da07da704c5403236`
+Now that we have added our network, it's time to import a wallet to interact with it. To do so, follow the guide given <a href="/router-core/guides/your-first-contract#step-2-setting-up-an-account" target="_blank">here</a>.

@@ -19,7 +19,7 @@ cp config.example.json config.json
 
 #### Step 3) Set the relevant paths and environment
 In the **`config.json`** file, you will have a key named `meta`.
-- Set up the paths for the public key `rsaPublic` and the private key `rsaPrivate`.
+- Set up the paths for the public key `rsaPublic` and the  key `rsa`.
 - Config files are picked based on environment. To run locally, set the env to `local`.
 
 #### Step 4) Set the configurations
