@@ -28,7 +28,7 @@ cd routerchain-e2e-tests/middleware
 docker run --rm -v "$(pwd)":/code \
   --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/workspace-optimizer:0.12.6
+  cosmwasm/workspace-optimizer:0.12.13
 ```
 
 </details>
@@ -40,7 +40,7 @@ docker run --rm -v "$(pwd)":/code \
 docker run --rm -v "$(pwd)":/code \
   --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/workspace-optimizer-arm64:0.12.6
+  cosmwasm/workspace-optimizer-arm64:0.12.13
 ```
 
 </details>
@@ -52,7 +52,7 @@ docker run --rm -v "$(pwd)":/code \
 docker run --rm -v ${pwd}:/code `
   --mount type=volume,source="$("$(Split-Path -Path $pwd -Leaf)")_cache",target=/code/target `
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry `
-  cosmwasm/rust-optimizer:0.12.6e
+  cosmwasm/rust-optimizer:0.12.13
 ```
 
 </details>
@@ -73,7 +73,7 @@ Following this command, a new wasm binary will be created under the folder `arti
 
 <center><img src={require('./images/deploying-a-sample-bridge-contract/step-3.png').default} alt="Step 3" style={{ width: 300, marginBottom: 12 }} /></center>
 
-> **Warning:** You'll find this file in this directory: ***routerchain-e2e-tests/middleware/artifacts/***
+> **Warning:** You'll find this file in this directory: ***_routerchain-e2e-tests/middleware/artifacts/***
 
 **Step 4)** Add a label and an empty JSON as the instantiation message:
 
