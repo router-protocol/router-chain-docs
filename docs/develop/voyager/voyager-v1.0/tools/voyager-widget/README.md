@@ -57,6 +57,7 @@ Generate the paramString (as given in the example above) and attach it to the sr
 | textColor	| Color of all the text in the widget |
 | backgroundColor |	Background color of the widget |
 | logoURI |	Circular logo URL - if not given, the original Router logo will be shown |
+| slippageTolerance |	Default slippage tolerance for cross-chain swaps |
 
 ### Restricting chains/tokens
 There might also be a few cases in which a platform wants to show a selected list of chains or tokens for its users. With Router's widget, partners can do this by adding a few parameters. An example with restricted parameters -
