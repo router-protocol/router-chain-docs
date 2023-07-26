@@ -13,7 +13,7 @@ Voyager v1.0 is a cross-chain swapping engine that facilitates cross-chain asset
 
 In addition to asset transfers, Voyager v1.0 also allows users to perform operations after the transfer of tokens is executed on the destination chain without any external triggers. This opens up an ocean of possibilities for the emerging chain-agnostic future.
 
-## About Voyager v2.0
+<!-- ## About Voyager v2.0
 
 ## Differences between Voyager v1.0 and v2.0
 | Version               | v1.0                                        | v2.0                                         |
@@ -25,4 +25,4 @@ In addition to asset transfers, Voyager v1.0 also allows users to perform operat
 | **Time Taken for Asset Transfers**      | 2-5 minutes          | Under 2 minutes       |
 | **Sequenced Requests**      | Yes          | No        |
 
-
+ -->
