@@ -1,9 +1,9 @@
 ---
-title: Token Transfer using Voyager Contracts
+title: Asset Transfers
 sidebar_position: 1
 ---
 
-As we discussed in the previous section, the Voyager allows us to transfer tokens as well as sequence token transfers and arbitrary instructions. In this section, we will explore how you can integrate the Voyager into your smart contracts for cross-chain token transfers.
+As we discussed in the previous section, Voyager allows us to transfer/swap assets between chains. In this section, we will explore how you can integrate Voyager into your smart contracts for cross-chain token transfers.
 
 The functions that can be called on the Voyager for cross-chain token transfers are:
 
@@ -11,11 +11,11 @@ The functions that can be called on the Voyager for cross-chain token transfers 
 2. depositLPToken
 3. depositNonReserveToken
 
-While you can definitely integrate only one of these functionalities into your contracts according to your needs, we suggest you to use the call with selector method to be able to call any of these functions from your contracts.
+While you can definitely integrate only one of these functionalities into your contracts according to your needs, we suggest you to use the call with the selector method to be able to call any of these functions from your contracts.
 
 ### Getting the data for the token transfer
 
-We will provide an API for the developers which will provide you the calldata for the swap directly. You won’t need to do anything, just call the API, get the data and call the Voyager using that data.
+We will provide an API for the developers which will provide the calldata for the swap directly. You can call the API, get the data, and call Voyager using that data.
 
 The params for the API call are: 
 

@@ -49,8 +49,8 @@ export function HomepageCard({ id, icon, svgFile, title, description, to, bottom
           </div>
           <div className="description">{description}</div>
           </div>
+          <div className="bottomText" style={{textAlign: "left", margin: "5 auto"}}>{bottomText}</div>
       </div>
-      <div className="bottomText" style={{textAlign: "center", margin: "0 auto"}}>{bottomText}</div>
     </Link>
   );
 }

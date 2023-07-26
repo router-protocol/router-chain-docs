@@ -1,6 +1,6 @@
 ---
 title: List of Reserve and LP Tokens
-sidebar_position: 8
+sidebar_position: 4
 ---
 
 ## Testnet Addresses

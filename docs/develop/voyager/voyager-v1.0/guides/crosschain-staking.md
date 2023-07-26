@@ -1,9 +1,7 @@
 ---
-title: Staking Contract using Voyager
+title: Cross-chain Staking dApp
 sidebar_position: 1
 ---
-
-# Cross-Chain Staking Dapp
 
 In this section, we shall create a simple cross-chain staking dapp using the voyager sequencer. We shall follow the instructions provided in the previous section to create the same. It consists of two smart contracts: **Vault** and **Stake**.
 
@@ -11,7 +9,7 @@ In this section, we shall create a simple cross-chain staking dapp using the voy
 **Stake** contract manages the staked tokens balance on the destination side. In other words, Stake contract is the fund and state manager of the Vault contract.
 
 <details>
-<summary><b>VAULT CONTRACT</b></summary>
+<summary><b>Vault Contract</b></summary>
 
 #### Installing the dependencies
 
@@ -20,7 +18,7 @@ Install the openzeppelin contracts by running the following command:
 
 #### Instantiating the contract
 
-```solidity
+```javascript
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
@@ -44,7 +42,7 @@ For your information:
 
 #### Creating state variables and the constructor
 
-```solidity
+```javascript
 using SafeERC20 for IERC20;
 IStake public stakingContract;
 
@@ -73,11 +71,11 @@ constructor(address _voyagerDepositHandler, address _voyagerExecuteHandler)
 
 1. `stakingContract`: This is the instance of our `Stake` contract which will manage the state and balance of funds in both kind of transfers: same chain as well as cross-chain.
 2. `voyagerDeposithandler` & `voyagerExecuteHandler` : These are the variables created for storing the addresses of Deposit and Execute handlers. We will be using Deposit Handler for calling the voyager that initiates the cross-chain sequenced transfer on the source side using function selectors of `voyagerDeposithandler` and Execute Handler for validating if the transaction is triggered on the destination side by Execute Handler only.
-3. `ourContractsOnChain` : This is the mapping that stores the address of the vault contract corresponding to the destination chain Id identifiers which can be found [here](../tools/configurations/chain-id-identifiers.md).
+3. `ourContractsOnChain` : This is the mapping that stores the address of the vault contract corresponding to the destination chain Id identifiers which can be found [here](../configurations/chain-id-identifiers).
 4. `DEPOSIT_RESERVE_AND_EXECUTE_SELECTOR, DEPOSIT_NON_RESERVE_AND_EXECUTE_SELECTOR & DEPOSIT_LP_AND_EXECUTE_SELECTOR` : These are the selectors of various functions in `voyagerDeposithandler` which assist us to identify the type of token transfer(whether it is a reserve token, non-reserve token or a LP token).
 5. `STAKE_FUNCTION_SELECTOR` : This is the selector of the function that is called whenever a cross-chain call is received on the destination chain. This is the function for your reference:
 
-```solidity
+```javascript
 function receiveStakeCrossChain(
         address _user,
         address _token,
@@ -91,7 +89,7 @@ function receiveStakeCrossChain(
 
 #### Function to set the Staking contract
 
-```solidity
+```javascript
 function setStakingContract(address _stakingContract)
         external
         onlyRole(DEFAULT_ADMIN_ROLE)
@@ -104,7 +102,7 @@ Our Vault contract on every chain must know the address of its corresponding Sta
 
 #### Function to store the addresses of Vault contracts deployed on other chains
 
-```solidity
+```javascript
 function setContractsOnChain(bytes32 chainIdBytes, address contractAddr) external onlyRole(DEFAULT_ADMIN_ROLE) {
         ourContractsOnChain[chainIdBytes] = contractAddr;
     }
@@ -114,7 +112,7 @@ Our Vault contract on every chain must know the addresses of its counterparts on
 
 #### Function to approve Stake contract to safely transfer funds from Vault
 
-```solidity
+```javascript
 function approve(address token, address spender, uint256 amount) external onlyRole(DEFAULT_ADMIN_ROLE) {
         IERC20(token).approve(spender, amount);
     }
@@ -124,7 +122,7 @@ Whenever a cross-chain transfer happens and funds are received by Vault contract
 
 #### \*Function to convert a variable of type `address` to type `bytes`
 
-```solidity
+```javascript
 function toBytes(address addr) internal pure returns (bytes memory b) {
         assembly {
             let m := mload(0x40)
@@ -140,7 +138,7 @@ function toBytes(address addr) internal pure returns (bytes memory b) {
 
 #### Function that enables cross-chain sequenced transfers
 
-```solidity
+```javascript
 function stakeCrossChain(
         bytes4 selector,
         bool isSourceNative,
@@ -200,7 +198,7 @@ Let us understand the parameters of `stakeCrossChain` function one by one:
 
 #### Function that receives the cross-chain call and executes the Stake function on destination chain
 
-```solidity
+```javascript
 function voyagerReceive(
         address sourceSenderAddress,
         bytes32 srcChainIdBytes,
@@ -238,11 +236,11 @@ It is the `voyagerReceive` function that:
 </details>
 
 <details>
-<summary><b>ISTAKE</b></summary>
+<summary><b>IStake</b></summary>
 
 It is the interface for our Stake contract. Find the code snippet below:
 
-```solidity
+```javascript
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
@@ -264,7 +262,7 @@ interface IStake {
 </details>
 
 <details>
-<summary><b>STAKE CONTRACT</b></summary>
+<summary><b>Stake Contract</b></summary>
 
 #### Installing the dependencies
 
@@ -273,7 +271,7 @@ Install the openzeppelin contracts by running the following command:
 
 #### Instantiating the contract
 
-```solidity
+```javascript
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
@@ -296,7 +294,7 @@ For your information:
 
 #### Creating State variables and the constructor
 
-```solidity
+```javascript
     using SafeERC20 for IERC20;
     using SafeMath for uint256;
     address public immutable vault;
@@ -315,7 +313,7 @@ For your information:
 
 #### Modifier onlyVault()
 
-```solidity
+```javascript
 modifier onlyVault() {
         require(msg.sender == vault, "Only Vault");
         _;
@@ -326,7 +324,7 @@ We shall add this modifier to our main functions `stake` and `unstake` because w
 
 #### Function to Stake
 
-```solidity
+```javascript
 function stake(
         address user,
         address token,
@@ -350,7 +348,7 @@ This function:
 
 #### Function to Unstake
 
-```solidity
+```javascript
 function unstake(
         address user,
         address token,
@@ -371,9 +369,9 @@ This is how we created a simple Cross-chain Staking Dapp using Router's Voyager.
 </details>
 
 <details>
-<summary><b> END-TO-END VAULT CONTRACT</b></summary>
+<summary><b> End-to-end Vault Contract</b></summary>
 
-```solidity
+```javascript
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
@@ -518,9 +516,9 @@ contract Vault is AccessControl {
 </details>
 
 <details>
-<summary><b>END-TO-END STAKE CONTRACT</b></summary>
+<summary><b>End-to-end Stake Contract</b></summary>
 
-```solidity
+```javascript
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
@@ -574,16 +572,26 @@ contract Stake is IStake {
 </details>
 
 <details>
-<summary><b>DEPLOYED CONTRACTS FOR REFERENCE</b></summary>
+<summary><b>Deployed Contracts for Reference</b></summary>
 
-**Polygon Mumbai Testnet:**
-**Vault**: [https://mumbai.polygonscan.com/address/0x92c618b8e726d4645e2614959acd15eec3363076](https://mumbai.polygonscan.com/address/0x92c618b8e726d4645e2614959acd15eec3363076)
+**Polygon Mumbai Testnet**
 
-**Stake**: [https://mumbai.polygonscan.com/address/0xd5b007b13ed9ad0dc6cd41714ea71408c66ed28d](https://mumbai.polygonscan.com/address/0xd5b007b13ed9ad0dc6cd41714ea71408c66ed28d)
+<u>Vault</u>
 
-**Avalanche Fuji Testnet:**
-**Vault**: [https://testnet.snowtrace.io/address/0xB3793af97Ef6BDF7b794F1Ed22B7A8bd056706C7](https://testnet.snowtrace.io/address/0xB3793af97Ef6BDF7b794F1Ed22B7A8bd056706C7)
+[https://mumbai.polygonscan.com/address/0x92c618b8e726d4645e2614959acd15eec3363076](https://mumbai.polygonscan.com/address/0x92c618b8e726d4645e2614959acd15eec3363076)
 
-**Stake**: [https://testnet.snowtrace.io/address/0x1c13a59ddaDb2deaBAf488e0bBFc9254DCe59F9b](https://testnet.snowtrace.io/address/0x1c13a59ddaDb2deaBAf488e0bBFc9254DCe59F9b)
+<u>Stake</u>
+
+[https://mumbai.polygonscan.com/address/0xd5b007b13ed9ad0dc6cd41714ea71408c66ed28d](https://mumbai.polygonscan.com/address/0xd5b007b13ed9ad0dc6cd41714ea71408c66ed28d)
+
+**Avalanche Fuji Testnet**
+
+<u>Vault</u>
+
+[https://testnet.snowtrace.io/address/0xB3793af97Ef6BDF7b794F1Ed22B7A8bd056706C7](https://testnet.snowtrace.io/address/0xB3793af97Ef6BDF7b794F1Ed22B7A8bd056706C7)
+
+<u>Stake</u>
+
+[https://testnet.snowtrace.io/address/0x1c13a59ddaDb2deaBAf488e0bBFc9254DCe59F9b](https://testnet.snowtrace.io/address/0x1c13a59ddaDb2deaBAf488e0bBFc9254DCe59F9b)
 
 </details>
