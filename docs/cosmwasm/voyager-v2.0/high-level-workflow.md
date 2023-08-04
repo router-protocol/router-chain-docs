@@ -3,13 +3,13 @@ title: High-level Workflow
 sidebar_position: 1
 ---
 
-In the case of Voyager v2.0, instead of locking/unlocking funds, we use permissionless entities called **Forwarders** to transfer tokens. Once a cross-chain token transfer request is initiated by the user on the source chain Voyager contract, a Forwarder will pick up the event corresponding to the request and provide user with that token on the desired destination chain. At a later time, the forwarded can claim the user-deposited token from chain A. Step-by-step flow for the entire process is given below:
+In the case of Voyager v2.0, instead of locking/unlocking funds, we use permissionless entities called **Forwarders** to transfer tokens. Once a cross-chain token transfer request is initiated by the user on the source chain Voyager contract, a Forwarder will pick up the event corresponding to the request and provide the user with that token on the desired destination chain. At a later time, the forwarded can claim the user-deposited token from chain A. Step-by-step flow for the entire process is given below:
 
 <center><figure><img src={require('./img/trustless-voyager.png').default} alt="Voyager v2.0 Workflow" style={{width: "100%", marginBottom: 12}} /><figcaption>High-level workflow of Voyager v2.0</figcaption></figure></center>
 
 **Step 1)** User invokes the Voyager contract to transfer funds from Chain A (source) to Chain B (destination).
 
-**Step 2)** The Voyager contract will validate the request, deduct funds from the user's account, increment event nonce and emit an `CrosschainTransferRequest` event. The event includes the following details: 
+**Step 2)** The Voyager contract will validate the request, deduct funds from the user's account, increment event nonce and emit a `CrosschainTransferRequest` event. The event includes the following details: 
 - `SrcChainId`
 - `EventNonce`
 - `DestChainId`
@@ -35,5 +35,5 @@ In the case of Voyager v2.0, instead of locking/unlocking funds, we use permissi
 
 **Step 7)** Upon 2/3+1 validation, the Router chain will invoke the middleware Voyager contract with the event info. Upon receiving the `CrosschainTransferExecuted` event, the middleware contract will mark the request as **Completed** and persist the Forwarder address and amount.
 
-**Step 8)** Once the request is marked as completed, the Forwarder can claim its (funds + reward) by triggering an outbound request. The outbound request gets processed via the Router chain and existing Gateway contracts. The Gateway contract will invoke the source chain Voyager contract which will settle the funds for Forwarder.
+**Step 8)** Once the request is marked as completed, the Forwarder can claim its (funds + reward) by triggering an outbound request. The outbound request gets processed via the Router chain and existing Gateway contracts. The Gateway contract will invoke the source chain Voyager contract, which will settle the funds for Forwarder.
 
