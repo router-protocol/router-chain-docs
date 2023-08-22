@@ -99,4 +99,32 @@ If you see your validator in the list of validators, then congratulations, you h
 
 </details>
 
+
+<details>
+<summary><b>Step 2.4) Backing up the validator keys</b></summary>
+
+### 1. Validator Private Key
+The private key of the validator is a crucial secret key that establishes the ownership of your validator. It is used by the node to sign blocks and engage in the consensus process, among other functions. You can find this file at:
+
+```
+$routerd_home/config/priv_validator_key.json
+```
+
+:::tip
+Usually `$routerd_home` is `~/.routerd`
+:::
+
+### 2. Node key
+This key is used to derive the node ID for your validator. If you back up this key, it simplifies the process when relocating or restoring your node, as there's no need to update the node ID in the configuration files of any connected peers.
+
+This is particularly handy if you're operating several nodes, like a sentry or seed node. You can find this at:
+
+```bash
+$routerd_home/config/node_key.json
+```
+
+Once you have backed up these files, using the same keys, you can restore your validator node on a new machine.
+
+</details>
+
 After setting up the validator, immediately proceed to setup the orchestrator. This is a necessary step in order to prevent the validator from being slashed.
