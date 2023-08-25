@@ -275,7 +275,7 @@ const config = {
               },
               {
                 label: 'Explorer',
-                href: 'https://routerscan.io/',
+                href: 'https://explorer.testnet.routerchain.dev',
               },
               {
                 label: 'Careers',
