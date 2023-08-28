@@ -39,7 +39,7 @@ Let’s start with a simple token transfer and stake functionality where user wi
 
 Let’s say you want to create a function to transfer your funds and then stake it on another chain, then you will need to create a function to create that request on the source chain and a function to handle that request on the destination chain.
 
-Let’s create a function to create that request on the source chain. For the details regarding the Arbitrary Data that needs to be generated, please check [this](../voyager-v1.0/transfer-reserve-token-arbitrary-instruction#arbitrary-data).
+Let’s create a function to create that request on the source chain. For the details regarding the Arbitrary Data that needs to be generated, please check [this](../different-functions/transfer-reserve-token-arbitrary-instruction#arbitrary-data).
 
 The arbitrary data consists of six fields:
 
@@ -122,7 +122,7 @@ function callVoyager(
 
 ### Handling the request on the destination chain contract
 
-The entry point of the cross-chain request for arbitrary instructions is the **voyagerReceive** function which needs to be implemented on each contract that wants to handle an arbitrary instruction from the Voyager. The detailed explanation for this function can be found [here](../voyager-v1.0/transfer-reserve-token-arbitrary-instruction#voyagerreceive).
+The entry point of the cross-chain request for arbitrary instructions is the **voyagerReceive** function which needs to be implemented on each contract that wants to handle an arbitrary instruction from the Voyager. The detailed explanation for this function can be found [here](../different-functions/transfer-reserve-token-arbitrary-instruction#voyagerreceive).
 
 ```javascript
 function voyagerReceive(
