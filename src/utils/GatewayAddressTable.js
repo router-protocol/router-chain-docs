@@ -11,9 +11,10 @@ const APIData = ({ apiData }) => {
   const fetchData = async () => {
     try {
       const networkType = apiData[0].networkType;
+      const contractType = apiData[0].contractType;
       const contractConfigPromise = axios.get(apiData[0].contractConfigUrl);
       const chainConfigPromise = axios.get(apiData[0].chainConfigUrl);
-
+      
       const [contractConfigResponse, chainConfigResponse] = await Promise.all([contractConfigPromise, chainConfigPromise]);
 
       if (!contractConfigResponse || !contractConfigResponse.data || !chainConfigResponse || !chainConfigResponse.data) {
@@ -37,8 +38,9 @@ const APIData = ({ apiData }) => {
         }
         return item1;
       });
-      console.log(combinedData)
-      setData(combinedData);
+
+      const filteredData = combinedData.filter(item => item.contractType === contractType && item.contract_enabled === true)
+      setData(filteredData);
     } catch (error) {
       console.log(error);
     }
@@ -58,7 +60,7 @@ const APIData = ({ apiData }) => {
         </thead>
         <tbody>
           {data.map((item) => (
-            <tr key={item.chainId}>
+            <tr key={item.chainId + '-' + item.contractType}>
               <td>{item.networkType}</td>
               <td>{item.chainId}</td>
               <td>{item.chainName}</td>
