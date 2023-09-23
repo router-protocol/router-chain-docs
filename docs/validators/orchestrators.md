@@ -14,9 +14,13 @@ At a high level, a Router orchestrator works like a funnel that gathers events f
 
 <center><img src={require('./img/orchestrator.png').default} alt="Orchestrator Architecture"  style={{ width: 700, marginBottom: 12 }} /></center>
 
-- **Listener:** The listener module of an orchestrator listens to events emitted from specific chains based on the **`chainType`** parameter in the configuration provided to it. Listeners operate as threads (goroutines) under an orchestrator. All listeners subscribe to multiple types of events - a regular iSend (cross-chain send) event, an iRecieve (cross-chain receive) event, and an iAck (acknowledgment) event. Once the listener module receives an event, it waits for the preconfigured amount of network confirmations (for example, 3 network confirmations for requests originating from Mumbai/Fuji) before parsing it into a message. Once the message is prepared, the listener adds it to a queue.
-- **Queue:** The queue is used to store and deliver transformed messages to consumers (dispatchers) in a first-in-first-out manner while ensuring that duplicate messages are automatically discarded.
-- **Dispatcher:** The dispatcher module is essentially responsible for streamlining the incoming requests by (a) listening to the queue, (b) signing the messages, and (c) broadcasting them to the Router chain.  
+- **Listener:** The listener module of an orchestrator listens to events emitted from specific chains based on the **`chainType`** parameter in the configuration provided to it. Listeners operate as threads (goroutines) under an orchestrator. All listeners subscribe to multiple types of events - a regular iSend (cross-chain send) event, an iRecieve (cross-chain receive) event, and an iAck (acknowledgment) event. Once the listener module receives an event, it waits for the preconfigured amount of network confirmations (for example, 10 network confirmations for requests originating from Mumbai/Fuji) before parsing it into a message. Once the message is prepared, the listener adds it to a transaction queue sequence database.
+- **Attester:** For any request originating from the Router chain, attestations are required. The attester module will query the chain to fetch such requests, attest them, and add them to the no sequence database queue.  
+- **DB Queue:** The queue is used to store and deliver transformed messages to consumers (dispatchers) in a first-in-first-out manner while ensuring that duplicate messages are discarded. 
+  - **Sequence DB:** Requests present in this DB should be processed sequentially (sorted by nonce).
+  - **No sequence DB:** Requests present in this DB can be process in any sequence. 
+- **Dispatcher:** The dispatcher module is essentially responsible for streamlining the incoming requests by (a) listening to the queue, (b) batching the transaction (c) signing the messages, and (d) broadcasting them to the Router chain.  
+.  
 
 <!-- As mentioned above, orchestrators also verify the processed requests. To do so, an orchestrator has to listen to the transactions occurring on the Router chain. -->
 

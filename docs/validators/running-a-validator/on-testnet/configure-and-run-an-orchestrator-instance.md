@@ -169,6 +169,35 @@ To obtain the orchestrator's `COSMOS_PRIVATE_KEY`, run 
 routerd keys unsafe-export-eth-key my-orchestrator-key --keyring-backend file
 ```
 
+### For Listening to NEAR Transactions
+
+To access the data provided by [NEAR Lake](/tools/realtime#near-lake-indexer) you need to provide valid AWS credentials in order to be charged by the AWS for the S3 usage.
+
+:::info AWS-cli
+We will require AWS CLI to access to query S3. If you don't have AWS CLI, please follow these steps. [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+:::
+
+### AWS S3 Credentials
+To be able to get objects from the AWS S3 bucket you need to provide the AWS credentials.
+AWS default profile configuration with aws configure looks similar to the following:
+```
+~/.aws/credentials
+```
+```
+[default]
+aws_access_key_id=AKIAIOSFODNN7EXAMPLE
+aws_secret_access_key=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+```
+[AWS docs: Configuration and credential file settings](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
+
+#### Environment variables
+Alternatively, you can provide your AWS credentials via environment variables with constant names:
+```
+$ export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+$ AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+$ AWS_DEFAULT_REGION=eu-central-1
+```
+
 
 Sample `.router-orchestrator/config.json`:
 ```json
@@ -189,6 +218,14 @@ Sample `.router-orchestrator/config.json`:
             "chainRpc": "<RPC_URL>",
             "blocksToSearch": 1000,
             "blockTime": "10s"
+        },
+        {
+            "chainId": "nearTestnet",
+            "chainType": " CHAIN_TYPE_NEAR",
+            "chainName": "nearTestnet",
+            "chainRpc": "<RPC_URL>",
+            "blocksToSearch": 1000,
+            "blockTime": "2s"
         }
     ],
     "globalConfig": {
