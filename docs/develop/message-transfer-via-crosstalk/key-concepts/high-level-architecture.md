@@ -39,5 +39,7 @@ EthereumIcon
 **Step 10)** The Gateway contract on the source chain sends the ack to the application's source chain contract. 
 
 
-
+:::info
+The Router chain adds expiry block height to all the blocked crosschain and crosschain ack requests. Once the expiry block height is passed, the blocked requests are moved to expired state, thereby stopping further reattempts to execute that request.
+:::
 
