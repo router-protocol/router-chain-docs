@@ -3,7 +3,7 @@ title: Cross-chain Staking dApp
 sidebar_position: 1
 ---
 
-In this section, we shall create a simple cross-chain staking dapp using the voyager sequencer. We shall follow the instructions provided in the previous section to create the same. It consists of two smart contracts: **Vault** and **Stake**.
+In this section, we shall create a simple cross-chain staking dapp using the Voyager sequencer. We shall follow the instructions provided in the previous section to create the same. It consists of two smart contracts: **Vault** and **Stake**.
 
 **Vault** contract enables the user to first transfer his funds from chain A to chain B and then stake them on chain B.
 **Stake** contract manages the staked tokens balance on the destination side. In other words, Stake contract is the fund and state manager of the Vault contract.

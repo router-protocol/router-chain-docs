@@ -7,7 +7,7 @@ import APIData from '../../../../../src/utils/GatewayAddressTable';
 
 This section describes how to deploy your NFT smart contract on different EVM-chains and test it by actually transferring your NFTs cross-chain.
 
-## **STEP 3)** Deploy your NFT Contract
+## **Part 3)** Deploy your NFT Contract
 
 ### 1) Add networks to metamask
 
@@ -61,7 +61,7 @@ This section describes how to deploy your NFT smart contract on different EVM-ch
   />
 </center>
 
-**Step 5)** Copy the smart contract mentioned in STEP 1) and paste it into **XERC1155.sol**.
+**Step 5)** Copy the smart contract mentioned in Part 1) and paste it into **XERC1155.sol**.
 
 **Step 6)** Click on the **Solidity compiler** icon (the one shaped like an S), check that your compiler version is within the versions specified in the pragma solidity statement, and click on **Compile HelloRouter.sol**.
 
@@ -137,7 +137,7 @@ Sometimes the contract deployment fails due to low gas fees, so make sure to edi
   />
 </center>
 
-## **STEP 4)** Fee-payer approval and contract configuration
+## **Part 4)** Fee-payer approval and contract configuration
 
 ### **1)** Get funds in your wallet from Router-faucet
 
@@ -206,7 +206,7 @@ Let's say you deployed your contract on Polygon Mumbai and Avalanche Fuji, you n
   />
 </center>
 
-## **STEP 5)** Test your Cross-chain NFT Contract
+## **Part 5)** Test your Cross-chain NFT Contract
 
 ### **1)** Get request metadata
 

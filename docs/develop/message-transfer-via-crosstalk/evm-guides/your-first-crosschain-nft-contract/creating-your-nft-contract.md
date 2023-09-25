@@ -5,7 +5,7 @@ sidebar_position: 1
 
 To create cross-chain applications using the Router infrastructure, users will have to build and deploy application contracts on various third-party chains. This section describes how to create a cross-chain NFT smart contract.
 
-## **STEP 1)** Create your Solidity smart contract
+## **Part 1)** Create your Solidity smart contract
 
 We simply inherit Openzeppelin's implementations of popular standard ERC1155, and extend the behavior to our needs. To make NFT cross-chain, we import Router Protocol's evm-gateway-contracts and utilise them as shown in the following code.
 
@@ -197,7 +197,7 @@ contract XERC1155 is ERC1155, IDapp {
 }
 ```
 
-## **STEP 2)** Cross-Chain functions in brief
+## **Part 2)** Cross-Chain functions in brief
 
 ### **1)** transferCrossChain Function
 
