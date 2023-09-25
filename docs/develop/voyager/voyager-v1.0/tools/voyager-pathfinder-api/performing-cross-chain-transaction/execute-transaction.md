@@ -7,31 +7,41 @@ Now that we have received the quote and given allowance to Router's Reserve Toke
 
 ```jsx
 import { ethers } from 'ethers'
+
+const PATH_FINDER_API_URL = "https://app.staging2.thevoyager.io"
+
+const getTransaction = async (params) => {
+    const endpoint = "v2/transaction"
+    const txDataUrl = `${PATH_FINDER_API_URL}/${endpoint}`
+
+    console.log(txDataUrl)
+
+    try {
+        const res = await axios.get(txDataUrl, {
+            ...params,
+            slippageTolerance: 1,
+            senderAddress: "sender-address",
+            receiverAddress: "receiver-address"
+        })
+        return res.data;
+    } catch (e) {
+        console.error(`Fetching tx data from pathfinder: ${e}`)
+    }    
+}
     
 const main = async () => {
-    // getting pathfinder response using the code given in Step 1
-    const pathfinder_response = await fetchPathfinderData(args)
     
     // setting up a signer
     const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com", 137);
     // use provider.getSigner() method to get a signer if you're using this for a UI
     const wallet = new ethers.Wallet("YOUR_PRIVATE_KEY", provider)
     
-    // setting the gas price and limit
-    if(!pathfinder_response.txn.execution.gasPrice){
-        pathfinder_response.txn.execution.gasPrice = await wallet.provider.getGasPrice()
-    }
+    // create transaction data from api
+    const pathfinder_response = await getTransaction(quoteResponse); // quoteResponse is fetched in step 1.
 
-    if(pathfinder_response.txn.execution.value){
-        pathfinder_response.txn.execution.value = ethers.utils.hexlify(ethers.BigNumber.from(pathfinder_response.txn.execution.value))
-    }
-    
-    if(!pathfinder_response.txn.execution.gasLimit){
-        pathfinder_response.txn.execution.gasLimit = ethers.utils.hexlify(ethers.BigNumber.from(1000000))
-    }
     
     // sending the transaction using the data given by the pathfinder
-    const tx = await wallet.sendTransaction(pathfinder_response.txn.execution)
+    const tx = await wallet.sendTransaction(txResponse.txn.execution)
     try {
         await tx.wait();
         console.log(`Transaction mined successfully: ${tx.hash}`)

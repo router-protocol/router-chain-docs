@@ -3,7 +3,7 @@ title: Check and Set Allowances
 sidebar_position: 2
 ---
 
-Prior to initiating a transaction using any web3 library (ethers.js or web3.js), users must make sure that Router's Reserve Token Handler has the appropriate permissions to use the requested asset in their wallet. You can achieve this via the following piece of code:
+Prior to initiating a transaction using any web3 library (ethers.js or web3.js), users must make sure that Router's transfer or swap contract has the appropriate permissions to use the requested asset in their wallet. You can achieve this via the following piece of code:
 
 :::note
 Router Protocol enables native asset transfers/swaps via their wrapped versions. Therefore, users need to provide an allowance to the wrapped version of the native asset being transferred/swapped.
@@ -96,7 +96,7 @@ const main = async () => {
     await checkAndSetAllowance(
         wallet,
         '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174', // fromTokenAddress (USDC on Polygon)
-        '0x6e14f48576265272B6CAA3A7cC500a26050Be64E', // addressToApprove (Voyager's Reserve Token Handler on Polygon)
+        '<address-to-approve>', // quote.allowanceTo in getQuote(args) response
         ethers.constants.MaxUint256 // amount to approve (infinite approval)
     );
 }

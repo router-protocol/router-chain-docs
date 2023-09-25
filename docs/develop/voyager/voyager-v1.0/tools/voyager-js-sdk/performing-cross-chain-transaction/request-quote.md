@@ -26,7 +26,7 @@ let args = {
     dest_chain_id: 250, // Fantom
     src_token_address: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174", // USDC on Polygon
     dest_token_address: "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75", // USDC on Fantom
-    user_address: "YOUR_WALLET_ADDRESS",
+
     fee_token_address: "0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4", // ROUTE on Polygon
     slippage_tolerance: 1.0
 }
