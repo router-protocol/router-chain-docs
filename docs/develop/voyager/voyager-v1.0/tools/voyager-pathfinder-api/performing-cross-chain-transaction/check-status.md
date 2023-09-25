@@ -17,9 +17,7 @@ const STATS_API_URL = "https://api.voyager-explorer.routerprotocol.com/graphql"
 
 // calling the status api using axios
 const fetchStatus = async () => {
-    const endpoint = "status"
-    const pathUrl = `${STATS_API_URL}/${endpoint}`
-    
+    const pathUrl = `${STATS_API_URL}`
 
     const statusResponse = await axios.post('https://api.voyager-explorer.routerprotocol.com/graphql', {
     query: `query($filter: TransactionFilterInput, $where_or: TransactionWhereInput, $isCrossChain: Boolean,$limit: Int, $offset: Int, $sortBy: TransactionSortInput) {

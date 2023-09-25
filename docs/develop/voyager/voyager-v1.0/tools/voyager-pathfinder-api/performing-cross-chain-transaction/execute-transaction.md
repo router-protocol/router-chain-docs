@@ -37,7 +37,7 @@ const main = async () => {
     const wallet = new ethers.Wallet("YOUR_PRIVATE_KEY", provider)
     
     // create transaction data from api
-    const pathfinder_response = await getTransaction(quoteResponse); // quoteResponse is fetched in step 1.
+    const txResponse = await getTransaction(quoteResponse); // quoteResponse is fetched in step 1.
 
     
     // sending the transaction using the data given by the pathfinder
