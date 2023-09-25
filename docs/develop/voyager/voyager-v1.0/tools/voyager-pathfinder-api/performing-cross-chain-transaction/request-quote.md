@@ -13,35 +13,36 @@ You can find the API information [**here**](../../../../../../api/?v=Pathfinder)
 ```jsx
 import axios from "axios"
 
-const PATH_FINDER_API_URL = "https://api.pathfinder.routerprotocol.com/api"
+const PATH_FINDER_API_URL = "https://app.staging2.thevoyager.io"
 
 // calling the pathfinder api using axios
-const fetchPathfinderData = async (params) => {
-    const endpoint = "quote"
-    const pathUrl = `${PATH_FINDER_API_URL}/${endpoint}`
-    console.log(pathUrl)
+const getQuote = async (params) => {
+    const endpoint = "v2/quote"
+    const quoteUrl = `${PATH_FINDER_API_URL}/${endpoint}`
+
+    console.log(quoteUrl)
+
     try {
-        const res = await axios.get(pathUrl, { params })
-        return res.data
+        const res = await axios.get(quoteUrl, { params })
+        return res.data;
     } catch (e) {
-        console.error(`Fetching data from pathfinder: ${e}`)
-    }
+        console.error(`Fetching quote data from pathfinder: ${e}`)
+    }    
 }
 
 const main = async () => {
     const args = {
-        'fromTokenAddress': '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174', // USDC on Polygon
-        'toTokenAddress': '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC on Fantom
-        'amount': '10000000', // 10 USDC (USDC token contract on Polygon has 6 decimal places)
-        'fromTokenChainId': 137, // Polygon
-        'toTokenChainId': 250, // Fantom
-        'userAddress': 'YOUR_WALLET_ADDRESS',
-        'slippageTolerance': 2, // slippage tolerance percentage
+        'fromTokenAddress': '0xd8579886e2bdae06ca11a188a2408182942b1d8e',
+        'toTokenAddress': '0x6b4ff03433b02a2f12ba56801524813fbea1cc59',
+        'amount': '10000000000000000000', // src amount
+        'fromTokenChainId': "80001", // Mumbai
+        'toTokenChainId': "43113", // Fuji
         'widgetId': 24, // get your unique wdiget id by contacting us on Telegram
     }
     
-    const pathfinder_response = await fetchPathfinderData(args)
-    console.log(pathfinder_response)
+    const quotData = await getQuote(args);
+
+    console.log(quotData)
 }
 
 

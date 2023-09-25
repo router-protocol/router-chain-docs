@@ -13,50 +13,45 @@ You can find the API information [**here**](../../../../../../api/?v=PATHFINDER)
 ```jsx
 import axios from "axios"
 
-const STATS_API_URL = "https://api.stats.routerprotocol.com/api"
+const STATS_API_URL = "https://api.voyager-explorer.routerprotocol.com/graphql"
 
 // calling the status api using axios
-const fetchStatus = async (params) => {
-    const endpoint = "status"
-    const pathUrl = `${STATS_API_URL}/${endpoint}`
-    console.log(pathUrl)
-    try {
-        const res = await axios.get(pathUrl, { params })
-        return res.data
-    } catch (e) {
-        console.error(`Fetching data from API: ${e}`)
+const fetchStatus = async () => {
+    const pathUrl = `${STATS_API_URL}`
+
+    const statusResponse = await axios.post('https://api.voyager-explorer.routerprotocol.com/graphql', {
+    query: `query($filter: TransactionFilterInput, $where_or: TransactionWhereInput, $isCrossChain: Boolean,$limit: Int, $offset: Int, $sortBy: TransactionSortInput) {
+        transactions(filter: $filter, where_or: $where_or, isCrossChain: $isCrossChain, limit: $limit, offset: $offset, sortBy: $sortBy) {
+        limit
+        page
+        total
+        data {
+            src_tx_hash
+            dest_tx_hash
+            status
+            sender_address
+            recipient_address
+        }
+        }
+    }`,
+    variables: {
+        where_or: {
+        src_tx_hash: '<source-tx-hash>'
+        }
     }
+    })
+    .then(function (response) {
+        console.log(response.data);
+    })
+    .catch(function (error) {
+        console.error(error);
+    });
+
 }
 
 const main = async () => {
-    // sending the transaction using the data prepared by us in step 3
-    const tx = await wallet.sendTransaction(pathfinder_response.txn.execution)
-    try {
-        await tx.wait();
-        console.log(`Transaction mined successfully: ${tx.hash}`)
-    }
-    catch (error) {
-        console.log(`Transaction failed with error: ${error}`)
-        return
-    }
-    
-    let params = {
-        txHash: tx.hash,
-        networkId: args.fromTokenChainId // args were defined in step 1 to fetch data from the pathfinder
-    }
-    
-   setTimeout(async function() {
-        let status = await fetchStatus(params) 
-        console.log(status)
-        if (status.tx_status_code === 1) {
-            console.log("Transaction completed")
-          // handle the case where the transaction is complete 
-        }
-        else if (status.tx_status_code === 0) {
-            console.log("Transaction still pending")
-        // handle the case where the transaction is still pending
-        }
-      }, 180000); // waiting for sometime before fetching the status of the transaction
+
+    await fetchStatus();
 }
 
 main()
