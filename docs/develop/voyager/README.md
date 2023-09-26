@@ -27,7 +27,7 @@ As mentioned above, in addition to asset transfers, Voyager (both v1.0 and v2.0)
 | --------------------- | ---------------------------------------------- | ---------------------------------------------- |
 | **Trust Assumptions**      | Trust Minimized          | Trustless        |
 | **Asset Transfers**          | Yes               | Yes      |
-| **Asset Swaps**               | Yes        | No      |
+| **Asset Swaps**               | Yes        | Yes      |
 | **Assets Supported**          | All arbitrary assets  | Limited |
 | **Time Taken for Asset Transfers**      | 2-5 minutes          | Under 2 minutes       |
 | **Sequenced Requests**      | Yes          | Yes        |
