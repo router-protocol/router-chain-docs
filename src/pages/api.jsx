@@ -65,13 +65,12 @@ export default function Home() {
         <link rel="preload" href="/assets/css/elements.min.css" as="style" />
         <link rel="stylesheet" href="/assets/css/elements.min.css" />
       </Head>
-      <div className="header">
-        <h2>Voyager {currentVersion} endpoints</h2>
+      {/* <div className="header">
+        <h2>Voyager {currentVersion} Endpoints</h2>
         <div className="aside">
-          {/* <RunInPostmanButton /> */}
           <a className="navbar__item navbar__link dev-portal-signup dev-postman-link"  target='_blank' href='' rel="noreferrer">Open Postman Collection</a>
         </div>
-      </div>
+      </div> */}
       <APIElement
         layout={size === 'sm' ? 'stacked' : 'sidebar'}
         currentVersion={currentVersion}

@@ -4,7 +4,7 @@ info:
   description: API details for using the pathfinder API to do a cross-chain transfer/swap of tokens
 servers:
   - url: https://app.staging2.thevoyager.io/api
-    description: Router protocol mainnet
+    description: Router Protocol Mainnet
 tags:
   - name: Quote
     description: Requesting a quote from the Pathfinder algorithm
