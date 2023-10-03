@@ -19,6 +19,8 @@ const getTransaction = async (params) => {
     try {
         const res = await axios.get(txDataUrl, {
             ...params,
+            fromTokenAddress: "<src-token-address>",
+            toTokenAddress: "<destination-token-address>",
             slippageTolerance: 1,
             senderAddress: "sender-address",
             receiverAddress: "receiver-address"
