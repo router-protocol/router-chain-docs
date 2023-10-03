@@ -23,6 +23,8 @@ function APIElement({ layout = 'sidebar', currentVersion = 'RPC' }) {
       {() => {
         // eslint-disable-next-line no-undef
         const { API } = require('@stoplight/elements');
+        currentVersion = currentVersion.toUpperCase()
+        console.log(currentVersion)
 
         return (
           <div className={clsx('elements-container', layout)}>
@@ -51,8 +53,8 @@ export default function Home() {
     `https://docs.dyte.io${location.pathname}${location.search}`
   );
 
-  const currentVersion = (url.searchParams.get('v')).toUpperCase() || 'RPC';
-
+  const currentVersion = url.searchParams.get('v') || 'RPC';
+  console.log(currentVersion)
   return (
     <Layout
       title="API Reference"
