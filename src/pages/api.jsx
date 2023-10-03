@@ -51,7 +51,7 @@ export default function Home() {
     `https://docs.dyte.io${location.pathname}${location.search}`
   );
 
-  const currentVersion = url.searchParams.get('v') || 'RPC';
+  const currentVersion = (url.searchParams.get('v')).toUpperCase() || 'RPC';
 
   return (
     <Layout
