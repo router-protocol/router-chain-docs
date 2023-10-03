@@ -25,6 +25,9 @@ ctaColor: "#E8425A",
 textColor: "#1A1B1C",
 backgroundColor: "#3fb043",
 logoURI: "ipfs://QmaznB5PRhMC696u8yZuzN6Uwrnp7Zmfa5CydVUMvLJc9i/aDAI.svg",
+display: "vertical",
+isFromSelLocked: "1",
+isToSelLocked: "0",
 };
 
 const paramString = new URLSearchParams(configuration).toString();
@@ -58,6 +61,9 @@ Generate the paramString (as given in the example above) and attach it to the sr
 | backgroundColor |	Background color of the widget |
 | logoURI |	Circular logo URL - if not given, the original Router logo will be shown |
 | slippageTolerance |	Default slippage tolerance for cross-chain swaps |
+| display |	Display can be vertical/horizontal |
+| isFromSelLocked |	If the value is 1 it will lock the source side selection |
+| isToSelLocked |	If the value is 1 it will lock the destination side selection |
 
 ### Restricting chains/tokens
 There might also be a few cases in which a platform wants to show a selected list of chains or tokens for its users. With Router's widget, partners can do this by adding a few parameters. An example with restricted parameters -
