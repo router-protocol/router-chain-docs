@@ -4,7 +4,7 @@ sidebar_position: 1
 ---
 
 If all the required parameters are valid, the Pathfinder API will always return a path.
-For transferring native assets, just use the native token addresses given [here](../../configurations/native-assets). However, you need to provide allowance for the wrapped version of the native asset to perform their transfers/swaps.
+For transferring native assets, just use the native token addresses given [here](../../../supported-chains-tokens). However, you need to provide allowance for the wrapped version of the native asset to perform their transfers/swaps.
 
 :::info
 You can find the API information [**here**](../../../../../../api/?v=PATHFINDER).
