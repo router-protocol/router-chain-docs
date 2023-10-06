@@ -8,9 +8,9 @@ Now that we have received the quote and given allowance to Router's Reserve Toke
 ```jsx
 import { ethers } from 'ethers'
 
-const PATH_FINDER_API_URL = "https://app.staging2.thevoyager.io"
+const PATH_FINDER_API_URL = "https://api.pf.testnet.routerprotocol.com/api"
 
-const getTransaction = async (params) => {
+const getTransaction = async (params, quoteData) => {
     const endpoint = "v2/transaction"
     const txDataUrl = `${PATH_FINDER_API_URL}/${endpoint}`
 
@@ -18,12 +18,13 @@ const getTransaction = async (params) => {
 
     try {
         const res = await axios.get(txDataUrl, {
-            ...params,
-            fromTokenAddress: "<src-token-address>",
-            toTokenAddress: "<destination-token-address>",
-            slippageTolerance: 1,
-            senderAddress: "sender-address",
-            receiverAddress: "receiver-address"
+            ...quoteData,
+            fromTokenAddress: params.fromTokenAddress,
+            toTokenAddress: params.toTokenAddress,
+            slippageTolerance: 0.5,
+            senderAddress: "<sender-address>",
+            receiverAddress: "<receiver-address>",
+            widgetId: params.widgetId
         })
         return res.data;
     } catch (e) {
@@ -34,14 +35,13 @@ const getTransaction = async (params) => {
 const main = async () => {
     
     // setting up a signer
-    const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com", 137);
+    const provider = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/polygon_mumbai", 80001);
     // use provider.getSigner() method to get a signer if you're using this for a UI
     const wallet = new ethers.Wallet("YOUR_PRIVATE_KEY", provider)
     
-    // create transaction data from api
-    const txResponse = await getTransaction(quoteResponse); // quoteResponse is fetched in step 1.
+    // get transaction data via Transaction endpoint
+    const txResponse = await getTransaction(params, quoteData); // params have been defined in step 1 and quoteData has also been fetched in step 1
 
-    
     // sending the transaction using the data given by the pathfinder
     const tx = await wallet.sendTransaction(txResponse.txn.execution)
     try {

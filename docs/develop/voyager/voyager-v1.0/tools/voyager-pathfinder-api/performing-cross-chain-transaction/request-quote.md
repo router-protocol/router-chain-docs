@@ -13,7 +13,7 @@ You can find the API information [**here**](../../../../../../api/?v=PATHFINDER)
 ```jsx
 import axios from "axios"
 
-const PATH_FINDER_API_URL = "https://app.staging2.thevoyager.io"
+const PATH_FINDER_API_URL = "https://api.pf.testnet.routerprotocol.com/api"
 
 // calling the pathfinder api using axios
 const getQuote = async (params) => {
@@ -31,18 +31,18 @@ const getQuote = async (params) => {
 }
 
 const main = async () => {
-    const args = {
-        'fromTokenAddress': '0xd8579886e2bdae06ca11a188a2408182942b1d8e',
-        'toTokenAddress': '0x6b4ff03433b02a2f12ba56801524813fbea1cc59',
-        'amount': '10000000000000000000', // src amount
+    const params = {
+        'fromTokenAddress': '0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054',
+        'toTokenAddress': '0xb452b513552aa0B57c4b1C9372eFEa78024e5936',
+        'amount': '10000000000000000000', // source amount
         'fromTokenChainId': "80001", // Mumbai
         'toTokenChainId': "43113", // Fuji
-        'widgetId': 24, // get your unique wdiget id by contacting us on Telegram
+        'widgetId': 0, // get your unique wdiget id by contacting us on Telegram
     }
     
-    const quotData = await getQuote(args);
+    const quoteData = await getQuote(params);
 
-    console.log(quotData)
+    console.log(quoteData)
 }
 
 

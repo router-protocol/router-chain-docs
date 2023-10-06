@@ -89,14 +89,14 @@ const checkAndSetAllowance = async (wallet, tokenAddress, approvalAddress, amoun
 const main = async () => {
 
     // setting up a signer
-    const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com", 137);
+    const provider = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/polygon_mumbai", 80001);
     // use provider.getSigner() method to get a signer if you're using this for a UI
     const wallet = new ethers.Wallet("YOUR_PRIVATE_KEY", provider)
     
     await checkAndSetAllowance(
         wallet,
-        '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174', // fromTokenAddress (USDC on Polygon)
-        '<address-to-approve>', // quote.allowanceTo in getQuote(args) response
+        "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054", // fromTokenAddress (USDT on Mumbai)
+        "<address-to-approve>", // quote.allowanceTo in getQuote(params) response from step 1
         ethers.constants.MaxUint256 // amount to approve (infinite approval)
     );
 }
