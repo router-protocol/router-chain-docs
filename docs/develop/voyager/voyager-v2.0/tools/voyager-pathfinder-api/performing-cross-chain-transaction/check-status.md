@@ -13,45 +13,29 @@ You can find the API information [**here**](../../../../../../api/?v=PATHFINDER)
 ```jsx
 import axios from "axios"
 
-const STATS_API_URL = "https://api.voyager-explorer.routerprotocol.com/graphql"
-
 // calling the status api using axios
-const fetchStatus = async () => {
-    const pathUrl = `${STATS_API_URL}`
+const fetchStatus = async (srcTxHash) => {
 
-    const statusResponse = await axios.post('https://api.voyager-explorer.routerprotocol.com/graphql', {
-    query: `query($filter: TransactionFilterInput, $where_or: TransactionWhereInput, $isCrossChain: Boolean,$limit: Int, $offset: Int, $sortBy: TransactionSortInput) {
-        transactions(filter: $filter, where_or: $where_or, isCrossChain: $isCrossChain, limit: $limit, offset: $offset, sortBy: $sortBy) {
-        limit
-        page
-        total
-        data {
-            src_tx_hash
-            dest_tx_hash
-            status
-            sender_address
-            recipient_address
-        }
-        }
-    }`,
-    variables: {
-        where_or: {
-        src_tx_hash: '<source-tx-hash>'
-        }
-    }
-    })
+  const STATS_API_URL = "https://api.pf.testnet.routerprotocol.com/api"
+
+  const config = {
+    method: 'get',
+    url:  STATS_API_URL +'/v2/status?srcTxHash=' + srcTxHash,
+    headers: {}
+  };
+
+  axios(config)
     .then(function (response) {
-        console.log(response.data);
+      console.log(JSON.stringify(response.data?.transaction));
     })
     .catch(function (error) {
-        console.error(error);
+      console.log(error);
     });
-
 }
 
 const main = async () => {
 
-    await fetchStatus();
+  await fetchStatus();
 }
 
 main()
