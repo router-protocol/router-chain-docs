@@ -1,0 +1,43 @@
+---
+title: Supported Chains and Tokens
+sidebar_position: 5
+---
+
+## Testnet
+
+### Supported Chains
+
+| **Chain**           | **Chain Id**                                   |
+| ------------------- | ---------------------------------------------- |
+| Avalanche Fuji      | 43113                                          |
+| Polygon Mumbai      | 80001                                          |
+| Ethereum Goerli     | 5                                              |
+| Near Testnet        | near-testnet                                   |
+| Tron Shasta Testnet | 2494104990                                     |
+
+
+### Supported Tokens
+
+| **Chain**               | **Token**    | **Decimals** | **Token Address**                           |
+| ----------------------- | ------------ | ------------ | ------------------------------------        |
+|   Avalanche Fuji        | USDT         | 6            | 0xb452b513552aa0B57c4b1C9372eFEa78024e5936  |
+|   Avalanche Fuji        | ETH          | 18           | 0xce811501ae59c3E3e539D5B4234dD606E71A312e  |
+|   Avalanche Fuji        | ROUTE        | 18           | 0x0b903E66b3A54f0F7DaE605418D14f0339560D76  |
+|   Avalanche Fuji        | USDC         | 6            | 0x5425890298aed601595a70ab815c96711a31bc65  |
+|   Avalanche Fuji        | PEPE         | 18           | 0x669365a664E41c3c3f245779f98118CF23a20789  |
+|   Avalanche Fuji        | PIKAMON      | 6            | 0x00A7318DE94e698c3683db8f78dE881de4E5d18C  |
+|   Avalanche Fuji        | SHIBA INU    | 6            | 0xB94EC038E5cF4739bE757dF3cBd2e1De897fCA2e  |
+|   Polygon Mumbai        | USDT         | 12           | 0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054  |
+|   Polygon Mumbai        | ETH          | 18           | 0x3C6Bb231079c1023544265f8F26505bc5955C3df  |
+|   Polygon Mumbai        | ROUTE        | 18           | 0x908aC4f83A93f3B7145f24f906327018c9e54B3a  |
+|   Polygon Mumbai        | PEPE         | 12           | 0xFee7De539Dd346189A33E954c8A140df95F94B89  |
+|   Polygon Mumbai        | PIKAMON      | 12           | 0xa78044353cB8C675E905Ce7339769872Edd8E637  |
+|   Polygon Mumbai        | SHIBA INU    | 12           | 0x418049cA499E9B5B983c9141c341E1aA489d6E4d  |
+|   Ethereum Goerli       | USDT         | 6            | 0x2227E4764be4c858E534405019488D9E5890Ff9E  |
+|   Ethereum Goerli       | ETH          | 18           | 0xb4fbf271143f4fbf7b91a5ded31805e42b2208d6  |
+|   Ethereum Goerli       | ROUTE        | 18           | 0x8725bfdCB8896d86AA0a6342A7e83c1565f62889  |
+|   Ethereum Goerli       | PEPE         | 6            | 0x9bAA6b58bc1fAB3619f1387F27dCC18CbA5A9ca1  |
+|   Ethereum Goerli       | PIKAMON      | 6            | 0x7085f7c56Ef19043874CA3F2eA781CDa788be5E4  |
+|   Ethereum Goerli       | SHIBA INU    | 12           | 0xDC17183328e81b5c619D58F6B7E480AB1c2EA152  |
+|   Ethereum Goerli       | USDC         | 6            | 0x07865c6E87B9F70255377e024ace6630C1Eaa37F  |
+

@@ -7,7 +7,7 @@ Prior to initiating a transaction using any web3 library (ethers.js or web3.js),
 
 :::note
 Router Protocol enables native asset transfers/swaps via their wrapped versions. Therefore, users need to provide an allowance to the wrapped version of the native asset being transferred/swapped.
-Native asset and its wrapped asset info is given [here](../../configurations/native-assets).
+Native asset and its wrapped asset info is given [here](../../../supported-chains-tokens).
 :::
 
 ```ts

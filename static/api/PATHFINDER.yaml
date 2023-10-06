@@ -3,17 +3,19 @@ info:
   title: Pathfinder API
   description: API details for using the pathfinder API to do a cross-chain transfer/swap of tokens
 servers:
-  - url: https://app.staging2.thevoyager.io/api
-    description: Router Protocol Mainnet
+  - url: https://api.pf.testnet.routerprotocol.com/api/v2
+    description: Router Protocol Testnet
 tags:
   - name: Quote
     description: Requesting a quote from the Pathfinder algorithm
+  - name: Transaction
+    description: Requesting a transaction for execution from the Pathfinder algorithm
   - name: Check Status
     description: Check status of your cross-chain request
 paths:
   /quote:
     get:
-      summary: Returns a quote and txn data for executing a cross-chain txn
+      summary: Returns a quote for a cross-chain txn
       tags:
         - Quote
       operationId: quote
@@ -24,21 +26,21 @@ paths:
           required: true
           schema:
             type: string
-          example: "0x0FA8781a83E46826621b3BC094Ea2A0212e71B23"
+          example: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054"
           description: Token address of the asset you wish to transfer from the source chain.
         - in: query
           name: toTokenAddress
           required: true
           schema:
             type: string
-          example: "0x5B4edAd1eE1A3328c113dbae3CB5aE061fBBcD84"
+          example: "0xb452b513552aa0B57c4b1C9372eFEa78024e5936"
           description: Token address of the asset you wish to receive on the destination chain.
         - in: query
           name: amount
           required: true
           schema:
             type: string
-          example: "3000000000000000000"
+          example: "200000000000000000000"
           description: "Decimal-expanded amount of the token to be transferred (for eg: if you want to transfer 1 USDC, you need to send 1000000). You can use ethers.utils.parseUnits function to calculate the decimal-adjusted amount of the source token."
         - in: query
           name: fromTokenChainId
@@ -53,28 +55,7 @@ paths:
           schema:
             type: string
           example: "43113"
-          description: Token address of the asset you wish to receive on the destination chain.
-        - in: query
-          name: slippageTolerance
-          required: false
-          schema:
-            type: string
-          example: "2"
-          description: Amount of price slippage that you are willing to accept for the trade. By default, it is set to 1.5.
-        - in: query
-          name: userAddress
-          required: true
-          schema:
-            type: string
-          example: "0x6F764aFdDFb229986d085C44aBFf6a0225164ad4"
-          description: Wallet address initiating the transaction. If userAddress is omitted, only quote is returned without data txn.
-        - in: query
-          name: destReceiverAddress
-          required: false
-          schema:
-            type: string
-          example: "0x6F764aFdDFb229986d085C44aBFf6a0225164ad4"
-          description: Address of the user on the destination chain. By default, it is set the same as userAddress.
+          description: "Token address of the asset you wish to receive on the destination chain."
       responses:
         "200":
           description: Empty
@@ -82,6 +63,33 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/QuoteResponse"
+        "404":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuoteErrorResponse"
+  /transaction:
+    post:
+      summary: Returns the quote and txn data for executing a cross-chain txn
+      tags:
+        - Transaction
+      operationId: transaction
+      description:
+      requestBody:
+        description: Create a new pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionRequestBody'
+        required: true
+      responses:
+        "200":
+          description: Empty
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransactionResponseBody"
         "404":
           description: Error
           content:
@@ -135,17 +143,24 @@ components:
     QuoteResponse:
       type: object
       required:
-        - "isWrappedToken"
-        - "source"
-        - "destination"
-        - "txn"
+        - "flowType"
       properties:
+        flowType:
+          type: string
+          example: "trustless"
+        isTransfer:
+          type: boolean
+          example: true
         isWrappedToken:
-          type: bool
+          type: boolean
           example: false
+        allowanceTo:
+          type: string
+          example: "0x190fC3352b361852E6abFE48d34C79473fF131D3"
         source:
           type: object
           required:
+            - "chainId"
             - "asset"
             - "stableReserveAsset"
             - "tokenAmount"
@@ -153,9 +168,13 @@ components:
             - "path"
             - "flags"
             - "priceImpact"
-            - "bridgeFee"
+            - "bridgeFeeAmount"
             - "tokenPath"
+            - "dataTx"
           properties:
+            chainId:
+              type: string
+              example: "80001"
             asset:
               type: object
               required:
@@ -167,56 +186,144 @@ components:
                 - "resourceID"
                 - "isMintable"
                 - "isWrappedAsset"
-                - "tokenInstance"
               properties:
                 decimals:
                   type: int
-                  example: 18
+                  example: 12
                 symbol:
                   type: string
-                  example: "USDC"
+                  example: "USDT"
                 name:
                   type: string
-                  example: "USDC"
+                  example: "USDT"
                 chainId:
-                  type: int
-                  example: 80001
+                  type: string
+                  example: "80001"
                 address:
                   type: string
-                  example: "0xe91E3aEfEAd645eea8a9007CEe7F64C0c913285F"
+                  example: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054"
                 resourceID:
                   type: string
-                  example: "0x0000000000000000000000c25902c1c5c16b9bf73702a8902e26bb0b8da37800"
+                  example: "usdi"
                 isMintable:
                   type: bool
                   example: false
                 isWrappedAsset:
                   type: bool
                   example: false
-                tokenInstance:
-                  type: object
-                  required:
-                    - "decimals"
-                    - "symbol"
-                    - "name"
-                    - "chainId"
-                    - "address"
-                  properties:
-                    decimals:
-                      type: int
-                      example: 18
-                    symbol:
-                      type: string
-                      example: "USDC"
-                    name:
-                      type: string
-                      example: "USDC"
-                    chainId:
-                      type: int
-                      example: 80001
-                    address:
-                      type: string
-                      example: "0xe91E3aEfEAd645eea8a9007CEe7F64C0c913285F"
+            stableReserveAsset:
+              type: object
+              required:
+                - "decimals"
+                - "symbol"
+                - "name"
+                - "chainId"
+                - "address"
+                - "resourceID"
+                - "isMintable"
+                - "isWrappedAsset"
+              properties:
+                decimals:
+                  type: int
+                  example: 12
+                symbol:
+                  type: string
+                  example: "USDT"
+                name:
+                  type: string
+                  example: "USDT"
+                chainId:
+                  type: string
+                  example: "80001"
+                address:
+                  type: string
+                  example: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054"
+                resourceID:
+                  type: string
+                  example: "usdi"
+                isMintable:
+                  type: bool
+                  example: false
+                isWrappedAsset:
+                  type: bool
+                  example: false
+            tokenAmount:
+              type: string
+              example: "200000000000000000000"
+            stableReserveAmount:
+              type: string
+              example: "200000000000000000000"
+            path:
+              type: array
+              example: []
+            flags:
+              type: array
+              example: []
+            priceImpact:
+              type: string
+              example: "0"
+            bridgeFeeAmount:
+              type: int
+              example: '2000237'
+            tokenPath:
+              type: string
+              example: ""
+            dataTx:
+              type: array
+              example: []
+        destination:
+          type: object
+          required:
+            - "chainId"
+            - "asset"
+            - "stableReserveAsset"
+            - "tokenAmount"
+            - "stableReserveAmount"
+            - "path"
+            - "flags"
+            - "priceImpact"
+            - "tokenPath"
+            - "dataTx"
+          properties:
+            chainId:
+              type: string
+              example: "43113"
+            asset:
+              type: object
+              required:
+                - "decimals"
+                - "symbol"
+                - "name"
+                - "chainId"
+                - "address"
+                - "resourceID"
+                - "isMintable"
+                - "isWrappedAsset"
+              properties:
+                decimals:
+                  type: int
+                  example: 6
+                symbol:
+                  type: string
+                  example: "USDT"
+                name:
+                  type: string
+                  example: "USDT"
+                chainId:
+                  type: string
+                  example: "43113"
+                address:
+                  type: string
+                  example: "0xb452b513552aa0B57c4b1C9372eFEa78024e5936"
+                resourceID:
+                  type: string
+                  example: "usdi"
+                isMintable:
+                  type: bool
+                  example: false
+                isWrappedAsset:
+                  type: bool
+                  example: false
             stableReserveAsset:
               type: object
               required:
@@ -234,19 +341,19 @@ components:
                   example: 6
                 symbol:
                   type: string
-                  example: "USDC"
+                  example: "USDT"
                 name:
                   type: string
-                  example: "USDC"
+                  example: "USDT"
                 chainId:
-                  type: int
-                  example: 137
+                  type: string
+                  example: "43113"
                 address:
                   type: string
-                  example: "0xe91E3aEfEAd645eea8a9007CEe7F64C0c913285F"
+                  example: "0xb452b513552aa0B57c4b1C9372eFEa78024e5936"
                 resourceID:
                   type: string
-                  example: "0x0000000000000000000000c25902c1c5c16b9bf73702a8902e26bb0b8da37800"
+                  example: "usdi"
                 isMintable:
                   type: bool
                   example: false
@@ -255,215 +362,28 @@ components:
                   example: false
             tokenAmount:
               type: string
-              example: "2000000000000000000"
+              example: "199999997999763"
             stableReserveAmount:
               type: string
-              example: "2000000000000000000"
+              example: "199999997999763"
             path:
               type: array
               example: []
-            path:
-              type: array
-              example: ["17716742144"]
-            priceImpact:
-              type: string
-              example: "0"
-            bridgeFeeAmount:
-              type: int
-              example: '1080420000000000000'
-            tokenPath:
-              type: string
-              example: ""
-        destination:
-          type: object
-          required:
-            - "asset"
-            - "stableReserveAsset"
-            - "tokenAmount"
-            - "stableReserveAmount"
-            - "path"
-            - "flags"
-            - "priceImpact"
-            - "bridgeFee"
-            - "tokenPath"
-          properties:
-            asset:
-              type: object
-              required:
-                - "decimals"
-                - "symbol"
-                - "name"
-                - "chainId"
-                - "address"
-                - "resourceID"
-                - "isMintable"
-                - "isWrappedAsset"
-                - "tokenInstance"
-              properties:
-                decimals:
-                  type: int
-                  example: 18
-                symbol:
-                  type: string
-                  example: "USDC"
-                name:
-                  type: string
-                  example: "USD Coin"
-                chainId:
-                  type: int
-                  example: 43113
-                address:
-                  type: string
-                  example: "0x685A94e520CfA0AdF6b48dF42Fb1AeF8C024EAf5"
-                resourceID:
-                  type: string
-                  example: "0x0000000000000000000000c25902c1c5c16b9bf73702a8902e26bb0b8da37800"
-                isMintable:
-                  type: bool
-                  example: false
-                isWrappedAsset:
-                  type: bool
-                  example: false
-                tokenInstance:
-                  type: object
-                  required:
-                    - "decimals"
-                    - "symbol"
-                    - "name"
-                    - "chainId"
-                    - "address"
-                  properties:
-                    decimals:
-                      type: int
-                      example: 18
-                    symbol:
-                      type: string
-                      example: "USDC"
-                    name:
-                      type: string
-                      example: "USD Coin"
-                    chainId:
-                      type: int
-                      example: 43113
-                    address:
-                      type: string
-                      example: "0x685A94e520CfA0AdF6b48dF42Fb1AeF8C024EAf5"
-            stableReserveAsset:
-              type: object
-              required:
-                - "decimals"
-                - "symbol"
-                - "name"
-                - "chainId"
-                - "address"
-                - "resourceID"
-                - "isMintable"
-                - "isWrappedAsset"
-              properties:
-                decimals:
-                  type: int
-                  example: 18
-                symbol:
-                  type: string
-                  example: "USDC"
-                name:
-                  type: string
-                  example: "USDC"
-                chainId:
-                  type: int
-                  example: 43113
-                address:
-                  type: string
-                  example: "0x685A94e520CfA0AdF6b48dF42Fb1AeF8C024EAf5"
-                resourceID:
-                  type: string
-                  example: "0x0000000000000000000000c25902c1c5c16b9bf73702a8902e26bb0b8da37800"
-                isMintable:
-                  type: bool
-                  example: false
-                isWrappedAsset:
-                  type: bool
-                  example: false
-            tokenAmount:
-              type: string
-              example: "2000000000000000000"
-            stableReserveAmount:
-              type: string
-              example: "2000000000000000000"
-            path:
+            flags:
               type: array
               example: []
-            path:
-              type: array
-              example: ["2"]
             priceImpact:
               type: string
               example: "0"
-            bridgeFee:
-              type: int
-              example: 0
             tokenPath:
               type: string
               example: ""
-        txn:
-          required:
-            - "execution"
-          properties:
-            execution:
-              type: object
-              required:
-                - "from"
-                - "to"
-                - "data"
-                - "value"
-                - "gasLimit"
-              properties:
-                from:
-                  type: string
-                  example: "0xB00BC9e04698A3315B6038225a2E9e42D63C7669"
-                to:
-                  type: string
-                  example: "0x98Ef834a3415f8651A99a87929b6244D0c81A8d2"
-                data:
-                  type: string
-                  example: "0x"
-                value:
-                  type: string
-                  example: "0x00"
-                gasLimit:
-                  type: string
-                  example: "0x0f4240"
-
-
-
-
-
-        result:
-          required:
-            - "code"
-            - "data"
-            - "log"
-            - "hash"
-          properties:
-            code:
-              type: string
-              example: "0"
-            data:
-              type: string
-              example: ""
-            log:
-              type: string
-              example: ""
-            codespace:
-              type: string
-              example: "ibc"
-            hash:
-              type: string
-              example: "0D33F2F03A5234F38706E43004489E061AC40A2E"
-          type: object
-        error:
+            dataTx:
+              type: array
+              example: []  
+        widgetId: 
           type: string
-          example: ""
+          example: "0"
     StatusResponse:
       type: object
       required:
@@ -492,3 +412,533 @@ components:
         dest_tx_hash:
           type: string
           example: "0x41f23c9bd5853af4805f04da5ac719b1bcbd3fcd193c08168cb4aead2d2626b7"
+    TransactionRequestBody:
+      type: object
+      required:
+        - "flowType"
+      properties:
+        flowType:
+          type: string
+          example: "trustless"
+        isTransfer:
+          type: boolean
+          example: true
+        isWrappedToken:
+          type: boolean
+          example: false
+        allowanceTo:
+          type: string
+          example: "0x190fC3352b361852E6abFE48d34C79473fF131D3"
+        source:
+          type: object
+          required:
+            - "chainId"
+            - "asset"
+            - "stableReserveAsset"
+            - "tokenAmount"
+            - "stableReserveAmount"
+            - "path"
+            - "flags"
+            - "priceImpact"
+            - "bridgeFeeAmount"
+            - "tokenPath"
+            - "dataTx"
+          properties:
+            chainId:
+              type: string
+              example: "80001"
+            asset:
+              type: object
+              required:
+                - "decimals"
+                - "symbol"
+                - "name"
+                - "chainId"
+                - "address"
+                - "resourceID"
+                - "isMintable"
+                - "isWrappedAsset"
+              properties:
+                decimals:
+                  type: int
+                  example: 12
+                symbol:
+                  type: string
+                  example: "USDT"
+                name:
+                  type: string
+                  example: "USDT"
+                chainId:
+                  type: string
+                  example: "80001"
+                address:
+                  type: string
+                  example: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054"
+                resourceID:
+                  type: string
+                  example: "usdi"
+                isMintable:
+                  type: bool
+                  example: false
+                isWrappedAsset:
+                  type: bool
+                  example: false
+            stableReserveAsset:
+              type: object
+              required:
+                - "decimals"
+                - "symbol"
+                - "name"
+                - "chainId"
+                - "address"
+                - "resourceID"
+                - "isMintable"
+                - "isWrappedAsset"
+              properties:
+                decimals:
+                  type: int
+                  example: 12
+                symbol:
+                  type: string
+                  example: "USDT"
+                name:
+                  type: string
+                  example: "USDT"
+                chainId:
+                  type: string
+                  example: "80001"
+                address:
+                  type: string
+                  example: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054"
+                resourceID:
+                  type: string
+                  example: "usdi"
+                isMintable:
+                  type: bool
+                  example: false
+                isWrappedAsset:
+                  type: bool
+                  example: false
+            tokenAmount:
+              type: string
+              example: "200000000000000000000"
+            stableReserveAmount:
+              type: string
+              example: "200000000000000000000"
+            path:
+              type: array
+              example: []
+            flags:
+              type: array
+              example: []
+            priceImpact:
+              type: string
+              example: "0"
+            bridgeFeeAmount:
+              type: int
+              example: '2000237'
+            tokenPath:
+              type: string
+              example: ""
+            dataTx:
+              type: array
+              example: []
+        destination:
+          type: object
+          required:
+            - "chainId"
+            - "asset"
+            - "stableReserveAsset"
+            - "tokenAmount"
+            - "stableReserveAmount"
+            - "path"
+            - "flags"
+            - "priceImpact"
+            - "tokenPath"
+            - "dataTx"
+          properties:
+            chainId:
+              type: string
+              example: "43113"
+            asset:
+              type: object
+              required:
+                - "decimals"
+                - "symbol"
+                - "name"
+                - "chainId"
+                - "address"
+                - "resourceID"
+                - "isMintable"
+                - "isWrappedAsset"
+              properties:
+                decimals:
+                  type: int
+                  example: 6
+                symbol:
+                  type: string
+                  example: "USDT"
+                name:
+                  type: string
+                  example: "USDT"
+                chainId:
+                  type: string
+                  example: "43113"
+                address:
+                  type: string
+                  example: "0xb452b513552aa0B57c4b1C9372eFEa78024e5936"
+                resourceID:
+                  type: string
+                  example: "usdi"
+                isMintable:
+                  type: bool
+                  example: false
+                isWrappedAsset:
+                  type: bool
+                  example: false
+            stableReserveAsset:
+              type: object
+              required:
+                - "decimals"
+                - "symbol"
+                - "name"
+                - "chainId"
+                - "address"
+                - "resourceID"
+                - "isMintable"
+                - "isWrappedAsset"
+              properties:
+                decimals:
+                  type: int
+                  example: 6
+                symbol:
+                  type: string
+                  example: "USDT"
+                name:
+                  type: string
+                  example: "USDT"
+                chainId:
+                  type: string
+                  example: "43113"
+                address:
+                  type: string
+                  example: "0xb452b513552aa0B57c4b1C9372eFEa78024e5936"
+                resourceID:
+                  type: string
+                  example: "usdi"
+                isMintable:
+                  type: bool
+                  example: false
+                isWrappedAsset:
+                  type: bool
+                  example: false
+            tokenAmount:
+              type: string
+              example: "199999997999763"
+            stableReserveAmount:
+              type: string
+              example: "199999997999763"
+            path:
+              type: array
+              example: []
+            flags:
+              type: array
+              example: []
+            priceImpact:
+              type: string
+              example: "0"
+            tokenPath:
+              type: string
+              example: ""
+            dataTx:
+              type: array
+              example: []  
+        fromTokenAddress: 
+          type: string
+          example: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054"
+        toTokenAddress: 
+          type: string
+          example: "0xb452b513552aa0B57c4b1C9372eFEa78024e5936"
+        senderAddress:
+          type: string
+          example: "0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964"
+        receiverAddress:
+          type: string
+          example: "0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964"
+        widgetId: 
+          type: string
+          example: "0"
+    TransactionResponseBody:
+      type: object
+      required:
+        - "flowType"
+      properties:
+        flowType:
+          type: string
+          example: "trustless"
+        isTransfer:
+          type: boolean
+          example: true
+        isWrappedToken:
+          type: boolean
+          example: false
+        allowanceTo:
+          type: string
+          example: "0x190fC3352b361852E6abFE48d34C79473fF131D3"
+        source:
+          type: object
+          required:
+            - "chainId"
+            - "asset"
+            - "stableReserveAsset"
+            - "tokenAmount"
+            - "stableReserveAmount"
+            - "path"
+            - "flags"
+            - "priceImpact"
+            - "bridgeFeeAmount"
+            - "tokenPath"
+            - "dataTx"
+          properties:
+            chainId:
+              type: string
+              example: "80001"
+            asset:
+              type: object
+              required:
+                - "decimals"
+                - "symbol"
+                - "name"
+                - "chainId"
+                - "address"
+                - "resourceID"
+                - "isMintable"
+                - "isWrappedAsset"
+              properties:
+                decimals:
+                  type: int
+                  example: 12
+                symbol:
+                  type: string
+                  example: "USDT"
+                name:
+                  type: string
+                  example: "USDT"
+                chainId:
+                  type: string
+                  example: "80001"
+                address:
+                  type: string
+                  example: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054"
+                resourceID:
+                  type: string
+                  example: "usdi"
+                isMintable:
+                  type: bool
+                  example: false
+                isWrappedAsset:
+                  type: bool
+                  example: false
+            stableReserveAsset:
+              type: object
+              required:
+                - "decimals"
+                - "symbol"
+                - "name"
+                - "chainId"
+                - "address"
+                - "resourceID"
+                - "isMintable"
+                - "isWrappedAsset"
+              properties:
+                decimals:
+                  type: int
+                  example: 12
+                symbol:
+                  type: string
+                  example: "USDT"
+                name:
+                  type: string
+                  example: "USDT"
+                chainId:
+                  type: string
+                  example: "80001"
+                address:
+                  type: string
+                  example: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054"
+                resourceID:
+                  type: string
+                  example: "usdi"
+                isMintable:
+                  type: bool
+                  example: false
+                isWrappedAsset:
+                  type: bool
+                  example: false
+            tokenAmount:
+              type: string
+              example: "200000000000000000000"
+            stableReserveAmount:
+              type: string
+              example: "200000000000000000000"
+            path:
+              type: array
+              example: []
+            flags:
+              type: array
+              example: []
+            priceImpact:
+              type: string
+              example: "0"
+            bridgeFeeAmount:
+              type: int
+              example: '2000237'
+            tokenPath:
+              type: string
+              example: ""
+            dataTx:
+              type: array
+              example: []
+        destination:
+          type: object
+          required:
+            - "chainId"
+            - "asset"
+            - "stableReserveAsset"
+            - "tokenAmount"
+            - "stableReserveAmount"
+            - "path"
+            - "flags"
+            - "priceImpact"
+            - "tokenPath"
+            - "dataTx"
+          properties:
+            chainId:
+              type: string
+              example: "43113"
+            asset:
+              type: object
+              required:
+                - "decimals"
+                - "symbol"
+                - "name"
+                - "chainId"
+                - "address"
+                - "resourceID"
+                - "isMintable"
+                - "isWrappedAsset"
+              properties:
+                decimals:
+                  type: int
+                  example: 6
+                symbol:
+                  type: string
+                  example: "USDT"
+                name:
+                  type: string
+                  example: "USDT"
+                chainId:
+                  type: string
+                  example: "43113"
+                address:
+                  type: string
+                  example: "0xb452b513552aa0B57c4b1C9372eFEa78024e5936"
+                resourceID:
+                  type: string
+                  example: "usdi"
+                isMintable:
+                  type: bool
+                  example: false
+                isWrappedAsset:
+                  type: bool
+                  example: false
+            stableReserveAsset:
+              type: object
+              required:
+                - "decimals"
+                - "symbol"
+                - "name"
+                - "chainId"
+                - "address"
+                - "resourceID"
+                - "isMintable"
+                - "isWrappedAsset"
+              properties:
+                decimals:
+                  type: int
+                  example: 6
+                symbol:
+                  type: string
+                  example: "USDT"
+                name:
+                  type: string
+                  example: "USDT"
+                chainId:
+                  type: string
+                  example: "43113"
+                address:
+                  type: string
+                  example: "0xb452b513552aa0B57c4b1C9372eFEa78024e5936"
+                resourceID:
+                  type: string
+                  example: "usdi"
+                isMintable:
+                  type: bool
+                  example: false
+                isWrappedAsset:
+                  type: bool
+                  example: false
+            tokenAmount:
+              type: string
+              example: "199999997999763"
+            stableReserveAmount:
+              type: string
+              example: "199999997999763"
+            path:
+              type: array
+              example: []
+            flags:
+              type: array
+              example: []
+            priceImpact:
+              type: string
+              example: "0"
+            tokenPath:
+              type: string
+              example: ""
+            dataTx:
+              type: array
+              example: []  
+        fromTokenAddress: 
+          type: string
+          example: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054"
+        toTokenAddress: 
+          type: string
+          example: "0xb452b513552aa0B57c4b1C9372eFEa78024e5936"
+        senderAddress:
+          type: string
+          example: "0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964"
+        receiverAddress:
+          type: string
+          example: "0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964"
+        widgetId: 
+          type: string
+          example: "0"
+        txn:
+          type: object
+          properties:
+            execution:
+              type: object
+              properties:
+                data:
+                  type: string
+                  example: "0xbf28ae630000000000000000000000000000000000000000000000000000000000000000343331313300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000c000000000000000000000000022baa8b6cdd31a0c5d1035d6e72043f4ce6af05400000000000000000000000000000000000000000000000ad78ebc5ac620000000000000000000000000000000000000000000000000000ad78eba890eb58ac000000000000000000000000000000000000000000000000000000000000000142b351b7bbc86ab5df433539fe907f8ee4de1b964000000000000000000000000"
+                from:
+                  type: string
+                  example: "0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964"
+                to:
+                  type: string
+                  example: "0x190fC3352b361852E6abFE48d34C79473fF131D3"
+                value:
+                  type: string
+                  example: "0x00"
