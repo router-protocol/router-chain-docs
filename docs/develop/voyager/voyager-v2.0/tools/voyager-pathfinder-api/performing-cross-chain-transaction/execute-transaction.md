@@ -17,7 +17,7 @@ const getTransaction = async (params, quoteData) => {
     console.log(txDataUrl)
 
     try {
-        const res = await axios.get(txDataUrl, {
+        const res = await axios.post(txDataUrl, {
             ...quoteData,
             fromTokenAddress: params.fromTokenAddress,
             toTokenAddress: params.toTokenAddress,
