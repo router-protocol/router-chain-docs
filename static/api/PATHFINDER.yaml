@@ -105,19 +105,12 @@ paths:
       description:
       parameters:
         - in: query
-          name: txHash
+          name: srcTxHash
           required: true
           schema:
             type: string
-          example: "0x0fac92a29bfa71c4c37e1e3ea8f90ac3dc8457e29268b554f056bc29cf38259d"
+          example: "0x2e2bcff05d5602bd1b983132076c693c9ff35c925b1ad45a60aed9755aca5e19"
           description: Transaction hash of the successfully mined source chain transaction.
-        - in: query
-          name: networkId
-          required: true
-          schema:
-            type: string
-          example: "80001"
-          description: "Network ID of the source chain, i.e. where the transaction was initiated (eg: 80001 for mumbai testnet)."
       responses:
         "200":
           description: Empty
@@ -387,31 +380,59 @@ components:
     StatusResponse:
       type: object
       required:
-        - "tx_status"
-        - "tx_status_code"
+        - "status"
         - "src_chain_id"
         - "dest_chain_id"
         - "src_tx_hash"
         - "dest_tx_hash"
+        - "src_address"
+        - "dest_address"
+        - "src_amount"
+        - "dest_amount"
+        - "src_symbol"
+        - "dest_symbol"
+        - "src_timestamp"
+        - "dest_timestamp"
       properties:
-        tx_status:
+        status:
           type: string
-          example: "Completed"
-        tx_status_code:
-          type: string
-          example: 1
+          example: "completed"
         src_chain_id:
           type: string
           example: "80001"
         dest_chain_id:
           type: string
-          example: "43113"
+          example: "5"
         src_tx_hash:
           type: string
-          example: "0x0fac92a29bfa71c4c37e1e3ea8f90ac3dc8457e29268b554f056bc29cf38259d"
+          example: "0x2e2bcff05d5602bd1b983132076c693c9ff35c925b1ad45a60aed9755aca5e19"
         dest_tx_hash:
           type: string
-          example: "0x41f23c9bd5853af4805f04da5ac719b1bcbd3fcd193c08168cb4aead2d2626b7"
+          example: "0x4e05ebda5183e926c0f4980e3101be9f461dfbca061edf08aa569889354752a5"
+        src_address:
+          type: string
+          example: "0x418049cA499E9B5B983c9141c341E1aA489d6E4d"
+        dest_address:
+          type: string
+          example: "0x8725bfdCB8896d86AA0a6342A7e83c1565f62889"
+        src_amount:
+          type: string
+          example: "201.0"
+        dest_amount:
+          type: string
+          example: "5.007069887860371228"
+        src_symbol:
+          type: string
+          example: "SHI"
+        dest_symbol:
+          type: string
+          example: "ROUTE"
+        src_timestamp:
+          type: int
+          example: 1696572856
+        dest_timestamp:
+          type: int
+          example: 1696573932
     TransactionRequestBody:
       type: object
       required:
