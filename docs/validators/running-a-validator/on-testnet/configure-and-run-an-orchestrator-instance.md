@@ -110,8 +110,8 @@ To connect with router chain you can keep `networkType` as testnet, or if you ar
 If you need to customize the tmRpc or gRpc settings, you can specify the `routerChainTmRpc` and `routerChainGRpc` options. In this scenario, you should also specify the `networkType` as either "local" or "testnet" so that it can determine the chain ID from there.
 
 </details>
+
 Now, let's configure and run an orchestrator instance.
-<!-- Before proceeding with this step, make sure that you are running a validator. If note, follow [this guide](./setup-a-validator-account) to become a validator. -->
 
 <details>
 <summary><b>Step 3.1) Create a new wallet for the orchestrator</b></summary>
