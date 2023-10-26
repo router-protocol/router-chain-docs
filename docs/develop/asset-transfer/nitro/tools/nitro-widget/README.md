@@ -9,18 +9,18 @@ We have developed a widget that can be used by other projects to give their user
 ## Usage/Example
 Nitro's widget can easily be integrated as an iframe. An example of the same is given below:
 ```jsx
-const baseUrl = "https://app.thevoyager.io/swap";
+const baseUrl = "https://nitro-testnet.routerprotocol.com/swap";
 
 const configuration = {
 isWidget: true,
-partnerId: "24", // get your unique partner id by contacting us on Telegram or emailing us at contact@routerprotocol.com
-fromChain: "56",
-toChain: "137",
-fromToken: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
-toToken: "0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4",
-dstChains: "137,56",
+partnerId: "0", // get your unique partner id by contacting us on Telegram or emailing us at contact@routerprotocol.com
+fromChain: "80001",
+toChain: "43113",
+fromToken: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054",
+toToken: "0xb452b513552aa0B57c4b1C9372eFEa78024e5936",
+dstChains: "43113",
 dstTokens:
-    "0x6855f7bb6287F94ddcC8915E37e73a3c9fEe5CF3,0x980111ae1B84E50222C8843e3A7a038F36Fecd2b",
+    "0xb452b513552aa0B57c4b1C9372eFEa78024e5936,0x980111ae1B84E50222C8843e3A7a038F36Fecd2b",
 ctaColor: "#E8425A",
 textColor: "#1A1B1C",
 backgroundColor: "#3fb043",
@@ -35,13 +35,16 @@ document.getElementById("widget__iframe").src = `${baseUrl}?${paramString}`;
 ```
 
 :::note
-Important Note: 
 To integrate the widget on your UI, you will be assigned a unique partner ID. To get your partner ID, please contact us on [Telegram](https://t.me/Add_ith).
+:::
+
+:::note
+You can use [Nitro's Widget Builder Tool](https://nitro-testnet.routerprotocol.com/widget) to automatically generate the widget paramaters.
 :::
 
 ```jsx
 <iframe id="widget__iframe" height="610px" width="420px" 
-src="https://app.thevoyager.io/swap?isWidget=true&partnerId=widget-0101&fromChain=56&toChain=137&fromToken=0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56&toToken=0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4"
+src="https://nitro-testnet.routerprotocol.com/swap?isWidget=true&partnerId=widget-0101&fromChain=56&toChain=137&fromToken=0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56&toToken=0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4"
 style="border: none; border-radius: 11px; box-shadow: 3px 3px 10px 4px rgba(0, 0, 0, 0.05);">
 </iframe>
 ```
@@ -70,7 +73,7 @@ There might also be a few cases in which a platform wants to show a selected lis
 
 ```jsx 
 <iframe height="610px" width="420px" 
-src="https://app.thevoyager.io/swap?isWidget=true&partnerId=widget-0101&fromChain=137&fromToken=0xc2132d05d31c914a87c6611c10748aeb04b58e8f&toChain=56&toToken=0x6855f7bb6287F94ddcC8915E37e73a3c9fEe5CF3&dstChains=137,56&dstTokens=0x6855f7bb6287F94ddcC8915E37e73a3c9fEe5CF3,0x980111ae1B84E50222C8843e3A7a038F36Fecd2b"
+src="https://nitro-testnet.routerprotocol.com/swap?isWidget=true&partnerId=widget-0101&fromChain=137&fromToken=0xc2132d05d31c914a87c6611c10748aeb04b58e8f&toChain=56&toToken=0x6855f7bb6287F94ddcC8915E37e73a3c9fEe5CF3&dstChains=137,56&dstTokens=0x6855f7bb6287F94ddcC8915E37e73a3c9fEe5CF3,0x980111ae1B84E50222C8843e3A7a038F36Fecd2b"
 style="border: none;border-radius: 11px;box-shadow: 3px 3px 10px 4px rgba(0, 0, 0, 0.05);">
 </iframe>
 ```

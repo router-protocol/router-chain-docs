@@ -97,8 +97,12 @@ const main = async () => {
 main()
 ```
 
-## Widget Migration
-
 :::info
 In Voyager, the pathfinder API used to return the transaction data along with the quote. However, in Nitro, the data is prepared via a separate endpoint. 
 :::
+
+## Widget Migration
+
+Just change the `baseURL` from "https://app.thevoyager.io/swap" to "https://nitro-testnet.routerprotocol.com/swap" and you're good to go. 
+
+
