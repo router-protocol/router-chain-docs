@@ -84,7 +84,7 @@ _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
 
 1. `stakingContract`: This is the instance of our Stake contract which will manage the state and balance of funds in both kinds of staking: same chain staking as well as cross-chain staking.
 2. `routerAssetBridgeContract`: This is the variable created for storing the address of the Nitro contract. We will be calling the Nitro contract to initiate the cross-chain sequenced transfer on the source side. We will also validate if the transaction triggered on the destination side has been made by the Nitro contract only.
-3. `ourContractsOnChain` : This is the mapping that stores the address of the Vault contract corresponding to the destination chain ID which can be found [here](https://github.com/router-protocol/router-chain-docs/blob/main/docs/develop/voyager/tools/configurations/chain-id-identifiers.md). It makes sure that while calling the `iStake` function (explained later), we are putting the correct recipient vault address as per our desired destination chain.
+3. `ourContractsOnChain` : This is the mapping that stores the address of the Vault contract corresponding to the destination chain ID which can be found [here](../supported-chains-tokens.md). It makes sure that while calling the `iStake` function (explained later), we are putting the correct recipient vault address as per our desired destination chain.
 4. `I_DEPOSIT_MESSAGE_SELECTOR` : This is the selector of `iDepositMessage` in Nitro.
 5. `constructor`: Create the constructor with the address of the Nitro contract and set that into our state variable. Also give the `DEFAULT_ADMIN_ROLE` to the deployer.
 
@@ -188,7 +188,7 @@ It is the `iStake` function that:
 
 Let us understand the parameters of `iStake` function one by one:
 
-| destChainIdBytes      | Network IDs of the chains in bytes32 format. These can be found [here](https://github.com/router-protocol/router-chain-docs/blob/main/docs/develop/voyager/tools/configurations/chain-id-identifiers.md).                   |
+| destChainIdBytes      | Network IDs of the chains in bytes32 format. These can be found [here](../supported-chains-tokens.md).                   |
 | --------------- | -------------------------------------------------------------------------------------- |  
 | srcToken | Address of the token that has to be transferred from the source chain.                                                                   |
 | amount | Decimal-adjusted amount of the token that has to be transferred from the source chain.                                                                   |
