@@ -87,7 +87,7 @@ In this example, we are demonstrating how to handle a cross-chain staking reques
 address public nitro = “address of the nitro;
 
 
-function handleNitroMessage(
+function handleMessage(
 address tokenSent,
 uint256 amount,
 bytes memory message

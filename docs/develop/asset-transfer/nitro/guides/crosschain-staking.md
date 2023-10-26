@@ -198,7 +198,7 @@ Let us understand the parameters of `iStake` function one by one:
 #### Function that receives the cross-chain call and executes the Stake function on the destination chain
 
 ```javascript
-function handleNitroMessage(
+function handleMessage(
 address tokenSent,
 uint256 amount,
 bytes memory message
@@ -410,7 +410,7 @@ address userAddress
 }
 
 
-function handleNitroMessage(
+function handleMessage(
 address tokenSent,
 uint256 amount,
 bytes memory message

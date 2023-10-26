@@ -103,6 +103,6 @@ In Voyager, the pathfinder API used to return the transaction data along with th
 
 ## Widget Migration
 
-Just change the `baseURL` from "https://app.thevoyager.io/swap" to "https://nitro-testnet.routerprotocol.com/swap" and you're good to go. 
+Just change the `baseURL` from "https://app.thevoyager.io/swap" to "https://nitro.routerprotocol.com/swap" and you're good to go. 
 
 
