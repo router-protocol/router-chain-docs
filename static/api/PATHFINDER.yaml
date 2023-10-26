@@ -381,7 +381,7 @@ components:
             dataTx:
               type: array
               example: []  
-        widgetId: 
+        partnerId: 
           type: string
           example: "0"
     StatusResponse:
@@ -665,7 +665,7 @@ components:
         receiverAddress:
           type: string
           example: "0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964"
-        widgetId: 
+        partnerId: 
           type: string
           example: "0"
     TransactionResponseBody:
@@ -921,7 +921,7 @@ components:
         receiverAddress:
           type: string
           example: "0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964"
-        widgetId: 
+        partnerId: 
           type: string
           example: "0"
         txn:

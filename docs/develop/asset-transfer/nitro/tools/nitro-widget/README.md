@@ -1,5 +1,5 @@
 ---
-title: Voyager Widget
+title: Nitro Widget
 sidebar_position: 1
 description: Widget to integrate cross-chain swaps on your website
 ---
@@ -7,13 +7,13 @@ description: Widget to integrate cross-chain swaps on your website
 We have developed a widget that can be used by other projects to give their users an option to perform cross-chain transactions directly from their UI.
 
 ## Usage/Example
-Router's widget can easily be integrated as an iframe. An example of the same is given below:
+Nitro's widget can easily be integrated as an iframe. An example of the same is given below:
 ```jsx
 const baseUrl = "https://app.thevoyager.io/swap";
 
 const configuration = {
 isWidget: true,
-widgetId: "24", // get your unique widget id by contacting us on Telegram
+partnerId: "24", // get your unique partner id by contacting us on Telegram or emailing us at contact@routerprotocol.com
 fromChain: "56",
 toChain: "137",
 fromToken: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
@@ -36,12 +36,12 @@ document.getElementById("widget__iframe").src = `${baseUrl}?${paramString}`;
 
 :::note
 Important Note: 
-To integrate the widget on your UI, you will be assigned a unique widget ID. To get your widget ID, please contact us on [Telegram](https://t.me/Add_ith).
+To integrate the widget on your UI, you will be assigned a unique partner ID. To get your partner ID, please contact us on [Telegram](https://t.me/Add_ith).
 :::
 
 ```jsx
 <iframe id="widget__iframe" height="610px" width="420px" 
-src="https://app.thevoyager.io/swap?isWidget=true&widgetId=widget-0101&fromChain=56&toChain=137&fromToken=0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56&toToken=0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4"
+src="https://app.thevoyager.io/swap?isWidget=true&partnerId=widget-0101&fromChain=56&toChain=137&fromToken=0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56&toToken=0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4"
 style="border: none; border-radius: 11px; box-shadow: 3px 3px 10px 4px rgba(0, 0, 0, 0.05);">
 </iframe>
 ```
@@ -51,7 +51,7 @@ Generate the paramString (as given in the example above) and attach it to the sr
 | **Parameter** | **Description** |
 | -------- | -------- |
 | isWidget | true (Required) |
-| widgetId | Unique for each widget (Required) |
+| partnerId | Unique for each partner (Required) |
 | fromChain | ChainId of the chain that needs to be shown as the default source chain. By default, the source chain will be chosen as the chain to which the user's wallet is connected. In case the user's wallet is not connected, Polygon is shown as the default source chain. |
 | toChain |	ChainId of the chain that needs to be shown as the default destination chain. By default, BSC is shown as the destination chain. |
 | fromToken | Address of the token that needs to be shown as the selected token on the source chain. By default, USDT will be shown as the source token. |
@@ -70,7 +70,7 @@ There might also be a few cases in which a platform wants to show a selected lis
 
 ```jsx 
 <iframe height="610px" width="420px" 
-src="https://app.thevoyager.io/swap?isWidget=true&widgetId=widget-0101&fromChain=137&fromToken=0xc2132d05d31c914a87c6611c10748aeb04b58e8f&toChain=56&toToken=0x6855f7bb6287F94ddcC8915E37e73a3c9fEe5CF3&dstChains=137,56&dstTokens=0x6855f7bb6287F94ddcC8915E37e73a3c9fEe5CF3,0x980111ae1B84E50222C8843e3A7a038F36Fecd2b"
+src="https://app.thevoyager.io/swap?isWidget=true&partnerId=widget-0101&fromChain=137&fromToken=0xc2132d05d31c914a87c6611c10748aeb04b58e8f&toChain=56&toToken=0x6855f7bb6287F94ddcC8915E37e73a3c9fEe5CF3&dstChains=137,56&dstTokens=0x6855f7bb6287F94ddcC8915E37e73a3c9fEe5CF3,0x980111ae1B84E50222C8843e3A7a038F36Fecd2b"
 style="border: none;border-radius: 11px;box-shadow: 3px 3px 10px 4px rgba(0, 0, 0, 0.05);">
 </iframe>
 ```

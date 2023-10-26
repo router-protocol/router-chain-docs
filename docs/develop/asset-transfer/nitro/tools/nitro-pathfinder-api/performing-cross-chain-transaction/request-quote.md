@@ -37,7 +37,7 @@ const main = async () => {
         'amount': '10000000000000000000', // source amount
         'fromTokenChainId': "80001", // Mumbai
         'toTokenChainId': "43113", // Fuji
-        'widgetId': 0, // get your unique wdiget id by contacting us on Telegram
+        'partnerId': 0, // (Optional) - For any partnership, get your unique partner id by contacting us on Telegram or emailing us at contact@routerprotocol.com
     }
     
     const quoteData = await getQuote(params);
@@ -51,5 +51,5 @@ main()
 
 :::info
 Important Note: 
-To play around with the API, you can use the Widget ID given in the example above. But for use in any product/protocol, you will be assigned a unique Widget ID. To get your Widget ID, please contact us on [Telegram](https://t.me/Add_ith).
+To play around with the API, you can use the Partner ID given in the example above. But for use in any product/protocol, you will be assigned a unique Partner ID. To get your Partner ID, please contact us on [Telegram](https://t.me/Add_ith).
 :::

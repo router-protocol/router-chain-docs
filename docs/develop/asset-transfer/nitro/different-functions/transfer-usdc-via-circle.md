@@ -14,9 +14,9 @@ function iDepositUSDC(
 ) external payable {}
 
 ```
-Voyager v2.0 enables cross-chain transfer of USDC on Arbitrum, Avalanche, Ethereum and Optimism via Circle. In this approach, USDC can be burnt on the source chain and minted on the destination chain. 
+Nitro enables cross-chain transfer of USDC on Arbitrum, Avalanche, Ethereum and Optimism via Circle. In this approach, USDC can be burnt on the source chain and minted on the destination chain. 
 
-When a user wants to transfer USDC between the aforementioned chains, the `iDepositUSDC` function has to be called. Once this function is called, Voyager will handle the interaction with Circle and ensure the end-to-end transfer of USDC to the user on the destination chain.
+When a user wants to transfer USDC between the aforementioned chains, the `iDepositUSDC` function has to be called. Once this function is called, Nitro will handle the interaction with Circle and ensure the end-to-end transfer of USDC to the user on the destination chain.
 
 ### Parameters
 
