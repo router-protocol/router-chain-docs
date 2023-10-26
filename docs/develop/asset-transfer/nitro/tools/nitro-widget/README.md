@@ -41,7 +41,7 @@ You can use [Nitro's Widget Builder Tool](https://nitro-testnet.routerprotocol.c
 
 ```jsx
 <iframe id="widget__iframe" height="610px" width="420px" 
-src="https://nitro-testnet.routerprotocol.com/swap?isWidget=true&partnerId=widget-0101&fromChain=56&toChain=137&fromToken=0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56&toToken=0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4"
+src="https://nitro-testnet.routerprotocol.com/swap?isWidget=true&partnerId=widget-0101&fromChain=80001&toChain=43113&fromToken=0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054&toToken=0xb452b513552aa0B57c4b1C9372eFEa78024e5936"
 style="border: none; border-radius: 11px; box-shadow: 3px 3px 10px 4px rgba(0, 0, 0, 0.05);">
 </iframe>
 ```
@@ -70,7 +70,7 @@ There might also be a few cases in which a platform wants to show a selected lis
 
 ```jsx 
 <iframe height="610px" width="420px" 
-src="https://nitro-testnet.routerprotocol.com/swap?isWidget=true&partnerId=widget-0101&fromChain=137&fromToken=0xc2132d05d31c914a87c6611c10748aeb04b58e8f&toChain=56&toToken=0x6855f7bb6287F94ddcC8915E37e73a3c9fEe5CF3&dstChains=137,56&dstTokens=0x6855f7bb6287F94ddcC8915E37e73a3c9fEe5CF3,0x980111ae1B84E50222C8843e3A7a038F36Fecd2b"
+src="https://nitro-testnet.routerprotocol.com/swap?isWidget=true&partnerId=widget-0101&fromChain=137&fromToken=0xc2132d05d31c914a87c6611c10748aeb04b58e8f&toChain=56&toToken=0x6855f7bb6287F94ddcC8915E37e73a3c9fEe5CF3&dstChains=5001,43113&dstTokens=0xb452b513552aa0B57c4b1C9372eFEa78024e5936,0x980111ae1B84E50222C8843e3A7a038F36Fecd2b"
 style="border: none;border-radius: 11px;box-shadow: 3px 3px 10px 4px rgba(0, 0, 0, 0.05);">
 </iframe>
 ```
