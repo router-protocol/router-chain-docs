@@ -40,7 +40,7 @@ paths:
           required: true
           schema:
             type: string
-          example: "200000000000000000000"
+          example: "20000000000000"
           description: "Decimal-expanded amount of the token to be transferred (for eg: if you want to transfer 1 USDC, you need to send 1000000). You can use ethers.utils.parseUnits function to calculate the decimal-adjusted amount of the source token."
         - in: query
           name: fromTokenChainId
@@ -56,6 +56,13 @@ paths:
             type: string
           example: "43113"
           description: "Token address of the asset you wish to receive on the destination chain."
+        - in: query
+          name: partnerId
+          required: false
+          schema:
+            type: number
+          example: 0
+          description: "For testing omit this parameter. For any partnership, you can get your unique partner id by contacting us on Telegram or emailing us at contact@routerprotocol.com"
       responses:
         "200":
           description: Empty
@@ -77,7 +84,7 @@ paths:
       operationId: transaction
       description:
       requestBody:
-        description: Create a new pet in the store
+        description: In request body pass the /quote response with senderAddress and receiverAddress.
         content:
           application/json:
             schema:
@@ -157,6 +164,12 @@ components:
         allowanceTo:
           type: string
           example: "0x190fC3352b361852E6abFE48d34C79473fF131D3"
+        fromTokenAddress:
+          type: string
+          example: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054"
+        toTokenAddress:
+          type: string
+          example: "0xb452b513552aa0B57c4b1C9372eFEa78024e5936"
         source:
           type: object
           required:
@@ -382,8 +395,8 @@ components:
               type: array
               example: []  
         partnerId: 
-          type: string
-          example: "0"
+          type: number
+          example: 0
     StatusResponse:
       type: object
       required:
@@ -429,6 +442,12 @@ components:
         allowanceTo:
           type: string
           example: "0x190fC3352b361852E6abFE48d34C79473fF131D3"
+        bridgeFee:
+          type: object
+          required:
+            - "amount"
+            - "decimals"
+            - "symbol"
         source:
           type: object
           required:
@@ -521,10 +540,10 @@ components:
                   example: false
             tokenAmount:
               type: string
-              example: "200000000000000000000"
+              example: "19399929"
             stableReserveAmount:
               type: string
-              example: "200000000000000000000"
+              example: "19399929"
             path:
               type: array
               example: []
@@ -536,7 +555,7 @@ components:
               example: "0"
             bridgeFeeAmount:
               type: int
-              example: '2000237'
+              example: '600071'
             tokenPath:
               type: string
               example: ""
@@ -659,15 +678,15 @@ components:
         toTokenAddress: 
           type: string
           example: "0xb452b513552aa0B57c4b1C9372eFEa78024e5936"
+        partnerId: 
+          type: string
+          example: "0"
         senderAddress:
           type: string
           example: "0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964"
         receiverAddress:
           type: string
           example: "0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964"
-        partnerId: 
-          type: string
-          example: "0"
     TransactionResponseBody:
       type: object
       required:
