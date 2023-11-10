@@ -3,7 +3,7 @@ title: Cross-chain Staking dApp
 sidebar_position: 1
 ---
 
-In this section, we shall create a simple cross-chain staking dapp using the Voyager sequencer. We shall follow the instructions provided in the previous section to create the same. It consists of two smart contracts: **Vault** and **Stake**.
+In this section, we shall create a simple cross-chain staking dapp using the Nitro sequencer. We shall follow the instructions provided in the previous section to create the same. It consists of two smart contracts: **Vault** and **Stake**.
 
 **Vault** contract enables the user to first transfer his funds from chain A to chain B and then stake them on chain B.
 **Stake** contract manages the balance of the staked tokens on the destination side. In other words, Stake contract is the state manager of the Vault contract.
@@ -83,10 +83,10 @@ _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
 ```
 
 1. `stakingContract`: This is the instance of our Stake contract which will manage the state and balance of funds in both kinds of staking: same chain staking as well as cross-chain staking.
-2. `routerAssetBridgeContract`: This is the variable created for storing the address of the Voyager contract. We will be calling the Voyager contract to initiate the cross-chain sequenced transfer on the source side. We will also validate if the transaction triggered on the destination side has been made by the Voyager contract only.
-3. `ourContractsOnChain` : This is the mapping that stores the address of the Vault contract corresponding to the destination chain ID which can be found [here](https://github.com/router-protocol/router-chain-docs/blob/main/docs/develop/voyager/tools/configurations/chain-id-identifiers.md). It makes sure that while calling the `iStake` function (explained later), we are putting the correct recipient vault address as per our desired destination chain.
-4. `I_DEPOSIT_MESSAGE_SELECTOR` : This is the selector of `iDepositMessage` in Voyager.
-5. `constructor`: Create the constructor with the address of the Voyager contract and set that into our state variable. Also give the `DEFAULT_ADMIN_ROLE` to the deployer.
+2. `routerAssetBridgeContract`: This is the variable created for storing the address of the Nitro contract. We will be calling the Nitro contract to initiate the cross-chain sequenced transfer on the source side. We will also validate if the transaction triggered on the destination side has been made by the Nitro contract only.
+3. `ourContractsOnChain` : This is the mapping that stores the address of the Vault contract corresponding to the destination chain ID which can be found [here](../supported-chains-tokens.md). It makes sure that while calling the `iStake` function (explained later), we are putting the correct recipient vault address as per our desired destination chain.
+4. `I_DEPOSIT_MESSAGE_SELECTOR` : This is the selector of `iDepositMessage` in Nitro.
+5. `constructor`: Create the constructor with the address of the Nitro contract and set that into our state variable. Also give the `DEFAULT_ADMIN_ROLE` to the deployer.
 
 
 #### Function to set the Staking contract
@@ -146,14 +146,14 @@ function toBytes(address addr) internal pure returns (bytes memory b) {
 
 This is just a supporting function. We shall use it as a converter whenever an address has to be passed as a parameter in the form of bytes.
 
-#### Function to approve Stake contract and Voyager contract to safely transfer funds from Vault
+#### Function to approve Stake contract and Nitro contract to safely transfer funds from Vault
 ```javascript
 function approve(address token, address spender, uint256 amount) external onlyRole(DEFAULT_ADMIN_ROLE) {
 IERC20(token).approve(spender, amount);
 }
 ```
 
-- Vault contract on every chain must approve the Voyager Contract on same chain so that Voyager is able to transfer funds from the Vault to itself, in order to start the cross-chain transfer process.
+- Vault contract on every chain must approve the Nitro Contract on same chain so that Nitro is able to transfer funds from the Vault to itself, in order to start the cross-chain transfer process.
 - On the destination side, funds are received by the Vault contract whenever a cross-chain transfer is executed and they are directed to Stake contract after which the staked balance against the user is updated. The Vault contract on every chain must approve the Stake contract on the same chain so that the Stake Contract is able to transfer a certain amount of tokens to itself from the Vault.
 
 
@@ -182,13 +182,13 @@ address userAddress
 ```
 It is the `iStake` function that:
 1. Encodes the data that we need on the destination chain whenever a cross-chain request is received. Here we need the recipient or user address to update the staked balance against the user's address on the destination chain.
-2. Calls the selector for the `iDepositMessage` function in Voyager as per the data passed in the parameters.
+2. Calls the selector for the `iDepositMessage` function in Nitro as per the data passed in the parameters.
 
 
 
 Let us understand the parameters of `iStake` function one by one:
 
-| destChainIdBytes      | Network IDs of the chains in bytes32 format. These can be found [here](https://github.com/router-protocol/router-chain-docs/blob/main/docs/develop/voyager/tools/configurations/chain-id-identifiers.md).                   |
+| destChainIdBytes      | Network IDs of the chains in bytes32 format. These can be found [here](../supported-chains-tokens.md).                   |
 | --------------- | -------------------------------------------------------------------------------------- |  
 | srcToken | Address of the token that has to be transferred from the source chain.                                                                   |
 | amount | Decimal-adjusted amount of the token that has to be transferred from the source chain.                                                                   |
@@ -198,7 +198,7 @@ Let us understand the parameters of `iStake` function one by one:
 #### Function that receives the cross-chain call and executes the Stake function on the destination chain
 
 ```javascript
-function handleVoyagerMessage(
+function handleMessage(
 address tokenSent,
 uint256 amount,
 bytes memory message
@@ -206,7 +206,7 @@ bytes memory message
     // Checking if the sender is the router asset bridge contract
     require(
     msg.sender == routerAssetBridgeContract,
-    "only voyager"
+    "only nitro"
     );
     IERC20(tokenSent).safeIncreaseAllowance(address(stakingContract), amount );
     // decoding the data we sent from the source chain
@@ -216,9 +216,9 @@ bytes memory message
 }
 ```
 
-It is the `hanldeVoyagerMessage` function that:
+It is the `hanldeNitroMessage` function that:
 
-1. Checks that the caller of the function is Voyager only.
+1. Checks that the caller of the function is Nitro only.
 2. Increases the allowance for the Stake contract so that the Vault can transfer funds to the Stake contract.
 3. Decodes the data that we encoded (recipient address) at the time of initiating the cross-chain transfer.
 4. Calls the Stake contract and updates the user’s staked balance.
@@ -410,7 +410,7 @@ address userAddress
 }
 
 
-function handleVoyagerMessage(
+function handleMessage(
 address tokenSent,
 uint256 amount,
 bytes memory message
@@ -527,7 +527,7 @@ uint256 amount
 <details>
 <summary><b>Fee Calculation</b></summary>
 
-The fee for using Voyager sequencer has two components: 
+The fee for using Nitro sequencer has two components: 
 - **Transfer/Forwarder Fee**: The fee for transferring tokens from one chain to another. Users can use this [API](https://api.trustless-voyager.alpha.routerprotocol.com/api#/Fees/FeeController_getFeesForChainInTokenTerms) to estimate the fee by putting in the destination chain ID, address of the token on the destination chain, token amount, and token decimals. There is another boolean value `checkLiquidity`:
     -  If marked as TRUE, the API gives the list of all the forwarders which have enough liquidity (along with the fee they would charge in terms of the token desired) against the amount requested by the user for the token.
     - If marked as FALSE, the API gives the list of all the forwarders whether or not they have enough liquidity to take up the transaction.

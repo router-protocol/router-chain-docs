@@ -2,7 +2,7 @@
 title: Different Functions
 ---
 
-The Voyager V1 Deposit Handler contract has six user facing functions which we will discuss in detail in this section:
+The Voyager Deposit Handler contract has six user facing functions which we will discuss in detail in this section:
 - [Transfer of Reserve Tokens](./different-functions/transfer-reserve-token)
 - [Transfer of Reserve Tokens along with an Arbitrary Instruction](./different-functions/transfer-reserve-token-arbitrary-instruction)
 - [Transfer of Non-Reserve Tokens](./different-functions/transfer-non-reserve-token)

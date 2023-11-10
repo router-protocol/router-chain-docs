@@ -1,19 +1,19 @@
 ---
 title: Supported Chains and Tokens
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 ## Testnet
 
 ### Supported Chains
 
-| **Chain**           | **Chain Id**                                   |
-| ------------------- | ---------------------------------------------- |
-| Avalanche Fuji      | 43113                                          |
-| Polygon Mumbai      | 80001                                          |
-| Ethereum Goerli     | 5                                              |
-| Near Testnet        | near-testnet                                   |
-| Tron Shasta Testnet | 2494104990                                     |
+| **Chain**           | **Chain Id**                                   | **Bytes32**
+| ------------------- | ---------------------------------------------- | --------------------------- |
+| Avalanche Fuji      | 43113                                          | `0x3433313133000000000000000000000000000000000000000000000000000000` |
+| Polygon Mumbai      | 80001                                          | `0x3830303031000000000000000000000000000000000000000000000000000000` |
+| Ethereum Goerli     | 5                                              | `0x3500000000000000000000000000000000000000000000000000000000000000` |
+| Near Testnet        | near-testnet                                   | `0x6e6561722d746573746e65740000000000000000000000000000000000000000` |
+| Tron Shasta Testnet | 2494104990                                     | `0x3234393431303439393000000000000000000000000000000000000000000000` |
 
 
 ### Supported Tokens

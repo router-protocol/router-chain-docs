@@ -22,7 +22,7 @@ The flow is just the same as that of the token transfer explained before. The on
 
 | partnerId  | Unique ID for each partner who integrates this functionality and has a fee sharing model with Router. This helps them to track and analyze their cross-chain transactions easily.           |
 | --------------- | -------------------------------------------------------------------------------------- |
-| destChainIdBytes        | Network IDs of the chains in bytes32 format. These can be found [here](https://github.com/router-protocol/router-chain-docs/blob/main/docs/develop/voyager/tools/configurations/chain-id-identifiers.md).                       |
+| destChainIdBytes        | Network IDs of the chains in bytes32 format. These can be found [here](../supported-chains-tokens.md).                       |
 | recipient     | Wallet address that will receive the tokens on the destination chain. |
 | srcToken | Address of the token that has to be transferred from the source chain.                                                                   |
 | amount | Decimal-adjusted amount of the token that has to be transferred from the source chain.                                                                   |
@@ -53,12 +53,12 @@ Inside the `handleMessage` function on the destination chain, you will decode th
 
 #### Example of a function on the source chain to generate a cross-chain sequenced request
 ```javascript
-address public voyager = “address of voyager contract”;
+address public nitro = “address of nitro contract”;
 
 bytes4 public constant I_DEPOSIT_MESSAGE_SELECTOR = bytes4(keccak256("iDepositMessage(uint256,bytes32,bytes,address,uint256,uint256,bytes)"));
 
 
-function callVoyager(
+function callNitro(
 uint256 partnerId,
 bytes32 destChainIdBytes,
 bytes calldata recipient,
@@ -70,12 +70,12 @@ bytes memory message
 bool success;
 
 
-(success, ) = voyager.call{ value: msg.value }(
+(success, ) = nitro.call{ value: msg.value }(
 abi.encodeWithSelector(I_DEPOSIT_MESSAGE_SELECTOR, partnerId, destChainIdBytes,recipient, srcToken, amount, destAmount, message)
 );
 
 
-require(success, "Voyager deposit unsuccessful");
+require(success, "Nitro deposit unsuccessful");
 }
 ```
 
@@ -84,16 +84,16 @@ require(success, "Voyager deposit unsuccessful");
 In this example, we are demonstrating how to handle a cross-chain staking request (transfer funds and stake them on a contract).
 
 ```javascript
-address public voyager = “address of the voyager”;
+address public nitro = “address of the nitro;
 
 
-function handleVoyagerMessage(
+function handleMessage(
 address tokenSent,
 uint256 amount,
 bytes memory message
 ) external {
-// Checking if the sender is the voyager contract
-require(msg.sender == voyager,"only voyager");
+// Checking if the sender is the nitro contract
+require(msg.sender == nitro,"only nitro");
 // decoding the data we sent from the source chain
 address user = abi.decode(message, (address));
 // calling the stake function
@@ -112,5 +112,5 @@ stakedBalance[user][token] += amount;
 ```
 
 :::info
-Check out this [guide](../guides/crosschain-staking) to learn how to create an end-to-end cross-chain staking dApp using Voyager sequencer.
+Check out this [guide](../guides/crosschain-staking) to learn how to create an end-to-end cross-chain staking dApp using Nitro sequencer.
 :::

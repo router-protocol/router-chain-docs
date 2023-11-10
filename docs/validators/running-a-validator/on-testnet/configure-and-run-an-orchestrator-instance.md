@@ -6,11 +6,29 @@ If you have followed the preceeding steps properly, you should already see an or
 ```json
 {
     "chains": [
+	            {
+      "chainId": "2494104990",
+      "chainType": " CHAIN_TYPE_EVM",
+      "chainName": "shasta-testnet",
+      "chainRpc": "grpc.shasta.trongrid.io:50051",
+      "chainApi": "https://api.shasta.trongrid.io",
+      "blocksToSearch": 1000,
+      "blockTime": "3s"
+    },
+             {
+            "chainId": "5",
+            "chainType": " CHAIN_TYPE_EVM",
+            "chainName": "Goerli",
+            "chainRpc": "https://rpc.ankr.com/eth_goerli",
+            "blocksToSearch": 1000,
+	    "confirmationsRequired": 5,
+            "blockTime": "60s"
+        },
         {
             "chainId": "80001",
             "chainType": " CHAIN_TYPE_EVM",
             "chainName": "Mumbai",
-            "chainRpc": "",
+            "chainRpc": "https://rpc.ankr.com/polygon_mumbai",
             "blocksToSearch": 1000,
             "blockTime": "10s"
         },
@@ -18,7 +36,7 @@ If you have followed the preceeding steps properly, you should already see an or
             "chainId": "43113",
             "chainType": " CHAIN_TYPE_EVM",
             "chainName": "Fuji",
-            "chainRpc": "",
+            "chainRpc": "https://rpc.ankr.com/avalanche_fuji",
             "blocksToSearch": 1000,
             "blockTime": "10s"
         },
@@ -26,43 +44,74 @@ If you have followed the preceeding steps properly, you should already see an or
             "chainId": "534353",
             "chainType": " CHAIN_TYPE_EVM",
             "chainName": "scrollTestnet",
-            "chainRpc": "",
+            "chainRpc": "https://rpc.ankr.com/scroll_testnet",
             "blocksToSearch": 1000,
+	    "confirmationsRequired": 5,
             "blockTime": "5s"
         },
         {
             "chainId": "5001",
             "chainType": " CHAIN_TYPE_EVM",
             "chainName": "mantleTestnet",
-            "chainRpc": "",
-            "blocksToSearch": 1000,
+            "chainRpc": "https://rpc.ankr.com/mantle_testnet",
+            "blocksToSearch": 500,
+	    "confirmationsRequired": 5,
             "blockTime": "5s"
         },
         {
             "chainId": "421613",
             "chainType": " CHAIN_TYPE_EVM",
             "chainName": "ArbitrumGoerli",
-            "chainRpc": "",
+            "chainRpc": "https://goerli-rollup.arbitrum.io/rpc",
             "blocksToSearch": 1000,
-            "blockTime": "10s"
+	    "confirmationsRequired": 10,
+            "blockTime": "5s"
+	    },
+	    {
+            "chainId": "59140",
+            "chainType": " CHAIN_TYPE_EVM",
+            "chainName": "lineaTestnet",
+            "chainRpc": "https://rpc.goerli.linea.build",
+            "blocksToSearch": 500,
+             "confirmationsRequired": 5,
+            "blockTime": "5s"
+            },
+	   {
+            "chainId": "near-testnet",
+           "chainType": "CHAIN_TYPE_NEAR",
+            "chainName": "near-testnet",
+            "chainRpc": "https://rpc.testnet.near.org",
+            "blocksToSearch": 1,
+            "blockTime": "2s"
         }
     ],
     "globalConfig": {
-        "mQEndpoint": "amqp://guest:guest@localhost",
-        "networkType": "testnet",
-        "dbPath": "processedblock.db",
+        "networkType": "local",
+        "dbPath": "orchestrator.db",
+        "routerChainTmRpc": "", //optional
+        "routerChainGRpc":"", //optional
         "evmAddress": "",
         "cosmosAddress": "",
         "ethPrivateKey": "",
         "cosmosPrivateKey": "",
-        "batchSize": 100,
-        "batchWaitTime": 15
+        "batchSize": 20,
+        "batchWaitTime": 3
     }
 }
 ```
+:::note
+We have added all the supported chain. In above example we have added public RPCs, feel free to update it.
+:::
+<details>
+
+### Connection with Router-chain
+
+To connect with router chain you can keep `networkType` as testnet, or if you are running your own node you can keep it as `local`. 
+If you need to customize the tmRpc or gRpc settings, you can specify the `routerChainTmRpc` and `routerChainGRpc` options. In this scenario, you should also specify the `networkType` as either "local" or "testnet" so that it can determine the chain ID from there.
+
+</details>
 
 Now, let's configure and run an orchestrator instance.
-<!-- Before proceeding with this step, make sure that you are running a validator. If note, follow [this guide](./setup-a-validator-account) to become a validator. -->
 
 <details>
 <summary><b>Step 3.1) Create a new wallet for the orchestrator</b></summary>

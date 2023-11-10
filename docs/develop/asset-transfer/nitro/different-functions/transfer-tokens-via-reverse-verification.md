@@ -21,7 +21,7 @@ Voyager enables cross-chain transfers of multiple tokens via this function. When
 
 | partnerId  | Unique ID for each partner who integrates this functionality and has a fee sharing model with Router. This helps them to track and analyze their cross-chain transactions easily.           |
 | --------------- | -------------------------------------------------------------------------------------- |
-| destChainIdBytes        | Network IDs of the chains in bytes32 format. These can be found [here](https://github.com/router-protocol/router-chain-docs/blob/main/docs/develop/voyager/tools/configurations/chain-id-identifiers.md).                       |
+| destChainIdBytes        | Network IDs of the chains in bytes32 format. These can be found [here](../supported-chains-tokens.md).                       |
 | recipient     | Wallet address that will receive the tokens on the destination chain. |
 | srcToken | Address of the token that has to be transferred from the source chain.                                                                   |
 | amount | Decimal-adjusted amount of the token that has to be transferred from the source chain.                                                                   |

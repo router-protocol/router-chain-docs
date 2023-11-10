@@ -62,6 +62,8 @@ Here is how the `config.json` file will look like:
     "globalConfig": {
         "mQEndpoint": "amqp://guest:guest@localhost",
         "networkType": "testnet",
+        "routerChainTmRpc": "", //optional
+        "routerChainGRpc":"", //optional
         "dbPath": "processedblock.db",
         "evmAddress": "",
         "cosmosAddress": "",
@@ -100,6 +102,11 @@ To provide the credential access, a private key in plaintext needs to be provide
 **Ethereum Private Key (Unsafe)**
 
 Simply update the `ethPrivateKey` with an Ethereum private key from a new account.
+
+### Connection with Router-chain
+
+To connect with router chain you can keep `networkType` as testnet, or if you are running your own node you can keep it as `local`. 
+If you need to customize the tmRpc or gRpc settings, you can specify the `routerChainTmRpc` and `routerChainGRpc` options. In this scenario, you should also specify the `networkType` as either "local" or "testnet" so that it can determine the chain ID from there.
 
 </details>
 

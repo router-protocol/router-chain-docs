@@ -133,7 +133,7 @@ the best cross-chain framework for your dApp.
   </Section>
   </Section>
 
-## Asset Transfer via Voyager
+## Asset Transfer
 
    <Section title="Developers" id="web-sdks" hasSubSections >
 
@@ -141,31 +141,31 @@ the best cross-chain framework for your dApp.
   <Card
     title="Overview"
     description="What is Voyager and why is it required?"
-    to="/develop/voyager"
+    to="/develop/asset-transfer"
     icon={<IDEIcon />}
   />
   <Card
-    title="Voyager v1.0"
-    description="Dissecting different functions and parameters associated with Voyager v1.0"
-    to="/develop/voyager/voyager-v1.0/architecture"
+    title="Voyager"
+    description="Dissecting different functions and parameters associated with Voyager (1st Gen Asset Transfer Bridge)"
+    to="/develop/asset-transfer/voyager/architecture"
     icon={<AssetIcon />}
   />
-    {/* <Card
-    title="Voyager v2.0"
-    description="Understanding the architecture of Voyager v2.0"
-    to="/develop/voyager/voyager-v2.0/high-level-workflow"
+    <Card
+    title="Nitro"
+    description="Understanding the architecture of Nitro (2nd Gen Asset Transfer Bridge)"
+    to="/develop/asset-transfer/nitro/high-level-workflow"
     icon={<ModulesIcon />}
-  /> */}
+  />
   {/* <Card
     title="Different Use-cases"
     description="Learning how to build different types of applications by using features enabled by Voyager"
-    to="/develop/voyager/voyager-v1.0/different-use-cases"
+    to="/develop/voyager/voyager/different-use-cases"
     icon={<ModulesIcon />}
   />
   <Card
     title="Fee Model"
     description="Gaining a deeper understanding of how the Voyager fee is computed"
-    to="/develop/voyager/voyager-v1.0/fee-model"
+    to="/develop/voyager/voyager/fee-model"
     icon={<AssetIcon />}
   /> */}
 </Section>
@@ -175,21 +175,21 @@ the best cross-chain framework for your dApp.
 <Section title="Developers" id="web-sdks" hasSubSections>
   <Section>
     <Card
-      title="Voyager Widget"
+      title="Nitro Widget"
       description="Widget to integrate cross-chain swaps on your website"
-      to="/develop/voyager/voyager-v1.0/tools/voyager-widget"
+      to="/develop/asset-transfer/nitro/tools/nitro-widget"
       icon={<Guide />}
     />
     <Card
-      title="Voyager PathFinder API"
+      title="Nitro PathFinder API"
       description="An API to integrate Voyager's cross-chain swap functionality"
-      to="/develop/voyager/tools/voyager-v1.0/voyager-pathfinder-api"
+      to="/develop/asset-transfer/tools/nitro/nitro-pathfinder-api"
       icon={<Guide />}
     />
     <Card
-      title="Voyager JS SDK"
-      description="SDK to integrate Voyager's cross-chain swap functionality"
-      to="/develop/voyager/tools/voyager-v1.0/voyager-js-sdk"
+      title="Migrating from Voyager to Nitro"
+      description="Guide to help users migrate from Voyager to Nitro"
+      to="/develop/asset-transfer/nitro/migrating-from-voyager-to-nitro"
       icon={<Guide />}
     />
   </Section>
@@ -199,9 +199,15 @@ the best cross-chain framework for your dApp.
 
 <Section>
   <Card
-    title="Deploying a Cross-chain Staking Contract"
+    title="Deploying a Cross-chain Staking Contract using Voyager"
     description="Learn how to deploy your first cross-chain staking dApp using Voyager"
-    to="/develop/voyager/voyager-v1.0/guides/crosschain-staking"
+    to="/develop/asset-transfer/voyager/guides/crosschain-staking"
+    icon={<Guide />}
+  />
+  <Card
+    title="Deploying a Cross-chain Staking Contract using Nitro"
+    description="Learn how to deploy your first cross-chain staking dApp using Nitro"
+    to="/develop/asset-transfer/nitro/guides/crosschain-staking"
     icon={<Guide />}
   />
 </Section>
@@ -221,7 +227,7 @@ the best cross-chain framework for your dApp.
   <Card
     title="Getting Started"
     description="How to interact with Pathfinder API"
-    to="/develop/voyager/tools/voyager-pathfinder-api/performing-cross-chain-transaction"
+    to="/develop/asset-transfer/nitro/tools/voyager-pathfinder-api/performing-cross-chain-transaction"
     icon={<Tscodegen />}
     svgFile="/icons/api.svg"
   />
