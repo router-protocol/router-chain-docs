@@ -91,7 +91,7 @@ const main = async () => {
     const txResponse = await getTransaction(quoteData); 
 
     // sending the transaction using the data given by the pathfinder
-    const tx = await wallet.sendTransaction(txResponse.txn.execution)
+    const tx = await wallet.sendTransaction(txResponse.txn)
 }
 
 main()
