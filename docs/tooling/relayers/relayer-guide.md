@@ -8,7 +8,7 @@ Steps involved in running a relayer
 ## Minimum Requirements
 
 - 2-core, x86_64 architecture processor
-- 4 GB RAM
+- 4GB RAM
 - 64GB storage
 
 If running many nodes on a single VM, [ensure your open files limit is increased](https://tecadmin.net/increase-open-files-limit-ubuntu/)
