@@ -1,0 +1,52 @@
+---
+title: Overview
+sidebar_position: 1
+---
+# Nitro Forwarders
+Basics about Nitro forwarders
+
+
+## Intro to Nitro Forwarders
+In simple terms, the Nitro forwarder is a permissionless module that listens to the Nitro deposit event from
+the source chain and settles the request for the user on the destination chain. It is 
+a Go service that handles cross-chain messages and token transactions across 
+blockchain networks. It starts with the **`run`** function, which listens to 
+blockchain events and relays data as needed. This modular system includes separate 
+listeners and relayers for each blockchain, managed by a central processor. It 
+features comprehensive logging, error management, and health monitoring for reliability.
+
+## Components of a Nitro Forwarder
+### Listener
+Nitro Listener is a sub-module within the Nitro forwarder that captures events from 
+blockchains, specifically from the "Asset Forwarder" contract. For every supported 
+chain, there will be a listener instance of a forwarder that will listen to the 
+events emitted from that chain.
+
+It stores the processed block number, and it resumes from the last processed block 
+to avoid reprocessing. The `ProcessInboundEvents` method fetches and processes 
+new events, including `fundDepositedEvents` and `fundDepositedWithMessageEvents`, 
+and updates the database with the latest event information. If errors occur, the 
+listener stops.
+
+### Processor
+The **RequestProcessor** works on queued database requests (`msgTxqArray`), 
+continuously pulling unprocessed transactions and marking 
+them as `Picked` to avoid duplication. It processes transactions 
+based on their type using specific methods and updates a registry to handle 
+transactions on the appropriate blockchain.
+
+### Chain Relayer
+
+For every supported chain, the forwarder will run a relayer sub-module: the **ChainRelayer** module runs 
+continuously, waiting for messages on two channels to relay funds and messages. It validates 
+incoming messages and uses the `IRelay` method for processing. Errors are 
+logged, and successful messages are processed further.
+
+**Executor:**
+As part of the relayer, the Executor prepares transaction data, estimates gas 
+costs, and checks for profitability. It sends transactions through
+**`assetForwarderWrapper`**, waits for confirmation, and
+updates the database with transaction details.
+
+:::info
+The relayer sub-module within a Nitro forwarder is different from Router chain relayers. 

@@ -965,20 +965,5 @@ components:
           type: string
           example: "0"
         txn:
-          type: object
-          properties:
-            execution:
               type: object
-              properties:
-                data:
-                  type: string
-                  example: "0xbf28ae630000000000000000000000000000000000000000000000000000000000000000343331313300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000c000000000000000000000000022baa8b6cdd31a0c5d1035d6e72043f4ce6af05400000000000000000000000000000000000000000000000ad78ebc5ac620000000000000000000000000000000000000000000000000000ad78eba890eb58ac000000000000000000000000000000000000000000000000000000000000000142b351b7bbc86ab5df433539fe907f8ee4de1b964000000000000000000000000"
-                from:
-                  type: string
-                  example: "0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964"
-                to:
-                  type: string
-                  example: "0x190fC3352b361852E6abFE48d34C79473fF131D3"
-                value:
-                  type: string
-                  example: "0x00"
+              example: "can be different for different chain types"
