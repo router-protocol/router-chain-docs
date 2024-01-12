@@ -708,6 +708,9 @@ components:
         receiverAddress:
           type: string
           example: "0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964"
+        refundAddress:
+          type: string
+          example: "0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964"
     TransactionResponseBody:
       type: object
       required:
