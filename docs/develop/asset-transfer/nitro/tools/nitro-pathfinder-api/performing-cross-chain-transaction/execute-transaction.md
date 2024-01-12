@@ -22,6 +22,7 @@ const getTransaction = async (params, quoteData) => {
             slippageTolerance: 0.5,
             senderAddress: "<sender-address>",
             receiverAddress: "<receiver-address>",
+            refundAddress: "<refundAddress>" // (optional) By default equal to `senderAddress` if not provided
         })
         return res.data;
     } catch (e) {
