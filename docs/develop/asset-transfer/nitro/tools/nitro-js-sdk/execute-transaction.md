@@ -48,6 +48,7 @@ const main = async () => {
       slippageTolerance: "1",
       senderAddress: evmSigner.address,
       receiverAddress: evmSigner.address,
+      refundAddress: evmSigner.address // (optional) By default equal to `senderAddress` if not provided
     },
     {
       evmSigner,
@@ -89,6 +90,7 @@ const main = async () => {
       slippageTolerance: "1",
       senderAddress: evmSigner.address, // tron address
       receiverAddress: evmSigner.address,
+      refundAddress: evmSigner.address // (optional) By default equal to `senderAddress` if not provided
     },
     {
       evmSigner,
@@ -133,6 +135,7 @@ const main = async () => {
       slippageTolerance: "1",
       senderAddress: "joydeeeep.testnet",
       receiverAddress: "0x40d5250D1ce81fdD1F0E0FB4F471E57AA0c1FaD3",
+      refundAddress: "joydeeeep.testnet" // (optional) By default equal to `senderAddress` if not provided
     },
     {
       nearAccount: nearSigner,
