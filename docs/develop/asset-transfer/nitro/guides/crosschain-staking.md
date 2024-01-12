@@ -559,3 +559,94 @@ destAmount = 100 - forwarder fee - total_gas_fee
 
 
 </details>
+
+
+<details>
+<summary><b>Sequencer Apis</b></summary>
+
+You can use sequencer api to trigger a cross-chain transaction with some custom instruction.
+
+Sample code is provided here - 
+```ts
+import { ethers } from 'ethers'
+
+const PATH_FINDER_API_URL = "https://api.pf.testnet.routerprotocol.com/api"
+
+const getQuote = async () => {
+    const params = {
+        'fromTokenAddress': '0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054',
+        'toTokenAddress': '0xb452b513552aa0B57c4b1C9372eFEa78024e5936',
+        'amount': '10000000000000000000', // source amount
+        'fromTokenChainId': "80001", // Mumbai
+        'toTokenChainId': "43113", // Fuji
+        'partnerId': 0, // (Optional) - For any partnership, get your unique partner id by contacting us on Telegram or emailing us at contact@routerprotocol.com
+    }
+
+    const endpoint = "v2/sequencer-quote"
+    const quoteUrl = `${PATH_FINDER_API_URL}/${endpoint}`
+
+    console.log(quoteUrl)
+
+    try {
+        const res = await axios.get(quoteUrl, { params })
+        return res.data;
+    } catch (e) {
+        console.error(`Fetching quote data from pathfinder: ${e}`)
+    }    
+}
+
+const getTransaction = async (params, quoteData) => {
+    const endpoint = "v2/sequencer-transaction"
+    const txDataUrl = `${PATH_FINDER_API_URL}/${endpoint}`
+
+    console.log(txDataUrl)
+
+    try {
+        const res = await axios.post(txDataUrl, {
+            ...quoteData,
+            slippageTolerance: 0.5,
+            senderAddress: "<sender-address>",
+            receiverAddress: "<receiver-address>",
+            contractMessage: "<contract-message or instruction>",
+            contractAddress: "<dest-contract-address>",
+            refundAddress: "<refund-address>"
+        })
+        return res.data;
+    } catch (e) {
+        console.error(`Fetching tx data from pathfinder: ${e}`)
+    }    
+}
+    
+const main = async () => {
+    
+    // setting up a signer
+    const provider = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/polygon_mumbai", 80001);
+    // use provider.getSigner() method to get a signer if you're using this for a UI
+    const wallet = new ethers.Wallet("YOUR_PRIVATE_KEY", provider)
+
+    // 1. get quote
+    const quoteData = getQuote();
+
+    // 2. give allowance if required
+    const allowanceTo = quoteData.allowanceTo;
+    
+    // 3. get transaction data
+    const txResponse = await getTransaction(quoteData);
+
+    // sending the transaction using the data given by the pathfinder
+    const tx = await wallet.sendTransaction(txResponse.txn)
+    try {
+        await tx.wait();
+        console.log(`Transaction mined successfully: ${tx.hash}`)
+    }
+    catch (error) {
+        console.log(`Transaction failed with error: ${error}`)
+    }
+}
+
+main()
+
+```
+
+
+</details>
