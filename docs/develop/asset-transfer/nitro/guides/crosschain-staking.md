@@ -3,11 +3,10 @@ title: Cross-chain Staking dApp
 sidebar_position: 1
 ---
 
-In this section, we shall create a simple cross-chain staking dapp using the Nitro sequencer. We shall follow the instructions provided in the previous section to create the same. It consists of two smart contracts: **Vault** and **Stake**.
+In this section, we shall create a simple cross-chain staking dapp using the Nitro sequencer. We shall follow the instructions provided in the previous section to create the same. It consists of two smart contracts: **Vault** and **Stake**. The github repository for the same can be found [here](https://github.com/router-protocol/sequencer-staking/tree/master).
 
-**Vault** contract enables the user to first transfer his funds from chain A to chain B and then stake them on chain B.
+**Vault** contract enables the user to first transfer his funds (say USDT) from chain A to chain B and then stake them on chain B.
 **Stake** contract manages the balance of the staked tokens on the destination side. In other words, Stake contract is the state manager of the Vault contract.
-
 
 <details>
 <summary><b>Vault Contract</b></summary>
@@ -19,9 +18,11 @@ Install the openzeppelin contracts by running the following command:
 `yarn add @openzeppelin/contracts` or `npm install @openzeppelin/contracts`
 
 #### Defining the IStake interface
-In a separate folder titled `interfaces`, create an `IStake.sol` file with the following code:
+
+Create an `IStake.sol` file with the following code:
+
 ```javascript
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.18;
 
 interface IStake {
     function stake(
@@ -38,193 +39,203 @@ interface IStake {
 
 ```
 
+#### Defining the IAssetForwarder interface
+
+Create an `IAssetForwarder.sol` file with the following code:
+
+```javascript
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.18;
+
+interface IAssetForwarder {
+    struct DepositData {
+        uint256 partnerId;
+        uint256 amount;
+        uint256 destAmount;
+        address srcToken;
+        address refundRecipient;
+        bytes32 destChainIdBytes;
+    }
+
+    function iDepositMessage(
+        DepositData memory depositData,
+        bytes memory destToken,
+        bytes memory recipient,
+        bytes memory message
+    ) external payable;
+}
+
+interface IMessageHandler {
+    function handleMessage(
+        address tokenSent,
+        uint256 amount,
+        bytes memory message
+    ) external;
+}
+```
+
+This is the standard interface for Router Nitro's asset transfer contract.
+
 #### Instantiating the contract
 
 ```javascript
 //SPDX-License-Identifier: Unlicense
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.18;
 
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
-import "@openzeppelin/contracts/access/AccessControl.sol";
-import "./interfaces/IStake.sol";
+import {SafeERC20, IERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
+import {IAssetForwarder, IMessageHandler} from "./IAssetForwarder.sol";
+import {IStake} from "./IStake.sol";
 
-contract Vault is AccessControl {
+contract Vault is AccessControl, IMessageHandler {
 }
 ```
 
-Import the `SafeERC20.sol`and `AccessControl.sol` from `@openzeppelin/contracts`and `IStake.sol` into your Vault contract.
+Importing the necessary interfaces and libraries in the contract.
 
 For your information:
 
-1. `IStake.sol` is the interface of Stake contract which we need here for defining an instance of staking contract into our Vault contract.
-2. `SafeERC20.sol` is the contract we shall use to access various functions of ERC20 tokens.
-3. `AccessControl.sol` is the contract we shall use for putting admin controls over certain functions.
+1. `SafeERC20.sol` is the contract we shall use to access various functions of ERC20 tokens.
+2. `AccessControl.sol` is the contract we shall use for putting admin controls over certain functions.
+3. `IAssetForwarder.sol` is the interface of the Nitro's AssetForwarder contract which will be used to call the bridge to transfer funds with message across chains.
+4. `IMessageHandler.sol` is the interface which defines a function to receive funds with message from the Nitro's AssetForwarder on the destination chain.
+5. `IStake.sol` is the interface of Stake contract which we need here for defining an instance of staking contract into our Vault contract.
 
 #### Creating state variables and the constructor
 
 ```javascript
-using SafeERC20 for IERC20;
-IStake public stakingContract;
+    using SafeERC20 for IERC20;
 
-address public routerAssetBridgeContract;
+    struct ChainData {
+        bytes vault;
+        bytes usdt;
+    }
 
-mapping(bytes32 => bytes) public ourContractsOnChain;
+    IStake public stakingContract;
+    address public nitroAssetForwarder;
+    address public immutable usdt;
 
-// iDepositMessage(uint256,bytes32,bytes,address,uint256,uint256,bytes)
-bytes4 public constant I_DEPOSIT_MESSAGE_SELECTOR = bytes4(keccak256("iDepositMessage(uint256,bytes32,bytes,address,uint256,uint256,bytes)"));
+    mapping(string => ChainData) public chainData;
 
-
-constructor(address _routerAssetBridgeContract)
-{
-routerAssetBridgeContract =_routerAssetBridgeContract;
-_setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
-}
+    constructor(address _nitroAssetForwarder, address _usdt) {
+        nitroAssetForwarder = _nitroAssetForwarder;
+        usdt = _usdt;
+        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+    }
 
 ```
 
-1. `stakingContract`: This is the instance of our Stake contract which will manage the state and balance of funds in both kinds of staking: same chain staking as well as cross-chain staking.
-2. `routerAssetBridgeContract`: This is the variable created for storing the address of the Nitro contract. We will be calling the Nitro contract to initiate the cross-chain sequenced transfer on the source side. We will also validate if the transaction triggered on the destination side has been made by the Nitro contract only.
-3. `ourContractsOnChain` : This is the mapping that stores the address of the Vault contract corresponding to the destination chain ID which can be found [here](../supported-chains-tokens.md). It makes sure that while calling the `iStake` function (explained later), we are putting the correct recipient vault address as per our desired destination chain.
-4. `I_DEPOSIT_MESSAGE_SELECTOR` : This is the selector of `iDepositMessage` in Nitro.
-5. `constructor`: Create the constructor with the address of the Nitro contract and set that into our state variable. Also give the `DEFAULT_ADMIN_ROLE` to the deployer.
-
-
-#### Function to set the Staking contract
-```javascript
-function setStakingContract(address _stakingContract) external onlyRole(DEFAULT_ADMIN_ROLE) {
-stakingContract = IStake(_stakingContract);
-}
-```
-
-Our Vault contract on every chain must know the address of its corresponding Stake contract on the same chain to interact with it whenever a cross-chain request is received by the Vault. To store the address of the Stake contract, we can use the vault contract's `setStakingContract` function.
+1. `stakingContract`: This is the instance of our Stake contract.
+2. `nitroAssetForwarder`: This is the address of the Nitro's Asset Forwarder contract.
+3. `usdt` : This is the address of asset that will be used for staking. For simplicity we have used USDT but any other token can also be used.
+4. `chainData` : A mapping of chain IDs with the respective Vault contract and USDT addresses. This will be used to fetch Vault contract and the USDT address for the destination chain when one calls the cross-chain staking function.
+5. `constructor`: Create the constructor with the addresses of the Nitro's Asset Forwarder contract and USDT token and set that into our state variable. Also assign the `DEFAULT_ADMIN_ROLE` to the deployer.
 
 #### Function to set the Staking contract
 
 ```javascript
-function setStakingContract(address _stakingContract) external onlyRole(DEFAULT_ADMIN_ROLE)
-{
-    stakingContract = IStake(_stakingContract);
-}
-```
-
-
-Our Vault contract on every chain must know the address of its corresponding Stake contract on same chain to interact with it whenever a cross-chain call is received by Vault. Hence we create a function `setStakingContract` to store the address of Stake Contract on the same chain.
-
-#### Function to store the addresses of Vault contracts deployed on other chains
-
-```javascript
-function setContractsOnChain(bytes32 chainIdBytes, address contractAddr) external onlyRole(DEFAULT_ADMIN_ROLE) {
-    ourContractsOnChain[chainIdBytes] = toBytes(contractAddr);
-}
-```
-
-Our Vault contract on every chain must know the addresses of its counterparts on every other chain to enable cross-chain transfers or cross-chain sequenced transfers. Hence we create a function `setContractsOnChain` that updates the mapping `ourContractsOnChain` about which we talked about earlier.
-
-#### Function to approve Stake contract to safely transfer funds from Vault
-
-```javascript
-function approve(address token, address spender, uint256 amount) external onlyRole(DEFAULT_ADMIN_ROLE) {
-        IERC20(token).approve(spender, amount);
+    function setStakingContract(address _stakingContract) external onlyRole(DEFAULT_ADMIN_ROLE) {
+        stakingContract = IStake(_stakingContract);
     }
 ```
 
-Our Vault contract on every chain must know the addresses of its counterparts on other chain sto enable cross-chain transfers or cross-chain sequenced transfers. Therefore, we create a function `setContractsOnChain` that updates the mapping `ourContractsOnChain`.
+The Vault contract on every chain must know the address of its corresponding Stake contract on that chain to interact with it. To store the address of the Stake contract, the vault contract's `setStakingContract` function.
 
-Below is the helper function to convert the `address` into `bytes`:
+#### Function to set the Chain Data
 
 ```javascript
-function toBytes(address addr) internal pure returns (bytes memory b) {
-        assembly {
-            let m := mload(0x40)
-            addr := and(addr, 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF)
-            mstore(add(m, 20), xor(0x140000000000000000000000000000000000000000, addr))
-            mstore(0x40, add(m, 52))
-            b := m
-        }
+    function setChainData(
+        string memory _chainId,
+        bytes memory _vaultContract,
+        bytes memory _usdt
+    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
+        chainData[_chainId] = ChainData(_vaultContract, _usdt);
     }
 ```
 
-This is just a supporting function. We shall use it as a converter whenever an address has to be passed as a parameter in the form of bytes.
-
-#### Function to approve Stake contract and Nitro contract to safely transfer funds from Vault
-```javascript
-function approve(address token, address spender, uint256 amount) external onlyRole(DEFAULT_ADMIN_ROLE) {
-IERC20(token).approve(spender, amount);
-}
-```
-
-- Vault contract on every chain must approve the Nitro Contract on same chain so that Nitro is able to transfer funds from the Vault to itself, in order to start the cross-chain transfer process.
-- On the destination side, funds are received by the Vault contract whenever a cross-chain transfer is executed and they are directed to Stake contract after which the staked balance against the user is updated. The Vault contract on every chain must approve the Stake contract on the same chain so that the Stake Contract is able to transfer a certain amount of tokens to itself from the Vault.
-
+To stake funds cross-chain, the Vault contract have knowledge of the recipient Vault contract address on the destination chain. Also the destination token address should be known to it. These parameters can be stored in the chainData mapping.
+This mapping can be set by the admin using the `setChainData` function.
 
 #### Function that enables cross-chain sequenced transfers
 
 ```javascript
-function iStake(
-bytes32 destChainIdBytes,
-address srcToken,
-uint256 amount,
-uint256 destAmount,
-address userAddress
-) public payable {
-    bytes memory recipientVaultContract = ourContractsOnChain[destChainIdBytes];
-    bytes memory message = abi.encode(userAddress);
-    bool success;
+    function iStake(
+        uint256 amount,
+        uint256 destAmount,
+        string memory destChainId
+    ) public payable {
+        IERC20(usdt).safeTransferFrom(msg.sender, address(this), amount);
+        IERC20(usdt).safeIncreaseAllowance(nitroAssetForwarder, amount);
 
+        ChainData memory destChainData = chainData[destChainId];
 
-    (success, ) = routerAssetBridgeContract.call{ value: msg.value }(
-    abi.encodeWithSelector(I_DEPOSIT_MESSAGE_SELECTOR,0, destChainIdBytes,recipientVaultContract, srcToken, amount, destAmount, message)
-    );
+        IAssetForwarder.DepositData memory depositData = IAssetForwarder
+            .DepositData({
+                partnerId: 1,
+                amount: amount,
+                destAmount: destAmount,
+                srcToken: usdt,
+                refundRecipient: msg.sender,
+                destChainIdBytes: getChainIdBytes(destChainId)
+            });
 
-
-    require(success, "unsuccessful");
-}
+        IAssetForwarder(nitroAssetForwarder).iDepositMessage(
+            depositData,
+            destChainData.usdt,
+            destChainData.vault,
+            abi.encode(msg.sender)
+        );
+    }
 ```
+
 It is the `iStake` function that:
-1. Encodes the data that we need on the destination chain whenever a cross-chain request is received. Here we need the recipient or user address to update the staked balance against the user's address on the destination chain.
-2. Calls the selector for the `iDepositMessage` function in Nitro as per the data passed in the parameters.
 
-
+1. Encodes the data that needs to be sent to the destination chain whenever a cross-chain request is received. Here only the recipient or user address is needed to update the staked balance against the user's address on the destination chain.
+2. Calls the selector for the `iDepositMessage` function in Nitro's Asset Forwarder as per the data passed in the parameters along with other parameters.
 
 Let us understand the parameters of `iStake` function one by one:
 
-| destChainIdBytes      | Network IDs of the chains in bytes32 format. These can be found [here](../supported-chains-tokens.md).                   |
-| --------------- | -------------------------------------------------------------------------------------- |  
-| srcToken | Address of the token that has to be transferred from the source chain.                                                                   |
-| amount | Decimal-adjusted amount of the token that has to be transferred from the source chain.                                                                   |
-| destAmount | Minimum amount of tokens expected to be received by the recipient on the destination chain. This can be achieved by subtracting the forwarder fee from the source chain amount. Refer to the **Fee Calculation** section given at the end of this guide for more details on how to calculate forwarder fee. |
-| userAddress    | Recipient or user address to update the staked balance on the destination chain. |
+| destChainIdBytes | Network IDs of the chains in bytes32 format. These can be found [here](../supported-chains-tokens.md).                                                                                                                                                                                                                                                                      |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| amount           | Decimal-adjusted amount of the token that has to be transferred from the source chain.                                                                                                                                                                                                                                                                                      |
+| destAmount       | Amount of tokens (in source chain decimals) expected to be received by the recipient on the destination chain. This can be calculated using the Nitro's PathFinder API. A small script has been added in the scripts folder of the github repository to calculate the destination amount. Refer to the [**Fee Management**](../fee-management.md) section for more details. |
+| destChainId      | ChainId of the destination chain.                                                                                                                                                                                                                                                                                                                                           |
 
 #### Function that receives the cross-chain call and executes the Stake function on the destination chain
 
 ```javascript
-function handleMessage(
-address tokenSent,
-uint256 amount,
-bytes memory message
-) external {
-    // Checking if the sender is the router asset bridge contract
-    require(
-    msg.sender == routerAssetBridgeContract,
-    "only nitro"
-    );
-    IERC20(tokenSent).safeIncreaseAllowance(address(stakingContract), amount );
-    // decoding the data we sent from the source chain
-    address user = abi.decode(message, (address));
-    // calling the stake function
-    stakingContract.stake(user, tokenSent, amount);
-}
+    function handleMessage(
+        address tokenSent,
+        uint256 amount,
+        bytes memory message
+    ) external {
+        // Checking if the sender is the voyager execute handler contract
+        require(
+            msg.sender == nitroAssetForwarder,
+            "only nitro asset forwarder"
+        );
+
+        IERC20(tokenSent).safeIncreaseAllowance(
+            address(stakingContract),
+            amount
+        );
+
+        // decoding the data we sent from the source chain
+        address user = abi.decode(message, (address));
+
+        // calling the stake function
+        stakingContract.stake(user, tokenSent, amount);
+    }
 ```
 
-It is the `hanldeNitroMessage` function that:
+It is the `handleMessage` function that:
 
-1. Checks that the caller of the function is Nitro only.
+1. Checks that the caller of the function is Nitro's Asset Forwarder contract only.
 2. Increases the allowance for the Stake contract so that the Vault can transfer funds to the Stake contract.
-3. Decodes the data that we encoded (recipient address) at the time of initiating the cross-chain transfer.
+3. Decodes the data that was encoded on the source chain (recipient address) at the time of initiating the cross-chain transfer.
 4. Calls the Stake contract and updates the user’s staked balance.
 
 </details>
-
 
 <details>
 <summary><b>Stake Contract</b></summary>
@@ -235,215 +246,211 @@ Install the openzeppelin contracts by running the following command:
 
 `yarn add @openzeppelin/contracts` or `npm install @openzeppelin/contracts`
 
-#### Defining the IStake interface
-In a separate folder titled `interfaces`, create an `IStake.sol` file with the following code:
-```javascript
-pragma solidity ^0.8.0;
-
-interface IStake {
-    function stake(
-    address user,
-    address token,
-    uint256 amount
-    ) external;
-    function unstake(
-    address user,
-    address token,
-    uint256 amount
-    ) external;
-}
-
-```
-
 #### Instantiating the contract
 
 ```javascript
 //SPDX-License-Identifier: Unlicense
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.18;
 
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-import "./interfaces/IStake.sol";
+import "./IStake.sol";
 
 contract Stake is IStake {
 
 }
 ```
 
-Import the `SafeERC20.sol` and `SafeMath.sol` from `@openzeppelin/contracts` and inherit the `IStake.sol` contract into your contract.
-
-For your information:
-
-1. `IStake.sol` is the interface of `Stake` contract which we need here for defining an instance of staking contract.
-2. `SafeERC20.sol` is the contract we shall use to access various functions of ERC20 tokens.
-3. `SafeMath.sol` is the wrapper contract over Solidity’s arithmetic operations with added overflow checks.
+Importing the necessary interfaces and libraries in the contract.
 
 #### Creating state variables and the constructor
 
 ```javascript
-using SafeERC20 for IERC20;
-using SafeMath for uint256;
-address public immutable vault;
-// user address => token address => staked amount
-mapping(address => mapping(address => uint256)) public stakedBalance;
-constructor(address _vault) {
-vault 
+    using SafeERC20 for IERC20;
+    using SafeMath for uint256;
+
+    address public immutable vault;
+
+    // user address => token address => staked amount
+    mapping(address => mapping(address => uint256)) public stakedBalance;
+
+    constructor(address _vault) {
+        vault = _vault;
+    }
 ```
 
-1. `vault`: This is the address of your Vault contract on the same chain.
-2. `stakedBalance` : This is the mapping that stores the amount staked corresponding to the user and token address.
-3. `constructor` : Create the constructor with the address of the Vault contract and store it in the state variable `vault`.
+1. `vault`: Address of your Vault contract.
+2. `stakedBalance` : Mapping that stores the amount of tokens staked by a particular user.
+3. `constructor` : Create the constructor with the address of the Vault contract and store it in the variable `vault`.
 
 #### Adding modifier onlyVault()
-```javascript
-modifier onlyVault() {
-require(msg.sender == vault, "Only Vault");
-_;
-}
 
+```javascript
+    modifier onlyVault() {
+        require(msg.sender == vault, "Only Vault");
+        _;
+    }
 ```
 
-We will add this modifier to our main functions `stake` and `unstake` to ensure that only the Vault contract can interact with the Stake contract. 
+This modifier will ensure that the `stake` and `unstake` functions can only be called by the Vault contract.
 
 #### Adding functions to Stake and Unstake
 
 ```javascript
-function stake(
-    address user,
-    address token,
-    uint256 amount
+    function stake(
+        address user,
+        address token,
+        uint256 amount
     ) external override onlyVault {
-    uint256 balanceBefore = IERC20(token).balanceOf(address(this));
-    IERC20(token).safeTransferFrom(msg.sender, address(this), amount);
-    uint256 balanceAfter = IERC20(token).balanceOf(address(this));
-    uint256 _amount = balanceAfter.sub(balanceBefore, "No amount received");
-    stakedBalance[user][token] += _amount;
-}
+        require(amount != 0, "amount cannot be 0");
+        IERC20(token).safeTransferFrom(msg.sender, address(this), amount);
+        stakedBalance[user][token] += amount;
+    }
 ```
 
 This function:
-1. Checks the balance of tokens before transferring them to itself from the Vault.
-2. Transfers the tokens to itself.
-3. Checks the balance of the token after transferring them.
-4. Calculates the amount actually staked.
-5. Updates the staked balance for the user.
 
+1. Checks that amount cannot be 0.
+2. Transfers the tokens to itself.
+3. Updates the staked balance for the user.
 
 ```javascript
-function unstake(
-    address user,
-    address token,
-    uint256 amount
+    function unstake(
+        address user,
+        address token,
+        uint256 amount
     ) external override onlyVault {
-    stakedBalance[user][token] = stakedBalance[user][token].sub(
-    amount,
-    "User balance too low"
-    );
-    IERC20(token).safeTransfer(user, amount);
-}
+        stakedBalance[user][token] = stakedBalance[user][token].sub(
+            amount,
+            "User balance too low"
+        );
+        IERC20(token).safeTransfer(user, amount);
+    }
 ```
-This function checks the staked balance of the user, subtracts the amount that the user wants to unstake from it and transfers that amount of tokens back to the user.
 
+This function checks the staked balance of the user, subtracts the amount that the user wants to unstake and transfers that amount back to the user.
 
 </details>
-
 
 <details>
 <summary><b> End-to-end Vault Contract</b></summary>
 
 ```javascript
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.0;
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
-import "@openzeppelin/contracts/access/AccessControl.sol";
-import "./IStake.sol";
-contract Vault is AccessControl {
-using SafeERC20 for IERC20;
-IStake public stakingContract;
-address public routerAssetBridgeContract;
-mapping(bytes32 => bytes) public ourContractsOnChain;
-// iDepositMessage(uint256,bytes32,bytes,address,uint256,uint256,bytes)
+//SPDX-License-Identifier: Unlicense
+pragma solidity ^0.8.18;
 
-bytes4 public constant I_DEPOSIT_MESSAGE_SELECTOR = bytes4(keccak256("iDepositMessage(uint256,bytes32,bytes,address,uint256,uint256,bytes)"));
+import {SafeERC20, IERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
+import {IAssetForwarder, IMessageHandler} from "./IAssetForwarder.sol";
+import {IStake} from "./IStake.sol";
 
-constructor(address _routerAssetBridgeContract) {
-    routerAssetBridgeContract = _routerAssetBridgeContract;
-    _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
-}
+contract Vault is AccessControl, IMessageHandler {
+    using SafeERC20 for IERC20;
 
-function setStakingContract(address _stakingContract)
-external
-onlyRole(DEFAULT_ADMIN_ROLE) {
-    stakingContract = IStake(_stakingContract);
-}
+    struct ChainData {
+        bytes vault;
+        bytes usdt;
+    }
 
-function setContractsOnChain(
-bytes32 chainIdBytes, 
-address contractAddr
-) external onlyRole(DEFAULT_ADMIN_ROLE) {
-    ourContractsOnChain[chainIdBytes] = toBytes(contractAddr);
-}
+    IStake public stakingContract;
+    address public nitroAssetForwarder;
+    address public immutable usdt;
 
-function stake(uint256 _amount, address _token) external {
-    IERC20(_token).safeTransferFrom(msg.sender, address(this), _amount);
-    stakingContract.stake(msg.sender, _token, _amount);
-}
+    mapping(string => ChainData) public chainData;
 
-function unstake(uint256 _amount, address _token) external {
-    stakingContract.unstake(msg.sender, _token, _amount);
-}
+    constructor(address _nitroAssetForwarder, address _usdt) {
+        nitroAssetForwarder = _nitroAssetForwarder;
+        usdt = _usdt;
+        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+    }
 
-function iStake(
-bytes32 destChainIdBytes,
-address srcToken,
-uint256 amount,
-uint256 destAmount,
-address userAddress
-) public payable {
-    bytes memory recipientVaultContract = ourContractsOnChain[destChainIdBytes];
-    bytes memory message = abi.encode(userAddress);
-    bool success;
-    (success, ) = routerAssetBridgeContract.call{ value: msg.value }(
-    abi.encodeWithSelector(I_DEPOSIT_MESSAGE_SELECTOR,0, destChainIdBytes,recipientVaultContract, srcToken, amount, destAmount, message)
-    );
-    require(success, "unsuccessful");
-}
+    function setStakingContract(
+        address _stakingContract
+    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
+        stakingContract = IStake(_stakingContract);
+    }
 
+    function setChainData(
+        string memory _chainId,
+        bytes memory _vaultContract,
+        bytes memory _usdt
+    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
+        chainData[_chainId] = ChainData(_vaultContract, _usdt);
+    }
 
-function handleMessage(
-address tokenSent,
-uint256 amount,
-bytes memory message
-) external {
-    // Checking if the sender is the routerAssetBridgeContract contract
-    require(
-    msg.sender == routerAssetBridgeContract,
-    "only routerAssetBridgeContract"
-    );
+    function stake(uint256 _amount) external {
+        IERC20(usdt).safeTransferFrom(msg.sender, address(this), _amount);
+        stakingContract.stake(msg.sender, usdt, _amount);
+    }
 
-    IERC20(tokenSent).safeIncreaseAllowance(address(stakingContract), amount );
-    // decoding the data we sent from the source chain
-    address user = abi.decode(message, (address));
-    // calling the stake function
-    stakingContract.stake(user, tokenSent, amount);
-}
+    function unstake(uint256 _amount) external {
+        stakingContract.unstake(msg.sender, usdt, _amount);
+    }
 
-function approve(address token, address spender, uint256 amount) external onlyRole(DEFAULT_ADMIN_ROLE) {
-    IERC20(token).approve(spender, amount);
-}
+    function iStake(
+        uint256 amount,
+        uint256 destAmount,
+        string memory destChainId
+    ) public payable {
+        IERC20(usdt).safeTransferFrom(msg.sender, address(this), amount);
+        IERC20(usdt).safeIncreaseAllowance(nitroAssetForwarder, amount);
 
-function toBytes(address addr) public pure returns (bytes memory b) {
-    assembly {
-        let m := mload(0x40)
-        addr := and(addr, 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF)
-        mstore(add(m, 20), xor(0x140000000000000000000000000000000000000000, addr))
-        mstore(0x40, add(m, 52))
-        b := m
+        ChainData memory destChainData = chainData[destChainId];
+
+        IAssetForwarder.DepositData memory depositData = IAssetForwarder
+            .DepositData({
+                partnerId: 1,
+                amount: amount,
+                destAmount: destAmount,
+                srcToken: usdt,
+                refundRecipient: msg.sender,
+                destChainIdBytes: getChainIdBytes(destChainId)
+            });
+
+        IAssetForwarder(nitroAssetForwarder).iDepositMessage(
+            depositData,
+            destChainData.usdt,
+            destChainData.vault,
+            abi.encode(msg.sender)
+        );
+    }
+
+    function handleMessage(
+        address tokenSent,
+        uint256 amount,
+        bytes memory message
+    ) external {
+        // Checking if the sender is the voyager execute handler contract
+        require(
+            msg.sender == nitroAssetForwarder,
+            "only nitro asset forwarder"
+        );
+
+        IERC20(tokenSent).safeIncreaseAllowance(
+            address(stakingContract),
+            amount
+        );
+
+        // decoding the data we sent from the source chain
+        address user = abi.decode(message, (address));
+
+        // calling the stake function
+        stakingContract.stake(user, tokenSent, amount);
+    }
+
+    function getChainIdBytes(
+        string memory _chainId
+    ) public pure returns (bytes32) {
+        bytes32 chainIdBytes32;
+
+        // solhint-disable-next-line no-inline-assembly
+        assembly {
+            chainIdBytes32 := mload(add(_chainId, 32))
+        }
+
+        return chainIdBytes32;
     }
 }
-
-}
-
 ```
 
 </details>
@@ -452,48 +459,51 @@ function toBytes(address addr) public pure returns (bytes memory b) {
 <summary><b>End-to-end Stake Contract</b></summary>
 
 ```javascript
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.0;
+//SPDX-License-Identifier: Unlicense
+pragma solidity ^0.8.18;
+
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "./IStake.sol";
+
 contract Stake is IStake {
-using SafeERC20 for IERC20;
-using SafeMath for uint256;
-address public immutable vault;
-// user address => token address => staked amount
-mapping(address => mapping(address => uint256)) public stakedBalance;
-constructor(address _vault) {
-vault = _vault;
-}
-modifier onlyVault() {
-    require(msg.sender == vault, "Only Vault");
-_;
-}
-function stake(
-address user,
-address token,
-uint256 amount
-) external override onlyVault {
-    uint256 balanceBefore = IERC20(token).balanceOf(address(this));
-    IERC20(token).safeTransferFrom(msg.sender, address(this), amount);
-    uint256 balanceAfter = IERC20(token).balanceOf(address(this));
-    uint256 _amount = balanceAfter.sub(balanceBefore, "No amount received");
-    stakedBalance[user][token] += _amount;
-}
+    using SafeERC20 for IERC20;
+    using SafeMath for uint256;
+    address public immutable vault;
 
+    // user address => token address => staked amount
+    mapping(address => mapping(address => uint256)) public stakedBalance;
 
-function unstake(
-address user,
-address token,
-uint256 amount
-) external override onlyVault {
-    stakedBalance[user][token] = stakedBalance[user][token].sub(
-    amount,
-    "User balance too low"
-    );
-    IERC20(token).safeTransfer(user, amount);
-}
+    constructor(address _vault) {
+        vault = _vault;
+    }
+
+    modifier onlyVault() {
+        require(msg.sender == vault, "Only Vault");
+        _;
+    }
+
+    function stake(
+        address user,
+        address token,
+        uint256 amount
+    ) external override onlyVault {
+        require(amount != 0, "amount cannot be 0");
+        IERC20(token).safeTransferFrom(msg.sender, address(this), amount);
+        stakedBalance[user][token] += amount;
+    }
+
+    function unstake(
+        address user,
+        address token,
+        uint256 amount
+    ) external override onlyVault {
+        stakedBalance[user][token] = stakedBalance[user][token].sub(
+            amount,
+            "User balance too low"
+        );
+        IERC20(token).safeTransfer(user, amount);
+    }
 }
 ```
 
@@ -506,44 +516,52 @@ uint256 amount
 
 <u>Vault</u>
 
-[0x8301831f9dA121A83E2f1b61f23bD4C36EBA2298](https://mumbai.polygonscan.com/address/0x8301831f9dA121A83E2f1b61f23bD4C36EBA2298)
+[0x068b55dfA3BCe91F7f0e06141f45004162ff022E](https://mumbai.polygonscan.com/address/0x068b55dfA3BCe91F7f0e06141f45004162ff022E)
 
 <u>Stake</u>
 
-[0xd1De48fbe9b0248535c7D69b0c3209E48B5378F5](https://mumbai.polygonscan.com/address/0xd1De48fbe9b0248535c7D69b0c3209E48B5378F5)
+[0x8df3B21428A22062a71fC89aDA42462088dDFa4E](https://mumbai.polygonscan.com/address/0x8df3B21428A22062a71fC89aDA42462088dDFa4E)
 
 **Avalanche Fuji Testnet**
 
 <u>Vault</u>
 
-[0xc3b7B28e1b9B43ebe130E3748e8843525C1c8315](https://testnet.snowtrace.io/address/0xc3b7B28e1b9B43ebe130E3748e8843525C1c8315)
+[0x43595baC35AC74fdc65Ef8225e7DE08Fe6883979](https://testnet.snowtrace.io/address/0x43595baC35AC74fdc65Ef8225e7DE08Fe6883979)
 
 <u>Stake</u>
 
-[0x5060eF48Ad8d135fbb37966f5F77C6b5Dca2e62f](https://testnet.snowtrace.io/address/0x5060eF48Ad8d135fbb37966f5F77C6b5Dca2e62f)
+[0x37dab2d677ba8B67408CD020D696BD5b16dB6ad4](https://testnet.snowtrace.io/address/0x37dab2d677ba8B67408CD020D696BD5b16dB6ad4)
+
+**Sample Cross Chain Transaction**
+
+[Transaction](https://nitro-explorer.routerprotocol.com/tx/0x89b76319de7a4d77428f93f7f96e08a1f5a2bf03ab5fc1cb8f039ccd4ff4fb6a)
 
 </details>
 
 <details>
 <summary><b>Fee Calculation</b></summary>
 
-The fee for using Nitro sequencer has two components: 
+The fee for using Nitro sequencer has two components:
+
 - **Transfer/Forwarder Fee**: The fee for transferring tokens from one chain to another. Users can use this [API](https://api.trustless-voyager.alpha.routerprotocol.com/api#/Fees/FeeController_getFeesForChainInTokenTerms) to estimate the fee by putting in the destination chain ID, address of the token on the destination chain, token amount, and token decimals. There is another boolean value `checkLiquidity`:
-    -  If marked as TRUE, the API gives the list of all the forwarders which have enough liquidity (along with the fee they would charge in terms of the token desired) against the amount requested by the user for the token.
-    - If marked as FALSE, the API gives the list of all the forwarders whether or not they have enough liquidity to take up the transaction.
+
+  - If marked as TRUE, the API gives the list of all the forwarders which have enough liquidity (along with the fee they would charge in terms of the token desired) against the amount requested by the user for the token.
+  - If marked as FALSE, the API gives the list of all the forwarders whether or not they have enough liquidity to take up the transaction.
 
 - **Additional Fee**: This is the gas fee for executing the message upon receiving the tokens on the destination chain. For this, two things are needed:
-    1. Gas limit required for execution of the request on the destination chain. This can be calculated using tools like hardhat-gas-reporter.
-    2. Gas price with which to execute the request on the destination chain. This can be calculated using the RPC of the destination chain.
-    ```javascript
-    // using ethers.js
-    const gasPrice = await provider.getGasPrice();
 
-    // using web3.js
-    const gasPrice = web3.eth.getGasPrice().then((result) => {
+  1. Gas limit required for execution of the request on the destination chain. This can be calculated using tools like hardhat-gas-reporter.
+  2. Gas price with which to execute the request on the destination chain. This can be calculated using the RPC of the destination chain.
+
+  ```javascript
+  // using ethers.js
+  const gasPrice = await provider.getGasPrice();
+
+  // using web3.js
+  const gasPrice = web3.eth.getGasPrice().then((result) => {
     console.log(web3.utils.fromWei(result, 'ether'));
-    });
-    ```
+  });
+  ```
 
 Let’s say the gas limit required to execute the message on Mumbai (destination chain) is 200000 units, the gas price is 26 GWEI, then:
 
@@ -551,102 +569,106 @@ Let’s say the gas limit required to execute the message on Mumbai (destination
 total_gas_fee = {(200000 * 26 * (10^9)) / (10^18)} wMATIC = 0.0052 wMATIC
 ```
 
+The fees could also be calculated directly using the Nitro's PathFinder API the script to which can be found in the Github repository in the scripts folder.
+
 <!-- Let's suppose the user is transferring 100 USDC from the source chain to the destination chain, the user should put the `destAmount` as the following:
 
 ```math
 destAmount = 100 - forwarder fee - total_gas_fee
 ``` -->
 
-
 </details>
-
 
 <details>
 <summary><b>Sequencer Apis</b></summary>
 
 You can use sequencer api to trigger a cross-chain transaction with some custom instruction.
 
-Sample code is provided here - 
-```ts
-import { ethers } from 'ethers'
+Sample code is provided here -
 
-const PATH_FINDER_API_URL = "https://api.pf.testnet.routerprotocol.com/api"
+```ts
+import { ethers } from 'ethers';
+
+const PATH_FINDER_API_URL = 'https://api.pf.testnet.routerprotocol.com/api';
 
 const getQuote = async () => {
-    const params = {
-        'fromTokenAddress': '0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054',
-        'toTokenAddress': '0xb452b513552aa0B57c4b1C9372eFEa78024e5936',
-        'amount': '10000000000000000000', // source amount
-        'fromTokenChainId': "80001", // Mumbai
-        'toTokenChainId': "43113", // Fuji
-        'partnerId': 0, // (Optional) - For any partnership, get your unique partner id by contacting us on Telegram or emailing us at contact@routerprotocol.com
-    }
+  const params = {
+    fromTokenAddress: '0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054', // USDT on src chain
+    toTokenAddress: '0xb452b513552aa0B57c4b1C9372eFEa78024e5936', // USDT on dest chain
+    amount: '10000000000000', // source amount
+    fromTokenChainId: '80001', // Mumbai
+    toTokenChainId: '43113', // Fuji
+    additionalGasLimit: '100000', // Additional gas limit to execute instruction on dest chain
+    partnerId: 0, // (Optional) - For any partnership, get your unique partner id by contacting us on Telegram or emailing us at contact@routerprotocol.com
+  };
 
-    const endpoint = "v2/sequencer-quote"
-    const quoteUrl = `${PATH_FINDER_API_URL}/${endpoint}`
+  const endpoint = 'v2/sequencer-quote';
+  const quoteUrl = `${PATH_FINDER_API_URL}/${endpoint}`;
 
-    console.log(quoteUrl)
+  try {
+    const { data } = await axios.get(quoteUrl, { params });
+    return data;
+  } catch (e) {
+    console.error(`Fetching quote data from pathfinder: ${e}`);
+  }
+};
 
-    try {
-        const res = await axios.get(quoteUrl, { params })
-        return res.data;
-    } catch (e) {
-        console.error(`Fetching quote data from pathfinder: ${e}`)
-    }    
-}
+/**
+ * senderAddress: The address of the sender of the transaction.
+ * receiverAddress: The receiver here should be the contract address that should receive the funds along with the instructions.
+ * contractMessage: Message to be passed to the destination chain contract.
+ * contractAddress: Address of the contract on destination chain.
+ * refundAddress: The address which will receive funds in case no forwarder picks up the transaction and the user needs to withdraw the funds after some interval of time. Do fill this address very carefully otherwise you may lose your funds.
+ */
+const getTransaction = async (quoteData) => {
+  const endpoint = 'v2/sequencer-transaction';
+  const txDataUrl = `${PATH_FINDER_API_URL}/${endpoint}`;
 
-const getTransaction = async (params, quoteData) => {
-    const endpoint = "v2/sequencer-transaction"
-    const txDataUrl = `${PATH_FINDER_API_URL}/${endpoint}`
+  try {
+    const res = await axios.post(txDataUrl, {
+      ...quoteData,
+      slippageTolerance: 0.5,
+      senderAddress: '<sender-address>',
+      receiverAddress: '<receiver-address>',
+      contractMessage: '<contract-message or instruction>',
+      contractAddress: '<dest-contract-address>',
+      refundAddress: '<refund-address>',
+    });
+    return res.data;
+  } catch (e) {
+    console.error(`Fetching tx data from pathfinder: ${e}`);
+  }
+};
 
-    console.log(txDataUrl)
-
-    try {
-        const res = await axios.post(txDataUrl, {
-            ...quoteData,
-            slippageTolerance: 0.5,
-            senderAddress: "<sender-address>",
-            receiverAddress: "<receiver-address>",
-            contractMessage: "<contract-message or instruction>",
-            contractAddress: "<dest-contract-address>",
-            refundAddress: "<refund-address>"
-        })
-        return res.data;
-    } catch (e) {
-        console.error(`Fetching tx data from pathfinder: ${e}`)
-    }    
-}
-    
 const main = async () => {
-    
-    // setting up a signer
-    const provider = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/polygon_mumbai", 80001);
-    // use provider.getSigner() method to get a signer if you're using this for a UI
-    const wallet = new ethers.Wallet("YOUR_PRIVATE_KEY", provider)
+  // setting up a signer
+  const provider = new ethers.providers.JsonRpcProvider(
+    'https://rpc.ankr.com/polygon_mumbai',
+    80001
+  );
+  // use provider.getSigner() method to get a signer if you're using this for a UI
+  const wallet = new ethers.Wallet('YOUR_PRIVATE_KEY', provider);
 
-    // 1. get quote
-    const quoteData = getQuote();
+  // 1. get quote
+  const quoteData = getQuote();
 
-    // 2. give allowance if required
-    const allowanceTo = quoteData.allowanceTo;
-    
-    // 3. get transaction data
-    const txResponse = await getTransaction(quoteData);
+  // 2. give allowance if required
+  const allowanceTo = quoteData.allowanceTo;
 
-    // sending the transaction using the data given by the pathfinder
-    const tx = await wallet.sendTransaction(txResponse.txn)
-    try {
-        await tx.wait();
-        console.log(`Transaction mined successfully: ${tx.hash}`)
-    }
-    catch (error) {
-        console.log(`Transaction failed with error: ${error}`)
-    }
-}
+  // 3. get transaction data
+  const txResponse = await getTransaction(quoteData);
 
-main()
+  // sending the transaction using the data given by the pathfinder
+  const tx = await wallet.sendTransaction(txResponse.txn);
+  try {
+    await tx.wait();
+    console.log(`Transaction mined successfully: ${tx.hash}`);
+  } catch (error) {
+    console.log(`Transaction failed with error: ${error}`);
+  }
+};
 
+main();
 ```
-
 
 </details>
