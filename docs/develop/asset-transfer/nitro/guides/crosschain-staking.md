@@ -195,11 +195,11 @@ It is the `iStake` function that:
 
 Let us understand the parameters of `iStake` function one by one:
 
-| destChainIdBytes | Network IDs of the chains in bytes32 format. These can be found [here](../supported-chains-tokens.md).                                                                                                                                                                                                                                                                      |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| amount           | Decimal-adjusted amount of the token that has to be transferred from the source chain.                                                                                                                                                                                                                                                                                      |
-| destAmount       | Amount of tokens (in source chain decimals) expected to be received by the recipient on the destination chain. This can be calculated using the Nitro's PathFinder API. A small script has been added in the scripts folder of the github repository to calculate the destination amount. Refer to the [**Fee Management**](../fee-management.md) section for more details. |
-| destChainId      | ChainId of the destination chain.                                                                                                                                                                                                                                                                                                                                           |
+| destChainIdBytes | Network IDs of the chains in bytes32 format. These can be found [here](../supported-chains-tokens.md).                                                                                                                                                                                                                                                                                                                                                  |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| amount           | Decimal-adjusted amount of the token that has to be transferred from the source chain.                                                                                                                                                                                                                                                                                                                                                                  |
+| destAmount       | Amount of tokens (in source chain decimals) expected to be received by the recipient on the destination chain. This can be calculated using the Nitro's PathFinder API. A small script has been added in the scripts folder of the [github repository](https://github.com/router-protocol/sequencer-staking/tree/master/scripts) to calculate the destination amount. Refer to the [**Fee Management**](../fee-management.md) section for more details. |
+| destChainId      | ChainId of the destination chain.                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 #### Function that receives the cross-chain call and executes the Stake function on the destination chain
 
@@ -569,7 +569,7 @@ Let’s say the gas limit required to execute the message on Mumbai (destination
 total_gas_fee = {(200000 * 26 * (10^9)) / (10^18)} wMATIC = 0.0052 wMATIC
 ```
 
-The fees could also be calculated directly using the Nitro's PathFinder API the script to which can be found in the Github repository in the scripts folder.
+The fees could also be calculated directly using the Nitro's PathFinder API the script to which can be found in the [Github repository](https://github.com/router-protocol/sequencer-staking/tree/master/scripts) in the scripts folder.
 
 <!-- Let's suppose the user is transferring 100 USDC from the source chain to the destination chain, the user should put the `destAmount` as the following:
 
@@ -615,10 +615,12 @@ const getQuote = async () => {
 
 /**
  * senderAddress: The address of the sender of the transaction.
- * receiverAddress: The receiver here should be the contract address that should receive the funds along with the instructions.
+ * receiverAddress: The receiver here should be the contract address that should receive the funds 
+   along with the instructions.
  * contractMessage: Message to be passed to the destination chain contract.
- * contractAddress: Address of the contract on destination chain.
- * refundAddress: The address which will receive funds in case no forwarder picks up the transaction and the user needs to withdraw the funds after some interval of time. Do fill this address very carefully otherwise you may lose your funds.
+ * refundAddress: The address which will receive funds in case no forwarder picks up the transaction
+   and the user needs to withdraw the funds after some interval of time. Do fill this address very
+   carefully otherwise you may lose your funds.
  */
 const getTransaction = async (quoteData) => {
   const endpoint = 'v2/sequencer-transaction';
@@ -631,7 +633,6 @@ const getTransaction = async (quoteData) => {
       senderAddress: '<sender-address>',
       receiverAddress: '<receiver-address>',
       contractMessage: '<contract-message or instruction>',
-      contractAddress: '<dest-contract-address>',
       refundAddress: '<refund-address>',
     });
     return res.data;
