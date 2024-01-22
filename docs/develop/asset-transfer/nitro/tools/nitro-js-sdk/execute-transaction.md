@@ -39,13 +39,13 @@ const main = async () => {
     destinationChainId: "80001",
     destinationTokenAddress: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054",
     expandedInputAmount: "10000000",
+    slippageTolerance: "1"
   });
 
   // execute quote handles approval as well
   const transaction = await pathfinder.executeQuote(
     {
       quote,
-      slippageTolerance: "1",
       senderAddress: evmSigner.address,
       receiverAddress: evmSigner.address,
       refundAddress: evmSigner.address // (optional) By default equal to `senderAddress` if not provided
@@ -87,7 +87,6 @@ const main = async () => {
   const transaction = await pathfinder.executeQuote(
     {
       quote,
-      slippageTolerance: "1",
       senderAddress: evmSigner.address, // tron address
       receiverAddress: evmSigner.address,
       refundAddress: evmSigner.address // (optional) By default equal to `senderAddress` if not provided
@@ -128,11 +127,11 @@ const main = async () => {
     destinationChainId: "80001",
     destinationTokenAddress: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054",
     expandedInputAmount: "1000000000000000000",
+    slippageTolerance: "1",
   });
   const transaction = await pathfinder.executeQuote(
     {
       quote,
-      slippageTolerance: "1",
       senderAddress: "joydeeeep.testnet",
       receiverAddress: "0x40d5250D1ce81fdD1F0E0FB4F471E57AA0c1FaD3",
       refundAddress: "joydeeeep.testnet" // (optional) By default equal to `senderAddress` if not provided
