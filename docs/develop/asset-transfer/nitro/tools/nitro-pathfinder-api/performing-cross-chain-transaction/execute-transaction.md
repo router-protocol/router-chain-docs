@@ -19,7 +19,6 @@ const getTransaction = async (params, quoteData) => {
     try {
         const res = await axios.post(txDataUrl, {
             ...quoteData,
-            slippageTolerance: 0.5,
             senderAddress: "<sender-address>",
             receiverAddress: "<receiver-address>",
             refundAddress: "<refundAddress>" // (optional) By default equal to `senderAddress` if not provided

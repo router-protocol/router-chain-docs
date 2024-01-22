@@ -598,6 +598,7 @@ const getQuote = async () => {
     amount: '10000000000000', // source amount
     fromTokenChainId: '80001', // Mumbai
     toTokenChainId: '43113', // Fuji
+    slippageTolerance: 1, // optional
     additionalGasLimit: '100000', // Additional gas limit to execute instruction on dest chain
     partnerId: 0, // (Optional) - For any partnership, get your unique partner id by contacting us on Telegram or emailing us at contact@routerprotocol.com
   };
@@ -629,7 +630,6 @@ const getTransaction = async (quoteData) => {
   try {
     const res = await axios.post(txDataUrl, {
       ...quoteData,
-      slippageTolerance: 0.5,
       senderAddress: '<sender-address>',
       receiverAddress: '<receiver-address>',
       contractMessage: '<contract-message or instruction>',
