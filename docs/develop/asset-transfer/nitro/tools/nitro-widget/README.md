@@ -32,11 +32,9 @@ document.getElementById("widget__iframe").src = `${baseUrl}?${paramString}`;
 ```
 
 :::note
-To integrate the widget on your UI, you will be assigned a unique partner ID. To get your partner ID, please contact us on [Telegram](https://t.me/Add_ith).
-:::
-
-:::note
-You can use [Nitro's Widget Builder Tool](https://nitro.routerprotocol.com/widget) to automatically generate the widget paramaters.
+1. You can use [Nitro's Widget Builder Tool](https://nitro.routerprotocol.com/widget) to automatically generate the widget paramaters.
+2. In case you want source / destination token to be native token, then the following value should be used for token address - 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE
+3. To integrate the widget on your UI, you will be assigned a unique partner ID. To get your partner ID, please contact us on [Telegram](https://t.me/Add_ith).
 :::
 
 ```jsx
