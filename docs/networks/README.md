@@ -10,16 +10,17 @@ The following APIs are recommended for development purposes.
 
 ## Official Public Endpoints
 
-| Network               | Testnet                                        | Devnet                                         |
+| Network               | Mainnet                                        | Testnet                                         |
 | --------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| **Chain ID**          | router_9601-1                                  | router_9603-1                                  |
-| **RPC**               | https://evm.rpc.testnet.routerchain.dev        | https://devnet.evm.rpc.routerprotocol.com      |
-| **gRPC-gateway**      | https://grpc.testnet.routerchain.dev           | https://devnet.grpc.routerprotocol.com         |
-| **TM endpoint**       | https://tm.rpc.testnet.routerchain.dev         | https://devnet.tm.routerprotocol.com           |
-| **LCD endpoint**      | https://lcd.testnet.routerchain.dev            | https://devnet.lcd.routerprotocol.com          |
-| **Faucet UI**         | https://faucet.routerprotocol.com/             | https://devnet-faucet.routerprotocol.com       |
-| **Explorer UI**       | https://routerscan.io       | https://devnet-explorer.routerprotocol.com     |
-| **Explorer endpoint** | https://explorer-api.testnet.routerchain.dev   | https://devnet-explorer-api.routerprotocol.com |
+| **Chain ID**          | router_9600-1                                  | router_9601-1                                  |
+| **RPC**               | https://sentry.evm.rpc.routerprotocol.com        | https://evm.rpc.testnet.routerchain.dev      |
+| **gRPC-gateway**      | https://sentry.grpcweb.routerprotocol.com           | https://grpc.testnet.routerchain.dev         |
+| **TM endpoint**       | https://sentry.tm.rpc.routerprotocol.com         | https://tm.rpc.testnet.routerchain.dev           |
+| **LCD endpoint**      | https://sentry.lcd.routerprotocol.com            | https://lcd.testnet.routerchain.dev          |
+| **Faucet UI**         | -             | https://faucet.routerprotocol.com       |
+| **Explorer UI**       | https://routerscan.io       | https://testnet.routerscan.io     |
+| **Explorer endpoint** | https://api.explorer.routerscan.io   | https://explorer-api.testnet.routerchain.dev |
+| **Explorer WSS endpoint** | wss://api.explorer.routerscan.io   | wss://explorer-api.testnet.routerchain.dev |
 
 <!-- ### API Docs
 

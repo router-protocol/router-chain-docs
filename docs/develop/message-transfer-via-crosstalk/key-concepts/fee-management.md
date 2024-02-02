@@ -12,7 +12,7 @@ The fee associated with any cross-chain request initiated by a dApp is paid by t
 * The fee payer address on the Gateway contract can be modified by the application at any time using the `setDappMetadata` function.
 
 #### How to provide approval for the fee payer on the Router chain?
-* The approval as a fee payer can be provided by accessing the [explorer](https://routerscan.io/feePayer).
+* The approval as a fee payer can be provided by accessing the [explorer](https://testnet.routerscan.io/feePayer).
 * The user can search for the dApp address or the fee payer address on the explorer to view all the pending approvals.
 * After connecting the fee payer wallet, you can approve all the pending fee payer requests.
 

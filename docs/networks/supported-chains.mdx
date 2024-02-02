@@ -7,6 +7,35 @@ import APIData from '../../src/utils/GatewayAddressTable' ;
 
 The chain config for all the networks supported by Router including the Gateway contract addresses can be found at the following links:
 
+### For Mainnet
+
+#### Gateway Contracts
+<APIData
+  apiData={[
+    { contractConfigUrl: 'https://sentry.lcd.routerprotocol.com/router-protocol/router-chain/multichain/contract_config', 
+    chainConfigUrl: 'https://sentry.lcd.routerprotocol.com/router-protocol/router-chain/multichain/chain_config', 
+    networkType: 'Mainnet', contractType: 'GATEWAY' }
+  ]}
+/>
+
+<div style={{ marginBottom: '50px' }}></div>
+
+:::info
+Please make sure that you pass the **Chain ID** and **Gateway Contract Address** in your request without any quotes. For example, for Polygon, instead of passing Chain ID as "137" or '80001371', pass it as 137.
+:::
+
+#### Voyager Contracts
+<APIData
+  apiData={[
+    { contractConfigUrl: 'https://sentry.lcd.routerprotocol.com/router-protocol/router-chain/multichain/contract_config', 
+    chainConfigUrl: 'https://sentry.lcd.routerprotocol.com/router-protocol/router-chain/multichain/chain_config', 
+    networkType: 'Mainnet', contractType: 'VOYAGER' }
+  ]}
+/>
+
+<div style={{ marginBottom: '50px' }}></div>
+
+
 ### For Testnet
 
 #### Gateway Contracts
@@ -30,30 +59,6 @@ Please make sure that you pass the **Chain ID** and **Gateway Contract Address**
     { contractConfigUrl: 'https://lcd.testnet.routerchain.dev/router-protocol/router-chain/multichain/contract_config', 
     chainConfigUrl: 'https://lcd.testnet.routerchain.dev/router-protocol/router-chain/multichain/chain_config', 
     networkType: 'Testnet', contractType: 'VOYAGER' }
-  ]}
-/>
-
-<div style={{ marginBottom: '50px' }}></div>
-
-### For Devnet
-
-#### Gateway Contracts
-<APIData
-  apiData={[
-    { contractConfigUrl: 'https://devnet.lcd.routerprotocol.com/router-protocol/router-chain/multichain/contract_config', 
-    chainConfigUrl: 'https://devnet.lcd.routerprotocol.com/router-protocol/router-chain/multichain/chain_config', 
-    networkType: 'Devnet', contractType: 'GATEWAY' }
-  ]}
-/>
-
-<div style={{ marginBottom: '50px' }}></div>
-
-#### Voyager Contracts
-<APIData
-  apiData={[
-    { contractConfigUrl: 'https://devnet.lcd.routerprotocol.com/router-protocol/router-chain/multichain/contract_config', 
-    chainConfigUrl: 'https://devnet.lcd.routerprotocol.com/router-protocol/router-chain/multichain/chain_config', 
-    networkType: 'Devnet', contractType: 'VOYAGER' }
   ]}
 />
 

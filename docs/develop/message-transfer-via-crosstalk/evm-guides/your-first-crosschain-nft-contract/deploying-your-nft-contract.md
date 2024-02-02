@@ -156,7 +156,7 @@ Go to https://faucet.routerprotocol.com, connect your metamask wallet, select ne
 
 ### **2)** Approve your request on Router-explorer
 
-Go to https://routerscan.io/feePayer , connect your wallet and approve the pending request corresponding to your source dapp address.
+Go to https://testnet.routerscan.io/feePayer , connect your wallet and approve the pending request corresponding to your source dapp address.
 
 <center>
   <img
@@ -244,7 +244,7 @@ You need to call this function by putting the chain id for destination chain; tu
 
 ### **3)** Track your transaction on Router Explorer
 
-You can track the status of your transaction on [Router Explorer](https://routerscan.io/)
+You can track the status of your transaction on [Router Explorer](https://testnet.routerscan.io/)
 
 ### **4)** Successfully receive your NFTs on destination chain
 

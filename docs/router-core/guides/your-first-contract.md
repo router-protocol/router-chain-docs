@@ -18,7 +18,7 @@ Before setting up an account to interact with the Router chain, verify that the 
 
 -   [Faucet](https://faucet.routerprotocol.com/)
 
--   [Block Explorer](https://routerscan.io)
+-   [Block Explorer](https://testnet.routerscan.io)
 
 <details>
 <summary><b>Method 1: Via the UI</b></summary>
