@@ -5,6 +5,8 @@ info:
 servers:
   - url: https://api.pf.testnet.routerprotocol.com/api/v2
     description: Router Protocol Testnet
+  - url: https://api-beta.pathfinder.routerprotocol.com/api/v2
+    description: Router Protocol Mainnet
 tags:
   - name: Quote
     description: Requesting a quote from the Pathfinder algorithm
@@ -390,6 +392,12 @@ components:
         partnerId: 
           type: number
           example: 0
+        estimatedTime:
+          type: number
+          example: 40
+        slippageTolerance:
+          type: number
+          example: 1
     StatusResponse:
       type: object
       required:
@@ -702,6 +710,12 @@ components:
         partnerId: 
           type: string
           example: "0"
+        estimatedTime:
+          type: number
+          example: 40
+        slippageTolerance:
+          type: number
+          example: 1
         senderAddress:
           type: string
           example: "0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964"

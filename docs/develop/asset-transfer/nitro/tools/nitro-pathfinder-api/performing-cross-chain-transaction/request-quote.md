@@ -50,6 +50,8 @@ main()
 ```
 
 :::note
+Mainnet URL - https://api-beta.pathfinder.routerprotocol.com/api/v2
+
 In case you want source / destination token to be native token, then the following value should be used for token address - 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE
 :::
 
