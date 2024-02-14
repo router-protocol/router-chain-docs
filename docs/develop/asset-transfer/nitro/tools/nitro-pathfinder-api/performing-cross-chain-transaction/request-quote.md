@@ -34,7 +34,7 @@ const main = async () => {
     const params = {
         'fromTokenAddress': '0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054',
         'toTokenAddress': '0xb452b513552aa0B57c4b1C9372eFEa78024e5936',
-        'amount': '10000000000000000000', // source amount
+        'amount': '100000000000000000', // source amount
         'fromTokenChainId': "80001", // Mumbai
         'toTokenChainId': "43113", // Fuji
         'partnerId': 0, // (Optional) - For any partnership, get your unique partner id by contacting us on Telegram or emailing us at contact@routerprotocol.com
