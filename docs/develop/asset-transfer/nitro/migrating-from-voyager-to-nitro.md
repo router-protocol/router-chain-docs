@@ -104,6 +104,70 @@ In Voyager, the pathfinder API used to return the transaction data along with th
 
 ## Widget Migration
 
-Just change the `baseURL` from "https://app.thevoyager.io/swap" to "https://nitro.routerprotocol.com/swap" and you're good to go. 
+Just change the `baseURL` from "https://app.thevoyager.io/swap" to "https://nitro.routerprotocol.com/swap" and you're good to go.
 
 
+## SDK Migration
+
+1. Initialization
+
+Earlier -
+```
+import { RouterProtocol } from "@routerprotocol/router-js-sdk"
+
+const routerprotocol = new RouterProtocol("YOUR_WIDGET_ID", "SOURCE_CHAIN_ID", "PROVIDER_HERE")
+await routerprotocol.initialize()
+```
+
+Change to -
+```
+import { Pathfinder, Env } from "@nitro/asset-transfer-js-sdk";
+const pathfinder = new Pathfinder(Env.Testnet, YOUR_WIDGET_ID);
+```
+
+Install new sdk with npm or yarn 
+`npm install @nitro/asset-transfer-js-sdk`
+
+
+2. Quote & Transaction
+
+Earlier -
+```
+const quote = await routerprotocol.getQuote(...params)
+```
+
+Change to -
+```
+const quote = await pathfinder.getQuote({
+            sourceChainId,
+            sourceTokenAddress,
+            destinationChainId,
+            destinationTokenAddress,
+            expandedInputAmount,
+        });
+
+// execute quote handles approval as well
+const transaction = await pathfinder.executeQuote({
+    quote,
+    slippageTolerance: "1",
+    senderAddress: evmSigner.address,
+    receiverAddress: evmSigner.address,
+},
+    {
+        evmSigner
+    }
+);
+```
+
+
+3. Status
+
+Earlier -
+```
+const status = await routerprotocol.getTransactionStatus(SRC_TXN_HASH)
+```
+
+Change to -
+```
+const status = await pathfinder.getTransactionStatus(SRC_TXN_HASH);
+```
