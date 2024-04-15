@@ -31,7 +31,7 @@ and more fields.
 Here's an example:
 Getting a quote for transferring 10 USDT from Fuji to Mumbai:
 ```jsx
-import { Pathfinder, Network } from "@nitro/asset-transfer-js-sdk";
+import { PathFinder, Network } from "@routerprotocol/asset-transfer-sdk-ts";
 
 // initialize a Pathfinder instance
 const YOUR_WIDGET_ID = 0; // get your unique sdk id by contacting us on Telegram

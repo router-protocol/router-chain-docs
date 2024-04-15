@@ -11,8 +11,8 @@ const status = await pathfinder.getTransactionStatus(SRC_TXN_HASH);
 
 Example has been provided below.
 ```jsx
-import { Pathfinder, Network } from "@nitro/asset-transfer-js-sdk";
-import { evmSignerFromPrivateKeyAndRpc } from "@nitro/asset-transfer-js-sdk/pathfinder/ChainClient/EvmChainClient";
+import { PathFinder, Network } from "@routerprotocol/asset-transfer-sdk-ts";
+import { evmSignerFromPrivateKeyAndRpc } from "@routerprotocol/asset-transfer-sdk-ts/pathfinder/ChainClient/EvmChainClient";
 
 // initialize a Pathfinder instance
 const YOUR_WIDGET_ID = 24; // get your unique sdk id by contacting us on Telegram

@@ -6,9 +6,9 @@ sidebar_position: 3
 For executing the quote you need to have EvmSigner for evm chains, NearAccount for near and tronweb for Tron. You can create them using private keys rpc using the following functions or you can pass your own.
 
 ```jsx
-  import { evmSignerFromPrivateKeyAndRpc } from '@nitro/asset-transfer-js-sdk/pathfinder/ChainClient/EvmChainClient';
-        import { getTronWeb } from '@nitro/asset-transfer-js-sdk/pathfinder/ChainClient/TronChainClient';
-        import { nearSignerFromPrivateKey } from '@nitro/asset-transfer-js-sdk/pathfinder/ChainClient/NearChainClient';
+  import { evmSignerFromPrivateKeyAndRpc } from '@routerprotocol/asset-transfer-sdk-ts/pathfinder/ChainClient/EvmChainClient';
+        import { getTronWeb } from '@routerprotocol/asset-transfer-sdk-ts/pathfinder/ChainClient/TronChainClient';
+        import { nearSignerFromPrivateKey } from '@routerprotocol/asset-transfer-sdk-ts/pathfinder/ChainClient/NearChainClient';
 
         const evmSigner = evmSignerFromPrivateKeyAndRpc(evmPrivateKey, EVM_RPC);
         const tronSigner = getTronWeb(tronPrivateKey, TRON_RPC);
@@ -18,8 +18,8 @@ Below is how you can execute a transaction for various chain types.
 
 ### Standard EVM Chains
 ```jsx
-import { Pathfinder, Network } from "@nitro/asset-transfer-js-sdk";
-import { evmSignerFromPrivateKeyAndRpc } from "@nitro/asset-transfer-js-sdk/pathfinder/ChainClient/EvmChainClient";
+import { PathFinder, Network } from "@routerprotocol/asset-transfer-sdk-ts";
+import { evmSignerFromPrivateKeyAndRpc } from "@routerprotocol/asset-transfer-sdk-ts/pathfinder/ChainClient/EvmChainClient";
 
 // initialize a Pathfinder instance
 const YOUR_WIDGET_ID = 0; // get your unique sdk id by contacting us on Telegram
@@ -62,9 +62,9 @@ main();
 
 ### TRON
 ```jsx
-import { Pathfinder, Network } from "@nitro/asset-transfer-js-sdk";
-import { evmSignerFromPrivateKeyAndRpc } from "@nitro/asset-transfer-js-sdk/pathfinder/ChainClient/EvmChainClient";
-import { getTronWeb } from "@nitro/asset-transfer-js-sdk/pathfinder/ChainClient/TronChainClient";
+import { PathFinder, Network } from "@routerprotocol/asset-transfer-sdk-ts";
+import { evmSignerFromPrivateKeyAndRpc } from "@routerprotocol/asset-transfer-sdk-ts/pathfinder/ChainClient/EvmChainClient";
+import { getTronWeb } from "@routerprotocol/asset-transfer-sdk-ts/pathfinder/ChainClient/TronChainClient";
 
 // initialize a Pathfinder instance
 const YOUR_WIDGET_ID = 0; // get your unique sdk id by contacting us on Telegram
@@ -103,8 +103,8 @@ main();
 
 ### NEAR
 ```jsx
-import { Pathfinder, Network } from "@nitro/asset-transfer-js-sdk";
-import { nearSignerFromPrivateKey } from "@nitro/asset-transfer-js-sdk/pathfinder/ChainClient/NearChainClient";
+import { PathFinder, Network } from "@routerprotocol/asset-transfer-sdk-ts";
+import { nearSignerFromPrivateKey } from "@routerprotocol/asset-transfer-sdk-ts/pathfinder/ChainClient/NearChainClient";
 
 // initialize a Pathfinder instance
 const YOUR_WIDGET_ID = 0; // get your unique sdk id by contacting us on Telegram
