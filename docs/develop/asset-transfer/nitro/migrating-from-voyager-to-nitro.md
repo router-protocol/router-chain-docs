@@ -121,12 +121,12 @@ await routerprotocol.initialize()
 
 Change to -
 ```
-import { Pathfinder, Env } from "@nitro/asset-transfer-js-sdk";
+import { Pathfinder, Env } from "@routerprotocol/asset-transfer-sdk-ts";
 const pathfinder = new Pathfinder(Env.Testnet, YOUR_WIDGET_ID);
 ```
 
 Install new sdk with npm or yarn 
-`npm install @nitro/asset-transfer-js-sdk`
+`npm install @routerprotocol/asset-transfer-sdk-ts`
 
 
 2. Quote & Transaction

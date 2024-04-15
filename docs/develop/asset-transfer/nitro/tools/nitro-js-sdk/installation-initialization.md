@@ -7,7 +7,7 @@ sidebar_position: 1
 Install Nitro's Asset Transfer SDK into your JavaScript development environment by running the following command in your terminal:
 
 ```jsx
-npm install @nitro/asset-transfer-js-sdk
+npm install @routerprotocol/asset-transfer-sdk-ts
 ```
 
 ## Initialization
@@ -15,9 +15,9 @@ npm install @nitro/asset-transfer-js-sdk
 After installing the module, import and initialize it into your code:
 
 ```jsx
-import { Pathfinder, Network } from "@nitro/asset-transfer-js-sdk";
+import { PathFinder, Network } from "@routerprotocol/asset-transfer-sdk-ts";
 
-const pathfinder = new Pathfinder(Network.Testnet, YOUR_WIDGET_ID);
+const pathfinder = new PathFinder(Network.Testnet, YOUR_WIDGET_ID);
 ```
 
 You can use Network.Testnet for mandara and Network.Mainnet for mainnet.
@@ -25,8 +25,8 @@ You can use Network.Testnet for mandara and Network.Mainnet for mainnet.
 Example:
 
 ```jsx
-import { Pathfinder, Network } from "@nitro/asset-transfer-js-sdk";
+import { PathFinder, Network } from "@routerprotocol/asset-transfer-sdk-ts";
 
 const YOUR_WIDGET_ID = 24 // get your unique sdk id by contacting us on Telegram
-const pathfinder = new Pathfinder(Network.Testnet, YOUR_WIDGET_ID);
+const pathfinder = new PathFinder(Network.Testnet, YOUR_WIDGET_ID);
 ```
