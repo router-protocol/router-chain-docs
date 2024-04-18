@@ -64,7 +64,7 @@ paths:
           schema:
             type: number
           example: 0
-          description: "For testing omit this parameter. For any partnership, you can get your unique partner id by contacting us on Telegram or emailing us at contact@routerprotocol.com"
+          description: "For testing omit this parameter. For any partnership, you can get your unique partner id - https://app.routernitro.com/partnerId"
       responses:
         "200":
           description: Empty

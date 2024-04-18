@@ -13,7 +13,7 @@ const baseUrl = "https://nitro.routerprotocol.com/swap";
 
 const configuration = {
 isWidget: true,
-partnerId: "0", // get your unique partner id by contacting us on Telegram or emailing us at contact@routerprotocol.com
+partnerId: "0", // get your unique partner id - https://app.routernitro.com/partnerId
 fromChain: "80001",
 toChain: "43113",
 fromToken: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054",
@@ -34,7 +34,7 @@ document.getElementById("widget__iframe").src = `${baseUrl}?${paramString}`;
 :::note
 1. You can use [Nitro's Widget Builder Tool](https://nitro.routerprotocol.com/widget) to automatically generate the widget paramaters.
 2. In case you want source / destination token to be native token, then the following value should be used for token address - 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE
-3. To integrate the widget on your UI, you will be assigned a unique partner ID. To get your partner ID, please contact us on [Telegram](https://t.me/Add_ith).
+3. To integrate the widget on your UI, you will be assigned a unique partner ID. To get your partner ID, please use the link [here](https://app.routernitro.com/partnerId).
 :::
 
 ```jsx

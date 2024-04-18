@@ -37,7 +37,7 @@ const main = async () => {
         'amount': '100000000000000000', // source amount
         'fromTokenChainId': "80001", // Mumbai
         'toTokenChainId': "43113", // Fuji
-        'partnerId': 0, // (Optional) - For any partnership, get your unique partner id by contacting us on Telegram or emailing us at contact@routerprotocol.com
+        'partnerId': 0, // (Optional) - For any partnership, get your unique partner id - https://app.routernitro.com/partnerId
     }
     
     const quoteData = await getQuote(params);
@@ -57,5 +57,5 @@ In case you want source / destination token to be native token, then the followi
 
 :::info
 Important Note: 
-To play around with the API, you can use the Partner ID given in the example above. But for use in any product/protocol, you will be assigned a unique Partner ID. To get your Partner ID, please contact us on [Telegram](https://t.me/Add_ith).
+To play around with the API, you can use the Partner ID given in the example above. But for use in any product/protocol, you will be assigned a unique Partner ID. To get your Partner ID, please use the link [here](https://app.routernitro.com/partnerId).
 :::

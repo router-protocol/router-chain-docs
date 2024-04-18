@@ -34,7 +34,7 @@ Getting a quote for transferring 10 USDT from Fuji to Mumbai:
 import { PathFinder, Network } from "@routerprotocol/asset-transfer-sdk-ts";
 
 // initialize a Pathfinder instance
-const YOUR_WIDGET_ID = 0; // get your unique sdk id by contacting us on Telegram
+const YOUR_WIDGET_ID = 0; // get your unique sdk id - https://app.routernitro.com/partnerId
 const pathfinder = new Pathfinder(Network.Testnet, YOUR_WIDGET_ID);
 
 const main = async () => {
@@ -59,5 +59,5 @@ In case you want source / destination token to be native token, then the followi
 
 :::info
 Important Note: 
-To play around with the API, you can use the Partner ID given in the example above. But for use in any product/protocol, you will be assigned a unique Partner ID. To get your Partner ID, please contact us on [Telegram](https://t.me/Add_ith).
+To play around with the API, you can use the Partner ID given in the example above. But for use in any product/protocol, you will be assigned a unique Partner ID. To get your Partner ID, please use the link provided [here](https://app.routernitro.com/partnerId).
 :::

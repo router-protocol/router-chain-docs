@@ -600,7 +600,7 @@ const getQuote = async () => {
     toTokenChainId: '43113', // Fuji
     slippageTolerance: 1, // optional
     additionalGasLimit: '100000', // Additional gas limit to execute instruction on dest chain
-    partnerId: 0, // (Optional) - For any partnership, get your unique partner id by contacting us on Telegram or emailing us at contact@routerprotocol.com
+    partnerId: 0, // (Optional) - For any partnership, get your unique partner id - https://app.routernitro.com/partnerId
   };
 
   const endpoint = 'v2/sequencer-quote';

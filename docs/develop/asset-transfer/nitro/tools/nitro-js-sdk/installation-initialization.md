@@ -27,6 +27,6 @@ Example:
 ```jsx
 import { PathFinder, Network } from "@routerprotocol/asset-transfer-sdk-ts";
 
-const YOUR_WIDGET_ID = 24 // get your unique sdk id by contacting us on Telegram
+const YOUR_WIDGET_ID = 24 // get your unique sdk id - https://app.routernitro.com/partnerId
 const pathfinder = new PathFinder(Network.Testnet, YOUR_WIDGET_ID);
 ```

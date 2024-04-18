@@ -27,7 +27,7 @@ const params = {
         'userAddress': 'YOUR_WALLET_ADDRESS',
         'feeTokenAddress': '0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4', // ROUTE on Polygon
         'slippageTolerance': 2,
-        'partnerId': 0, // get your unique partner id by contacting us on Telegram
+        'partnerId': 0, // get your unique partner id - https://app.routernitro.com/partnerId
     }
 
 
@@ -45,7 +45,7 @@ const params = {
         'fromTokenChainId': 137, // Polygon
         'toTokenChainId': 250, // Fantom
         'slippageTolerance': 2, // optional
-        'partnerId': 0, // get your unique partner id by contacting us on Telegram
+        'partnerId': 0, // get your unique partner id - https://app.routernitro.com/partnerId
     }
 ```
 
@@ -83,7 +83,7 @@ const main = async () => {
         'amount': '10000000', // 10 USDC (USDC token contract on Polygon has 6 decimal places)
         'fromTokenChainId': 137, // Polygon
         'toTokenChainId': 250, // Fantom
-        'partnerId': 24, // get your unique partner id by contacting us on Telegram
+        'partnerId': 24, // get your unique partner id - https://app.routernitro.com/partnerId
     }
 
     const quoteData = await getQuote(params);

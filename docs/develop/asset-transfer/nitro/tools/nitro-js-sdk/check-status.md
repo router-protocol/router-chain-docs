@@ -15,7 +15,7 @@ import { PathFinder, Network } from "@routerprotocol/asset-transfer-sdk-ts";
 import { evmSignerFromPrivateKeyAndRpc } from "@routerprotocol/asset-transfer-sdk-ts/pathfinder/ChainClient/EvmChainClient";
 
 // initialize a Pathfinder instance
-const YOUR_WIDGET_ID = 24; // get your unique sdk id by contacting us on Telegram
+const YOUR_WIDGET_ID = 24; // get your unique sdk id - https://app.routernitro.com/partnerId
 const pathfinder = new Pathfinder(Network.Testnet, YOUR_WIDGET_ID);
 
 const main = async () => {
