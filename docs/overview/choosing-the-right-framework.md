@@ -7,7 +7,7 @@ Router Protocol provides two ways using which developers can build cross-chain a
 
 
 1. CrossTalk framework (stateless and stateful communication)
-2. Voyager (leveraging global liquidity with message transfers)
+2. Nitro (leveraging global liquidity with message transfers)
 
 Let us now understand which framework best suits your requirements before using it in your dApp. 
 
@@ -21,5 +21,5 @@ For standard cross-chain instruction transfers, CrossTalk framework is the best 
 If an application does not require any logic in the middle or does not need any accounting layer, CrossTalk's generic workflow can be used. However, if you want to build an application that requires custom bridging logic or a decentralized accounting layer, you can use CrossTalk's stateful bridging. For example, you can use stateful bridging to create a multi-chain NFT collection with a single place to maintain the list of all the NFTs minted on different chains. If you wanted to use existing solutions, you'd have to maintain this list on all the chains where your dApp is deployed. In this case, by removing the redundancy involved in accounting, a CosmWasm contract on the Router chain act as a data aggregation layer. Another potential dApp that can benefit from Router's middleware capabilities is a cross-chain DEX. You'll need to deploy the token-swapping logic only on the Router chain, while smart contracts on other chains only need to include the locking/unlocking logic. 
 
 
-### Voyager
-Voyager is the native cross-chain asset-transfer bridge built on Router. It acts as the gateway to the liquidity managed by Router Protocol. Developers can use Voyager to access this liquidity and build either (a) other asset-transfer applications or (b) applications requiring both an asset transfer and an instruction transfer in a single sequenced cross-chain request. A very good example of the latter is a cross-chain yield aggregator that needs to transfer users' funds and an instruction to stake them in a particular contract, both in a single cross-chain request. 
+### Nitro
+Nitro (previously Voyager) is the native cross-chain asset-transfer bridge built on Router. It acts as the gateway to the liquidity managed by Router Protocol. Developers can use Voyager to access this liquidity and build either (a) other asset-transfer applications or (b) applications requiring both an asset transfer and an instruction transfer in a single sequenced cross-chain request. A very good example of the latter is a cross-chain staking application that needs to transfer users' funds and an instruction to stake them in a particular contract, both in a single cross-chain request. 
