@@ -199,6 +199,12 @@ const config = {
             position: 'left',
             // className: 'new-badge',
           },
+          {
+            label: 'Audits',
+            to: 'https://github.com/router-protocol/audit-reports',
+            position: 'left',
+            // className: 'new-badge',
+          },
           // {
           //   label: 'Learn',
           //   to: '/learn',
@@ -220,17 +226,17 @@ const config = {
           //   to: 'apis',
           //   position: 'left',
           // },
-          {
-            type: 'dropdown',
-            label: 'v2.0',
-            position: 'left',
-            items: [
-              {
-                label: 'v1.0',
-                href: 'https://v1.docs.routerprotocol.com',
-              }
-            ],
-          },
+          // {
+          //   type: 'dropdown',
+          //   label: 'v2.0',
+          //   position: 'left',
+          //   items: [
+          //     {
+          //       label: 'v1.0',
+          //       href: 'https://v1.docs.routerprotocol.com',
+          //     }
+          //   ],
+          // },
           // {
           //   href: 'https://github.com/router-protocol',
           //   className: 'pseudo-icon github-icon',
@@ -270,12 +276,12 @@ const config = {
                 href: 'https://routerprotocol.com/',
               },
               {
-                label: 'Voyager',
-                href: 'https://app.thevoyager.io/',
+                label: 'Nitro',
+                href: 'https://app.routernitro.com/',
               },
               {
-                label: 'Explorer',
-                href: 'https://explorer.testnet.routerchain.dev',
+                label: 'Nitro Explorer',
+                href: 'https://explorer.routernitro.com',
               },
               {
                 label: 'Careers',
@@ -291,8 +297,12 @@ const config = {
             title: 'Resources',
             items: [
               {
-                label: 'Whitepaper',
-                href: 'https://global-uploads.webflow.com/61d1382fe0e915f2953f9500/63ecc619fa7285237ea184f3_Router%20Chain%20Whitepaper.pdf',
+                label: 'Router Chain Whitepaper',
+                href: 'https://www.routerprotocol.com/router-chain-whitepaper.pdf',
+              },
+              {
+                label: 'Router CCIF Whitepaper',
+                href: 'https://www.routerprotocol.com/router-ccif-whitepaper.pdf'
               },
               {
                 label: 'Developer Portal',
@@ -306,10 +316,10 @@ const config = {
                 label: 'Medium',
                 href: 'https://routerprotocol.medium.com/',
               },
-              {
-                label: 'Community',
-                href: 'https://discord.com/invite/yjM2fUUHvN',
-              },
+              // {
+              //   label: 'Community',
+              //   href: 'https://discord.com/invite/yjM2fUUHvN',
+              // },
             ],
           },
           {

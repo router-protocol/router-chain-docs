@@ -26,8 +26,8 @@ CrossTalk supports both stateful and stateless bridging:
 - For dApps that do not require any custom bridging logic or any data aggregation layer in the middle, no middleware contract is required. 
 
 
-## Global Liquidity via Voyager
-Voyager is a cross-chain swapping engine that allows for cross-chain asset transfers as well as cross-chain sequencing of asset transfers and arbitrary instruction transfers. Voyager has a whole development suite around it, which includes:
+## Global Liquidity via Nitrp
+Nitro is a cross-chain swapping engine that allows for cross-chain asset transfers as well as cross-chain sequencing of asset transfers and arbitrary instruction transfers. Nitro has a whole development suite around it, which includes:
 1. a widget that can be used by other projects to give their users an option to perform cross-chain transactions directly from their UI;
-2. an API and a SDK that abstracts Voyager's backend capabilities for projects that want to use their own UI/platform for offering the cross-chain asset swap functionality;
+2. an API and a SDK that abstracts Nitro's backend capabilities for projects that want to use their own UI/platform for offering the cross-chain asset swap functionality;
 3. most importantly, the sequencer library, which allows developers to build cross-chain applications that require both asset transfer and instruction transfer in a single cross-chain request. 

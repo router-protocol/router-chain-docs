@@ -1,6 +1,6 @@
 ---
 title: Slashing Conditions
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 ### Condition 1 - Failure to Submit a Vote or Publishing a Conflicting Vote for Events Emitted by the Gateway Contract

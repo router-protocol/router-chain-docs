@@ -9,6 +9,7 @@ export { default as VueIcon } from './VueIcon';
 export { default as SwiftIcon } from './SwiftIcon';
 export { default as KotlinIcon } from './KotlinIcon';
 export { default as VoyagerIcon } from './VoyagerIcon';
+export { default as NitroIcon } from './NitroIcon';
 export { default as NearIcon } from './NearIcon';
 export { default as EthereumIcon } from './EthereumIcon';
 export { default as RouterIcon } from './RouterIcon';

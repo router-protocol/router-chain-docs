@@ -30,9 +30,9 @@ import {
 
 # Introduction
 
-The guides on this page will explain the process of developing on Router's CrossTalk and Voyager framework. The CrossTalk framework
+The guides on this page will explain the process of developing via Router's CrossTalk and Nitro. The CrossTalk framework
 leverages Router's infrastructure to allow contracts on one chain to send intructions to contracts deployed on some other chain. On the other hand,
-Voyager is the native cross-chain asset-transfer bridge built using Router. It acts as the gateway to the liquidity managed by Router Protocol and allows
+Nitro is the native cross-chain asset-transfer bridge built using Router. It acts as the gateway to the liquidity managed by Router Protocol and allows
 projects to execute cross-chain transactions which involve both fund transfer and instruction transfer.
 
 If you're new here or you're not sure if CrossTalk is compatible with your requirements, check out [this guide](../overview/choosing-the-right-framework) to figure out
@@ -113,19 +113,19 @@ the best cross-chain framework for your dApp.
 
   <Section>
   <Card
-  title="EVM Guide"
+  title="EVM"
   description="Understanding the crosstalk functions for EVM contracts"
   to="/develop/message-transfer-via-crosstalk/evm-guides/iDapp-functions"
   icon={<EthereumIcon />}
   />
   <Card
-  title="NEAR Guide"
+  title="NEAR"
   description="Understanding the crosstalk functions for Near chain"
   to="/develop/message-transfer-via-crosstalk/near-guides/iDapp-functions"
   icon={<NearIcon />}
   />
   <Card
-  title="Router Chain Guide"
+  title="Router Chain"
   description="Understanding the crosstalk functions for Router chain"
   to="/develop/message-transfer-via-crosstalk/router-chain-guides/iDapp-functions"
   icon={<RouterIcon />}
@@ -133,30 +133,31 @@ the best cross-chain framework for your dApp.
   </Section>
   </Section>
 
-## Asset Transfer
+## Asset Transfer via Nitro
 
    <Section title="Developers" id="web-sdks" hasSubSections >
 
 <Section>
   <Card
     title="Overview"
-    description="What is Voyager and why is it required?"
-    to="/develop/asset-transfer"
+    description="What is Nitro and how is it different from Voyager?"
+    to="/develop/asset-transfer-via-nitro"
     icon={<IDEIcon />}
   />
-  <Card
-    title="Voyager"
-    description="Dissecting different functions and parameters associated with Voyager (1st Gen Asset Transfer Bridge)"
-    to="/develop/asset-transfer/voyager/architecture"
-    icon={<AssetIcon />}
-  />
     <Card
-    title="Nitro"
-    description="Understanding the architecture of Nitro (2nd Gen Asset Transfer Bridge)"
-    to="/develop/asset-transfer/nitro/high-level-workflow"
+    title="Router Nitro"
+    description="Understanding the architecture of Nitro"
+    to="/develop/asset-transfer-via-nitro/high-level-workflow"
     icon={<ModulesIcon />}
   />
-  {/* <Card
+  {/* 
+    <Card
+    title="Voyager"
+    description="Dissecting different functions and parameters associated with Voyager (1st Gen Asset Transfer Bridge)"
+    to="/develop/asset-transfer-via-nitro/voyager/architecture"
+    icon={<AssetIcon />}
+  />
+  <Card
     title="Different Use-cases"
     description="Learning how to build different types of applications by using features enabled by Voyager"
     to="/develop/voyager/voyager/different-use-cases"
@@ -177,19 +178,19 @@ the best cross-chain framework for your dApp.
     <Card
       title="Nitro Widget"
       description="Widget to integrate cross-chain swaps on your website"
-      to="/develop/asset-transfer/nitro/tools/nitro-widget"
+      to="/develop/asset-transfer-via-nitro/tools/nitro-widget"
       icon={<Guide />}
     />
     <Card
       title="Nitro PathFinder API"
       description="An API to integrate Voyager's cross-chain swap functionality"
-      to="/develop/asset-transfer/nitro/tools/nitro-pathfinder-api/performing-cross-chain-transaction"
+      to="/develop/asset-transfer-via-nitro/tools/nitro-pathfinder-api/performing-cross-chain-transaction"
       icon={<Guide />}
     />
     <Card
       title="Migrating from Voyager to Nitro"
       description="Guide to help users migrate from Voyager to Nitro"
-      to="/develop/asset-transfer/nitro/migrating-from-voyager-to-nitro"
+      to="/develop/asset-transfer-via-nitro/migrating-from-voyager-to-nitro"
       icon={<Guide />}
     />
   </Section>
@@ -199,15 +200,15 @@ the best cross-chain framework for your dApp.
 
 <Section>
   <Card
-    title="Deploying a Cross-chain Staking Contract using Voyager"
-    description="Learn how to deploy your first cross-chain staking dApp using Voyager"
-    to="/develop/asset-transfer/voyager/guides/crosschain-staking"
-    icon={<Guide />}
-  />
-  <Card
     title="Deploying a Cross-chain Staking Contract using Nitro"
     description="Learn how to deploy your first cross-chain staking dApp using Nitro"
-    to="/develop/asset-transfer/nitro/guides/crosschain-staking"
+    to="/develop/asset-transfer-via-nitro/guides/crosschain-staking"
+    icon={<Guide />}
+  />
+    <Card
+    title="Building a Cross-chain Token using Router"
+    description="Learn how to deploy a cross-chain token using Router"
+    to="/develop/asset-transfer-via-nitro/managing-cross-chain-tokens/building-a-cross-chain-token-using-router"
     icon={<Guide />}
   />
 </Section>
@@ -219,7 +220,7 @@ the best cross-chain framework for your dApp.
 <Section>
   <Card
     title="API endpoints"
-    description="Voyager Pathfinder API endpoints"
+    description="Nitro Pathfinder API endpoints"
     to="/api/?v=PATHFINDER"
     icon={<Tscodegen />}
     svgFile="/icons/api.svg"
@@ -227,7 +228,7 @@ the best cross-chain framework for your dApp.
   <Card
     title="Getting Started"
     description="How to interact with Pathfinder API"
-    to="/develop/asset-transfer/nitro/tools/voyager-pathfinder-api/performing-cross-chain-transaction"
+    to="/develop/asset-transfer-via-nitro/tools/nitro-pathfinder-api/performing-cross-chain-transaction"
     icon={<Tscodegen />}
     svgFile="/icons/api.svg"
   />

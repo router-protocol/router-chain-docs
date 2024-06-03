@@ -31,7 +31,7 @@ export function DocVersion(){
   return(
             <div class="theme-admonition theme-admonition-info alert alert--info admonition_node_modules-@docusaurus-theme-classic-lib-theme-Admonition-styles-module" style={{marginBottom: "20px"}}>
                 <div class="admonitionContent_node_modules-@docusaurus-theme-classic-lib-theme-Admonition-styles-module">
-                The documentation provided below pertains to Router V2. If you require documentation for V1, please refer to the <b><a href="https://v1.docs.routerprotocol.com/" target="_blank">following link</a></b>.
+                The documentation provided below pertains to Router Chain and Router Nitro. For documentation around Router Intents, please refer to the <b><a href="https://docs.routerintents.com/" target="_blank">following link</a></b>.
               </div></div>
   );
 }

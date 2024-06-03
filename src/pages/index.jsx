@@ -26,6 +26,7 @@ import {
   Contribute,
   Network,
   Omnichain,
+  NitroIcon,
 } from '../icons';
 import GuidesSection from '../components/GuidesSection';
 
@@ -52,19 +53,19 @@ export default function Homepage() {
           <Section title="Build your first iDapp"
             description={
               <>
-                Build your first iDapp (Interoperable dApp) using Router's crosstalk in 5 simple steps.
+                Build your first iDapp (Interoperable dApp) using Router's CrossTalk in 5 simple steps.
               </>
             }
           >
             <Card
               title="iDapp using Stateless bridging"
-              description="Build your first iDapp in 5 steps using Router crosstalk's stateless bridging."
+              description="Build your first iDapp in 5 steps using Router CrossTalk's stateless bridging."
               to="/develop/message-transfer-via-crosstalk/evm-guides/your-first-crosschain-nft-contract"
               icon={<Network />}
             />
             <Card
               title="iDapp using Stateful bridging"
-              description="Build your first Omnichain iDapp in 5 steps using Router crosstalk's stateful bridging."
+              description="Build your first Omnichain iDapp in 5 steps using Router CrossTalk's stateful bridging."
               to="/develop/message-transfer-via-crosstalk/stateful-bridging/your-first-omnichain-dapp"
               icon={<Omnichain />}
             />
@@ -99,27 +100,27 @@ export default function Homepage() {
           </Section>
 
           <Section title="Important Links" id="web-sdks" hasSubSections>
-            <Section title="🛠 iDapps" HeadingTag="h4">
+            <Section title="iDapps" HeadingTag="h4">
               <Card
                 title="Ping Pong"
-                description="A iDapp using which you can transfer message from one chain to another."
+                description="A testnet iDapp using which you can transfer a simple message from one chain to another."
                 to="https://pingpong.routerprotocol.com"
                 icon={<Network />}
               />
-              {/* <Card
-                title="Voyager"
-                description="An asset transfer dApp built using Router's omnichain framework providing seamless cross-chain swaps."
-                to="https://voyager.routerprotocol.com"
-                icon={<VoyagerIcon />}
+              <Card
+                title="Nitro"
+                description="An asset transfer dApp built using Router that facilitates seamless cross-chain swaps."
+                to="https://app.routernitro.com"
+                icon={<NitroIcon />}
               />
               <Card
                 title="Texchange"
-                description="An iDapp to exchange testnet tokens."
+                description="A testnet iDapp to exchange testnet tokens."
                 to="https://texchange.routerprotocol.com"
                 icon={<TerminalIcon />}
-              /> */}
+              />
             </Section>
-            <Section title="🛠 Tools" HeadingTag="h4">
+            <Section title="Auxillary Services" HeadingTag="h4">
               <Card
                 title="Router Explorer"
                 description="A block explorer to monitor cross-chain transactions."
@@ -134,21 +135,21 @@ export default function Homepage() {
               />
               <Card
                 title="Router Faucet"
-                description="A tool to get testnet tokens for performing tasks on Testnet."
+                description="A platform for users to get Router testnet tokens."
                 to="https://faucet.routerprotocol.com/"
                 icon={<AssetIcon />}
               />
               <Card
                 title="Router Hub"
-                description="A tool for delegating ROUTE tokens to validators."
+                description="A platform for delegating ROUTE tokens to validators."
                 to="https://hub.routerprotocol.com/"
                 icon={<Contribute />}
               />
               <Card
-                title="Router Sandbox"
-                description="An easy-to-use prototyping environment for interoperable dApps built using Router."
-                to="https://sandbox.routerprotocol.com/"
-                icon={<TerminalIcon />}
+                title="Router Intent Store"
+                description="A place where developers can add their own intent adapters or explore existing ones."
+                to="https://store.routerintents.com/"
+                icon={<ModulesIcon />}
               />
             </Section>
           </Section>
@@ -164,14 +165,14 @@ export default function Homepage() {
               />
               <Card
                 title="Asset Transfer"
-                description="Learn about asset transfer bridge Voyager and how to build other asset-transfer applications or sequenced cross-chain requests (asset + instruction)"
+                description="Learn about asset transfer bridge Nitro and how to build other asset-transfer applications or sequenced cross-chain requests (asset + instruction)"
                 to="/develop/voyager"
                 icon={<AssetIcon />}
               />
 
             </Section>
 
-            <Section title="🛠 Tools" HeadingTag="h4">
+            <Section title="🛠 Tooling" HeadingTag="h4">
               <Card
                 title="Router Scan"
                 description="A feature-rich block explorer for monitoring transactions on the Router chain."
