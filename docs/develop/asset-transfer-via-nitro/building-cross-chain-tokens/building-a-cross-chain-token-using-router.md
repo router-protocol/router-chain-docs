@@ -43,7 +43,7 @@ contract ERC20Token is ERC20, ERC20Burnable, AccessControl, ERC20Permit {
 
 Once you have deployed the token on Chain A and you want to integrate this token with other chains where you have liquidity, follow these steps:
 
-1. Grant the Minter role to the Router AssetBridge contract on the chain where the original token in deployed. You can find the AssetBridge contract addresses [here](../assetbridge-contract-addresses).
+1. Grant the Minter role to the Router AssetBridge contract on the chain where the original token in deployed. You can find the AssetBridge contract addresses [here](../supported-chains-tokens).
 2. Mint the required supply of the deployed token.
 3. For each chain on which you want to integrate the token, create wrapped tokens or mirror tokens.
 4. Whitelist the token on the source chain AssetBridge contract.

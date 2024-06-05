@@ -8,7 +8,7 @@ To integrate a new token that is already present on some blockchains, the follow
 
 ### 1. Granting Minter Role
 
-On the original token contract, grant Minter Role to the AssetBridge contract on the chains where the original token is present. You can find the AssetBridge contract addresses [here](../assetbridge-contract-addresses).
+On the original token contract, grant Minter Role to the AssetBridge contract on the chains where the original token is present. You can find the AssetBridge contract addresses [here](../supported-chains-tokens).
 
 ### 2. Creating Wrapped Token Versions
 
