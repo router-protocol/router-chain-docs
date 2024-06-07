@@ -54,7 +54,7 @@ const APIData = ({ apiData }) => {
             <th style={{ fontWeight: 'bold' }}>Network Type</th>
             <th style={{ fontWeight: 'bold' }}>Chain ID</th>
             <th style={{ fontWeight: 'bold' }}>Chain Name</th>
-            <th style={{ fontWeight: 'bold' }}>Gateway Contract Address</th>
+            <th style={{ fontWeight: 'bold' }}>Contract Address</th>
             {/* <th style={{ fontWeight: 'bold' }}>Fee Payer Address</th> */}
           </tr>
         </thead>
