@@ -13,7 +13,7 @@ You can find the API information [**here**](../../../../../../api/?v=PATHFINDER)
 ```jsx
 import axios from "axios"
 
-const PATH_FINDER_API_URL = "https://api.pf.testnet.routerprotocol.com/api"
+const PATH_FINDER_API_URL = "https://k8-testnet-pf.routerchain.dev/api"
 
 // calling the pathfinder api using axios
 const getQuote = async (params) => {

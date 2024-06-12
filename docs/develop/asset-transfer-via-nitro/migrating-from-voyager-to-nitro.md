@@ -7,7 +7,7 @@ Migrating from Voyager to Nitro is a straightforward task and won't require more
 
 ## API Migration
 
-**Step 1)** To fetch the quote from the pathfinder API, change the `PATH_FINDER_API_URL` from "https://api.pathfinder.routerprotocol.com/api" to "https://api.pf.testnet.routerprotocol.com/api". Also, change the `endpoint` from "quote" to "v2/quote" and remove `userAddress` and `feeTokenAddres` from the params.
+**Step 1)** To fetch the quote from the pathfinder API, change the `PATH_FINDER_API_URL` from "https://api.pathfinder.routerprotocol.com/api" to "https://k8-testnet-pf.routerchain.dev/api". Also, change the `endpoint` from "quote" to "v2/quote" and remove `userAddress` and `feeTokenAddres` from the params.
 
 ```javascript
 // Voyager
@@ -32,7 +32,7 @@ const params = {
 
 
 // Nitro 
-const PATH_FINDER_API_URL = "https://api.pf.testnet.routerprotocol.com/api"
+const PATH_FINDER_API_URL = "https://k8-testnet-pf.routerchain.dev/api"
 const getQuote = async (params) => {
     const endpoint = "v2/quote"
     const quoteUrl = `${PATH_FINDER_API_URL}/${endpoint}`
@@ -54,7 +54,7 @@ const params = {
 ```javascript
 import { ethers } from 'ethers'
 
-const PATH_FINDER_API_URL = "https://api.pf.testnet.routerprotocol.com/api"
+const PATH_FINDER_API_URL = "https://k8-testnet-pf.routerchain.dev/api"
 
 const getTransaction = async (params, quoteData) => {
     const endpoint = "v2/transaction"

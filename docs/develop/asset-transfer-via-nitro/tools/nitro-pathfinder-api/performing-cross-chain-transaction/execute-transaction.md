@@ -8,7 +8,7 @@ Now that we have received the quote and given allowance to Router's Reserve Toke
 ```jsx
 import { ethers } from 'ethers'
 
-const PATH_FINDER_API_URL = "https://api.pf.testnet.routerprotocol.com/api"
+const PATH_FINDER_API_URL = "https://k8-testnet-pf.routerchain.dev/api"
 
 const getTransaction = async (params, quoteData) => {
     const endpoint = "v2/transaction"

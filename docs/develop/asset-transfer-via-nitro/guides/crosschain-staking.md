@@ -589,17 +589,17 @@ Sample code is provided here -
 ```ts
 import { ethers } from 'ethers';
 
-const PATH_FINDER_API_URL = 'https://api.pf.testnet.routerprotocol.com/api';
+const PATH_FINDER_API_URL = 'https://k8-testnet-pf.routerchain.dev/api';
 
 const getQuote = async () => {
   const params = {
-    fromTokenAddress: '0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054', // USDT on src chain
-    toTokenAddress: '0xb452b513552aa0B57c4b1C9372eFEa78024e5936', // USDT on dest chain
-    amount: '10000000000000', // source amount
-    fromTokenChainId: '80001', // Mumbai
-    toTokenChainId: '43113', // Fuji
+    fromTokenAddress: '0xb75f7E3256A5FDa11A3e95Dd25e8129189F78dA3', // USDT on src chain
+    toTokenAddress: '0xBAD6e1AbE5EbEae8a123ef14AcA7024D3F8c45fb', // USDT on dest chain
+    amount: '3000000000000000000', // source amount
+    fromTokenChainId: '11155111', // Eth sepolia
+    toTokenChainId: '80002', // Amoy
     slippageTolerance: 1, // optional
-    additionalGasLimit: '100000', // Additional gas limit to execute instruction on dest chain
+    additionalGasLimit: '100000', // (optional) Additional gas limit to execute instruction on dest chain. Not required in case of asset transfer/swap.
     partnerId: 0, // (Optional) - For any partnership, get your unique partner id - https://app.routernitro.com/partnerId
   };
 

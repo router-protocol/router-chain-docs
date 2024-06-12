@@ -3,7 +3,7 @@ info:
   title: Pathfinder API
   description: API details for using the pathfinder API to do a cross-chain transfer/swap of tokens
 servers:
-  - url: https://api.pf.testnet.routerprotocol.com/api/v2
+  - url: https://k8-testnet-pf.routerchain.dev/api/v2
     description: Router Protocol Testnet
   - url: https://api-beta.pathfinder.routerprotocol.com/api/v2
     description: Router Protocol Mainnet

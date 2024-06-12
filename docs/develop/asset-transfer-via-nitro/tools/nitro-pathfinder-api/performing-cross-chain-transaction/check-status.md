@@ -16,7 +16,7 @@ import axios from "axios"
 // calling the status api using axios
 const fetchStatus = async (srcTxHash) => {
 
-  const STATS_API_URL = "https://api.pf.testnet.routerprotocol.com/api"
+  const STATS_API_URL = "https://k8-testnet-pf.routerchain.dev/api"
 
   const config = {
     method: 'get',
