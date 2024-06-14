@@ -2,7 +2,7 @@
 title: Forwarder Guide
 sidebar_position: 2
 ---
-# Relayer Guide
+
 Steps involved in running a forwarder
 
 ## Minimum Requirements
@@ -10,7 +10,6 @@ Steps involved in running a forwarder
 - 4-core, x86_64 architecture processor
 - 8GB RAM
 - 64GB storage
-
 
 
 ## Setup Forwarder
