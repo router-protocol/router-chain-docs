@@ -1,5 +1,5 @@
 ---
-title: Transfer of USDC via Circle's Burn and Mint Flow
+title: Transfer of USDC via CCTP
 sidebar_position: 1
 ---
 import RelayerAPIData from '../../../../src/utils/RelayerFees'
