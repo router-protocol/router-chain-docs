@@ -74,14 +74,14 @@ function depositUsdcMessage(
 
 ## Fee Structure
 
-1. **Forwarder Fee**
+1. **iSend Fee**
 
    - **Description:** A very small fee to prevent sybil attack on Router chain via the source Gateway contract.
    - **Purpose:** To prevent sybil attack on Router chain.
    - **Calculation:** This is a very low amount just to deter fake request creators.
    - **Denomination:** It is paid in native token of the source chain.
 
-2. **iSend Fee**
+2. **Forwarder Fee**
 
    - **Description:** A fee paid to the forwarder who mints USDC on the destination chain.
    - **Purpose:** Compensates the forwarder for the service of minting USDC, ensuring the transfer is completed on the destination chain.
