@@ -1,7 +1,9 @@
 ---
-title: Transfer of USDC with instructions via CCTP
+title: Transfer of USDC with Instructions via CCTP
 sidebar_position: 1
 ---
+
+Unlike the current crop of bridges, Nitro allows for the transfer of arbitrary instructions with the the transfer of USDC via Circle. In this approach, USDC is burnt on the source chain and minted on the destination chain, and an instruction is passed specifying what to do with the minted USDC.
 
 # Transfer USDC with Message via CCTP
 
