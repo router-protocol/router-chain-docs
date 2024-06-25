@@ -234,7 +234,7 @@ These are the chains that the router chain will support for validations.
             "chainType": "CHAIN_TYPE_EVM",
             "chainName": "Oasis",
             "chainRpc": "https://sapphire.oasis.io",
-            "blocksToSearch": 1000,
+            "blocksToSearch": 90,
             "blockTime": "5s"
         },
         {
