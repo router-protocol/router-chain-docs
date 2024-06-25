@@ -340,7 +340,7 @@ pub fn set_dapp_metadata(&mut self, fee_payer_address: String) -> Promise {
 Create a function `set_dapp_metadata` that takes the `fee_payer_address` as a parameter and calls the Gateway contract's `set_dapp_metadata` function. Make this function payable by adding the decorator `payable` to it. This is because Router Gateway contract charges some minimal fees to prevent Sybil attacks.
 
 :::tip
-The fee payer address should be an address on the Router chain. Check [here](../../near-guides/iDapp-functions/set_dapp_metadata) more details about this function.
+The fee payer address should be an address on the Router Chain. Check [here](../../near-guides/iDapp-functions/set_dapp_metadata) more details about this function.
 :::
 
 </details>

@@ -4,7 +4,7 @@ sidebar_position: 4
 ---
 
 ## Overview
-Chains supported by the Router chain are as follows:
+Chains supported by the Router Chain are as follows:
 
 ```json
 {

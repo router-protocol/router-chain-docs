@@ -54,7 +54,7 @@ contract DelayASM is IAdditionalSecurityModule {
 }
 ```
 
-- The owner of the ASM contract can set the `delayPeriod`, which is the period that must pass before transactions can be executed on the destination contract once they have been validated on the Router chain.
+- The owner of the ASM contract can set the `delayPeriod`, which is the period that must pass before transactions can be executed on the destination contract once they have been validated on the Router Chain.
 
 ```javascript
   function setDelayPeriod(uint256 _delayPeriod) external {

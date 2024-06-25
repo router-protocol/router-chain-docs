@@ -40,7 +40,7 @@ Orchestrators will be given a sufficient amount of time to publish their vote. T
 :::    
 
 ### Condition 3 - Failure to Submit Confirmation for Requests Originating on the Router Chain
-An orchestrator will be slashed if it **fails to submit confirmation** for any request originating on the Router chain. The list of such requests is as follows:
+An orchestrator will be slashed if it **fails to submit confirmation** for any request originating on the Router Chain. The list of such requests is as follows:
 1. `ValsetUpdate` 
 2. `CrosschainRequest` (Outbound)
 3. `CrosschainAckRequest` (OutboundAck)

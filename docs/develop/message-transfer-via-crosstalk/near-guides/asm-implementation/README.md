@@ -39,11 +39,11 @@ In this function selector, there are 6 arguments. Within this function, any poss
 
 **1) `request_identifier` -** A unique identifier of the request. It is added by the source chain's Gateway contract.
 
-**2) `request_timestamp` -** Timestamp when a request is added/verified on the Router chain.
+**2) `request_timestamp` -** Timestamp when a request is added/verified on the Router Chain.
 
 **3) `request_sender` -** Address of the application's contract on the source chain in string format.
 
-**4) `src_chain_id` -** Network ID of the chain from which the request to the Router chain was initiated.
+**4) `src_chain_id` -** Network ID of the chain from which the request to the Router Chain was initiated.
 
 **5) `packet` -** This is the payload, i.e., the data to be transferred to the destination chain.
 

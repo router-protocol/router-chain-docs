@@ -108,7 +108,7 @@ Lets say if you want to deploy your contract on Polygon Mumbai and Avalanche Fuj
 />
 
 :::info
-You can pass your own address (either your `0x` address or the corresponding Router chain address) as the `feePayerAddress`. Just make sure you have funds on the Router chain testnet. If not, you can get funds from our [faucet](https://faucet.routerprotocol.com/).
+You can pass your own address (either your `0x` address or the corresponding Router Chain address) as the `feePayerAddress`. Just make sure you have funds on the Router Chain testnet. If not, you can get funds from our [faucet](https://faucet.routerprotocol.com/).
 :::
 
 <p style={{ marginBottom: '50px' }}></p>

@@ -76,7 +76,7 @@ function setDappMetadata(
   }
 ```
 
-To allow your dApp to send cross-chain transactions, you must specify the fee payer address on the Router chain. This can be done by calling the `setDappMetadata` function on the Gateway contract, and passing the fee payer address as a parameter. Once the fee payer address is set, the fee payer must provide approval on the Router chain to confirm their willingness to pay fees for your dApp.
+To allow your dApp to send cross-chain transactions, you must specify the fee payer address on the Router Chain. This can be done by calling the `setDappMetadata` function on the Gateway contract, and passing the fee payer address as a parameter. Once the fee payer address is set, the fee payer must provide approval on the Router Chain to confirm their willingness to pay fees for your dApp.
 
 It's important to note that any fee refunds will be credited to the fee payer address specified in the `setDappMetadata` function.
 

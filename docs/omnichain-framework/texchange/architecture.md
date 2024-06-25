@@ -15,12 +15,12 @@ TExchange is connected to multiple chains -
 3. Mainnet chain - the TExchange will be connected to a mainnet chain, this mainnet chain will be used for converting testnet tokens to USDC
 
 ## High Level Architecture
-TExchange utilizes Router's Omnichain Framework to provide the token swap functionality to it's users. The heavy lifting of the swapping algorithm resides on the Router chain while the remaining chains are only used to lock and unlock funds. 
-On Router chain TEchange has a DEX in the background which maintains the liquidity pairs for all the testnet tokens. Each testnet token has a pair with wrapped USDC. Whenever there is a request for a token swap on any chain, the request gets routed to Router chain where the DEX is utilized to convert the token into the required token and then a request is sent to the chain where the token is supposed to be unlocked.
+TExchange utilizes Router's Omnichain Framework to provide the token swap functionality to it's users. The heavy lifting of the swapping algorithm resides on the Router Chain while the remaining chains are only used to lock and unlock funds. 
+On Router Chain TEchange has a DEX in the background which maintains the liquidity pairs for all the testnet tokens. Each testnet token has a pair with wrapped USDC. Whenever there is a request for a token swap on any chain, the request gets routed to Router Chain where the DEX is utilized to convert the token into the required token and then a request is sent to the chain where the token is supposed to be unlocked.
 This architecture makes things much more scalable for TExchange -
 1. Liquidity pools need to be maintained only on a single chain which means there is no liquidity fragmentation
-2. All the heavy logic of swaps via multiple paths is on Router chain which is a low cost chain, making TEchange cost-effective
-3. Given the core logic sits on Router chain, other chains have simple functionality of locking and unlocking tokens. Hence, to extend this functionality across more chains such as non-EVM chains, the amount of effort will be considerably low. 
+2. All the heavy logic of swaps via multiple paths is on Router Chain which is a low cost chain, making TEchange cost-effective
+3. Given the core logic sits on Router Chain, other chains have simple functionality of locking and unlocking tokens. Hence, to extend this functionality across more chains such as non-EVM chains, the amount of effort will be considerably low. 
 
 ![image](https://user-images.githubusercontent.com/21297284/216024398-b3ede5e5-707e-456d-83c7-03ac0956afbc.png)
 
@@ -36,9 +36,9 @@ Users can buy testnet tokens from the TExchange. Below is how the flow works -
 4. User signs the transaction
 5. USDC is deducted from the user's account
 6. USDC gets locked on Mainnet chain
-7. A message is sent from the Mainnet chain via the Router's Omnichain Framework to Router chain with the amount of tokens which were locked
-8. On Router chain the inbound messages from Mainnet chain is received. Same amount of wrapped USDC is minted and then the DEX is utilized to convert the wUSDC to wGETH
-9. The middleware contract on Router chain then burns these wGETH and creates an outbound request to unlock these tokens on the destination (Goerli Ethereum) chain
+7. A message is sent from the Mainnet chain via the Router's Omnichain Framework to Router Chain with the amount of tokens which were locked
+8. On Router Chain the inbound messages from Mainnet chain is received. Same amount of wrapped USDC is minted and then the DEX is utilized to convert the wUSDC to wGETH
+9. The middleware contract on Router Chain then burns these wGETH and creates an outbound request to unlock these tokens on the destination (Goerli Ethereum) chain
 10. The message is received by the contract on Goerli Ethereum chain and it unlocks the required amount of funds to the user's address
 
 ### Sell Testnet Tokens
@@ -49,9 +49,9 @@ Users can sell their testnet tokens on the TExchange to earn mainnet USDC. Below
 4. User signs the transaction
 5. Testnet tokens (mMatic) are deducted from the user's account
 6. mMatic gets locked on Mumbai Polygon chain
-7. A message is sent from the Mumbai Polygon chain via the Router's Omnichain Framework to Router chain with the amount of tokens which were locked
-8. On Router chain the inbound messages from Mumbai Polygon chain is received. Same amount of wrapped mMatic is minted and then the DEX is utilized to convert the wmMatic to wUSDC
-9. The middleware contract on Router chain then burns these wUSDC and creates an outbound request to unlock these tokens on the destination (Mainnet) chain
+7. A message is sent from the Mumbai Polygon chain via the Router's Omnichain Framework to Router Chain with the amount of tokens which were locked
+8. On Router Chain the inbound messages from Mumbai Polygon chain is received. Same amount of wrapped mMatic is minted and then the DEX is utilized to convert the wmMatic to wUSDC
+9. The middleware contract on Router Chain then burns these wUSDC and creates an outbound request to unlock these tokens on the destination (Mainnet) chain
 10. The message is received by the contract on Mainnet chain and it unlocks the required amount of USDC to the user's address
 
 ![image](https://user-images.githubusercontent.com/21297284/216024085-6f567523-1adf-4aac-be9d-e632707590aa.png)
@@ -64,7 +64,7 @@ Users can swap one testnet token to another testnet token via the TExchange. The
 4. User signs the transaction
 5. mMatic is deducted from the user's account
 6. mMatic gets locked on Mumbai Polygon chain
-7. A message is sent from the Mumbai Polygon chain via the Router's Omnichain Framework to Router chain with the amount of tokens which were locked
-8. On Router chain the inbound messages from Mainnet chain is received. Same amount of wrapped mMatic is minted and then the DEX is utilized to convert the wmMatic to wGETH
-9. The middleware contract on Router chain then burns these wGETH and creates an outbound request to unlock these tokens on the destination (Goerli Ethereum) chain
+7. A message is sent from the Mumbai Polygon chain via the Router's Omnichain Framework to Router Chain with the amount of tokens which were locked
+8. On Router Chain the inbound messages from Mainnet chain is received. Same amount of wrapped mMatic is minted and then the DEX is utilized to convert the wmMatic to wGETH
+9. The middleware contract on Router Chain then burns these wGETH and creates an outbound request to unlock these tokens on the destination (Goerli Ethereum) chain
 10. The message is received by the contract on Goerli Ethereum chain and it unlocks the required amount of funds to the user's address

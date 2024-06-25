@@ -16,7 +16,7 @@ Before understanding the end-to-end working of Router Sandbox, let us first unde
 
 **Step 4) [Optional]** Verifying your contracts to allow for interaction with the contract directly from the relevant block explorer. 
 
-**Step 5)** Setting the fee payer address for each contract. The fee associated with any cross-chain request initiated by a dApp is paid by the dApp's corresponding fee payer account on the Router chain. This fee payer account need to be set by the dApp deployers for all the integrated chains and can be changed anytime. The fee payer account on the Router chain also has to approve the dApp’s request to be its fee payer (to prevent dApp deployers from unilaterally setting any random account as their fee payer account). 
+**Step 5)** Setting the fee payer address for each contract. The fee associated with any cross-chain request initiated by a dApp is paid by the dApp's corresponding fee payer account on the Router Chain. This fee payer account need to be set by the dApp deployers for all the integrated chains and can be changed anytime. The fee payer account on the Router Chain also has to approve the dApp’s request to be its fee payer (to prevent dApp deployers from unilaterally setting any random account as their fee payer account). 
 
 **Step 6)**  Performing a test transaction from one chain to another as a sanity check.
 
@@ -24,7 +24,7 @@ With Router Sandbox, we have abstracted all the steps mentioned above into a one
 - generates a random wallet using ```ethers.wallet.createRandom()``` and sends some native testnet tokens to that wallet (on the chains selected by the user);
 - depending on the user selection, deploys one of our preprogrammed and compiled contracts with the required constructor parameters (including the fee payer address) - `PingPong.sol`, `XERC20.sol` (cross-chain ERC20), `XERC1155.sol` or `XERC721.sol` (cross-chain NFTs); 
 - verifies the contract on the respective chain’s block explorer;
-- approves the fee payer request on behalf of the fee payer account on the Router chain;
+- approves the fee payer request on behalf of the fee payer account on the Router Chain;
 - executes a test transaction on behalf of the user on the newly deployed iDapp;
 
 :::info

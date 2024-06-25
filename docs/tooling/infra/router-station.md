@@ -5,9 +5,9 @@ sidebar_position: 2
 
 # Overview
 
-Router Station is the official tool of the Router chain. It helps with wallet management, cosmwasm contract deployment, execution, queries, and other contract lifecycle-related processes.
+Router Station is the official tool of the Router Chain. It helps with wallet management, cosmwasm contract deployment, execution, queries, and other contract lifecycle-related processes.
 
-To deploy a smart contract on the Router chain there is a requirement to create a wasm build of the smart contract. 
+To deploy a smart contract on the Router Chain there is a requirement to create a wasm build of the smart contract. 
 
 Please refer to the following document to learn how to create the wasm build.
 
@@ -45,7 +45,7 @@ You can add an existing cosmwasm contract in the Router Station. To add an exist
 <details>
 <summary><b>3. Upload wasm Contract</b></summary>
 
-The Router chain is a cosmos chain. To deploy a smart contract first, you need to upload the contract’s wasm file on the chain. On Router Station to upload a wasm file, you need to follow the below mentioned steps or you can also follow the video. 
+The Router Chain is a cosmos chain. To deploy a smart contract first, you need to upload the contract’s wasm file on the chain. On Router Station to upload a wasm file, you need to follow the below mentioned steps or you can also follow the video. 
 
 - Click on the “+Add Contract” button. It will open up one pop-up.
 - Here, you need to select the wasm file.

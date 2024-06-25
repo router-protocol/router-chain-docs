@@ -39,7 +39,7 @@ The mnemonic phrase is better backed up on a physical paper, storing it in cloud
 :::
 
 :::tip
-Remember the address starting from `router`, this is the address of your Router chain validator account.
+Remember the address starting from `router`, this is the address of your Router Chain validator account.
 :::
 
 </details>
@@ -47,7 +47,7 @@ Remember the address starting from `router`, this is the address of your Router
 <details>
 <summary><b>Step 2.2) Obtain ROUTE tokens</b></summary>
 
-Obtain ROUTE tokens on the Router chain from the [testnet faucet](https://faucet.routerprotocol.com/).
+Obtain ROUTE tokens on the Router Chain from the [testnet faucet](https://faucet.routerprotocol.com/).
 
 After a few minutes, you can verify the deposit on the [explorer UI](https://explorer.testnet.routerprotocol.com). Alternatively, account balance can be queried using the `routerd` CLI with the following command:
 

@@ -1,6 +1,6 @@
 # Tools
 
-The following is a list of tools available for the Router chain. Please make sure to contribute to this page if any tools are missing.
+The following is a list of tools available for the Router Chain. Please make sure to contribute to this page if any tools are missing.
 
 
 ### Block Explorers

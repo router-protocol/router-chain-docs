@@ -6,10 +6,10 @@ sidebar_position: 3
 Let's say the following EVM address is our Forwarder EOA wallet:
 `0xEeDb3AB68d567A6CD6D19Fa819fe77b9f8Ed1538`
 
-All EVM addresses are compatible with the Router chain. You can check its equivalent Router chain address by replacing `your_EVM_address` in the link below with your EVM address:
+All EVM addresses are compatible with the Router Chain. You can check its equivalent Router Chain address by replacing `your_EVM_address` in the link below with your EVM address:
 https://routerscan.io/address/your_EVM_address#tokentxns
 
-Now, let's review the Nitro Asset Forwarder account-specific query operations on the CosmWasm contract. Nitro Asset Forwarder Middleware Contract is a permissionless module present on the Router chain that listens to the deposit event on the source chain and settles that user's request on the destination chain. 
+Now, let's review the Nitro Asset Forwarder account-specific query operations on the CosmWasm contract. Nitro Asset Forwarder Middleware Contract is a permissionless module present on the Router Chain that listens to the deposit event on the source chain and settles that user's request on the destination chain. 
 
 Please execute or query the operation on the following asset forwarder addresses:
 

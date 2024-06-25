@@ -41,8 +41,8 @@ Ginkgo is a popular BDD-style testing framework for the Go programming language.
 go install github.com/router-protocol/router-robot@latest
 ``` 
 2. Add private keys in `networkconfig.json` (This file is added in .gitignore)
-3. Add artifacts for Router chain and other third party chains.
-    1. For Router chain: Get the artifacts (.wasm files) generated during contract deployment on Router chain.
+3. Add artifacts for Router Chain and other third party chains.
+    1. For Router Chain: Get the artifacts (.wasm files) generated during contract deployment on Router Chain.
     2. For EVM chain: Generate artifacts.
     Copy these artifacts into `contract-wrapper` folder
         

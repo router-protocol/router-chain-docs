@@ -7,8 +7,8 @@ In this section we will dilineate the steps involved in running the Router block
 
 ## Part 1: Config File Setup
 
-#### Step 1) Clone the Router chain repository
-Clone [this repo](https://github.com/router-protocol/routerchain-devops) to begin deploying the Router chain in your local system.
+#### Step 1) Clone the Router Chain repository
+Clone [this repo](https://github.com/router-protocol/routerchain-devops) to begin deploying the Router Chain in your local system.
 
 #### Step 2) Create a config file
 Run the command given below to create a config file from the existing template.
@@ -61,10 +61,10 @@ apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
 #### Step 2) Start deployment
-Run the following commands to start the Router chain deployment on your local machine:
+Run the following commands to start the Router Chain deployment on your local machine:
 ``` bash
 cd routerchain-devops
 bash deploy/start.sh
 ```
 
-Once these commands are successfully executed, the Router chain should be running in your local system!
+Once these commands are successfully executed, the Router Chain should be running in your local system!

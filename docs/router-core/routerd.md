@@ -4,7 +4,7 @@ sidebar_position: 2
 ---
 
 # routerd
-`routerd` is the command-line interface and daemon that connects to Router and enables you to interact with the Router chain. Router Core is the official Golang reference implementation of the Router node software.
+`routerd` is the command-line interface and daemon that connects to Router and enables you to interact with the Router Chain. Router Core is the official Golang reference implementation of the Router node software.
 
 ## Quick Start
 To install `routerd` and interact with the Router Core without running a node, run the following commands on your terminal/cmd:

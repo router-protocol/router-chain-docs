@@ -13,7 +13,7 @@ IDEIcon,
 Tscodegen,
 } from '../../../../../src/icons';
 
-To support Router's cross-chain functionality on the Router chain, CosmWasm contracts need to have `router-wasm-bindings`.
+To support Router's cross-chain functionality on the Router Chain, CosmWasm contracts need to have `router-wasm-bindings`.
 
 ### Adding `router-wasm-bindings` as a dependency
 
@@ -31,7 +31,7 @@ Once you have added `router-wasm-bindings` to your project, you can start buildi
 - **`RouterMsg` -** A function to send requests to other chains. This function is akin to the `iSend` function for EVM chains.
 - **`SudoMsg` -** A function to handle incoming requests from the other chains, be it a generic cross-chain request or an acknowledgment. This function encapsulates the functionality of both `iReceive` and `iAck` as present on EVM contracts. 
 
-Contracts on the Router chain can also be used to enable stateful bridging between any two chains. Developers can write custom bridging logic on these contracts such that a request originating from any chain A gets processed on the Router chain contract before it is sent to the designated destination chain. More details about stateful bridging using Router have been provided [here](../../message-transfer-via-crosstalk/stateful-bridging/). 
+Contracts on the Router Chain can also be used to enable stateful bridging between any two chains. Developers can write custom bridging logic on these contracts such that a request originating from any chain A gets processed on the Router Chain contract before it is sent to the designated destination chain. More details about stateful bridging using Router have been provided [here](../../message-transfer-via-crosstalk/stateful-bridging/). 
 
 <!-- While writing the custom bridging logic, the developer can convert single or multiple incoming requests into single or multiple outbound requests.
 Also, while creating requests to other chains, the contract can be developed in such a way that multiple requests can be generated for different chains.
@@ -40,7 +40,7 @@ You can find examples of different scenarios in the [_cw-bridge-contracts_](http
 <!-- <Section>
   <Card
     title="SudoMsg"
-    description="Enum type for handling the incoming requests on Router chain's contracts"
+    description="Enum type for handling the incoming requests on Router Chain's contracts"
     to="/message-transfer/router-chain-guides/understanding-functions/sudomsg"
     icon={<IDEIcon />}
   />

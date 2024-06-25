@@ -47,4 +47,4 @@ Once you have deployed the token on Chain A and you want to integrate this token
 2. Mint the required supply of the deployed token.
 3. For each chain on which you want to integrate the token, create wrapped tokens or mirror tokens.
 4. Whitelist the token on the source chain AssetBridge contract.
-5. Reach out to the Router team [here](https://t.me/Alpie01). The Router team will handle the AssetBridge contract configuration on the Router chain. Additionally, the Router team will set up the pathfinder Nitro API configurations and update the user interface (UI) as well as the Router Explorer to incorporate the new token.
+5. Reach out to the Router team [here](https://t.me/Alpie01). The Router team will handle the AssetBridge contract configuration on the Router Chain. Additionally, the Router team will set up the pathfinder Nitro API configurations and update the user interface (UI) as well as the Router Explorer to incorporate the new token.

@@ -39,7 +39,7 @@ pub enum SudoMsg {
 }
 ```
 
-The `sudo` function is one of the entry-points in a CosmWasm contract. For contracts on the Router chain, you need to implement this function to receive any incoming request. It can be called internally by the chain only (just like `iReceive` and `iAck` on other chains can only be called by the Router Gateway contract). Sample implementation:
+The `sudo` function is one of the entry-points in a CosmWasm contract. For contracts on the Router Chain, you need to implement this function to receive any incoming request. It can be called internally by the chain only (just like `iReceive` and `iAck` on other chains can only be called by the Router Gateway contract). Sample implementation:
 
 ```javascript
 // import router binding message
@@ -86,9 +86,9 @@ Developers can implement their own business logic inside the `handle_sudo_reques
 
 The sudo message `HandleIReceive` contains 4 arguments. This message type is used whenever any generic cross-chain request is received. As you can see in the code snippet, a function `handle_sudo_request` has been created to handle the incoming request in the CosmWasm contact. Within this function, you can apply your custom logic to handle the payload.  Each field has its own purpose and meaning in the `HandleIReceive` request.
 
-**1) `request_sender` -** The application contract address on the source chain from which the request to the Router chain was sent.
+**1) `request_sender` -** The application contract address on the source chain from which the request to the Router Chain was sent.
 
-**2) `source_chain_id` -** The network ID of the chain from which the cross-chain request to the Router chain has been initiated.
+**2) `source_chain_id` -** The network ID of the chain from which the cross-chain request to the Router Chain has been initiated.
 
 **3) `request_identifier` -** A unique identifier of the request that is added by the source chain's Gateway contract.
 
@@ -103,7 +103,7 @@ After handling the incoming cross-chain request, if you wish, you can generate a
 
 The sudo message `HandleIAck` has 4 arguments. This message type is used whenever any acknowledgment is received. As you can see in the code snippet, a function named `handle_sudo_ack` has been created to handle the incoming acknowledgment request in the CosmWasm contact. Each field has its own purpose and meaning in the `HandleIAck` request.
 
-**1) `request_identifier` -** This is same nonce you receive while calling the `CrosschainCall` function on the Router chain. 
+**1) `request_identifier` -** This is same nonce you receive while calling the `CrosschainCall` function on the Router Chain. 
 Using this nonce, you can map the acknowledgmemnt to a particular request. 
 
 **2) `exec_flag` -** A boolean value that tells you the status of your cross-chain request. 

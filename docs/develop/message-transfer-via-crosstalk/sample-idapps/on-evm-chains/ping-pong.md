@@ -110,9 +110,9 @@ function setDappMetadata(
   }
 ```
 
-- To facilitate cross-chain transactions, it is necessary to pay the fees on the Router chain. This can be achieved using the `setDappMetadata` function available in the Gateway contracts. The function takes a `feePayerAddress` parameter, which represents the account responsible for covering the transaction fees for any cross-chain requests originating from the dApp.
-- Once the `feePayerAddress` is set, the designated fee payer must approve the request to act as the fee payer on the Router chain. Without this approval, dApps will not be able to execute any cross-chain transactions.
-- It's important to note that any fee refunds resulting from these transactions will be credited back to the dApp's `feePayerAddress` on the Router chain.
+- To facilitate cross-chain transactions, it is necessary to pay the fees on the Router Chain. This can be achieved using the `setDappMetadata` function available in the Gateway contracts. The function takes a `feePayerAddress` parameter, which represents the account responsible for covering the transaction fees for any cross-chain requests originating from the dApp.
+- Once the `feePayerAddress` is set, the designated fee payer must approve the request to act as the fee payer on the Router Chain. Without this approval, dApps will not be able to execute any cross-chain transactions.
+- It's important to note that any fee refunds resulting from these transactions will be credited back to the dApp's `feePayerAddress` on the Router Chain.
 
 </details>
 
@@ -229,8 +229,8 @@ function iReceive(
 - Ensure that only the Gateway contract can call the function, as no other contract or wallet should have access to it.
 - To ensure that the request is received only from the application contract on the source chain, the application can create a mapping of allowed contract addresses for each chain ID. Then, in the `iReceive` function, the application can check that the `requestSender` is the same as the address stored in the mapping for the specific chain ID. To keep this contract as simple as possible, this condition has not been implemented here.
 - Decode the packet using abi decoding and store it in `requestId` and `sampleStr` variables.
-- Check if the string received in non-empty. If it is empty, throw a custom error which will trigger a failure acknowledgment to the Router chain.
-- Set the string message in `pingFromSource` mapping and emit the `PingFromSource` event with `srcChainId`, `requestId` and the string message. Finally, return the `requestId` and the received message from the function. This will trigger a success acknowledgment to the Router chain.
+- Check if the string received in non-empty. If it is empty, throw a custom error which will trigger a failure acknowledgment to the Router Chain.
+- Set the string message in `pingFromSource` mapping and emit the `PingFromSource` event with `srcChainId`, `requestId` and the string message. Finally, return the `requestId` and the received message from the function. This will trigger a success acknowledgment to the Router Chain.
 
 Now that we have handled the request on the destination chain, we need to handle the acknowledgment on the source chain.
 

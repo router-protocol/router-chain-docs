@@ -1,5 +1,5 @@
 ---
-title: Functions on Router chain's middleware contract
+title: Functions on Router Chain's middleware contract
 sidebar_position: 4
 ---
 
@@ -39,7 +39,7 @@ You can find examples of different scenarios in the [_cw-bridge-contracts_](http
 <Section>
   <Card
     title="SudoMsg"
-    description="Enum type for handling the incoming requests on Router chain's contracts"
+    description="Enum type for handling the incoming requests on Router Chain's contracts"
     to="/omnichain-framework/understanding-omnichain-framework/router-chain-middleware-contract/sudomsg"
     icon={<IDEIcon />}
   />

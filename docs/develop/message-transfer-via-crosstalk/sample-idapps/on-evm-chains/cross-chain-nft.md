@@ -123,9 +123,9 @@ function setDappMetadata(string memory FeePayer) public {
   gatewayContract.setDappMetadata(FeePayer);
 }
 
-- To facilitate cross-chain transactions, it is necessary to pay the fees on the Router chain. This can be achieved using the `setDappMetadata` function available in the Gateway contracts. The function takes a `feePayerAddress` parameter, which represents the account responsible for covering the transaction fees for any cross-chain requests originating from the dApp.
-- Once the `feePayerAddress` is set, the designated fee payer must approve the request to act as the fee payer on the Router chain. Without this approval, dApps will not be able to execute any cross-chain transactions.
-- It's important to note that any fee refunds resulting from these transactions will be credited back to the dApp's `feePayerAddress` on the Router chain.
+- To facilitate cross-chain transactions, it is necessary to pay the fees on the Router Chain. This can be achieved using the `setDappMetadata` function available in the Gateway contracts. The function takes a `feePayerAddress` parameter, which represents the account responsible for covering the transaction fees for any cross-chain requests originating from the dApp.
+- Once the `feePayerAddress` is set, the designated fee payer must approve the request to act as the fee payer on the Router Chain. Without this approval, dApps will not be able to execute any cross-chain transactions.
+- It's important to note that any fee refunds resulting from these transactions will be credited back to the dApp's `feePayerAddress` on the Router Chain.
 
 </details>
 
@@ -285,8 +285,8 @@ function toAddress(bytes memory _bytes) internal pure returns (address addr) {
 
 
 3. Decode the packet using abi decoding and store it in `requestId` and `sampleStr` variables.
-4. Check if the string received in non-empty. If it is empty, throw a custom error which will trigger a failure acknowledgment to the Router chain.
-5. Set the string message in `pingFromSource` mapping and emit the `PingFromSource` event with `srcChainId`, `requestId` and the string message. Finally, return the `requestId` and string message received with the function. This will trigger a success acknowledgment to the Router chain.
+4. Check if the string received in non-empty. If it is empty, throw a custom error which will trigger a failure acknowledgment to the Router Chain.
+5. Set the string message in `pingFromSource` mapping and emit the `PingFromSource` event with `srcChainId`, `requestId` and the string message. Finally, return the `requestId` and string message received with the function. This will trigger a success acknowledgment to the Router Chain.
 
 
 </details>

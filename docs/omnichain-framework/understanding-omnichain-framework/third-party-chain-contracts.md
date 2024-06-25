@@ -3,7 +3,7 @@ title: Functions on third-party chain's contract
 sidebar_position: 3
 ---
 
-Router’s Gateway contracts have a function named `iSend` that facilitates the transmission of a cross-chain request to the middleware contract on the Router Chain. Whenever users want to execute a cross-chain request, they can call this function by passing the payload to be transferred from the source to the Router chain.
+Router’s Gateway contracts have a function named `iSend` that facilitates the transmission of a cross-chain request to the middleware contract on the Router Chain. Whenever users want to execute a cross-chain request, they can call this function by passing the payload to be transferred from the source to the Router Chain.
 
 In addition to calling the aforementioned function, the recipient contract on the destination chain will also have to implement the function `iReceive` to handle the requests received from the middleware contract.
 
@@ -103,7 +103,7 @@ function getRequestMetadata(
 
 3. **ackGasLimit:** Gas limit required for execution of the acknowledgment coming from the destination chain back on the source chain. This can be calculated using tools like [hardhat-gas-reporter](https://www.npmjs.com/package/hardhat-gas-reporter).
 4. **ackGasPrice:** Gas price of the destination chain. This can be calculated using the RPC of source chain as shown in the above [snippet](https://www.notion.so/EVM-to-Other-Chain-Flow-de922b13e0fa4d7b8c3c24590ff8ef65).
-5. **relayerFees:** This is similar to priority fees that one pays on other chains. Router chain relayers execute your requests on the destination chain. So if you want your request to be picked up by relayer faster, this should be set to a higher number. If you pass really low amount, the Router chain will adjust it to some minimum amount.
+5. **relayerFees:** This is similar to priority fees that one pays on other chains. Router Chain relayers execute your requests on the destination chain. So if you want your request to be picked up by relayer faster, this should be set to a higher number. If you pass really low amount, the Router Chain will adjust it to some minimum amount.
 6. **ackType:** When the contract calls have been executed on the destination chain, the iDapp has the option to get an acknowledgment back to the source chain.
 
    We provide the option to the user to be able to get this acknowledgment from the router chain to the source chain and perform some operation based on it.

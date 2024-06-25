@@ -5,7 +5,7 @@ sidebar_position: 2
 
 ## Overview
 
-The Router explorer provides information on the blocks, validator, network status, and various types of transactions happening on Router chain. We have provided an easy way using GraphQL to query the Router chain’s explorer data so that developers and applications can use the data as per their requirements for analytics or creating their own custom explorer.
+The Router explorer provides information on the blocks, validator, network status, and various types of transactions happening on Router Chain. We have provided an easy way using GraphQL to query the Router Chain’s explorer data so that developers and applications can use the data as per their requirements for analytics or creating their own custom explorer.
 
 ## API Endpoints
 

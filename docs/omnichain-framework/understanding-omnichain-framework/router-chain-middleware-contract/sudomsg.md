@@ -87,8 +87,8 @@ pub fn sudo(deps: DepsMut, _env: Env, msg: SudoMsg) -> StdResult<Response<Router
 
 The sudo message `HandleIReceive` contains 4 arguments. This sudo function gets called when an inbound request comes for your middleware contract. We can handle this sudo request in any possible way or even skip it. As you can see in the code snippet, a function `handle_sudo_request` has been created to handle the incoming inbound request in the cosmwasm contact. Within this function, you can apply any logic to the payload from the incoming request before creating the request for the destination chain. Each field has its own purpose and meaning in the `HandleIReceive` request.
 
-1. **request_sender:** The application contract address on the source chain from which the request to the Router chain was sent.
-2. **source_chain_id:** The chain ID of the chain from which the inbound request to the Router chain has been initiated.
+1. **request_sender:** The application contract address on the source chain from which the request to the Router Chain was sent.
+2. **source_chain_id:** The chain ID of the chain from which the inbound request to the Router Chain has been initiated.
 3. **request_identifier:** The request identifier is a unique identifier of the request that is added by the source chain's Gateway contract.
 4. **payload:** The payload comes from the source chain contract.
 
@@ -97,7 +97,7 @@ The sudo message `HandleIReceive` contains 4 arguments. This sudo function gets 
 <details>
 <summary><b>HandleIAck</b></summary>
 
-The sudo message `HandleIAck` has 4 arguments. This sudo function gets called when the acknowledgment is received by the middleware contract on the Router chain post-execution of the contract call on the destination chain. We can handle this sudo request in any possible way or even skip it. As you can see in the code snippet, the function `handle_sudo_ack` has been created to handle the incoming acknowledgment request in the cosmwasm contact. Each field has its own purpose and meaning in the `HandleIAck` request.
+The sudo message `HandleIAck` has 4 arguments. This sudo function gets called when the acknowledgment is received by the middleware contract on the Router Chain post-execution of the contract call on the destination chain. We can handle this sudo request in any possible way or even skip it. As you can see in the code snippet, the function `handle_sudo_ack` has been created to handle the incoming acknowledgment request in the cosmwasm contact. Each field has its own purpose and meaning in the `HandleIAck` request.
 
 1. **request_identifier:** The unique and incremented integer value for the outbound request.
 2. **exec_flag:** The execution status flag for the contract call which was made on the destination chain.

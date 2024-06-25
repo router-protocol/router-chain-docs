@@ -12,6 +12,6 @@ Before diving deep into Router's stateful bridging capabilities, it is important
 A stateless bridge, on the other hand, does not support storage or computation. It simply routes a cross-chain transaction from the source chain to the destination chain as it is. To have case-based routing with a stateless bridge, applications must lay out all the scenarios in contracts deployed across all the chains, which adds too much overhead. On chains like Ethereum, performing computation might even be costly, so it would make much more sense to delegate the computation to a cheaper stateful middleware.
 
 :::tip
-Stateful bridging only makes sense for a cross-chain dApp if it wants to incorporate a custom bridging logic or wants to use a middleware contract on the Router chain as an accounting module.
+Stateful bridging only makes sense for a cross-chain dApp if it wants to incorporate a custom bridging logic or wants to use a middleware contract on the Router Chain as an accounting module.
 :::
 

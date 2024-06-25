@@ -18,7 +18,7 @@ To check you system configuration, run the following command on your terminal/co
 :::
 
 ## Running a Validator on Router Testnet
-To run a validator on Router chain's testnet, follow these 3 steps:
+To run a validator on Router Chain's testnet, follow these 3 steps:
 - [Run a Node on Testnet](./on-testnet/run-a-node)
 - [Setup a Validator Account](./on-testnet/setup-a-validator-account)
 - [Configure and Run an Orchestrator Instance](./on-testnet/configure-and-run-an-orchestrator-instance)

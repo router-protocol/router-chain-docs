@@ -121,15 +121,15 @@ function getRequestMetadata(
 
 **3.1) `dest_gas_limit` -** Gas limit required for execution of the request on the destination chain.
 
-**3.2) `dest_gas_price` -** Gas price of the destination chain. This can be calculated using the RPC of destination chain. If you don’t want to calculate it, just send **0** in its place and the Router chain will estimate the real time gas price for you.
+**3.2) `dest_gas_price` -** Gas price of the destination chain. This can be calculated using the RPC of destination chain. If you don’t want to calculate it, just send **0** in its place and the Router Chain will estimate the real time gas price for you.
 
 **3.3) `ack_gas_limit` -** Gas limit required for the execution of the acknowledgment on the source chain. This can be calculated using tools like [hardhat-gas-reporter](https://www.npmjs.com/package/hardhat-gas-reporter).
 
-**3.4) `ack_gas_price` -** Gas price of the source chain. This can be calculated using the RPC of source chain. To avoid the need for calculation, it can be passed as 0. The Router chain will then estimate the real-time gas price for them.
+**3.4) `ack_gas_price` -** Gas price of the source chain. This can be calculated using the RPC of source chain. To avoid the need for calculation, it can be passed as 0. The Router Chain will then estimate the real-time gas price for them.
 
-**3.5) `relayer_fees` -** This parameter functions similarly to the priority fees on other blockchain networks. Since the Router chain relayers handle the execution of cross-chain requests on the destination chain, setting a higher `relayer_fees` will increase the likelihood of your request being prioritized by relayers. If a very low `relayer_fees` is provided, the Router chain will automatically adjust it to the minimum required amount to ensure that it is executed. If it is passed as 0, the Router chain will default it to the minimum set Relayer fee value.
+**3.5) `relayer_fees` -** This parameter functions similarly to the priority fees on other blockchain networks. Since the Router Chain relayers handle the execution of cross-chain requests on the destination chain, setting a higher `relayer_fees` will increase the likelihood of your request being prioritized by relayers. If a very low `relayer_fees` is provided, the Router Chain will automatically adjust it to the minimum required amount to ensure that it is executed. If it is passed as 0, the Router Chain will default it to the minimum set Relayer fee value.
 
-**3.6) `ack_type` -** When the contract calls have been executed on the destination chain, the destination chain Gateway contract sends an acknowledgent back to the Router chain. iDapps have the option to get this acknowledgment from the Router chain to the source chain and execute some operations based on the ack.
+**3.6) `ack_type` -** When the contract calls have been executed on the destination chain, the destination chain Gateway contract sends an acknowledgent back to the Router Chain. iDapps have the option to get this acknowledgment from the Router Chain to the source chain and execute some operations based on the ack.
    - If `ack_type` = 0, the user doesn't want the acknowledgment to be forwarded back to the source chain.
    - If `ack_type` = 1, the acknowledgment is expected to be received only if the calls were successfully executed on the destination chain, and the user intends to perform some operation on the source chain after receiving the ack.
    - If `ack_type` = 2, an acknowledgment is needed only in case of an error occurring on the destination chain. This options also allows for execution of certain operations after receiving the ack.
@@ -186,4 +186,4 @@ In other words, payload is the data that you will receive on the destination cha
    use ethabi::{ ethereum_types::U256, encode, Token };
    ```
 
-After you call this function, a cross-chain request is created and relayed via the Router chain to the destination chain where the `i_receive` function is called on the destination contract address passed in the `request_packet`.
+After you call this function, a cross-chain request is created and relayed via the Router Chain to the destination chain where the `i_receive` function is called on the destination contract address passed in the `request_packet`.

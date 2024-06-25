@@ -16,7 +16,7 @@ If running many nodes on a single VM, [ensure your open files limit is increased
 ## Prerequisites
 
 * Latest go-version https://golang.org/doc/install
-* Ensure you have a Router chain instance running instance running for the environment you want to setup the relayer for. In case you want to run the relayer for your local, follow [this guide](../../router-core/running-router-chain-locally) to setup Router chain locally.
+* Ensure you have a Router Chain instance running instance running for the environment you want to setup the relayer for. In case you want to run the relayer for your local, follow [this guide](../../router-core/running-router-chain-locally) to setup Router Chain locally.
 * Reliable RPCs for supporting networks
 
 ## Setup Relayer
@@ -37,7 +37,7 @@ In the `root` folder, a sample config file `config.example.json` has been provid
     "pollingTimer": 60, //Listener service polling time in secs; default:60
     "reset": "false", //Database reset on start of relayer service; default:false
     "routerRelayerAddress": "RELAYER_ADDRESS", //Relayer router chain address; default:""
-    "routerchainEnv": "devnet" //Router chain connection environment; default:local
+    "routerchainEnv": "devnet" //Router Chain connection environment; default:local
   },
   "chains": { //Chain related config 
     "7545": {
@@ -82,12 +82,12 @@ In the `root` folder, a sample config file `config.example.json` has been provid
   "pollingTimer": 60, //Listener service polling time in secs; default:60
   "reset": "false", //Database reset on start of relayer service; default:false
   "routerRelayerAddress": "RELAYER_ADDRESS", //Relayer router chain address; default:""
-  "routerchainEnv": "devnet" //Router chain connection environment; default:local
+  "routerchainEnv": "devnet" //Router Chain connection environment; default:local
 }
 ```
 * environment: This is the relayer running environment; specifies the verbosity for the relayer; accepted values - `development` or `production`.
 * watcherTimer: Watcher is a service for monitoring Transaction Queue DB. watcherTimer determines the polling interval for service in seconds.
-* pollingTimer: Polling Timer is for listening interval for transaction from Router chain
+* pollingTimer: Polling Timer is for listening interval for transaction from Router Chain
 * reset: Reset is for resetting Transaction Queue DB, if `true` it will reset, if `false` in will not reset.
 * routerchainEnv:  routerchainEnv is router chain instance to connect with, it connects with network's gRPC and chainID; accepted values - `testnet` or `devnet` or `local-docker`
 
@@ -104,7 +104,7 @@ chains:[{
 ```
 Chains config section defines parameters for each supported chain by the relayer. You can follow the same structure as given in the example and provide name, rpc, gasLimit, maxGasPrice and private key for chains you want to support.
 :::tip
-1. Make sure that the chains mentioned in the config are supported by Router chain. Chains not supported will be ignored.
+1. Make sure that the chains mentioned in the config are supported by Router Chain. Chains not supported will be ignored.
 2. Ensure the wallet has funds in the respective native tokens of all the supported chains in order to pay the fees required to relay.
 :::
 

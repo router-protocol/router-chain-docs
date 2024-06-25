@@ -3,7 +3,7 @@ title: Go SDK
 sidebar_position: 1
 ---
 
-With Router's [Go SDK](https://github.com/router-protocol/sdk-go), you can perform the following actions on the Router chain  -
+With Router's [Go SDK](https://github.com/router-protocol/sdk-go), you can perform the following actions on the Router Chain  -
 
 - Create a transaction.
 - Sign a transaction.

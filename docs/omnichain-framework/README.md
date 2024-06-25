@@ -64,7 +64,7 @@ The guides on this page will explain the process of developing cross-chain appli
    <Section>
    <Card
     title="Your First Omnichain dApp"
-    description="Learn how to deploy your first omnichain dApp leveraging the Router chain middleware"
+    description="Learn how to deploy your first omnichain dApp leveraging the Router Chain middleware"
   to="guides/your-first-omnichain-dapp"
     icon={<Guide />}
   />

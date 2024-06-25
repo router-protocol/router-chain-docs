@@ -1,6 +1,6 @@
 The following information provides a set of guidelines for contributing to the Router Docs repo. Use your best judgment, and, if you see room for improvement, please propose changes to this document.
 
-Contributions come in the form of writing documentation, raising issues, and any other actions that help develop the Router chain documentation.
+Contributions come in the form of writing documentation, raising issues, and any other actions that help develop the Router Chain documentation.
 
 ## Just want to ask a question?
 

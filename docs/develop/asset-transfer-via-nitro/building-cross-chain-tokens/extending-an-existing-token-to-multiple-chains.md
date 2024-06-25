@@ -28,4 +28,4 @@ For example, consider that ROUTE token is natively present on Ethereum and Polyg
 To facilitate the cross-chain transfer of the token, it must be whitelisted on the AssetBridge contracts. This will allow the bridge to recognize and handle the token transfer.
 
 ### 5. Further Configurations
-Reach out to the Router team [here](https://t.me/Alpie01). The Router team will handle the AssetBridge contract configuration on the Router chain. Additionally, the Router team will set up the pathfinder Nitro API configurations and update the user interface (UI) as well as the Router Explorer to incorporate the new token.
+Reach out to the Router team [here](https://t.me/Alpie01). The Router team will handle the AssetBridge contract configuration on the Router Chain. Additionally, the Router team will set up the pathfinder Nitro API configurations and update the user interface (UI) as well as the Router Explorer to incorporate the new token.

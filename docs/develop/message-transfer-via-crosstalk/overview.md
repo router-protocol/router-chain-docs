@@ -20,4 +20,4 @@ Router's CrossTalk is an extensible cross-chain framework that enables seamless 
 
 <!-- ## About OmniChain
 
-Router's OmniChain framework leverages Router chain's architectural components to allow developers to create seamless cross-chain applications with custom bridging logic. It even allows them to deploy their application-specific security layer on top of the infra-level security layer provided by Router. By allowing developers to program their logic on just one smart contract on the Router chain, Router's OmniChain framework will reduce code redundancy and save developers' time and effort. -->
+Router's OmniChain framework leverages Router Chain's architectural components to allow developers to create seamless cross-chain applications with custom bridging logic. It even allows them to deploy their application-specific security layer on top of the infra-level security layer provided by Router. By allowing developers to program their logic on just one smart contract on the Router Chain, Router's OmniChain framework will reduce code redundancy and save developers' time and effort. -->

@@ -145,7 +145,7 @@ The mnemonic phrase is better backed up on a physical paper, storing it in cloud
 :::
 
 :::tip
-Remember the address starting from `router`, this is the address of your Router chain orchestrator account.
+Remember the address starting from `router`, this is the address of your Router Chain orchestrator account.
 :::
 
 
@@ -195,7 +195,7 @@ Add the relevant keys in `.router-orchestrator/config.json`:
 }
 ```
 
-- `chains` is an array of objects including info about all the chains you want to listen to as an orchestrator. This needs to be done only for external chains i.e. Router chain will not be part of the orchestrator chains config. For each chain, you need to provide:
+- `chains` is an array of objects including info about all the chains you want to listen to as an orchestrator. This needs to be done only for external chains i.e. Router Chain will not be part of the orchestrator chains config. For each chain, you need to provide:
     - `chainId` - the chain id of the network
     - `chainType` - the type of chain, possible values are:
         `CHAIN_TYPE_EVM`,

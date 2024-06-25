@@ -105,15 +105,15 @@ A computer connected to the Router mainnet able to validate transactions and int
 
 ## Governance
 
-Governance is the democratic process that allows users and validators to make changes to the Router chain. Community members submit, vote, and implement proposals.
+Governance is the democratic process that allows users and validators to make changes to the Router Chain. Community members submit, vote, and implement proposals.
 
 ## Governance proposal
 
-A written submission for a change or addition to the Router chain. Topics of proposals can vary from community pool spending, software changes, parameter changes, or any idea pertaining to Router Protocol.
+A written submission for a change or addition to the Router Chain. Topics of proposals can vary from community pool spending, software changes, parameter changes, or any idea pertaining to Router Protocol.
 
 ## IBC
 
-IBC is a communication standard that allows applications built on any Cosmos-based chains to interact with each other. Since the Router chain is built using the Cosmos SDK, any application built on it can use IBC to interact directly with applications on other Cosmos blockchains like Injective, Osmosis, and others. This interaction can be a token transfer or an instruction transfer.
+IBC is a communication standard that allows applications built on any Cosmos-based chains to interact with each other. Since the Router Chain is built using the Cosmos SDK, any application built on it can use IBC to interact directly with applications on other Cosmos blockchains like Injective, Osmosis, and others. This interaction can be a token transfer or an instruction transfer.
 
 <!-- The inter-blockchain communication protocol (IBC) creates communication between independent Cosmos-based blockchains. IBC achieves this by specifying a set of structures that can be implemented by any distributed ledger that satisfies a small number of requirements. Router utilizes IBC for communication (message transfers and token transfers) between Cosmos-based chains.  -->
 
@@ -179,7 +179,7 @@ In the context of decentralized systems, a stateless entity is one that does not
 
 ## Tendermint consensus
 
-The consensus procedure used by the Router chain. First, a validator proposes a new block. Other validators vote on the block in two rounds. If a block receives a two-thirds majority or greater of yes votes in both rounds, it gets added to the blockchain. Validators get rewarded with the block's transaction fees. Proposers get rewarded extra. Each validator is chosen to propose based on their weight. Checkout the [Tendermint official documentation](https://docs.tendermint.com/) for more information.
+The consensus procedure used by the Router Chain. First, a validator proposes a new block. Other validators vote on the block in two rounds. If a block receives a two-thirds majority or greater of yes votes in both rounds, it gets added to the blockchain. Validators get rewarded with the block's transaction fees. Proposers get rewarded extra. Each validator is chosen to propose based on their weight. Checkout the [Tendermint official documentation](https://docs.tendermint.com/) for more information.
 
 ## routerd
 

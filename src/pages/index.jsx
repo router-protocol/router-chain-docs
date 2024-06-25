@@ -71,7 +71,7 @@ export default function Homepage() {
             />
             {/* <Card
               title="Router as an Interoperability Layer"
-              description="In addition to its functionalities as a blockchain network, the Router chain will serve as an interoperability framework."
+              description="In addition to its functionalities as a blockchain network, the Router Chain will serve as an interoperability framework."
               to="/overview#router-chain-as-an-interoperability-layer"
             /> */}
           </Section>
@@ -79,7 +79,7 @@ export default function Homepage() {
           <Section title="Learn about Router">
             <Card
               title="What is Router?"
-              description="The Router chain is a layer 1 blockchain that leverages tendermint’s Byzantine Fault Tolerant (BFT) consensus engine."
+              description="The Router Chain is a layer 1 blockchain that leverages tendermint’s Byzantine Fault Tolerant (BFT) consensus engine."
               to="/overview/"
             />
             <Card
@@ -89,12 +89,12 @@ export default function Homepage() {
             />
             {/* <Card
               title="Router as an Interoperability Layer"
-              description="In addition to its functionalities as a blockchain network, the Router chain will serve as an interoperability framework."
+              description="In addition to its functionalities as a blockchain network, the Router Chain will serve as an interoperability framework."
               to="/overview#router-chain-as-an-interoperability-layer"
             /> */}
             <Card
               title="The ROUTE Token"
-              description="The ROUTE token is a digital asset that will serve as the primary gas and governance token on the Router chain."
+              description="The ROUTE token is a digital asset that will serve as the primary gas and governance token on the Router Chain."
               to="/overview/route"
             />
           </Section>
@@ -129,7 +129,7 @@ export default function Homepage() {
               />
               <Card
                 title="Router Station"
-                description="A tool to manage contract lifecycle-related processes on the Router chain."
+                description="A tool to manage contract lifecycle-related processes on the Router Chain."
                 to="https://station.routerprotocol.com/"
                 icon={<Transaction />}
               />
@@ -175,7 +175,7 @@ export default function Homepage() {
             <Section title="🛠 Tooling" HeadingTag="h4">
               <Card
                 title="Router Scan"
-                description="A feature-rich block explorer for monitoring transactions on the Router chain."
+                description="A feature-rich block explorer for monitoring transactions on the Router Chain."
                 to="/tooling/infra/router-scan"
                 icon={<ModulesIcon />}
               />
@@ -187,13 +187,13 @@ export default function Homepage() {
               />
               <Card
                 title="Router Station"
-                description="A web application that makes it easier to interact with the Router chain."
+                description="A web application that makes it easier to interact with the Router Chain."
                 to="/tooling/infra/router-station"
                 icon={<Createapp />}
               />
               <Card
                 title="Router Faucet"
-                description="Get funds to interact with the Router chain."
+                description="Get funds to interact with the Router Chain."
                 to="https://faucet.routerprotocol.com/"
                 icon={<AssetIcon />}
               />

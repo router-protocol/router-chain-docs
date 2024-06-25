@@ -137,13 +137,13 @@ function getRequestMetadata(
    });
    ```
 
-   To avoid the need for calculation, it can be passed as 0. The Router chain will then estimate the real-time gas price for them.
+   To avoid the need for calculation, it can be passed as 0. The Router Chain will then estimate the real-time gas price for them.
 
 **5.3) `ackGasLimit` -** Gas limit required for the execution of the acknowledgment on the source chain. This can be calculated using tools like [hardhat-gas-reporter](https://www.npmjs.com/package/hardhat-gas-reporter).
 
-**5.4) `ackGasPrice` -** Gas price of the source chain. This can be calculated using the RPC of source chain as shown in the above [snippet](#5-requestmetadata). To avoid the need for calculation, it can be passed as 0. The Router chain will then estimate the real-time gas price for them.
+**5.4) `ackGasPrice` -** Gas price of the source chain. This can be calculated using the RPC of source chain as shown in the above [snippet](#5-requestmetadata). To avoid the need for calculation, it can be passed as 0. The Router Chain will then estimate the real-time gas price for them.
 
-**5.5) `relayerFees` -** This parameter functions similarly to the priority fees on other blockchain networks. Since the Router chain relayers handle the execution of cross-chain requests on the destination chain, setting a higher `relayerFees` will increase the likelihood of your request being prioritized by relayers. If a very low `relayerFees` is provided, the Router chain will automatically adjust it to the minimum required amount to ensure that it is executed. If it is passed as 0, the Router chain will default it to the minimum set Relayer fee value. 
+**5.5) `relayerFees` -** This parameter functions similarly to the priority fees on other blockchain networks. Since the Router Chain relayers handle the execution of cross-chain requests on the destination chain, setting a higher `relayerFees` will increase the likelihood of your request being prioritized by relayers. If a very low `relayerFees` is provided, the Router Chain will automatically adjust it to the minimum required amount to ensure that it is executed. If it is passed as 0, the Router Chain will default it to the minimum set Relayer fee value. 
 
 Minimum relayer fees based on network is given below -
 <RelayerAPIData
@@ -154,7 +154,7 @@ Minimum relayer fees based on network is given below -
 <p style={{ marginBottom: '30px' }}></p>
 
 
-**5.6) `ackType` -** When the contract calls have been executed on the destination chain, the destination chain Gateway contract sends an acknowledgent back to the Router chain. iDapps have the option to get this acknowledgment from the Router chain to the source chain and execute some operations based on the ack.
+**5.6) `ackType` -** When the contract calls have been executed on the destination chain, the destination chain Gateway contract sends an acknowledgent back to the Router Chain. iDapps have the option to get this acknowledgment from the Router Chain to the source chain and execute some operations based on the ack.
    - If `ackType` = 0, the user doesn't want the acknowledgment to be forwarded back to the source chain.
    - If `ackType` = 1, the acknowledgment is expected to be received only if the calls were successfully executed on the destination chain, and the user intends to perform some operation on the source chain after receiving the ack.
    - If `ackType` = 2, an acknowledgment is needed only in case of an error occurring on the destination chain. This options also allows for execution of certain operations after receiving the ack.

@@ -9,7 +9,7 @@ A key strength of Router Sandbox lies in its intuitive user interface. The platf
 
 
 ## One-click Deployment
-Router Sandbox eliminates the complexities of deploying iDapps by offering a one-click deployment feature. Users can choose the iDapp they want to deploy and select the chains where they should be deployed. With just one click, Router Sandbox automatically handles the deployment process, providing users with a ready-to-use cross-chain application. This streamlined approach saves considerable time and effort for users to test out the capabilities of the Router chain.
+Router Sandbox eliminates the complexities of deploying iDapps by offering a one-click deployment feature. Users can choose the iDapp they want to deploy and select the chains where they should be deployed. With just one click, Router Sandbox automatically handles the deployment process, providing users with a ready-to-use cross-chain application. This streamlined approach saves considerable time and effort for users to test out the capabilities of the Router Chain.
 
 ## Support for Multiple Chains
 Router Sandbox supports multiple testnet networks, including Fuji (Avalanche), Mumbai (Polygon), Arbitrum Goerli, Mantle Ringwood Testnet, and Scroll Testnet. In addition to these chains, Router Sandbox is committed to expanding its chain support and ensuring compatibility with new and emerging blockchain networks.

@@ -52,7 +52,7 @@ The `CrosschainCall` is a data type that helps end users create a cross-chain re
 
 **1) `version` -** The network type of the chain to which the request needs to be sent. 
 
-**2) `route_amount` -** The ROUTE token amount that needs to be sent to the destination chain. To send ROUTE tokens to the specified destinaton chain, ROUTE will be burnt on the Router chain and minted on the destination chain.
+**2) `route_amount` -** The ROUTE token amount that needs to be sent to the destination chain. To send ROUTE tokens to the specified destinaton chain, ROUTE will be burnt on the Router Chain and minted on the destination chain.
 
 **3) `route_recipient` -** The recipient address of the ROUTE token on the destination chain.
 

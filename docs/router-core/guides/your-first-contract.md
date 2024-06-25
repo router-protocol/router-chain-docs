@@ -4,15 +4,15 @@ sidebar_position: 9
 ---
 
 # Your First Contract
-This section will provide a step-by-step guide for first-time users to compile and deploy their first CosmWasm contract on the Router chain.
+This section will provide a step-by-step guide for first-time users to compile and deploy their first CosmWasm contract on the Router Chain.
 
 
 ## Step 1) Installing Prerequisites
-If you haven't already, kindly [install the required tools/technologies](../installing-prerequisites) to interact with the Router chain.
+If you haven't already, kindly [install the required tools/technologies](../installing-prerequisites) to interact with the Router Chain.
 
 
 ## Step 2) Setting up an Account
-Before setting up an account to interact with the Router chain, verify that the testnet is live and the following links are working for you:
+Before setting up an account to interact with the Router Chain, verify that the testnet is live and the following links are working for you:
 
 -   [RPC Endpoint](https://lcd.testnet.routerchain.dev)
 
@@ -224,7 +224,7 @@ Following this step, your newly instantiated contract will be visible under the 
 
 ### Part 1 - Deploying the Contract
 
-**Step 1)** Store the bytecode on the Router chain and acquire the Code Id. The Code Id will later be used to create an instance of the cw_namespace contract.
+**Step 1)** Store the bytecode on the Router Chain and acquire the Code Id. The Code Id will later be used to create an instance of the cw_namespace contract.
 
 ```bash
 RES=$(routerd tx wasm store cw_nameservice.wasm --from wallet --node https://tm.rpc.testnet.routerchain.dev:443 --chain-id router-1 --gas-prices 225000router --gas auto --gas-adjustment 1.3 -y --output json -b block)

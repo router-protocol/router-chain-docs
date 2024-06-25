@@ -54,10 +54,10 @@ Ok(res)
 
 The `CrosschainCall` is a data_type that helps the end user to create an cross-chain request to any destination chain. It has 6 arguments.
 
-1. **version:** The chain type of the chain for which the outbound request from the Router chain has been created.
+1. **version:** The chain type of the chain for which the outbound request from the Router Chain has been created.
 2. **route_amount:** The route token amount that needs to be burned on the router chain and minted/unlocked on the destination chain.
 3. **route_recipient:** The recipient address of the route token on the destination chain.
-4. **destination_chain_id:** The chain ID of the chain for which the outbound request from the Router chain has been created.
+4. **destination_chain_id:** The chain ID of the chain for which the outbound request from the Router Chain has been created.
 5. **request_metadata:** The request metadata is encodedPacked information that contains information destination gas limit & price, ack gas limit & price, relayer fee, ack_type, is_read_call and asm_address.
 6. **request_packet:** The request packet is encoded information of destination address and payload. In example we can see how are we encoding this information.
 

@@ -148,7 +148,7 @@ impl DelayAsm {
 }
 ```
 
-- The owner of the ASM contract can set the `delay_period`, which is the period that must pass before transactions can be executed on the destination contract once they have been validated on the Router chain.
+- The owner of the ASM contract can set the `delay_period`, which is the period that must pass before transactions can be executed on the destination contract once they have been validated on the Router Chain.
 
   ```javascript
   pub fn set_delay_period(&mut self, delay_period: U128) {

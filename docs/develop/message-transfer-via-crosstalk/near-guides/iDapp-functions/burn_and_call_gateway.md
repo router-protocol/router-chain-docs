@@ -69,4 +69,4 @@ fn encode_base64(
 }
 ```
 
-After you call this function, a cross-chain request is created and relayed via the Router chain to the destination chain where the `i_receive` function is called on the destination contract address passed in the `request_packet`.
+After you call this function, a cross-chain request is created and relayed via the Router Chain to the destination chain where the `i_receive` function is called on the destination contract address passed in the `request_packet`.

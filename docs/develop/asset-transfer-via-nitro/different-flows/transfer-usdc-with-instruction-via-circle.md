@@ -78,8 +78,8 @@ function depositUsdcMessage(
 
 1. **iSend Fee**
 
-   - **Description:** A very small fee to prevent sybil attack on Router chain via the source Gateway contract.
-   - **Purpose:** To prevent sybil attack on Router chain.
+   - **Description:** A very small fee to prevent sybil attack on Router Chain via the source Gateway contract.
+   - **Purpose:** To prevent sybil attack on Router Chain.
    - **Calculation:** This is a very low amount just to deter fake request creators.
    - **Denomination:** It is paid in native token of the source chain.
 

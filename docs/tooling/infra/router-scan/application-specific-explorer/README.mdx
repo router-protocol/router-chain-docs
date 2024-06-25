@@ -7,7 +7,7 @@ import DocCardList from '@theme/DocCardList';
 What is an application-specific explorer?
  
 ---
-The Router chain provides a generic explorer using which anyone can independently track the blocks, transactions, inbound requests, and outbound requests, among other things. However, some applications may want to create a custom explorer which correlates their inbound requests with the corresponding outbound requests and display an overall status to their end users.
+The Router Chain provides a generic explorer using which anyone can independently track the blocks, transactions, inbound requests, and outbound requests, among other things. However, some applications may want to create a custom explorer which correlates their inbound requests with the corresponding outbound requests and display an overall status to their end users.
 To this end, we have abstracted our explorer service in the form of an SDK that can be easily embedded in any application's UI. This SDK exposes APIs that allow applications to query the explorer backend to fetch all the inbound requests and outbound requests based on various filters such as the sourceAddress, chainId, eventNonce, and various other parameters. You can look at the functions available in the SDK [here](https://router-protocol.github.io/router-chain-ts-sdk/classes/RouterExplorer.html).
 
 
