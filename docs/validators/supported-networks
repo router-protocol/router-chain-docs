@@ -212,6 +212,38 @@ These are the chains that the router chain will support for validations.
             "blockTime": "2s",
             "useStreamerApi": true,
             "nearStreamerApi": "http://13.233.000.00:6902/"
+        },
+        {
+            "chainId": "1997",
+            "chainType": "CHAIN_TYPE_EVM",
+            "chainName": "Kyoto",
+            "chainRpc": "https://rpc.kyotochain.io",
+            "blocksToSearch": 1000,
+            "blockTime": "5s"
+        },
+        {
+            "chainId": "196",
+            "chainType": "CHAIN_TYPE_EVM",
+            "chainName": "XLayer",
+            "chainRpc": "https://xlayerrpc.okx.com",
+            "blocksToSearch": 1000,
+            "blockTime": "5s"
+        },
+        {
+            "chainId": "23294",
+            "chainType": "CHAIN_TYPE_EVM",
+            "chainName": "Oasis",
+            "chainRpc": "https://sapphire.oasis.io",
+            "blocksToSearch": 1000,
+            "blockTime": "5s"
+        },
+        {
+            "chainId": "2000",
+            "chainType": "CHAIN_TYPE_EVM",
+            "chainName": "Dogechain",
+            "chainRpc": "https://rpc.dogechain.dog",
+            "blocksToSearch": 1000,
+            "blockTime": "5s"
         }
     ]
 }
