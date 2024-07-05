@@ -244,6 +244,14 @@ These are the chains that the router chain will support for validations.
             "chainRpc": "https://rpc.dogechain.dog",
             "blocksToSearch": 1000,
             "blockTime": "5s"
+        },
+        {
+            "chainId": "995",
+            "chainType": "CHAIN_TYPE_EVM",
+            "chainName": "5ire network",
+            "chainRpc": "https://rpc.5ire.network",
+            "blocksToSearch": 1000,
+            "blockTime": "5s"
         }
     ]
 }
