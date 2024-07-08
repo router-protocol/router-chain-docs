@@ -13,7 +13,7 @@ You can find the API information [**here**](../../../../../../api/?v=PATHFINDER)
 ```jsx
 import axios from "axios"
 
-const PATH_FINDER_API_URL = "https://k8-testnet-pf.routerchain.dev/api"
+const PATH_FINDER_API_URL = "https://api.pf.testnet.routerprotocol.com/api"
 
 // calling the pathfinder api using axios
 const getQuote = async (params) => {
@@ -30,12 +30,13 @@ const getQuote = async (params) => {
     }    
 }
 
+
 const main = async () => {
     const params = {
-        'fromTokenAddress': '0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054',
-        'toTokenAddress': '0xb452b513552aa0B57c4b1C9372eFEa78024e5936',
+        'fromTokenAddress': '0x5c2c6ab36a6e4e160fb9c529e164b7781f7d255f',
+        'toTokenAddress': '0x69dc97bb33e9030533ca2006ab4cef67f4db4125',
         'amount': '100000000000000000', // source amount
-        'fromTokenChainId': "80001", // Mumbai
+        'fromTokenChainId': "17000", // Hoelsky
         'toTokenChainId': "43113", // Fuji
         'partnerId': 0, // (Optional) - For any partnership, get your unique partner id - https://app.routernitro.com/partnerId
     }

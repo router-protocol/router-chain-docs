@@ -14,6 +14,7 @@ Native asset and its wrapped asset info is given [here](../../../supported-chain
 import { ethers, Contract } from 'ethers'
 
 // ERC20 Contract ABI for "Approve" and "Allowance" functions
+// ERC20 Contract ABI for "Approve" and "Allowance" functions
 const erc20_abi = [
     {
         "name": "approve",
@@ -65,12 +66,6 @@ const erc20_abi = [
     }
 ];
 
-// Fetch the current allowance and update if needed
-const checkAndSetAllowance = async (wallet, tokenAddress, approvalAddress, amount) => {
-    // Transactions with the native token don't need approval
-    if (tokenAddress === ethers.constants.AddressZero) {
-        return
-    }
 
     const erc20 = new Contract(tokenAddress, erc20_abi, wallet);
     const allowance = await erc20.allowance(await wallet.getAddress(), approvalAddress);
@@ -84,18 +79,18 @@ const checkAndSetAllowance = async (wallet, tokenAddress, approvalAddress, amoun
             console.log(`Transaction failed with error: ${error}`)
         }
     }
-}
+
 
 const main = async () => {
 
     // setting up a signer
-    const provider = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/polygon_mumbai", 80001);
+    const provider = new ethers.providers.JsonRpcProvider("hhttps://endpoints.omniatech.io/v1/eth/holesky/public", 17000);
     // use provider.getSigner() method to get a signer if you're using this for a UI
     const wallet = new ethers.Wallet("YOUR_PRIVATE_KEY", provider)
     
     await checkAndSetAllowance(
         wallet,
-        "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054", // fromTokenAddress (USDT on Mumbai)
+        "0x5c2c6ab36a6e4e160fb9c529e164b7781f7d255f", // fromTokenAddress (AFTT on Hoelsky)
         "<address-to-approve>", // quote.allowanceTo in getQuote(params) response from step 1
         ethers.constants.MaxUint256 // amount to approve (infinite approval)
     );

@@ -8,7 +8,7 @@ Now that we have received the quote and given allowance to Router's Reserve Toke
 ```jsx
 import { ethers } from 'ethers'
 
-const PATH_FINDER_API_URL = "https://k8-testnet-pf.routerchain.dev/api"
+const PATH_FINDER_API_URL = "https://api.pf.testnet.routerprotocol.com/api"
 
 const getTransaction = async (params, quoteData) => {
     const endpoint = "v2/transaction"
@@ -32,7 +32,7 @@ const getTransaction = async (params, quoteData) => {
 const main = async () => {
     
     // setting up a signer
-    const provider = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/polygon_mumbai", 80001);
+    const provider = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/eth_holesky", 17000);
     // use provider.getSigner() method to get a signer if you're using this for a UI
     const wallet = new ethers.Wallet("YOUR_PRIVATE_KEY", provider)
     

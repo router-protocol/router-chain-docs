@@ -50,32 +50,6 @@ export default function Homepage() {
             </DyteButton>
           </div>
 
-          <Section title="Build your first iDapp"
-            description={
-              <>
-                Build your first iDapp (Interoperable dApp) using Router's CrossTalk in 5 simple steps.
-              </>
-            }
-          >
-            <Card
-              title="iDapp using Stateless bridging"
-              description="Build your first iDapp in 5 steps using Router CrossTalk's stateless bridging."
-              to="/develop/message-transfer-via-crosstalk/evm-guides/your-first-crosschain-nft-contract"
-              icon={<Network />}
-            />
-            <Card
-              title="iDapp using Stateful bridging"
-              description="Build your first Omnichain iDapp in 5 steps using Router CrossTalk's stateful bridging."
-              to="/develop/message-transfer-via-crosstalk/stateful-bridging/your-first-omnichain-dapp"
-              icon={<Omnichain />}
-            />
-            {/* <Card
-              title="Router as an Interoperability Layer"
-              description="In addition to its functionalities as a blockchain network, the Router Chain will serve as an interoperability framework."
-              to="/overview#router-chain-as-an-interoperability-layer"
-            /> */}
-          </Section>
-
           <Section title="Learn about Router">
             <Card
               title="What is Router?"
@@ -87,11 +61,7 @@ export default function Homepage() {
               description="Router Protocol provides a host of cross-chain solutions. Go through this guide to understand which one's right for you."
               to="/overview/choosing-the-right-framework"
             />
-            {/* <Card
-              title="Router as an Interoperability Layer"
-              description="In addition to its functionalities as a blockchain network, the Router Chain will serve as an interoperability framework."
-              to="/overview#router-chain-as-an-interoperability-layer"
-            /> */}
+        
             <Card
               title="The ROUTE Token"
               description="The ROUTE token is a digital asset that will serve as the primary gas and governance token on the Router Chain."
@@ -99,76 +69,22 @@ export default function Homepage() {
             />
           </Section>
 
-          <Section title="Important Links" id="web-sdks" hasSubSections>
-            <Section title="iDapps" HeadingTag="h4">
-              <Card
-                title="Ping Pong"
-                description="A testnet iDapp using which you can transfer a simple message from one chain to another."
-                to="https://pingpong.routerprotocol.com"
-                icon={<Network />}
-              />
-              <Card
-                title="Nitro"
-                description="An asset transfer dApp built using Router that facilitates seamless cross-chain swaps."
-                to="https://app.routernitro.com"
-                icon={<NitroIcon />}
-              />
-              <Card
-                title="Texchange"
-                description="A testnet iDapp to exchange testnet tokens."
-                to="https://texchange.routerprotocol.com"
-                icon={<TerminalIcon />}
-              />
-            </Section>
-            <Section title="Auxillary Services" HeadingTag="h4">
-              <Card
-                title="Router Explorer"
-                description="A block explorer to monitor cross-chain transactions."
-                to="https://routerscan.io/"
-                icon={<IDEIcon />}
-              />
-              <Card
-                title="Router Station"
-                description="A tool to manage contract lifecycle-related processes on the Router Chain."
-                to="https://station.routerprotocol.com/"
-                icon={<Transaction />}
-              />
-              <Card
-                title="Router Faucet"
-                description="A platform for users to get Router testnet tokens."
-                to="https://faucet.routerprotocol.com/"
-                icon={<AssetIcon />}
-              />
-              <Card
-                title="Router Hub"
-                description="A platform for delegating ROUTE tokens to validators."
-                to="https://hub.routerprotocol.com/"
-                icon={<Contribute />}
-              />
-              <Card
-                title="Router Intent Store"
-                description="A place where developers can add their own intent adapters or explore existing ones."
-                to="https://store.routerintents.com/"
-                icon={<ModulesIcon />}
-              />
-            </Section>
-          </Section>
-
           <Section title="Developers" id="web-sdks" hasSubSections>
 
             <Section title="🛠 Build iDapps using Router" HeadingTag="h4">
+            <Card
+                title="Asset Transfer"
+                description="Learn about asset transfer bridge Nitro and how to build other asset-transfer applications or sequenced cross-chain requests (asset + instruction)"
+                to="/develop/asset-transfer-via-nitro"
+                icon={<AssetIcon />}
+              />
               <Card
                 title="Message Transfer"
                 description="Learn about the instruction transfer framework Crosstalk and convert your existing single/multi-chain applications to cross-chain applications."
                 to="/develop/message-transfer-via-crosstalk"
                 icon={<RelayerIcon />}
               />
-              <Card
-                title="Asset Transfer"
-                description="Learn about asset transfer bridge Nitro and how to build other asset-transfer applications or sequenced cross-chain requests (asset + instruction)"
-                to="/develop/voyager"
-                icon={<AssetIcon />}
-              />
+            
 
             </Section>
 
@@ -217,12 +133,7 @@ export default function Homepage() {
             >
 
 
-              {/* <Card
-    title="Build and Test Osmosis Source Code"
-    description="Getting started with building and testing Osmosis codebase"
-    to="/router-core/build"
-    icon={<OsmosisCore />}
-  /> */}
+ 
               <Card
                 title="Installing Prerequisites"
                 description="Set up your machine to start developing on the Router Chain"
@@ -236,13 +147,7 @@ export default function Homepage() {
                 icon={<TerminalIcon />}
                 svgFile="/icons/cli.svg"
               />
-              {/* <Card
-    title="Modules"
-    description="Osmosis modules and their respective CLI commands"
-    to="/router-core/modules"
-    icon={<ModulesIcon />}
-    svgFile="/icons/modules.svg"
-  /> */}
+    
               <Card
                 title="Router on a Local System"
                 description="Follow the steps in this guide to run the Router blockchain on your local machine."
@@ -250,94 +155,73 @@ export default function Homepage() {
                 icon=""
                 svgFile="/icons/bag.svg"
               />
-              {/* <Card
-    title="Assets"
-    description="     Currently supported assets on Osmosis with their corresponding channels and IBC denoms."
-    to="/router-core/asset-info"
-    icon={<AssetIcon />}
-  />
-  <Card
-    title="Key Management"
-    description="Managing keys via CLI and advanced operations such as multisig wallets"
-    to="/router-core/category/keys-management"
-    icon={<KeysIcon />}
-  />
-  <Card
-    title="Transaction Structure"
-    description=" Understanding the structure of a transaction on the Osmosis blockchain"
-    to="/router-core/guides/structure"
-    icon={<Transaction />}
-    svgFile="/icons/transaction.svg"
-  />
-  <Card
-    title="Contributing"
-    description=" Guidelines to contributing to Osmosis core development."
-    to="/router-core/contributing"
-    icon={<Contribute />}
-    svgFile="/icons/octocat.svg"
-  /> */}
+     
 
             </Section>
+          
+            <Section title="Auxillary Services" HeadingTag="h4">
+              <Card
+                title="Router Explorer"
+                description="A block explorer to monitor cross-chain transactions."
+                to="https://routerscan.io/"
+                icon={<IDEIcon />}
+              />
+              <Card
+                title="Router Station"
+                description="A tool to manage contract lifecycle-related processes on the Router Chain."
+                to="https://station.routerprotocol.com/"
+                icon={<Transaction />}
+              />
+              <Card
+                title="Router Faucet"
+                description="A platform for users to get Router testnet tokens."
+                to="https://faucet.routerprotocol.com/"
+                icon={<AssetIcon />}
+              />
+              <Card
+                title="Router Hub"
+                description="A platform for delegating ROUTE tokens to validators."
+                to="https://hub.routerprotocol.com/"
+                icon={<Contribute />}
+              />
+              <Card
+                title="Router Intent Store"
+                description="A place where developers can add their own intent adapters or explore existing ones."
+                to="https://store.routerintents.com/"
+                icon={<ModulesIcon />}
+              />
+            </Section>
+          <Section title="Important Links" id="web-sdks" hasSubSections>
+            <Section title="iDapps" HeadingTag="h4">
+
+            <Card
+                title="Nitro"
+                description="An asset transfer dApp built using Router that facilitates seamless cross-chain swaps."
+                to="https://app.routernitro.com"
+                icon={<NitroIcon />}
+              />
+              <Card
+                title="Ping Pong"
+                description="A testnet iDapp using which you can transfer a simple message from one chain to another."
+                to="https://pingpong.routerprotocol.com"
+                icon={<Network />}
+              />
+              
+              <Card
+                title="Texchange"
+                description="A testnet iDapp to exchange testnet tokens."
+                to="https://texchange.routerprotocol.com"
+                icon={<TerminalIcon />}
+              />
+            </Section>
+            
           </Section>
 
-          {/* <Section title="💻 Utilities"  HeadingTag="h4" id="utilities">
-    <Card
-    title="OsmoJS"
-    description="Compose and broadcast Osmosis and Cosmos messages, with all of the proto and amino encoding handled for you."
-    to="/osmojs"
-    icon={<Osmojs />}
-    svgFile="/icons/osmojs.svg"
-  />
+          
+           
+           
+          </Section>
 
-<Card
-    title="Cosmos Kit"
-    description="A wallet adapter for react with mobile WalletConnect support for the Cosmos ecosystem."
-    to="https://github.com/cosmology-tech/cosmos-kit"
-    icon=""
-    svgFile="/icons/bag.svg"
-  />
-
-  <Card
-    title="Telescope"
-    description="TypeScript Transpiler for Cosmos Protobufs. Telescope is used to generate libraries for Cosmos blockchains."
-    to="/telescope"
-    svgFile="/icons/telescope.svg"
-  />
-
-<Card
-    title="Create Cosmos App"
-    description="Set up a modern Cosmos app by running one command"
-    to="https://github.com/cosmology-tech/create-cosmos-app"
-    icon={<Createapp />}
-    svgFile="/icons/create-cosmos-app.svg"
-  />
-
- <Card
-    title="Chain Registry"
-    description="The npm package for the Official Cosmos chain registry"
-    to="https://github.com/cosmology-tech/chain-registry"
-    icon={<Cosmoskit />}
-    svgFile="/icons/registry.svg"
-  />
-
-  <Card
-    title="TS Codegen"
-    description="The quickest and easiest way to interact with CosmWasm Contracts"
-    to="https://github.com/CosmWasm/ts-codegen"
-    icon={<Tscodegen />}
-    svgFile="/icons/tscodegen.svg"
-  />   
- 
-  </Section> */}
-
-          {/* <Section title="📜 API Reference" HeadingTag="h4">
-            <Card
-              title="API Reference"
-              description="Router RPC and LCD API Reference"
-              to="#"
-              icon={<APIReferenceIcon />}
-            />
-          </Section> */}
         </div>
       </div>
     </Layout>

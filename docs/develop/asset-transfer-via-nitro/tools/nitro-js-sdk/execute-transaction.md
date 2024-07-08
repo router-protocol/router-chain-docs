@@ -19,44 +19,48 @@ Below is how you can execute a transaction for various chain types.
 ### Standard EVM Chains
 ```jsx
 import { PathFinder, Network } from "@routerprotocol/asset-transfer-sdk-ts";
-import { evmSignerFromPrivateKeyAndRpc } from "@routerprotocol/asset-transfer-sdk-ts/pathfinder/ChainClient/EvmChainClient";
+import { evmSignerFromPrivateKeyAndRpc } from '@routerprotocol/asset-transfer-sdk-ts';
+const YOUR_WIDGET_ID = 24 // get your unique sdk id by contacting us on Telegram
+const pathfinder = new PathFinder(Network.Testnet, '0');
 
-// initialize a Pathfinder instance
-const YOUR_WIDGET_ID = 0; // get your unique sdk id - https://app.routernitro.com/partnerId
-const pathfinder = new Pathfinder(Network.Testnet, YOUR_WIDGET_ID);
 
-const main = async () => {
-  // building evmsigner
-  const evmSigner = evmSignerFromPrivateKeyAndRpc(
-    evmPrivateKey,
-    "https://rpc.ankr.com/avalanche_fuji",
-  );
 
-  // getting a quote for 10 USDT from Fuji to Mumbai
-  const quote = await pathfinder.getQuote({
-    sourceChainId: "43113",
-    sourceTokenAddress: "0xb452b513552aa0B57c4b1C9372eFEa78024e5936",
-    destinationChainId: "80001",
-    destinationTokenAddress: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054",
-    expandedInputAmount: "10000000",
-    slippageTolerance: "1"
-  });
+const main = async() => {
 
-  // execute quote handles approval as well
-  const transaction = await pathfinder.executeQuote(
-    {
-      quote,
-      senderAddress: evmSigner.address,
-      receiverAddress: evmSigner.address,
-      refundAddress: evmSigner.address // (optional) By default equal to `senderAddress` if not provided
-    },
-    {
-      evmSigner,
-    },
-  );
-};
+    
+const evmSigner = evmSignerFromPrivateKeyAndRpc(YOUR_PRIVATE_KEY, "https://rpc.ankr.com/avalanche_fuji");
 
-main();
+
+
+
+
+const quote = await pathfinder.getQuote({
+            sourceChainId: "43113",
+            sourceTokenAddress: "0x69dc97bb33e9030533ca2006ab4cef67f4db4125",
+            destinationChainId: "17000",
+            destinationTokenAddress: "0x5c2c6ab36a6e4e160fb9c529e164b7781f7d255f",
+            expandedInputAmount: "4000000000000000",
+        });
+
+
+     
+        console.log(quote)
+
+      
+         const transaction = await pathfinder.executeQuote({
+            quote,
+            slippageTolerance: "1",
+            senderAddress: evmSigner.address,
+            receiverAddress: "0x8CB29084A720E6D421812A259431042F03524FED",
+        },
+            {
+                evmSigner
+            }
+        );
+
+}
+
+main()
 ```
 
 
@@ -80,8 +84,8 @@ const main = async () => {
   const quote = await pathfinder.getQuote({
     sourceChainId: "2494104990", // tron chainId
     sourceTokenAddress: "0xF2340B8D37A198B2D66795C8B5B7C467CF92C4EC", // tron token address
-    destinationChainId: "80001",
-    destinationTokenAddress: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054",
+    destinationChainId: "43113",
+    destinationTokenAddress: "0x69dc97bb33e9030533ca2006ab4cef67f4db4125",
     expandedInputAmount: "1000000",
   });
   const transaction = await pathfinder.executeQuote(
@@ -124,8 +128,8 @@ const main = async () => {
   const quote = await pathfinder.getQuote({
     sourceChainId: "near-testnet", 
     sourceTokenAddress: "usdt_router.router_protocol.testnet", // near usdt address
-    destinationChainId: "80001",
-    destinationTokenAddress: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054",
+    destinationChainId: "43113",
+    destinationTokenAddress: "0x69dc97bb33e9030533ca2006ab4cef67f4db4125",
     expandedInputAmount: "1000000000000000000",
     slippageTolerance: "1",
   });

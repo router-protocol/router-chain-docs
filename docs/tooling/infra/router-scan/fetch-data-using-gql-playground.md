@@ -43,7 +43,6 @@ query getLatestBlocks($limit: Int!, $offset: Int!) {
         sender
         status
         receiver
-        timeStamp
         gasWanted
         gasUsed
         fee
@@ -61,14 +60,14 @@ query getLatestBlocks($limit: Int!, $offset: Int!) {
 {
   "data": {
     "paginatedBlock": {
-      "totalRecords": 15641,
+      "totalRecords": 14991144,
       "blocks": [
         {
-          "_id": 15641,
-          "hash": "1C6BC272B52029A27D574A9E68269E9079A6E33AD4DBC3B4754874CE6EE4B0E6",
-          "proposer": "4EC53962072D60BE17C849C98902EC05B22076E4",
+          "_id": 14991157,
+          "hash": "56842E9A8E4C5C242C0D9B12449966270B85E8E13533ADA7CC6DB54C01C1CDED",
+          "proposer": "FBB74FDA13F022AAAAD103D5BBFCCCFBFE68608A",
           "txn_count": 0,
-          "timestamp": "2023-01-02T08:55:57Z",
+          "timestamp": 1718912560,
           "transactions": []
         }
       ]
@@ -132,7 +131,7 @@ The parameters can be set in the “Query Variables” section on the GraphQL pl
 
 ```jsx
 query getLatestTransactions($limit: Int!, $offset: Int!){
-    paginatedTransaction(sortBy:{height:desc,timeStamp:desc},limit:$limit,offset:$offset){
+    paginatedTransaction(sortBy:{height:desc},limit:$limit,offset:$offset){
     totalRecords
   transactions{
      _id
@@ -140,7 +139,6 @@ query getLatestTransactions($limit: Int!, $offset: Int!){
     sender
     status
     receiver
-    timeStamp
     gasWanted
     gasUsed
     fee
@@ -159,22 +157,21 @@ query getLatestTransactions($limit: Int!, $offset: Int!){
 {
   "data": {
     "paginatedTransaction": {
-      "totalRecords": 17,
+      "totalRecords": 1935023,
       "transactions": [
         {
-          "_id": "4BB9D33522003683D23AF08A463248B77A65F0992C8FFAD730BD6F766B261E27",
-          "height": 12886,
-          "sender": "router1hvaau9fkk4xssmqe455mfujzd2hs6jnsy0rcdj",
+          "_id": "2507F83086C3B61F0D3BA03BF7399643B75675F59CDE56EBB0B9390C9A1EDF30",
+          "height": 14991156,
+          "sender": "router1kmg4njeauxlgp628qtx9zu899h7red9cz2cgat",
           "status": "",
-          "receiver": "router1gmj4z4vr3rn8ptzcumyycp6eegkuhehrlzlws2",
-          "timeStamp": "2023-01-02T07:30:46Z",
-          "gasWanted": "",
-          "gasUsed": "",
-          "fee": "100000000000000router",
+          "receiver": "router17xpfvakm2amg962yls6f84z3kell8c5l9zzc5d",
+          "gasWanted": "242334",
+          "gasUsed": "179934",
+          "fee": "121167000000000route",
           "event_logs": "",
           "success": "",
-          "rawLog": "[{\"events\":[{\"type\":\"coin_received\",\"attributes\":[{\"key\":\"receiver\",\"value\":\"router1gmj4z4vr3rn8ptzcumyycp6eegkuhehrlzlws2\"},{\"key\":\"amount\",\"value\":\"1000000000000000000router\"}]},{\"type\":\"coin_spent\",\"attributes\":[{\"key\":\"spender\",\"value\":\"router1hvaau9fkk4xssmqe455mfujzd2hs6jnsy0rcdj\"},{\"key\":\"amount\",\"value\":\"1000000000000000000router\"}]},{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/cosmos.bank.v1beta1.MsgSend\"},{\"key\":\"sender\",\"value\":\"router1hvaau9fkk4xssmqe455mfujzd2hs6jnsy0rcdj\"},{\"key\":\"module\",\"value\":\"bank\"}]},{\"type\":\"transfer\",\"attributes\":[{\"key\":\"recipient\",\"value\":\"router1gmj4z4vr3rn8ptzcumyycp6eegkuhehrlzlws2\"},{\"key\":\"sender\",\"value\":\"router1hvaau9fkk4xssmqe455mfujzd2hs6jnsy0rcdj\"},{\"key\":\"amount\",\"value\":\"1000000000000000000router\"}]}]}]",
-          "routePrice": "1.7062257784837516"
+          "rawLog": "[{\"msg_index\":0,\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/routerprotocol.routerchain.voyager.MsgFundsDeposited\"}]},{\"type\":\"routerprotocol.routerchain.attestation.EventAttestationVote\",\"attributes\":[{\"key\":\"attestationType\",\"value\":\"\\\"CLAIM_TYPE_FUND_DEPOSITED_REQUEST\\\"\"},{\"key\":\"attestation_id\",\"value\":\"\\\"ODAwMDEweDlhMjVmYjRkM2RkYWRhNGNhOWFkOGJkZmY2ZmE2Mzc1N2E5ZmU1NWEAAAAAAAASvBsh+sZ67B9C9av9gB7U4hall1aVph8HM6jVvxQJnxGf\\\"\"},{\"key\":\"chainId\",\"value\":\"\\\"80001\\\"\"},{\"key\":\"contract\",\"value\":\"\\\"0x9a25fb4d3ddada4ca9ad8bdff6fa63757a9fe55a\\\"\"},{\"key\":\"eventNonce\",\"value\":\"\\\"4796\\\"\"},{\"key\":\"voter\",\"value\":\"\\\"routervaloper1rpnn4p7kff7pjvetattjaq4fw9dtrspp5lvhy0\\\"\"}]}]}]",
+          "routePrice": "2.8491109382811772"
         }
       ]
     }
