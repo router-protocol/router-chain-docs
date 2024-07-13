@@ -150,23 +150,30 @@ components:
         flowType:
           type: string
           example: "trustless"
+          description: type of bridging solution to be used for specified route. Currently following solutions are available 'trustless', 'mint-burn', 'circle', 'gateway' and 'none'. Here, 'none' is used when there is no bridging used like in case of same chain swap. 
         isTransfer:
           type: boolean
           example: true
+          description: true if route is direct transfer without any swap.
         isWrappedToken:
           type: boolean
           example: false
+          description: deprecated. Not used
         allowanceTo:
           type: string
           example: "0x190fC3352b361852E6abFE48d34C79473fF131D3"
+          description: Depending upon 'flowType' and 'isTransfer', allowance has to be given to a particular contracts. All possible list of contracts can be queries via GET /api/v2/contracts
         fromTokenAddress:
           type: string
           example: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054"
+          description: source token as per request
         toTokenAddress:
           type: string
           example: "0xb452b513552aa0B57c4b1C9372eFEa78024e5936"
+          description: destination token as per request
         source:
           type: object
+          description: In case of source swap. 'tokenAmount' is amount user provides. It contains path details for swap that will be used by dexSpan contract (Nitro's swapper contract). Note - native tokens are represented as its wrapped native in quote as it's used by dexSpan. Actual input token is determined by user request `fromTokenAddress` if to be taken as gas. Currently, final output token as wrapped native is not supported. 
           required:
             - "chainId"
             - "asset"
@@ -264,9 +271,11 @@ components:
             path:
               type: array
               example: []
+              description: If length of path is greater than 1, then only token is swap from index 0 'asset' to index length-1 'stableReserveAsset' of array using others as intermediate tokens.
             flags:
               type: array
               example: []
+              description: flags represents aggregators and DEXs that is mapped in dexspan contract.
             priceImpact:
               type: string
               example: "0"
@@ -281,6 +290,7 @@ components:
               example: []
         destination:
           type: object
+          description: In case of destination swap. `tokenAmount` is final amount that will be given to user. It contains path details for swap that will be used by dexSpan contract (Nitro's swapper contract).
           required:
             - "chainId"
             - "asset"
@@ -395,6 +405,7 @@ components:
         estimatedTime:
           type: number
           example: 40
+          description: Estimated time of completion in seconds. Its based on chain combination and 'flowType'.
         slippageTolerance:
           type: number
           example: 1
@@ -418,6 +429,7 @@ components:
         status:
           type: string
           example: "completed"
+          description: Transaction completion status.
         src_chain_id:
           type: string
           example: "80001"
@@ -456,6 +468,7 @@ components:
           example: 1696573932
     TransactionRequestBody:
       type: object
+      description: Request body contains response of /v2/quote response with these additional params 'senderAddress', 'receiverAddress' and 'refundAddress'.
       required:
         - "flowType"
       properties:
@@ -719,14 +732,18 @@ components:
         senderAddress:
           type: string
           example: "0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964"
+          description: user's source chain address
         receiverAddress:
           type: string
           example: "0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964"
+          description: user's destination chain address
         refundAddress:
           type: string
           example: "0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964"
+          description: Address where user will be refunded in case when transaction doesn't go through and withdrawl is requested. Usually same as 'senderAddress'
     TransactionResponseBody:
       type: object
+      description: In response all fields are same as request with one additional field 'txn'.
       required:
         - "flowType"
       properties:
@@ -982,5 +999,13 @@ components:
           type: string
           example: "0"
         txn:
-              type: object
-              example: "can be different for different chain types"
+            type: object
+            example: >
+              for evm chain
+              'from': 'sender or interactor',
+              'to': 'contract to be invoked',
+              'data': 'hex raw tnx data that contains method and its params details',
+              'value': 'gas value',
+              'gasPrice': 'gas price',
+              'gasLimit': 'estimated gas limit. In case of gaslimit failure we provided some static value according to flowType'
+            description: 'transaction object for a chain. Can be different for different chain types'
