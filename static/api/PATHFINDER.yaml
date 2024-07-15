@@ -310,7 +310,7 @@ components:
               example: "43113"
             asset:
               type: object
-              destination: 'stableReserveAsset' is swapped to 'asset' if path length > 1 and sent to receiver. Note - final token as wrapped native is not supported currently. User will get native on destination in this case.
+              description: 'stableReserveAsset' is swapped to 'asset' if path length > 1 and sent to receiver. Note - final token as wrapped native is not supported currently. User will get native on destination in this case.
               required:
                 - "decimals"
                 - "symbol"
