@@ -173,7 +173,7 @@ components:
           description: destination token as per request
         source:
           type: object
-          description: In case of source swap. 'tokenAmount' is amount user provides. It contains path details for swap that will be used by dexSpan contract (Nitro's swapper contract). Note - native tokens are represented as its wrapped native in quote as it's used by dexSpan. Actual input token is determined by user request `fromTokenAddress` if to be taken as gas. Currently, final output token as wrapped native is not supported. 
+          description: In case of source swap. 'tokenAmount' is amount user provides. It contains path details for swap that will be used by dexSpan contract (Nitro's swapper contract). Note - native tokens are represented as its wrapped native in quote as it's used by dexSpan. Actual input token is determined by user request `fromTokenAddress` if to be taken as gas.
           required:
             - "chainId"
             - "asset"
@@ -192,6 +192,7 @@ components:
               example: "80001"
             asset:
               type: object
+              description: source input token
               required:
                 - "decimals"
                 - "symbol"
@@ -228,6 +229,7 @@ components:
                   example: false
             stableReserveAsset:
               type: object
+              description: source final swapped token that will be transferred to destination through a 'flowType'.
               required:
                 - "decimals"
                 - "symbol"
@@ -290,7 +292,7 @@ components:
               example: []
         destination:
           type: object
-          description: In case of destination swap. `tokenAmount` is final amount that will be given to user. It contains path details for swap that will be used by dexSpan contract (Nitro's swapper contract).
+          description: In case of destination swap. `tokenAmount` is final amount that will be given to user. It contains path details for swap that will be used by dexSpan contract (Nitro's swapper contract).  Currently, final output token as wrapped native is not supported. 
           required:
             - "chainId"
             - "asset"
@@ -308,6 +310,7 @@ components:
               example: "43113"
             asset:
               type: object
+              destination: 'stableReserveAsset' is swapped to 'asset' if path length > 1 and sent to receiver. Note - final token as wrapped native is not supported currently. User will get native on destination in this case.
               required:
                 - "decimals"
                 - "symbol"
@@ -344,6 +347,7 @@ components:
                   example: false
             stableReserveAsset:
               type: object
+              description: token that initially is transferred on destination.
               required:
                 - "decimals"
                 - "symbol"
@@ -387,6 +391,7 @@ components:
             path:
               type: array
               example: []
+              description: If length of path is greater than 1, then only token is swap from index 0 'stableReserveAsset' to index length-1 'asset' of array using others as intermediate tokens.
             flags:
               type: array
               example: []
@@ -1008,4 +1013,4 @@ components:
               'value': 'gas value',
               'gasPrice': 'gas price',
               'gasLimit': 'estimated gas limit. In case of gaslimit failure we provided some static value according to flowType'
-            description: 'transaction object for a chain. Can be different for different chain types'
+            description: 'transaction object for a chain. Can be different for different chain types.'
