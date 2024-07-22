@@ -13,6 +13,7 @@ export { default as NitroIcon } from './NitroIcon';
 export { default as NearIcon } from './NearIcon';
 export { default as EthereumIcon } from './EthereumIcon';
 export { default as RouterIcon } from './RouterIcon';
+export { default as RouterLogo } from './RouterLogo';
 export { default as Omnichain } from './Omnichain';
 export { default as TerminalIcon } from './TerminalIcon';
 export { default as APIReferenceIcon } from './APIReferenceIcon';
