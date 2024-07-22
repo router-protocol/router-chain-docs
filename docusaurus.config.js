@@ -284,13 +284,18 @@ const config = {
                 href: 'https://explorer.routernitro.com',
               },
               {
-                label: 'Careers',
-                href: 'https://wellfound.com/company/router-protocol',
+                label: 'Intent Store',
+                href: 'https://store.routerintents.com/',
+              },
+              {
+                label: 'Intent PoCs',
+                href: 'https://poc.routerintents.com/all',
               },
               {
                 label: 'Ecosystem',
                 href: 'https://www.routerprotocol.com/ecosystem',
               },
+            
             ],
           },
           {
@@ -305,10 +310,6 @@ const config = {
                 href: 'https://www.routerprotocol.com/router-ccif-whitepaper.pdf'
               },
               {
-                label: 'Developer Portal',
-                href: '/develop',
-              },
-              {
                 label: 'GitHub',
                 href: 'https://github.com/router-protocol',
               },
@@ -316,10 +317,14 @@ const config = {
                 label: 'Medium',
                 href: 'https://routerprotocol.medium.com/',
               },
-              // {
-              //   label: 'Community',
-              //   href: 'https://discord.com/invite/yjM2fUUHvN',
-              // },
+              {
+                label: 'Careers',
+                href: 'https://wellfound.com/company/router-protocol',
+              },
+              {
+                label: 'Brand Assets',
+                href: 'https://drive.google.com/drive/folders/1rOmmXOQ82VwFua0Yk6m0CWDMH1fNGbuG',
+              },
             ],
           },
           {
