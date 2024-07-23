@@ -252,6 +252,14 @@ These are the chains that the router chain will support for validations.
             "chainRpc": "https://rpc.5ire.network",
             "blocksToSearch": 1000,
             "blockTime": "5s"
+        },
+        {
+        "chainId": "570",
+        "chainType": "CHAIN_TYPE_EVM",
+        "chainName": "Rollux Mainnet",
+        "chainRpc": "https://rpc.rollux.com",
+        "blocksToSearch": 1000,
+        "blockTime": "5s"
         }
     ]
 }
