@@ -4,7 +4,7 @@ sidebar_position: 1
 ---
 
 Before running a Sentry node on , install the following prerequisites:
-- [Golang](https://go.dev/doc/install) (version > `1.19`)
+- [Golang](https://go.dev/doc/install) (version > `1.21.0`)
 - [Python](https://www.python.org/downloads/) (version > `3.9.1`)
 
 Once all the required dependencies are installed, execute the following `curl` request from your terminal/command prompt to run a Sentry node on Router's testnet:
