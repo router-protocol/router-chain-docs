@@ -14,7 +14,7 @@ If you haven't already, kindly [install the required tools/technologies](../inst
 ## Step 2) Setting up an Account
 Before setting up an account to interact with the Router Chain, verify that the testnet is live and the following links are working for you:
 
--   [RPC Endpoint](https://lcd.testnet.routerchain.dev)
+-   [RPC Endpoint](https://lcd.sentry.routerchain.dev)
 
 -   [Faucet](https://faucet.routerprotocol.com/)
 

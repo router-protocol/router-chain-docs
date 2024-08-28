@@ -101,8 +101,8 @@ Lets say if you want to deploy your contract on Polygon Mumbai and Avalanche Fuj
 
 <APIData
   apiData={[
-    { contractConfigUrl: 'https://lcd.testnet.routerchain.dev/router-protocol/router-chain/multichain/contract_config', 
-    chainConfigUrl: 'https://lcd.testnet.routerchain.dev/router-protocol/router-chain/multichain/chain_config', 
+    { contractConfigUrl: 'https://lcd.sentry.routerchain.dev/router-protocol/router-chain/multichain/contract_config', 
+    chainConfigUrl: 'https://lcd.sentry.routerchain.dev/router-protocol/router-chain/multichain/chain_config', 
     networkType: 'Testnet', contractType: 'GATEWAY' }
   ]}
 />

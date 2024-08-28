@@ -148,7 +148,7 @@ function getRequestMetadata(
 Minimum relayer fees based on network is given below -
 <RelayerAPIData
   relayerApiData={[
-    { apiUrl: 'https://lcd.testnet.routerchain.dev/router-protocol/router-chain/crosschain/params', networkType: 'Testnet' }
+    { apiUrl: 'https://lcd.sentry.routerchain.dev/router-protocol/router-chain/crosschain/params', networkType: 'Testnet' }
   ]}
 />
 <p style={{ marginBottom: '30px' }}></p>

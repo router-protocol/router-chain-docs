@@ -16,7 +16,7 @@ The following APIs are recommended for development purposes.
 | **RPC**               | https://sentry.evm.rpc.routerprotocol.com        | https://evm.rpc.testnet.routerchain.dev      |
 | **gRPC-gateway**      | https://sentry.grpcweb.routerprotocol.com           | https://grpc.testnet.routerchain.dev         |
 | **TM endpoint**       | https://sentry.tm.rpc.routerprotocol.com         | https://tm.rpc.testnet.routerchain.dev           |
-| **LCD endpoint**      | https://sentry.lcd.routerprotocol.com            | https://lcd.testnet.routerchain.dev          |
+| **LCD endpoint**      | https://sentry.lcd.routerprotocol.com            | https://lcd.sentry.routerchain.dev          |
 | **Faucet UI**         | -             | https://faucet.routerprotocol.com       |
 | **Explorer UI**       | https://routerscan.io       | https://testnet.routerscan.io     |
 | **Explorer endpoint** | https://api.explorer.routerscan.io   | https://explorer-api.testnet.routerchain.dev |
