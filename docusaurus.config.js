@@ -29,7 +29,7 @@ function defineSection(section, options = {}) {
       id: section,
       sidebarPath: require.resolve('./sidebars-default.js'),
       breadcrumbs: false,
-      editUrl: 'https://github.com/router-protocol/docs/tree/main/',
+      editUrl: 'https://github.com/router-protocol/router-chain-docs/tree/testnet-docs/',
       ...defaultSettings,
       ...options,
     }),
@@ -295,7 +295,7 @@ const config = {
                 label: 'Ecosystem',
                 href: 'https://www.routerprotocol.com/ecosystem',
               },
-            
+
             ],
           },
           {
