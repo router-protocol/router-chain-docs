@@ -276,8 +276,25 @@ These are the chains that the router chain will support for validations.
         "chainRpc": "https://rpc.matchain.io",
         "blocksToSearch": 1000,
         "blockTime": "5s"
-        }
+        },
+        {
+        "chainId": "bitcoin",
+        "chainName":"bitcoin",
+        "wnativeAddress" : "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "blocksToSearch": 100,
+        "blockTime": "600s",
+        "evmRelayerForBitcoin" : "0x444a0f21f51babf03bb8a0714a03f802c0619784",
+        "UseStreamerApi":true,
+        "BitcoinStreamerApi":"" 
+    }
     ]
+}
+
+```
+### Must be added in globalConfig of Orchestrator to support Bitcoin Network 
+```json
+"globalConfig": {
+    "routerBridgeAddress":"router17p9rzwnnfxcjp32un9ug7yhhzgtkhvl9jfksztgw5uh69wac2pgsmpev85"
 }
 ```
 
