@@ -279,6 +279,7 @@ These are the chains that the router chain will support for validations.
         },
         {
         "chainId": "bitcoin",
+        "chainType": "CHAIN_TYPE_BITCOIN",
         "chainName":"bitcoin",
         "wnativeAddress" : "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
         "blocksToSearch": 100,
