@@ -38,6 +38,11 @@
       "tags": "overview",
       "selectors_key": "overview"
     },
+    {
+      "url": "https://docs.routerprotocol.com/brand-assets",
+      "tags": "brand-assets",
+      "selectors_key": "brand-assets"
+    },
     "https://docs.routerprotocol.com"
   ],
   "stop_urls": [],

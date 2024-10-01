@@ -53,6 +53,7 @@ const SECTIONS = [
   defineSection('develop'),
   // defineSection('omnichain-framework'),
   defineSection('tooling'),
+  defineSection('brand-assets'),
 ];
 
 /** @type {import('@docusaurus/types').Config} */
@@ -205,6 +206,12 @@ const config = {
             position: 'left',
             // className: 'new-badge',
           },
+          {
+            label: 'Brand Assets',  
+            to: '/brand-assets',
+            position: 'left',
+            // className: 'new-badge',
+          },
           // {
           //   label: 'Learn',
           //   to: '/learn',
@@ -323,7 +330,7 @@ const config = {
               },
               {
                 label: 'Brand Assets',
-                href: 'https://drive.google.com/drive/folders/1rOmmXOQ82VwFua0Yk6m0CWDMH1fNGbuG',
+                href: '/brand-assets',
               },
             ],
           },

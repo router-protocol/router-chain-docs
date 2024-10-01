@@ -1,0 +1,39 @@
+.logo-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+}
+.logo-icon {
+  width: 40px;
+  margin-right: 1rem;
+}
+.logo-name {
+  flex-grow: 1;
+}
+.logo-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  font-size: 1.2rem;
+}
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.popup img, .popup svg {
+  max-width: 90%;
+  max-height: 90%;
+  background-color: white;
+}
