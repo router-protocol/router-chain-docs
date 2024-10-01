@@ -3,9 +3,9 @@ title: Solana chain support for sending transactions
 sidebar_position: 5
 ---
 
-For solana getting quote will be same but executing transaction will be different.
+For Solana, fetching the Nitro pathfinder quote will be same as before; however, executing transaction will be different.
 
-1. When source chain is solana
+1. When the source chain is Solana
 
 ```jsx
 import {
@@ -231,8 +231,8 @@ const getTransaction = async (params, quoteData) => {
 ```
 
 
-2. When destination chain is solana.
-When solana is destination, passing `receiverAddress` to api can be different.
+2. When the destination chain is Solana.
+When Solana is the destination chain, passing `receiverAddress` to the pathfinder API can be different.
 
 ```jsx
 import { ethers } from 'ethers'
