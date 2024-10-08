@@ -9,24 +9,20 @@ import {
   HomepageSection as Section,
 } from '../components/HomepageComponents';
 import {
-  APIReferenceIcon,
   TerminalIcon,
   IDEIcon,
   ModulesIcon,
   RelayerIcon,
   AssetIcon,
-  Telescope,
   Osmojs,
   Createapp,
-  Cosmoskit,
-  Tscodegen,
-  KeysIcon,
   Transaction,
-  VoyagerIcon,
   Contribute,
   Network,
   Omnichain,
   NitroIcon,
+  StakeEaseIcon,
+  TagzzIcon
 } from '../icons';
 import GuidesSection from '../components/GuidesSection';
 
@@ -101,23 +97,35 @@ export default function Homepage() {
 
           <Section title="Important Links" id="web-sdks" hasSubSections>
             <Section title="iDapps" HeadingTag="h4">
-              <Card
+              {/* <Card
                 title="Ping Pong"
                 description="A testnet iDapp using which you can transfer a simple message from one chain to another."
                 to="https://pingpong.routerprotocol.com"
                 icon={<Network />}
-              />
+              /> */}
               <Card
                 title="Nitro"
                 description="An asset transfer dApp built using Router that facilitates seamless cross-chain swaps."
                 to="https://app.routernitro.com"
                 icon={<NitroIcon />}
               />
-              <Card
+              {/* <Card
                 title="Texchange"
                 description="A testnet iDapp to exchange testnet tokens."
                 to="https://texchange.routerprotocol.com"
                 icon={<TerminalIcon />}
+              /> */}
+              <Card
+                title="StakeEase"
+                description="An omnichain restaking index and restaking aggregator."
+                to="https://stakeease.com"
+                icon={<StakeEaseIcon />}
+              />
+              <Card
+                title="Tagzz"
+                description="An omnichain identity / domain name service."
+                to="https://tagzz.xyz"
+                icon={<TagzzIcon />}
               />
             </Section>
             <Section title="Auxillary Services" HeadingTag="h4">

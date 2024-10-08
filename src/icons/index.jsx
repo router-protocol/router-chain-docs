@@ -21,7 +21,8 @@ export { default as Omnichain } from './Omnichain';
 export { default as TerminalIcon } from './TerminalIcon';
 export { default as APIReferenceIcon } from './APIReferenceIcon';
 export { default as DisconnectedPlugIcon } from './DisconnectedPlugIcon';
-
+export { default as StakeEaseIcon } from './StakeEaseIcon';
+export { default as TagzzIcon } from './TagzzIcon';
 export { default as ChainIcon } from './ChainIcon';
 export { default as IDEIcon } from './IDEIcon';
 export { default as ModulesIcon } from './ModulesIcon';
