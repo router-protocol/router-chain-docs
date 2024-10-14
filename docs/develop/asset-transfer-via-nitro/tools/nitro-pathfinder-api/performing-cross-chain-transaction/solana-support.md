@@ -4,6 +4,9 @@ sidebar_position: 5
 ---
 
 For Solana, fetching the Nitro pathfinder quote will be same as before; however, executing transaction will be different.
+:::note
+Token approval is not required when source is Solana.
+:::
 
 1. When the source chain is Solana
 
@@ -44,12 +47,6 @@ const main = async () => {
         : undefined;
     
     let transactionInstructions = [];
-
-    // only for flowType 'circle', approval instruction
-    const txnFlowType = txResponse.flowType;
-    if (txnFlowType === "circle") {
-        transactionInstructions = getApproveInstruction("<senderAddress>", "<srctoken>", "<amount>");
-    }
 
     let allTxnHash = [];
 
@@ -218,38 +215,14 @@ const getTransaction = async (params, quoteData) => {
     try {
         const res = await axios.post(txDataUrl, {
             ...quoteData,
-            senderAddress: "<sender-address>",
+            senderAddress: "<sender-address>", // solana user wallet address
             receiverAddress: "<receiver-address>",
             refundAddress: "<refundAddress>" // (optional) By default equal to `senderAddress` if not provided,
-            metaData: {
-                    ataAddress:
-                        await getAtaAddress( new PublicKey(senderAddress), fromTokenAddress)
-                }
         })
         return res.data;
     } catch (e) {
         console.error(`Fetching tx data from pathfinder: ${e}`)
     }    
-}
-
-async function getAtaAddress(wallet: string | PublicKey, asset: string) {
-  const ownerAddress = new PublicKey(wallet);
-  const tokenMintAddressPubKey = new PublicKey(asset)
-  console.log('asset - ', asset)
-
-  const tokenProgram = asset === 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v' ? TOKEN_PROGRAM_ID : TOKEN_2022_PROGRAM_ID
-
-  const ataAddress = await getAssociatedTokenAddress(
-    tokenMintAddressPubKey,
-    ownerAddress,
-    true,
-    tokenProgram
-  );
-
-  const account = await solanaConnection.getAccountInfo(ataAddress);
-
-  console.log('ata address from fn - ', ataAddress, ataAddress.toBase58(), account)
-  return ataAddress;
 }
 
 ```
@@ -289,42 +262,15 @@ curl 'https://k8-testnet-pf.routerchain.dev/api/v2/transaction' \
   -H 'sec-fetch-mode: cors' \
   -H 'sec-fetch-site: cross-site' \
   -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36' \
-  --data-raw '{"flowType":"trustless","isTransfer":true,"isWrappedToken":false,"allowanceTo":"3rexFGP7LYszqCRZR78Bo6XNGZNLZekA2Lpgh9fAdaeY","bridgeFee":{"amount":"800000","decimals":18,"symbol":"AFTT","address":"CuDPEYd8tFRBvUs97mUQzQcECwgXGj5ZmFM4qNnjkfq2"},"fromTokenAddress":"CuDPEYd8tFRBvUs97mUQzQcECwgXGj5ZmFM4qNnjkfq2","toTokenAddress":"0x69dc97bb33e9030533ca2006ab4cef67f4db4125","source":{"chainId":"solana-devnet","chainType":"solana","asset":{"decimals":9,"symbol":"AFTT","name":"AFTT","chainId":"solana-devnet","address":"CuDPEYd8tFRBvUs97mUQzQcECwgXGj5ZmFM4qNnjkfq2","resourceID":"aftt","isMintable":false,"isWrappedAsset":false},"stableReserveAsset":{"decimals":9,"symbol":"AFTT","name":"AFTT","chainId":"solana-devnet","address":"CuDPEYd8tFRBvUs97mUQzQcECwgXGj5ZmFM4qNnjkfq2","resourceID":"aftt","isMintable":false,"isWrappedAsset":false},"tokenAmount":"400000000","stableReserveAmount":"400000000","path":[],"flags":[],"priceImpact":"0","tokenPath":"","dataTx":[]},"destination":{"chainId":"43113","chainType":"evm","asset":{"decimals":18,"symbol":"AFTT","name":"AFTT","chainId":"43113","address":"0x69DC97Bb33E9030533Ca2006aB4Cef67f4DB4125","resourceID":"aftt","isMintable":false,"isWrappedAsset":false},"stableReserveAsset":{"decimals":18,"symbol":"AFTT","name":"AFTT","chainId":"43113","address":"0x69DC97Bb33E9030533Ca2006aB4Cef67f4DB4125","resourceID":"aftt","isMintable":false,"isWrappedAsset":false},"tokenAmount":"399999999999200000","stableReserveAmount":"399999999999200000","path":[],"flags":[],"priceImpact":"0","tokenPath":"","dataTx":[]},"partnerId":1,"fuelTransfer":null,"slippageTolerance":"1","estimatedTime":40,"senderAddress":"GHELhmF2K3B9FthTq5FQAgN1ntJw6N4EmNqQYEjJdwPz","receiverAddress":"0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964","metaData":{"ataAddress":"6vyNyzxsD391XTK6q9j85Ns62nDGPZwHiJVB5eR1yC6E"}}'
+  --data-raw '{"flowType":"trustless","isTransfer":true,"isWrappedToken":false,"allowanceTo":"3rexFGP7LYszqCRZR78Bo6XNGZNLZekA2Lpgh9fAdaeY","bridgeFee":{"amount":"800000","decimals":18,"symbol":"AFTT","address":"CuDPEYd8tFRBvUs97mUQzQcECwgXGj5ZmFM4qNnjkfq2"},"fromTokenAddress":"CuDPEYd8tFRBvUs97mUQzQcECwgXGj5ZmFM4qNnjkfq2","toTokenAddress":"0x69dc97bb33e9030533ca2006ab4cef67f4db4125","source":{"chainId":"solana-devnet","chainType":"solana","asset":{"decimals":9,"symbol":"AFTT","name":"AFTT","chainId":"solana-devnet","address":"CuDPEYd8tFRBvUs97mUQzQcECwgXGj5ZmFM4qNnjkfq2","resourceID":"aftt","isMintable":false,"isWrappedAsset":false},"stableReserveAsset":{"decimals":9,"symbol":"AFTT","name":"AFTT","chainId":"solana-devnet","address":"CuDPEYd8tFRBvUs97mUQzQcECwgXGj5ZmFM4qNnjkfq2","resourceID":"aftt","isMintable":false,"isWrappedAsset":false},"tokenAmount":"400000000","stableReserveAmount":"400000000","path":[],"flags":[],"priceImpact":"0","tokenPath":"","dataTx":[]},"destination":{"chainId":"43113","chainType":"evm","asset":{"decimals":18,"symbol":"AFTT","name":"AFTT","chainId":"43113","address":"0x69DC97Bb33E9030533Ca2006aB4Cef67f4DB4125","resourceID":"aftt","isMintable":false,"isWrappedAsset":false},"stableReserveAsset":{"decimals":18,"symbol":"AFTT","name":"AFTT","chainId":"43113","address":"0x69DC97Bb33E9030533Ca2006aB4Cef67f4DB4125","resourceID":"aftt","isMintable":false,"isWrappedAsset":false},"tokenAmount":"399999999999200000","stableReserveAmount":"399999999999200000","path":[],"flags":[],"priceImpact":"0","tokenPath":"","dataTx":[]},"partnerId":1,"fuelTransfer":null,"slippageTolerance":"1","estimatedTime":40,"senderAddress":"GHELhmF2K3B9FthTq5FQAgN1ntJw6N4EmNqQYEjJdwPz","receiverAddress":"0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964","metaData":{"ataAddress":null}}'
 ```
 
 
 2. When the destination chain is Solana.
-When Solana is the destination chain, passing `receiverAddress` to the pathfinder API can be different.
-
-```jsx
-import { ethers } from 'ethers'
-
-const PATH_FINDER_API_URL = "https://k8-testnet-pf.routerchain.dev/api"
-
-const getTransaction = async (params, quoteData) => {
-    const endpoint = "v2/transaction"
-    const txDataUrl = `${PATH_FINDER_API_URL}/${endpoint}`
-
-    console.log(txDataUrl);
-
-    // circle flow doesn't support ata creation during transaction. So, need to pass user's ata address.
-    const receiverAddress = quoteData.flowType == "circle" ? "<receiver-ata-address>" : "<receiver-address>";
-
-    try {
-        const res = await axios.post(txDataUrl, {
-            ...quoteData,
-            senderAddress: "<sender-address>",
-            receiverAddress: "<receiver-address>",
-            refundAddress: "<refundAddress>" // (optional) By default equal to `senderAddress` if not provided
-        })
-        return res.data;
-    } catch (e) {
-        console.error(`Fetching tx data from pathfinder: ${e}`)
-    }    
-}
-
-
-```
+When Solana is the destination chain, api calls will be same as evm interaction. 
+:::note
+`receiverAddress` will be user wallet address. No need to pass ATA for user. It's taken care by nitro.
+:::
 
 
 Examples on testnet -
