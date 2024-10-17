@@ -8,39 +8,39 @@ const worker = require('node:worker_threads');
 const { webpackPlugin } = require('./plugins/webpack-plugin.cjs');
 // const posthogPlugin = require('./plugins/posthog-plugin.cjs');
 
-module.exports = function(context, options) {
-  return {
-    name: 'docusaurus-plugin-add-canonical-tags',
-    injectHtmlTags({ permalink }) {
-      const canonicalTags = [
-        { path: '/develop', canonicalUrl: 'https://docs.routerprotocol.com/develop' },
-        { path: '/overview', canonicalUrl: 'https://docs.routerprotocol.com/overview' },
-        { path: '/networks', canonicalUrl: 'https://docs.routerprotocol.com/networks' },
-        { path: '/router-core', canonicalUrl: 'https://docs.routerprotocol.com/router-core' },
-        { path: '/tooling', canonicalUrl: 'https://docs.routerprotocol.com/tooling' },
-        { path: '/validators', canonicalUrl: 'https://docs.routerprotocol.com/validators' },
-        { path: '/discover', canonicalUrl: 'https://docs.routerprotocol.com/discover' },
-        { path: '/brand-assets', canonicalUrl: 'https://docs.routerprotocol.com/brand-assets' },
-        // Add more pages here
-      ];
+// module.exports = function(context, options) {
+//   return {
+//     name: 'docusaurus-plugin-add-canonical-tags',
+//     injectHtmlTags({ permalink }) {
+//       const canonicalTags = [
+//         { path: '/develop', canonicalUrl: 'https://docs.routerprotocol.com/develop' },
+//         { path: '/overview', canonicalUrl: 'https://docs.routerprotocol.com/overview' },
+//         { path: '/networks', canonicalUrl: 'https://docs.routerprotocol.com/networks' },
+//         { path: '/router-core', canonicalUrl: 'https://docs.routerprotocol.com/router-core' },
+//         { path: '/tooling', canonicalUrl: 'https://docs.routerprotocol.com/tooling' },
+//         { path: '/validators', canonicalUrl: 'https://docs.routerprotocol.com/validators' },
+//         { path: '/discover', canonicalUrl: 'https://docs.routerprotocol.com/discover' },
+//         { path: '/brand-assets', canonicalUrl: 'https://docs.routerprotocol.com/brand-assets' },
+//         // Add more pages here
+//       ];
 
-      // Find the canonical URL for the current page's permalink
-      const canonicalTag = canonicalTags.find(tag => permalink && permalink.includes(tag.path));
+//       // Find the canonical URL for the current page's permalink
+//       const canonicalTag = canonicalTags.find(tag => permalink && permalink.includes(tag.path));
 
-      return {
-        headTags: canonicalTag
-          ? [{
-              tagName: 'link',
-              attributes: {
-                rel: 'canonical',
-                href: canonicalTag.canonicalUrl,
-              },
-            }]
-          : [],
-      };
-    },
-  };
-};
+//       return {
+//         headTags: canonicalTag
+//           ? [{
+//               tagName: 'link',
+//               attributes: {
+//                 rel: 'canonical',
+//                 href: canonicalTag.canonicalUrl,
+//               },
+//             }]
+//           : [],
+//       };
+//     },
+//   };
+// };
 
 
 
@@ -373,6 +373,41 @@ const config = {
       liveCodeBlock: {
         playgroundPosition: 'bottom',
       },
+
+      metadata: [
+        {
+          rel: 'canonical',
+          href: 'https://docs.routerprotocol.com/overview', // default site-wide canonical URL
+        },
+        {
+          rel: 'canonical',
+          href: 'https://docs.routerprotocol.com/router-core', // default site-wide canonical URL
+        },
+        {
+          rel: 'canonical',
+          href: 'https://docs.routerprotocol.com/develop', // default site-wide canonical URL
+        },
+        {
+          rel: 'canonical',
+          href: 'https://docs.routerprotocol.com/tooling', // default site-wide canonical URL
+        },
+        {
+          rel: 'canonical',
+          href: 'https://docs.routerprotocol.com/networks', // default site-wide canonical URL
+        },
+        {
+          rel: 'canonical',
+          href: 'https://docs.routerprotocol.com/validators', // default site-wide canonical URL
+        },
+        {
+          rel: 'canonical',
+          href: 'https://docs.routerprotocol.com/discover', // default site-wide canonical URL
+        },
+        {
+          rel: 'canonical',
+          href: 'https://docs.routerprotocol.com/brand-assets', // default site-wide canonical URL
+        },
+      ],
     }),
 };
 
