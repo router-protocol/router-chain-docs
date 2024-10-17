@@ -44,7 +44,7 @@ function getRequestMetadata(
 ```
 
 :::info
-The detailed documentation for this function can be found [here](../iDapp-functions/iSend#5-requestmetadata).
+The detailed documentation for this function can be found [here](../idapp-functions/isend#5-requestmetadata).
 :::
 
 When creating a read request, the `isReadCall` parameter must be set to `true` in the `requestMetadata` parameter. In addition, the payload encoding must be of a specific type.

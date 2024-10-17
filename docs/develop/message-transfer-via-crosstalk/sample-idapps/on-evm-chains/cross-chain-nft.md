@@ -219,14 +219,14 @@ function transferCrossChain(
       ```
        ```
 
-    More details on `requestMetadata` can be found [here](../../evm-guides/iDapp-functions/iSend#5-requestmetadata).
+    More details on `requestMetadata` can be found [here](../../evm-guides/idapp-functions/iSend#5-requestmetadata).
 
 
 - **Check the mapping:** Check to see whether the mapping of NFTs contract addresses on the respective destination chains is set using the `setContractOnChain` function.
 - **Burn the NFTs from user’s account:** The user must own the NFTs to be able to transfer them to the destination chain. Burn those NFTs from the user’s account before creating a cross-chain communication request to the destination chain using the `burnBatch` method defined in `ERC-1155` contract of the Openzeppelin library.
 - **Create the payload packet:** The payload for the cross-chain communication request will contain transfer parameters that need to be delivered to the destination chain. To achieve this, ABI-encode the `transferParams` and set the resulting encoded data as the payload for the request.
 - **Create the request packet:** To create a request packet, simply ABI-encode the destination contract address along with the payload packet created in the previous step. Set this encoded data as the request packet to be sent to the destination chain.
-- **Call the Gateway contract to generate a cross-chain request:** Call the `iSend` function of the Gateway contract with the required parameters. The documentation for this function can be found [here](../../evm-guides/iDapp-functions/iSend).
+- **Call the Gateway contract to generate a cross-chain request:** Call the `iSend` function of the Gateway contract with the required parameters. The documentation for this function can be found [here](../../evm-guides/idapp-functions/iSend).
 
 </details>
 
@@ -263,7 +263,7 @@ function iReceive(
 }
 ```
 
-- It is important to name the function `iReceive` and ensure that its signature, including the name and parameters, remains the same. This is because the Gateway contract on the destination chain will call this function, and any changes to the name or parameters will result in a failed call. Further details on the parameters required for this function can be found [here](../../evm-guides/iDapp-functions/iReceive).
+- It is important to name the function `iReceive` and ensure that its signature, including the name and parameters, remains the same. This is because the Gateway contract on the destination chain will call this function, and any changes to the name or parameters will result in a failed call. Further details on the parameters required for this function can be found [here](../../evm-guides/idapp-functions/iReceive).
 - To ensure that the request is received only from the application contract on the source chain, the application can create a mapping of allowed contract addresses for each chain ID. Then, in the `iReceive` function, the application can check that the `requestSender` is the same as the address stored in the mapping for the specific chain ID. To keep this contract as simple as possible, this condition has not been implemented here.
 - Ensure that only the Gateway contract can call the function, as no other contract or wallet should have access to it. Once this is confirmed, the payload can be decoded to obtain the transfer parameters, which are stored in a variable called `transferParams`.
 - The burnt NFTs from the source chain can then be minted to the recipient on the destination chain using the `ERC-1155` contract's `mintBatch` function from the Openzeppelin library. It is necessary to convert the recipient's address from bytes back to address format for this process, which can be done using the `toAddress` function.
@@ -295,7 +295,7 @@ function toAddress(bytes memory _bytes) internal pure returns (address addr) {
 <summary><b>Step 8) Handling the acknowledgment</b></summary>
 
 
-After handling the request on the destination chain, the contract inherited from the `IDapp` must implement the `iAck` function. However, if the acknowledgment on the source chain is not to be handled, an empty function can be implemented to satisfy the requirement. Further information about the function can be found in the documentation provided [here](../../evm-guides/iDapp-functions/iAck)
+After handling the request on the destination chain, the contract inherited from the `IDapp` must implement the `iAck` function. However, if the acknowledgment on the source chain is not to be handled, an empty function can be implemented to satisfy the requirement. Further information about the function can be found in the documentation provided [here](../../evm-guides/idapp-functions/iAck)
 
 ```javascript
 function iAck(

@@ -16,7 +16,7 @@ pub fn i_send(
 ) -> U128
 ```
 
-In the above-mentioned code snippet, a `request_metadata` parameter needs to be constructed, which is an ABI-encoded parameter that can be generated on-chain or passed via arguments in a function call. Checkout this [section](../iDapp-functions/i_send#5-request_metadata) to know more about the `request_metadata` parameter.
+In the above-mentioned code snippet, a `request_metadata` parameter needs to be constructed, which is an ABI-encoded parameter that can be generated on-chain or passed via arguments in a function call. Checkout this [section](../idapp-functions/i_send#5-request_metadata) to know more about the `request_metadata` parameter.
 
 The last argument in the `request_metadata` parameter is `asm_address` in the string format. As the name suggests, this address points to the ASM contract on the destination chain. The `request_metadata` parameter can be created on-chain using the following function:
 

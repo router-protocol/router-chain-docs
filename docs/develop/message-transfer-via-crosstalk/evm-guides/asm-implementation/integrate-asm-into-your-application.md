@@ -16,7 +16,7 @@ function iSend(
 ) external payable returns (uint256);
 ```
 
-In the above-mentioned code snippet, a `requestMetadata` parameter needs to be constructed, which is an ABI-encoded parameter that can be generated on-chain or passed via arguments in a function call. Checkout this [section](../iDapp-functions/iSend#5-requestmetadata) to know more about the `requestMetadata` function.
+In the above-mentioned code snippet, a `requestMetadata` parameter needs to be constructed, which is an ABI-encoded parameter that can be generated on-chain or passed via arguments in a function call. Checkout this [section](../idapp-functions/isend#5-requestmetadata) to know more about the `requestMetadata` function.
 
 The last argument in the `requestMetadata` parameter is `asmAddress` in string format. As the name suggests, this address points to the ASM contract on the destination chain. The `requestMetadata` parameter can be created on-chain using the following function:
 

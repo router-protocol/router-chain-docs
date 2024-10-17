@@ -58,7 +58,7 @@ The `CrosschainCall` is a data type that helps end users create a cross-chain re
 
 **4) `destination_chain_id` -** The network ID of the chain to which the request needs to be sent. 
 
-**5) `request_metadata` -** The request metadata is encoded data that includes `dest_gas_limit`, `dest_gas_price`, `ack_gas_limit`, `ack_gas_price`, `relayer_fee`, `ack_type`, `is_read_call` and `asm_address`. Further details for each one of these parameters can be found [here](../../near-guides/iDapp-functions/i_send#3-request_metadata).
+**5) `request_metadata` -** The request metadata is encoded data that includes `dest_gas_limit`, `dest_gas_price`, `ack_gas_limit`, `ack_gas_price`, `relayer_fee`, `ack_type`, `is_read_call` and `asm_address`. Further details for each one of these parameters can be found [here](../../near-guides/idapp-functions/i_send#3-request_metadata).
 
-**6) `request_packet` -** The request packet is encoded data that includes `destination_address` and `payload`. In the example given above, you can see how this encoding needs to be performed. Further detals for both of these parameters can be found [here](../../near-guides/iDapp-functions/i_send#4-request_packet). 
+**6) `request_packet` -** The request packet is encoded data that includes `destination_address` and `payload`. In the example given above, you can see how this encoding needs to be performed. Further detals for both of these parameters can be found [here](../../near-guides/idapp-functions/i_send#4-request_packet). 
 

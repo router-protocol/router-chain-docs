@@ -210,7 +210,7 @@ Let's say you deployed your contract on Polygon Mumbai and Avalanche Fuji, you n
 
 ### **1)** Get request metadata
 
-This function gets you the metadata to be used while initiating a cross-chain transfer requestfrom source chain using `transferCrossChain` function. It includes gas limit for destination chain, gas price for destination chain, gas limit for source chain(ackGasLimit), gas price for source chain(ackGasPrice), relayer fees, acknowledgement type, bool if it is a read call and address for additional security module. To know more about request metadata parameters, kindly refer to this [page](../iDapp-functions/iSend.md#5-requestmetadata).
+This function gets you the metadata to be used while initiating a cross-chain transfer requestfrom source chain using `transferCrossChain` function. It includes gas limit for destination chain, gas price for destination chain, gas limit for source chain(ackGasLimit), gas price for source chain(ackGasPrice), relayer fees, acknowledgement type, bool if it is a read call and address for additional security module. To know more about request metadata parameters, kindly refer to this [page](../idapp-functions/isend.md#5-requestmetadata).
 
 Create the metadata like this:
 
@@ -261,4 +261,4 @@ After the transaction is successfully executed, you should now be able to see yo
   />
 </center>
 
-To know more about message transfer via Router's Crosstalk , kindly refer to EVM-guides [here](../../evm-guides/iDapp-functions/).
+To know more about message transfer via Router's Crosstalk , kindly refer to EVM-guides [here](../../evm-guides/idapp-functions/).

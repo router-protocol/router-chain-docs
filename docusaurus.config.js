@@ -8,6 +8,42 @@ const worker = require('node:worker_threads');
 const { webpackPlugin } = require('./plugins/webpack-plugin.cjs');
 // const posthogPlugin = require('./plugins/posthog-plugin.cjs');
 
+module.exports = function(context, options) {
+  return {
+    name: 'docusaurus-plugin-add-canonical-tags',
+    injectHtmlTags({ permalink }) {
+      const canonicalTags = [
+        { path: '/develop', canonicalUrl: 'https://docs.routerprotocol.com/develop' },
+        { path: '/overview', canonicalUrl: 'https://docs.routerprotocol.com/overview' },
+        { path: '/networks', canonicalUrl: 'https://docs.routerprotocol.com/networks' },
+        { path: '/router-core', canonicalUrl: 'https://docs.routerprotocol.com/router-core' },
+        { path: '/tooling', canonicalUrl: 'https://docs.routerprotocol.com/tooling' },
+        { path: '/validators', canonicalUrl: 'https://docs.routerprotocol.com/validators' },
+        { path: '/discover', canonicalUrl: 'https://docs.routerprotocol.com/discover' },
+        { path: '/brand-assets', canonicalUrl: 'https://docs.routerprotocol.com/brand-assets' },
+        // Add more pages here
+      ];
+
+      // Find the canonical URL for the current page's permalink
+      const canonicalTag = canonicalTags.find(tag => permalink && permalink.includes(tag.path));
+
+      return {
+        headTags: canonicalTag
+          ? [{
+              tagName: 'link',
+              attributes: {
+                rel: 'canonical',
+                href: canonicalTag.canonicalUrl,
+              },
+            }]
+          : [],
+      };
+    },
+  };
+};
+
+
+
 /** @type {import('@docusaurus/preset-classic').Options} */ defaultSettings = {
   remarkPlugins: [
     [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
@@ -218,58 +254,10 @@ const config = {
             position: 'left',
             // className: 'new-badge',
           },
-          // {
-          //   label: 'Learn',
-          //   to: '/learn',
-          //   position: 'left',
-          //   // className: 'new-badge',
-          // },
-          // {
-          //   label: 'Integrate',
-          //   to: 'overview/integrate',
-          //   position: 'left',
-          // },
-          // {
-          //   label: 'Validate',
-          //   to: 'overview/validate',
-          //   position: 'left',
-          // },
-          // {
-          //   label: 'API Reference',
-          //   to: 'apis',
-          //   position: 'left',
-          // },
-          // {
-          //   type: 'dropdown',
-          //   label: 'v2.0',
-          //   position: 'left',
-          //   items: [
-          //     {
-          //       label: 'v1.0',
-          //       href: 'https://v1.docs.routerprotocol.com',
-          //     }
-          //   ],
-          // },
-          // {
-          //   href: 'https://github.com/router-protocol',
-          //   className: 'pseudo-icon github-icon',
-          //   position: 'right',
-          // },
-          // {
-          //   href: 'https://discord.gg/yjM2fUUHvN',
-          //   className: 'pseudo-icon discord-icon',
-          //   position: 'right'
-          // },
           {
             type: 'search',
             position: 'right',
           },
-          // {
-          //   label: 'Launch Router Testnet',
-          //   href: 'https://station.routerprotocol.com/',
-          //   position: 'right',
-          //   className: 'dev-portal-signup dev-portal-link',
-          // },
         ],
       },
       footer: {

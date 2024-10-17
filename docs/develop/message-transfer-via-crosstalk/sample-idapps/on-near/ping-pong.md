@@ -222,8 +222,8 @@ trait GatewayContract {
 }
 ```
 
-We have already learnt about the `i_send` function in the [i_send section](../../near-guides/iDapp-functions/i_send).
-Also we have learnt about the `set_dapp_metadata` function in the [set_dapp_metadata section](../../near-guides/iDapp-functions/set_dapp_metadata).
+We have already learnt about the `i_send` function in the [i_send section](../../near-guides/idapp-functions/i_send).
+Also we have learnt about the `set_dapp_metadata` function in the [set_dapp_metadata section](../../near-guides/idapp-functions/set_dapp_metadata).
 </details>
 
 <details>
@@ -340,7 +340,7 @@ pub fn set_dapp_metadata(&mut self, fee_payer_address: String) -> Promise {
 Create a function `set_dapp_metadata` that takes the `fee_payer_address` as a parameter and calls the Gateway contract's `set_dapp_metadata` function. Make this function payable by adding the decorator `payable` to it. This is because Router Gateway contract charges some minimal fees to prevent Sybil attacks.
 
 :::tip
-The fee payer address should be an address on the Router Chain. Check [here](../../near-guides/iDapp-functions/set_dapp_metadata) more details about this function.
+The fee payer address should be an address on the Router Chain. Check [here](../../near-guides/idapp-functions/set_dapp_metadata) more details about this function.
 :::
 
 </details>
@@ -406,7 +406,7 @@ Create a function named `i_ping` decorated with `payable` that enables sending a
 
 **3) `str` -** The message to be passed as a ping to the destination chain.
 
-**4) `request_metadata` -** The `request_metadata` consists of parameters related based on the source chain and destination chain including the gas limit and price, the relayer fees, among others. Details about this parameter can be found [here](../../near-guides/iDapp-functions/i_send#5-request_metadata).
+**4) `request_metadata` -** The `request_metadata` consists of parameters related based on the source chain and destination chain including the gas limit and price, the relayer fees, among others. Details about this parameter can be found [here](../../near-guides/idapp-functions/i_send#5-request_metadata).
 
 The `i_ping` function starts by incrementing the `request_id` and creating the necessary parameters for the `i_ping` function. It then proceeds to create the `packet` by ABI encoding the `request_id `and the message string, resulting in a `packet`.
 
@@ -414,7 +414,7 @@ Next, a `request_packet` is constructed using the `destination_contract_address`
 
 Next, the `NewPing` event should be emitted whenever a new request is generated.
 
-Finally, the `i_send` function of the Gateway contract is invoked, passing in the relevant parameters. A detailed explanation of the `i_send` function can be found [here](../../near-guides/iDapp-functions/i_send). This will create a cross-chain request to the destination chain with the abi-encoded packet.
+Finally, the `i_send` function of the Gateway contract is invoked, passing in the relevant parameters. A detailed explanation of the `i_send` function can be found [here](../../near-guides/idapp-functions/i_send). This will create a cross-chain request to the destination chain with the abi-encoded packet.
 
 </details>
 
@@ -467,7 +467,7 @@ pub fn i_receive(
 
 ```
 
-Create a new function called `i_receive`, which is essential to receive and handle requests coming from another chain. Make sure to keep the signature of the function same as above otherwise the contract will not be able to receive requests from another chain. More about this function is explained [here](../../near-guides/iDapp-functions/i_receive).
+Create a new function called `i_receive`, which is essential to receive and handle requests coming from another chain. Make sure to keep the signature of the function same as above otherwise the contract will not be able to receive requests from another chain. More about this function is explained [here](../../near-guides/idapp-functions/i_receive).
 
 **1) `request_sender` -** The address of the contract on source chain from where this request was created. You can use it to validate whether the request originated from your contract on the source chain.
 
@@ -527,7 +527,7 @@ pub fn i_ack(
 }
 ```
 
-Create a new function called `i_ack`, which is essential to receive and handle acknowledgments on the source chain. Make sure to keep the signature of the function same as above otherwise the contract will not be able to receive acknowledgment requests. More about this function is explained [here](../../near-guides/iDapp-functions/i_ack).
+Create a new function called `i_ack`, which is essential to receive and handle acknowledgments on the source chain. Make sure to keep the signature of the function same as above otherwise the contract will not be able to receive acknowledgment requests. More about this function is explained [here](../../near-guides/idapp-functions/i_ack).
 
 **1) `request_identifier` -** The event nonce emitted from Gateway contract when the request was created. This can be used this to track the status of the requests.
 **2) `exec_flag` -** The `exec_flag` is a boolean value that tells you the execution status of your request on destination chain.
