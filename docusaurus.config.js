@@ -181,7 +181,7 @@ const config = {
           },
           {
             label: 'Develop',
-            to: '/develop',
+            to: 'develop',
             position: 'left',
             // className: 'new-badge',
             // activeBaseRegex: '(.*ui-kit|.*web-core)',
