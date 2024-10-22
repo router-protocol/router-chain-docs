@@ -2,6 +2,7 @@ import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 
 if (ExecutionEnvironment.canUseDOM) {
   const logPageInfo = () => {
+    console.log('Version: v1')
     console.log('Current pathname:', window.location.pathname);
     console.log('Full URL:', window.location.href);
     console.log('Canonical URL:', document.querySelector('link[rel="canonical"]')?.href);
