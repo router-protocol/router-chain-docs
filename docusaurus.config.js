@@ -322,7 +322,7 @@ const config = {
           },
         ],
         copyright:
-          'Copyright © Router Protocol since 2021. All rights reserved.',
+          'Copyright © Router Protocol since 2021. All rights reserved..',
       },
       prism: {
         theme: lightCodeTheme,
