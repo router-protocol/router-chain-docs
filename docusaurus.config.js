@@ -67,7 +67,7 @@ const config = {
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: '/favicon.svg',
-  trailingSlash: false,
+  trailingSlash: true,
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -181,7 +181,7 @@ const config = {
           },
           {
             label: 'Develop',
-            to: 'develop',
+            to: '/develop',
             position: 'left',
             // className: 'new-badge',
             // activeBaseRegex: '(.*ui-kit|.*web-core)',
