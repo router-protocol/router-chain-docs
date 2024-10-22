@@ -30,7 +30,7 @@ function defineSection(section, options = {}) {
       id: section,
       sidebarPath: require.resolve('./sidebars-default.js'),
       breadcrumbs: false,
-      editUrl: 'https://github.com/router-protocol/docs/tree/main/',
+      editUrl: 'https://github.com/router-protocol/router-chain-docs/tree/testnet-docs/',
       ...defaultSettings,
       ...options,
     }),
@@ -82,7 +82,9 @@ const config = {
     locales: ['en'],
   },
 
-  clientModules: [require.resolve('./src/client/define-ui-kit.js')],
+  clientModules: [
+    require.resolve('./src/utils/debug.js'),
+    require.resolve('./src/client/define-ui-kit.js')],
 
   presets: [
     [
@@ -338,20 +340,26 @@ const config = {
       liveCodeBlock: {
         playgroundPosition: 'bottom',
       },
-      
+
+      // metadata: [
+      //   {name: 'canonical-base', content: 'https://docs.routerprotocol.com'},
+      // ],
+
       // Add a function to dynamically set the canonical URL
-      injectHtmlTags({ permalink }) {
-        const canonicalUrl = `https://docs.routerprotocol.com${permalink}`;
-        return {
-          headTags: [{
-            tagName: 'link',
-            attributes: {
-              rel: 'canonical',
-              href: canonicalUrl,
-            },
-          }],
-        };
-      }
+      // injectHtmlTags: ({ content, pathname }) => {
+      //   const canonicalUrl = `https://docs.routerprotocol.com${pathname}`;
+      //   return {
+      //     headTags: [
+      //       {
+      //         tagName: 'link',
+      //         attributes: {
+      //           rel: 'canonical',
+      //           href: canonicalUrl,
+      //         },
+      //       },
+      //     ],
+      //   };
+      // }
     }),
 };
 
