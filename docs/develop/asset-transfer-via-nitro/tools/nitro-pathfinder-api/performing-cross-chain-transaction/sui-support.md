@@ -42,9 +42,9 @@ const main = async () => {
 }
 
 async function signAndSendTx(
-  client: SuiClient,
-  txb: Transaction | Uint8Array,
-  signer: typeof Ed25519Keypair
+  client,
+  txb,
+  signer
 ) {
   return await client.signAndExecuteTransaction({
     transaction: txb,
