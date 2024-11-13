@@ -14,6 +14,7 @@ export { default as NitroLight } from './NitroLight';
 export { default as NitroDark } from './NitroDark';
 export { default as NitroBolt } from './NitroBolt';
 export { default as NearIcon } from './NearIcon';
+export { default as SolanaIcon } from './SolanaIcon';
 export { default as EthereumIcon } from './EthereumIcon';
 export { default as RouterIcon } from './RouterIcon';
 export { default as RouterLogo } from './RouterLogo';

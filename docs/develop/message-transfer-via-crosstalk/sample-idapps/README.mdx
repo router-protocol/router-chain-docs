@@ -10,7 +10,8 @@ import {
 
 import {
   EthereumIcon,
-  NearIcon
+  NearIcon,
+  SolanaIcon,
 } from '../../../../src/icons';
 
 This section will include a step-by-step guide to building truly cross-chain dApps by leveraging Router's infra. We'll showcase this guide with the help of some basic cross-chain applications like cross-chain Ping Pong (message transfer) and cross-chain ERC1155 (NFT transfer). This guide will make use of the cross-chain communication framework described earlier and will include code snippets and explanations for each step involved in the process.
@@ -25,14 +26,20 @@ Recognizing that different developers work on different tech stacks, we have inc
   <Card
   title="EVM Guide"
   description="Sample solidity contracts for creating a iDapp for EVM chains."
-  to="sample-idapps/on-evm-chains"
+  to="on-evm-chains"
   icon={<EthereumIcon />}
   />
   <Card
   title="NEAR Guide"
   description="Sample rust contracts for creating a iDapp for Near chains."
-  to="sample-idapps/on-near"
+  to="on-near"
   icon={<NearIcon />}
+  />
+  <Card
+  title="Solana Guide"
+  description="Sample rust contracts for creating a iDapp for Solana."
+  to="on-solana"
+  icon={<SolanaIcon />}
   />
   </Section>
   </Section>
