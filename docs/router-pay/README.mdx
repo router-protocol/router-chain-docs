@@ -1,0 +1,73 @@
+---
+title: Introduction
+sidebar_position: 1
+canonicalUrl: https://docs.routerprotocol.com/develop
+---
+
+import {
+  HomepageCard as Card,
+  HomepageSection as Section,
+} from '../../src/components/HomepageComponents';
+
+import {
+  IDEIcon,
+  TerminalIcon,
+  RelayerIcon,
+  Contribute,
+  Guide,
+  NitroIcon
+} from '../../src/icons';
+
+# Introduction
+
+Router Pay introduces the Instruction Specific Address (ISA) mechanism, which enables wallet-less interactions with decentralized applications (DApps). By generating dynamic, single-use addresses, users can initiate transactions by transferring assets directly, without wallet connections or approvals. The ISA mechanism supports both single-chain and cross-chain interactions, enhancing user security and convenience while bringing a familiar Web 2.0 experience to Web 3.0 applications, including use cases like POS machines for merchant payments.
+
+# Motivation
+
+Currently, DApp interactions in Web 3.0 often require wallet connections and approvals, introducing additional steps that disrupt usability and pose security risks. This complex flow has hindered DeFi adoption, as Web 3.0 interfaces don’t match the ease and familiarity of Web 2.0 experiences, especially compared to centralized exchanges.
+
+Router Pay (referred to as ISA as well) addresses these issues by offering a user journey that mirrors the simplicity of Web 2.0 actions. With Router Pay, users can complete interactions by simply scanning a QR code and sending payment. This approach enables a seamless, recognizable process, supporting a Web 2.0-like user experience in a Web 3.0 setting. By bridging the usability gap between centralized and decentralized applications, Router Pay opens the door for greater mainstream adoption of DeFi.
+
+
+<Section title="Integrating Router Pay" id="web-sdks" hasSubSections >
+
+<Section>
+  <Card
+    title="Add ISA to your dApp"
+    description="Integrate Router Pay and provide a no sign-up UX to users"
+    to="/router-pay/integrate-router-pay/dapp-integration"
+    icon={<IDEIcon />}
+  />
+    <Card
+    title="Nitro integration via Router Pay"
+    description="Integrate Router Nitro with no sign-up flow for users"
+    to="/router-pay/integrate-router-pay/router-nitro"
+    icon={<NitroIcon />}
+  />
+  </Section>
+
+  </Section>
+
+<Section title="Learn about Router Pay" id="web-sdks" hasSubSections >
+   <Section>
+  <Card
+    title="User Journey with Router Pay"
+    description="Learn about the advanced user journey with Router Pay"
+    to="/router-pay/user-journey"
+    icon={<RelayerIcon />}
+  />
+  <Card
+    title="Technical Specifications"
+    description="How does Router Pay work technically"
+    to="/router-pay/technical-specifications"
+    icon={<TerminalIcon />}
+  />
+  <Card
+    title="Benefits"
+    description="Benefits of Router Pay"
+    to="/router-pay/benefits"
+    icon={<Contribute />}
+  />
+    </Section>
+
+  </Section>

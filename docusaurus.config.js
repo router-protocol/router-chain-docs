@@ -55,6 +55,7 @@ const SECTIONS = [
   // defineSection('omnichain-framework'),
   defineSection('tooling'),
   defineSection('brand-assets'),
+  defineSection('router-pay'),
 ];
 
 /** @type {import('@docusaurus/types').Config} */
@@ -185,6 +186,11 @@ const config = {
             position: 'left',
             // className: 'new-badge',
             // activeBaseRegex: '(.*ui-kit|.*web-core)',
+          },
+          {
+            label: 'Router Pay',
+            to: '/router-pay',
+            position: 'left',
           },
           {
             label: 'Tooling',
