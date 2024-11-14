@@ -16,7 +16,7 @@ BASE URL = https://btc-testnet.poap-nft.routernitro.com/internal
 
 ## Generate Deposit Address
 The below end point will generate the deposit address where the end user can send funds to. By default the expiry time for an address is 10 mins. Any amount sent to the address post 10 mins can be refunded back to the user in a trustless way. 
-Initiate a cross-chain token swap with specified parameters.
+The below API returns both the transaction data as well as the deposit address for the user. In case just the quote is needed, [Quote API](../../../develop/asset-transfer-via-nitro/tools/nitro-pathfinder-api/performing-cross-chain-transaction/request-quote) can be integrated and called.
 
 **Endpoint:** `GET /swap-on-nitro`
 
