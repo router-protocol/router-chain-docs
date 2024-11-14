@@ -8,6 +8,10 @@ Integration of Router Pay is a 2 step process -
 1. **Generation of deposit address:** API to generate a deposit address where user will send their funds to. Relayer will use the funds sent to this address to execute the transaction on behalf of the user.
 2. **Check status:** API to check the status of the transaction.
 
+:::info
+BASE URL = https://btc-testnet.poap-nft.routernitro.com/internal
+:::
+
 ## Generate Deposit Address
 The below end point will generate the deposit address where the end user can send funds to. By default the expiry time for an address is 10 mins. Any amount sent to the address post 10 mins can be refunded back to the user in a trustless way. 
 
