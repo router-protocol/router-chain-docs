@@ -1,0 +1,778 @@
+openapi: 3.0.0
+info:
+  title: Router Pay
+  version: 1.0.0
+  description: This is the API for Router Pay by Router Protocol
+
+servers:
+  - url: https://api.pay.routerprotocol.com
+    description: Mainnet
+
+paths:
+  /health:
+    get:
+      summary: Health check endpoint
+      tags:
+        - Health
+      responses:
+        "200":
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "ok"
+
+  /generate-deposit-address:
+    post:
+      summary: Generate a deposit address (ISA) for your dApp
+      tags:
+        - Add ISA to your dApp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - "contractAddressOnSrcChain"
+              - "calldata"
+              - "fromTokenAddress"
+              - "refundAddress"
+              - "chainId"
+              - "amount"
+              properties:
+                contractAddressOnSrcChain:
+                  type: string
+                  example: "0x1396f41d89b96eaf29a7ef9ee01ad36e452235ae"
+                  description: "Contract address on selected chain which needs to be called for execution."
+                calldata:
+                  type: string
+                  example: "0xddddd"
+                  description: "Calldata for contract execution (hex)."
+                fromTokenAddress:
+                  type: string
+                  example: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+                  description: "The token which user will be sending funds in."
+                refundAddress:
+                  type: string
+                  example: "0xf79D7E74304AF49748A4d77d4B64eeEE84d131cf"
+                  description: "Address for potential refunds."
+                chainId:
+                  type: string
+                  example: "56"
+                  description: "Chain Id on which the user will be sending funds (should be the same where the contract has to be called)."
+                amount:
+                  type: string
+                  example: "1000000000000000000"
+                  description: "Amount to be used for executing the calldata."
+                partnerId:
+                  type: integer # optional
+                  example: 12
+                bufferTimeInSec:
+                  type: integer
+                  description: "The time post which the deposit address will be treated as expired. Any funds sent post expiration will not call the desired contract but can be refunded to the user (refund address) in a trustless way."
+                  example: 1200
+                  required: false
+                # Add your deposit address generation properties here
+      responses:
+        "200":
+          description: Deposit address generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenerateDepositAddressResponse"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /swap-on-nitro:
+    get:
+      summary: Generate deposit address for Nitro swap
+      tags:
+        - Use Nitro with Router Pay
+      parameters:
+        - in: query
+          name: fromTokenAddress
+          required: true
+          schema:
+            type: string
+          example: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+          description: Token address of the asset to be transferred from the source chain.
+        - in: query
+          name: toTokenAddress
+          required: true
+          schema:
+            type: string
+          example: "0x912CE59144191C1204E64559FE8253a0e49E6548"
+          description: Token address of the asset to be received on the destination chain.
+        - in: query
+          name: amount
+          required: true
+          schema:
+            type: string
+          example: "10000000000000000"
+          description: Decimal-expanded amount of the token to be transferred (for eg: if you want to transfer 1 USDC, you need to send 1000000). You can use ethers.utils.parseUnits function to calculate the decimal-adjusted amount of the source token.
+        - in: query
+          name: fromTokenChainId
+          required: true
+          schema:
+            type: string
+          example: "8453"
+          description: Network ID of the source chain (eg: 8453 for Base).
+        - in: query
+          name: toTokenChainId
+          required: true
+          schema:
+            type: string
+          example: "42161"
+          description: Network ID of the source chain (eg. 42161 for Arbitrum).
+        - in: query
+          name: partnerId
+          required: false
+          schema:
+            type: number
+          example: 0
+          description: For any partnership, you can get your unique partner id - https://app.routernitro.com/partnerId.
+        - in: query
+          name: slippageTolerance
+          required: false
+          schema:
+            type: number
+          example: 2
+          description: Maximum acceptable slippage (%). If not provided, by default assumed at 2%.
+        - in: query
+          name: refundAddress
+          required: true
+          schema:
+            type: string
+          example: "0x46c5a13490076cE77a285E9E38FA8818AC2915Aa"
+          description: Address for potential refunds
+        - in: query
+          name: destFuel
+          required: true
+          schema:
+            type: number
+          example: 0
+          description: Destination fuel amount
+      
+      responses:
+        "200":
+          description: Deposit address generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SwapOnNitroResponse"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /get-status-by-deposit-address:
+    get:
+      summary: Get status by deposit address
+      tags:
+        - Status
+      parameters:
+        - in: query
+          name: depositAddress
+          schema:
+            type: string
+          required: true
+          description: Deposit address to check
+          example: "0xB50D96d27C2a92243853c06147F67AdAad412e24"
+        - in: query
+          name: chainId
+          schema:
+            type: number
+          required: true
+          description: Chain Id for the address to check
+          example: 56
+      responses:
+        "200":
+          description: Status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MultiDepositAddressStatusResponse"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /get-status-by-deposit-addresses:
+    post:
+      summary: Get status for multiple deposit addresses
+      tags:
+        - Status
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MultiDepositAddressStatusRequest"
+      responses:
+        "200":
+          description: Status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MultiDepositAddressStatusResponse"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    # Common Schemas
+    Error:
+      type: object
+      required:
+        - message
+        - statusCode
+      properties:
+        message:
+          type: string
+          description: Error message describing what went wrong
+        error:
+          type: string
+          description: Error type or code
+        statusCode:
+          type: integer
+          description: HTTP status code
+
+    # Health Check Schemas
+    HealthCheckResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "ok"
+          description: Service health status
+
+    # Deposit Related Schemas
+    GenerateDepositAddressRequest:
+      type: object
+      required:
+        - contractAddressOnSrcChain
+        - calldata
+        - fromTokenAddress
+        - refundAddress
+        - chainId
+        - amount
+      properties:
+        contractAddressOnSrcChain:
+          type: string
+          description: Contract address on the source chain
+        calldata:
+          type: string
+          description: Encoded function call data
+        fromTokenAddress:
+          type: string
+          description: Token address on source chain
+        refundAddress:
+          type: string
+          description: Address for refunds if transaction fails
+        chainId:
+          type: string
+          description: Source chain identifier
+        amount:
+          type: string
+          description: Amount to deposit
+        partnerId:
+          type: integer
+          description: Optional partner identifier
+        bufferTimeInSec:
+          type: integer
+          description: Optional buffer time for transaction
+
+    GenerateDepositAddressResponse:
+      type: object
+      properties:
+        uid:
+          type: string
+          example: "6e6363f6-d221-47b5-bf7f-06fd2a6ad53a"
+          description: Unique identifier for the deposit
+        chainId:
+          type: integer
+          example: 56
+          description: Chain identifier
+        depositAddress:
+          type: string
+          example: "0xB50D96d27C2a92243853c06147F67AdAad412e24"
+          description: Generated deposit address
+        amount:
+          type: string
+          example: "1000000000000000000"
+          description: Deposit amount
+        refundAddress:
+          type: string
+          description: Refund address
+          example: "0xf79D7E74304AF49748A4d77d4B64eeEE84d131cf"
+        status:
+          type: string
+          enum: [PENDING, COMPLETED, FAILED]
+          description: Current status of the deposit
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp of creation
+        expirationAt:
+          type: string
+          format: date-time
+          description: Timestamp of expiration
+
+    # Swap Related Schemas
+    SwapOnNitroRequest:
+      type: object
+      required:
+        - fromTokenChainId
+        - toTokenChainId
+        - fromTokenAddress
+        - toTokenAddress
+        - amount
+        - refundAddress
+      properties:
+        fromTokenChainId:
+          type: string
+          description: Source chain ID
+        toTokenChainId:
+          type: string
+          description: Destination chain ID
+        fromTokenAddress:
+          type: string
+          description: Source token address
+        toTokenAddress:
+          type: string
+          description: Destination token address
+        amount:
+          type: string
+          description: Amount to swap
+        refundAddress:
+          type: string
+          description: Refund address
+        partnerId:
+          type: integer
+          description: Optional partner ID
+        destFuel:
+          type: integer
+          description: Optional destination fuel amount
+        slippageTolerance:
+          type: integer
+          description: Optional slippage tolerance percentage
+        bufferTimeInSec:
+          type: integer
+          description: Optional buffer time in seconds
+
+    SwapOnNitroResponse:
+      type: object
+      properties:
+        depositInfo:
+          type: object
+          description: Meta data for the generated deposit address
+          properties:
+            uid:
+              type: string
+              example: "6e6363f6-d221-47b5-bf7f-06fd2a6ad53a"
+              description: Unique identifier for the deposit
+            chainId:
+              type: integer
+              example: 56
+              description: Chain identifier
+            depositAddress:
+              type: string
+              example: "0xB50D96d27C2a92243853c06147F67AdAad412e24"
+              description: Generated deposit address
+            amount:
+              type: string
+              example: "1000000000000000000"
+              description: Deposit amount
+            refundAddress:
+              type: string
+              description: Refund address
+              example: "0xf79D7E74304AF49748A4d77d4B64eeEE84d131cf"
+            status:
+              type: string
+              enum: [PENDING, COMPLETED, FAILED]
+              description: Current status of the deposit
+            createdAt:
+              type: string
+              format: date-time
+              description: Timestamp of creation
+            expirationAt:
+              type: string
+              format: date-time
+              description: Timestamp of expiration
+        bestRoute:
+          type: object
+          properties:
+            bridgeFee:
+              type: object
+              properties:
+                address:
+                  type: string
+                  example: "0x4200000000000000000000000000000000000006"
+                amount:
+                  type: string
+                  example: "26704079670600"
+                decimals:
+                  type: number
+                  example: 18
+                symbol:
+                  type: string
+                  example: "WETH"
+            flowType:
+              type: string
+              example: "trustless"
+            isTransfer:
+              type: boolean
+              example: true
+            isWrappedToken:
+              type: boolean
+              example: false
+            allowanceTo:
+              type: string
+              example: "0x190fC3352b361852E6abFE48d34C79473fF131D3"
+            source:
+              type: object
+              required:
+                - "chainId"
+                - "asset"
+                - "stableReserveAsset"
+                - "tokenAmount"
+                - "stableReserveAmount"
+                - "path"
+                - "flags"
+                - "priceImpact"
+                - "bridgeFeeAmount"
+                - "tokenPath"
+                - "dataTx"
+              properties:
+                chainId:
+                  type: string
+                  example: "80001"
+                asset:
+                  type: object
+                  required:
+                    - "decimals"
+                    - "symbol"
+                    - "name"
+                    - "chainId"
+                    - "address"
+                    - "resourceID"
+                    - "isMintable"
+                    - "isWrappedAsset"
+                  properties:
+                    decimals:
+                      type: int
+                      example: 12
+                    symbol:
+                      type: string
+                      example: "USDT"
+                    name:
+                      type: string
+                      example: "USDT"
+                    chainId:
+                      type: string
+                      example: "80001"
+                    chainType:
+                      type: string
+                      example: "evm"
+                    address:
+                      type: string
+                      example: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054"
+                    resourceID:
+                      type: string
+                      example: "usdi"
+                    isMintable:
+                      type: bool
+                      example: false
+                    isWrappedAsset:
+                      type: bool
+                      example: false
+                    isReserveAsset:
+                      type: bool
+                      example: false
+                stableReserveAsset:
+                  type: object
+                  required:
+                    - "decimals"
+                    - "symbol"
+                    - "name"
+                    - "chainId"
+                    - "address"
+                    - "resourceID"
+                    - "isMintable"
+                    - "isWrappedAsset"
+                  properties:
+                    decimals:
+                      type: int
+                      example: 12
+                    symbol:
+                      type: string
+                      example: "USDT"
+                    name:
+                      type: string
+                      example: "USDT"
+                    chainId:
+                      type: string
+                      example: "80001"
+                    address:
+                      type: string
+                      example: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054"
+                    resourceID:
+                      type: string
+                      example: "usdi"
+                    isMintable:
+                      type: bool
+                      example: false
+                    isWrappedAsset:
+                      type: bool
+                      example: false
+                tokenAmount:
+                  type: string
+                  example: "200000000000000000000"
+                stableReserveAmount:
+                  type: string
+                  example: "200000000000000000000"
+                path:
+                  type: array
+                  example: []
+                flags:
+                  type: array
+                  example: []
+                priceImpact:
+                  type: string
+                  example: "0"
+                bridgeFeeAmount:
+                  type: int
+                  example: '2000237'
+                tokenPath:
+                  type: string
+                  example: ""
+                dataTx:
+                  type: array
+                  example: []
+            destination:
+              type: object
+              required:
+                - "chainId"
+                - "asset"
+                - "stableReserveAsset"
+                - "tokenAmount"
+                - "stableReserveAmount"
+                - "path"
+                - "flags"
+                - "priceImpact"
+                - "tokenPath"
+                - "dataTx"
+              properties:
+                chainId:
+                  type: string
+                  example: "43113"
+                asset:
+                  type: object
+                  required:
+                    - "decimals"
+                    - "symbol"
+                    - "name"
+                    - "chainId"
+                    - "address"
+                    - "resourceID"
+                    - "isMintable"
+                    - "isWrappedAsset"
+                  properties:
+                    decimals:
+                      type: int
+                      example: 6
+                    symbol:
+                      type: string
+                      example: "USDT"
+                    name:
+                      type: string
+                      example: "USDT"
+                    chainId:
+                      type: string
+                      example: "43113"
+                    chainType:
+                      type: string
+                      example: "evm"
+                    address:
+                      type: string
+                      example: "0xb452b513552aa0B57c4b1C9372eFEa78024e5936"
+                    resourceID:
+                      type: string
+                      example: "usdi"
+                    isMintable:
+                      type: bool
+                      example: false
+                    isWrappedAsset:
+                      type: bool
+                      example: false
+                    isReserveAsset:
+                      type: bool
+                      example: false
+                stableReserveAsset:
+                  type: object
+                  required:
+                    - "decimals"
+                    - "symbol"
+                    - "name"
+                    - "chainId"
+                    - "address"
+                    - "resourceID"
+                    - "isMintable"
+                    - "isWrappedAsset"
+                  properties:
+                    decimals:
+                      type: int
+                      example: 6
+                    symbol:
+                      type: string
+                      example: "USDT"
+                    name:
+                      type: string
+                      example: "USDT"
+                    chainId:
+                      type: string
+                      example: "43113"
+                    address:
+                      type: string
+                      example: "0xb452b513552aa0B57c4b1C9372eFEa78024e5936"
+                    resourceID:
+                      type: string
+                      example: "usdi"
+                    isMintable:
+                      type: bool
+                      example: false
+                    isWrappedAsset:
+                      type: bool
+                      example: false
+                tokenAmount:
+                  type: string
+                  example: "199999997999763"
+                stableReserveAmount:
+                  type: string
+                  example: "199999997999763"
+                path:
+                  type: array
+                  example: []
+                flags:
+                  type: array
+                  example: []
+                priceImpact:
+                  type: string
+                  example: "0"
+                tokenPath:
+                  type: string
+                  example: ""
+                dataTx:
+                  type: array
+                  example: []  
+            fromTokenAddress: 
+              type: string
+              example: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054"
+            toTokenAddress: 
+              type: string
+              example: "0xb452b513552aa0B57c4b1C9372eFEa78024e5936"
+            senderAddress:
+              type: string
+              example: "0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964"
+            receiverAddress:
+              type: string
+              example: "0x2B351b7bbC86ab5DF433539fE907f8EE4DE1B964"
+            partnerId: 
+              type: string
+              example: "0"
+            txn:
+                type: object
+                example: >
+                  for evm chain
+                  'from': 'sender or interactor',
+                  'to': 'contract to be invoked',
+                  'data': 'hex raw tnx data that contains method and its params details',
+                  'value': 'gas value',
+                  'gasPrice': 'gas price',
+                  'gasLimit': 'estimated gas limit. In case of gaslimit failure we provided some static value according to flowType'
+                description: 'transaction object for a chain. Can be different for different chain types.'
+
+    MultiDepositAddressStatusRequest:
+      type: object
+      required:
+        - queries
+      properties:
+        queries:
+          type: array
+          items:
+            type: object
+            required:
+              - depositAddress
+              - chainId
+            properties:
+              depositAddress:
+                type: string
+                description: Deposit address to check
+              chainId:
+                type: integer
+                description: Chain ID
+              uid:
+                type: string
+                description: Optional unique identifier
+
+    MultiDepositAddressStatusResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              status:
+                type: string
+                enum: [SUCCESS, FAILED]
+              relayTxn:
+                type: string
+              chainId:
+                type: integer
+              amount:
+                type: string
+              refundAddress:
+                type: string
+              createdAt:
+                type: string
+                format: date-time
+              updatedAt:
+                type: string
+                format: date-time
+              uid:
+                type: string
+              expirationAt:
+                type: string
+                format: date-time
+              currentBalance:
+                type: string
+              depositAddress:
+                type: string
+        pagination:
+          type: object
+          properties:
+            total:
+              type: integer
+            page:
+              type: integer
+            limit:
+              type: integer
+            totalPages:
+              type: integer

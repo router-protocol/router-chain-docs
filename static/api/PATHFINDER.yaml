@@ -57,7 +57,7 @@ paths:
           schema:
             type: string
           example: "43113"
-          description: "Token address of the asset you wish to receive on the destination chain."
+          description: "Network ID of the destination chain (eg: 43113 for fuji)"
         - in: query
           name: partnerId
           required: false

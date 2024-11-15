@@ -10,6 +10,7 @@ sidebar_position: 2
 To install `routerd` and interact with the Router Core without running a node, run the following commands on your terminal/cmd:
 ```bash
 git clone https://github.com/router-protocol/router-chain.git
+//router-chain.git is a private repo as of now, please request access for the same via discord
 cd router-chain
 git checkout dev
 make install
