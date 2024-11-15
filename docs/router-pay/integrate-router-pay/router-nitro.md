@@ -10,7 +10,7 @@ Integration of Router Nitro which also has ISA capabilities is a 2 step process 
 2. **Check status:** API to check the status of the transaction.
 
 :::info
-BASE URL = https://btc-testnet.poap-nft.routernitro.com/internal
+BASE URL = https://api.pay.routerprotocol.com
 :::
 
 

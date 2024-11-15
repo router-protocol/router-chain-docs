@@ -9,7 +9,7 @@ Integration of Router Pay is a 2 step process -
 2. **Check status:** API to check the status of the transaction.
 
 :::info
-BASE URL = https://btc-testnet.poap-nft.routernitro.com/internal
+BASE URL = https://api.pay.routerprotocol.com
 :::
 
 ## Generate Deposit Address
@@ -28,6 +28,7 @@ The below end point will generate the deposit address where the end user can sen
 | chainId |	string |	Chain Id on which the user will be sending funds (should be the same where the contract has to be called) |
 | amount |	string |	Amount to be used for executing the calldata |
 | partnerId |	number |	OPTIONAL: Partner identification number |
+| bufferTimeInSec | number | OPTIONAL: In case a custom expiration time is needed for the generated address |
 
 
 **Sample Request**
@@ -39,7 +40,8 @@ The below end point will generate the deposit address where the end user can sen
     "refundAddress": "0xf79D7E74304AF49748A4d77d4B64eeEE84d131cf",
     "chainId": "43113",
     "amount": "100000000000000023001",
-    "partnerId": 12
+    "partnerId": 12,
+    "bufferTimeInSec": 2000
 }
 ```
 
