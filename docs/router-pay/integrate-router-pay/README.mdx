@@ -9,8 +9,9 @@ import {
 } from '../../../src/components/HomepageComponents';
 
 import {
-  IDEIcon,
-  NitroIcon
+  Network,
+  NitroIcon,
+  Transaction
 } from '../../../src/icons';
 
 Router Pay provides the capability to generate a ISA for any dApp which wants to provide a no sign-up experience to its users.
@@ -29,12 +30,18 @@ Router Pay provides the capability to generate a ISA for any dApp which wants to
     title="Add ISA to your dApp"
     description="Integrate Router Pay and provide a no sign-up UX to users"
     to="/router-pay/integrate-router-pay/dapp-integration"
-    icon={<IDEIcon />}
+    icon={<Transaction />}
   />
     <Card
     title="Nitro integration via Router Pay"
     description="Integrate Router Nitro with no sign-up flow for users"
     to="/router-pay/integrate-router-pay/router-nitro"
     icon={<NitroIcon />}
+  />
+    <Card
+    title="Managing Refunds"
+    description="Manage refunds in case the transaction is not completed by solver"
+    to="/router-pay/integrate-router-pay/refund-calldata"
+    icon={<Network />}
   />
   </Section>

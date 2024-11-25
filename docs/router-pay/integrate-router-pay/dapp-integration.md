@@ -3,6 +3,10 @@ title: Integrating Router Pay into your dApp
 sidebar_position: 2
 ---
 
+:::note
+You can find the API swagger **[here](../../../api/?v=ROUTER-PAY)**
+:::
+
 Any dApp can integrate Router Pay to provide it's users a no sign-up UX. This can be easily done by integrating Router Pay APIs. 
 Integration of Router Pay is a 2 step process -
 1. **Generation of deposit address:** API to generate a deposit address where user will send their funds to. Relayer will use the funds sent to this address to execute the transaction on behalf of the user.

@@ -3,6 +3,10 @@ title: Integrating Router Nitro with ISA capabilities
 sidebar_position: 3
 ---
 
+:::note
+You can find the API swagger **[here](../../../api/?v=ROUTER-PAY)**
+:::
+
 A dApp looking to add Nitro for adding cross-chain capabilities to their system can also take advantage of Router Pay and provide a wallet-less journey to their end users.
 
 Integration of Router Nitro which also has ISA capabilities is a 2 step process -

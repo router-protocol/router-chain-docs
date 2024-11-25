@@ -234,6 +234,43 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /prepare-calldata:
+    get:
+      summary: Prepare calldata for getting initiating the refund for a UID
+      tags:
+        - Calldata for refund for a UID
+      parameters:
+        - in: query
+          name: uid
+          required: true
+          schema:
+            type: string
+          example: "6e6363f6-d221-47b5-bf7f-06fd2a6ad53a"
+          description: Token address of the asset to be transferred from the source chain.
+      responses:
+        "200":
+          description: Calldata is created for the refund
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: bool
+                    example: "true"
+                  calldata:
+                    type: string
+                    example: "0xc4930ba6000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000400000000000000000000000001396f41d89b96eaf29a7ef9ee01ad36e452235ae0000000000000000000000001396f41d89b96eaf29a7ef9ee01ad36e452235ae00000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee000000000000000000000000f79d7e74304af49748a4d77d4b64eeee84d131cf0000000000000000000000000000000000000000000000000000000000000003ddddd00000000000000000000000000000000000000000000000000000000000"
+                  address:
+                    type: string
+                    example: "0x5C96CD07f3034670f297d567CD1517665F31c58F"
+                  status:
+                    type: string
+                    example: "NOT_FOUND"
+                  uid:
+                    type: string
+                    example: "6e6363f6-d221-47b5-bf7f-06fd2a6ad53a"
+
 components:
   schemas:
     # Common Schemas
