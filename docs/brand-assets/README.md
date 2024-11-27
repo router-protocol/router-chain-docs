@@ -10,6 +10,6 @@ Here, you'll find all the assets and logos you need to represent Router Protocol
 
 Below are the brand assets for both Router Protocol and Nitro.
 
-1. [Router Brand Assets](./brand-assets/router-brand-assets)
-2. [Nitro Brand Assets](./brand-assets/nitro-brand-assets)
+1. [Router Brand Assets](./router-brand-assets)
+2. [Nitro Brand Assets](./nitro-brand-assets)
 
