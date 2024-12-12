@@ -108,7 +108,7 @@ Once compiled, you should see a green tick mark over the **Solidity compiler** i
 
 <APIData
   apiData={[
-    { contractConfigUrl: 'https://lcd.sentry.routerchain.dev/router-protocol/router-chain/multichain/contract_config', 
+    { contractConfigUrl: 'https://lcd.sentry.routerchain.dev/router-protocol/router-chain/multichain/contract_config?pagination.limit=10000', 
     chainConfigUrl: 'https://lcd.sentry.routerchain.dev/router-protocol/router-chain/multichain/chain_config', 
     networkType: 'Testnet' }
   ]}
