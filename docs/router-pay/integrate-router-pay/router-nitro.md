@@ -37,6 +37,7 @@ partnerId |	number |	Partner identification number
 slippageTolerance |	number |	Maximum acceptable slippage (%)
 destFuel |	number |	Destination fuel amount
 refundAddress |	string |	Address for potential refunds
+recipientAddress |	string |	Address to receive funds
 
 Example Request
 ```jsx
@@ -49,6 +50,7 @@ GET /swap-on-nitro?fromTokenAddress=0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d
     &slippageTolerance=2
     &destFuel=0
     &refundAddress=0x46c5a13490076cE77a285E9E38FA8818AC2915Aa
+    &recipientAddress=0xD0945D64674284265b63507a1Fc212fAd0E8FDb8
 ```
 
 ## Check Status
