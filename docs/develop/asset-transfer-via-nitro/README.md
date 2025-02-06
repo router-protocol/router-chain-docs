@@ -26,7 +26,7 @@ As mentioned above, in addition to asset transfers, both these bridges also allo
 | **Trust Assumptions**      | Trust Minimized          | Trustless        |
 | **Asset Transfers**          | Yes               | Yes      |
 | **Asset Swaps**               | Yes        | Yes      |
-| **Assets Supported**          | All arbitrary assets  | Limited |
+| **Assets Supported**          | All arbitrary assets  | All arbitrary assets |
 | **Time Taken for Asset Transfers**      | 2-5 minutes          | Under 2 minutes       |
 | **Sequenced Requests**      | Yes          | Yes        |
 
