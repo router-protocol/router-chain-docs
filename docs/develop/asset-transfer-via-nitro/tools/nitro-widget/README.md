@@ -14,34 +14,46 @@ const baseUrl = "https://nitro.routerprotocol.com/swap";
 const configuration = {
 isWidget: true,
 partnerId: "0", // get your unique partner id - https://app.routernitro.com/partnerId
-fromChain: "80001",
-toChain: "43113",
+fromChainId: "80001",
+toChainId: "43113",
 fromToken: "0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054",
 toToken: "0xb452b513552aa0B57c4b1C9372eFEa78024e5936",
-ctaColor: "#E8425A",
-textColor: "#1A1B1C",
-backgroundColor: "#3fb043",
+ctaColor: "hsl(0, 45%, 33%)",
+textColor: "hsl(219, 59%, 57%)",
+appColor: "hsl(154, 49%, 57%)",
+inputColor: "hsl(74, 41%, 61%)",
 logoURI: "ipfs://QmaznB5PRhMC696u8yZuzN6Uwrnp7Zmfa5CydVUMvLJc9i/aDAI.svg",
-display: "vertical",
-isFromSelLocked: "1",
-isToSelLocked: "0",
+lockFromSelections: true,
+lockToSelections: false,
+slippageTolerance: "1",
+theme: "dark"
 };
 
-const paramString = new URLSearchParams(configuration).toString();
-document.getElementById("widget__iframe").src = `${baseUrl}?${paramString}`;
+const configurationUrl = new URLSearchParams(configuration).toString();
+const widgetUrl = `${baseUrl}?${configurationUrl}`;
 ```
 
 :::note
 1. You can use [Nitro's Widget Builder Tool](https://app.routernitro.com/widget) to automatically generate the widget paramaters.
 2. In case you want source / destination token to be native token, then the following value should be used for token address - 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE
-3. To integrate the widget on your UI, you will be assigned a unique partner ID. To get your partner ID, please use the link [here](https://app.routernitro.com/partnerId).
+3. To integrate the widget on your UI, you will be assigned a unique partner ID. To get your partner ID, please use the link [here](https://nitro.routerprotocol.com/partnerId).
 :::
 
 ```jsx
-<iframe id="widget__iframe" height="610px" width="420px" 
-src="https://nitro.routerprotocol.com/swap?isWidget=true&partnerId=widget-0101&fromChain=80001&toChain=43113&fromToken=0x22bAA8b6cdd31a0C5D1035d6e72043f4Ce6aF054&toToken=0xb452b513552aa0B57c4b1C9372eFEa78024e5936"
-style="border: none; border-radius: 11px; box-shadow: 3px 3px 10px 4px rgba(0, 0, 0, 0.05);">
-</iframe>
+<iframe
+  id="widget__iframe"
+  title="widget__iframe"
+  src="https://nitro.routerprotocol.com/swap?isWidget=true&slippageTolerance=1&theme=dark&display=horizontal&logoURI=&lockToSelections=false&lockFromSelections=false&ctaColor=&textColor=&appColor=&inputColor=&fromChainId=1&fromToken=0x60f67e1015b3f069dd4358a78c38f83fe3a667a9&toChainId=10&toToken=0xe2dca969624795985f2f083bcd0b674337ba130a"
+  />
+
+// add custom css classes to iframe element 
+/* styles.css */
+.iframe-widget {
+  border: 2px solid var(--bg-app);
+  outline: none;
+  height: 650px;
+  width: 100%;
+}
 ```
 
 Generate the paramString (as given in the example above) and attach it to the src of the iframe. Except for the isWidget parameter, all of the query params in the URL can be customized based on your requirement -
@@ -50,18 +62,19 @@ Generate the paramString (as given in the example above) and attach it to the sr
 | -------- | -------- |
 | isWidget | true (Required) |
 | partnerId | Unique for each partner (Required) |
-| fromChain | ChainId of the chain that needs to be shown as the default source chain. By default, the source chain will be chosen as the chain to which the user's wallet is connected. In case the user's wallet is not connected, Polygon is shown as the default source chain. |
-| toChain |	ChainId of the chain that needs to be shown as the default destination chain. By default, BSC is shown as the destination chain. |
+| fromChainId | ChainId of the chain that needs to be shown as the default source chain. By default, the source chain will be chosen as the chain to which the user's wallet is connected. In case the user's wallet is not connected, Polygon is shown as the default source chain. |
+| toChainId |	ChainId of the chain that needs to be shown as the default destination chain. By default, BSC is shown as the destination chain. |
 | fromToken | Address of the token that needs to be shown as the selected token on the source chain. By default, USDT will be shown as the source token. |
 | toToken |	Address of the token that needs to be shown as the selected token on the destination chain. By default, USDT will be shown as the destination token. |
 | ctaColor | Color of the "Call to Action" buttons |
 | textColor	| Color of all the text in the widget |
-| backgroundColor |	Background color of the widget |
+| appColor |	App color of the widget |
+| inputColor |	Input color of the widget |
+| theme |	Theme of the widget |
 | logoURI |	Circular logo URL - if not given, the original Router logo will be shown |
 | slippageTolerance |	Default slippage tolerance for cross-chain swaps |
-| display |	Display can be vertical/horizontal |
-| isFromSelLocked |	If the value is 1 it will lock the source side selection |
-| isToSelLocked |	If the value is 1 it will lock the destination side selection |
+| lockFromSelections |	If the value is true it will lock the source side selection |
+| lockToSelections |	If the value is true it will lock the destination side selection |
 
 ### Restricting chains/tokens
 There might also be a few cases in which a platform wants to show a selected list of chains or tokens for its users. With Router's widget, partners can do this by adding a few parameters. An example with restricted parameters -
@@ -69,8 +82,7 @@ There might also be a few cases in which a platform wants to show a selected lis
 ```jsx 
 <iframe height="610px" width="420px" 
 src="https://nitro.routerprotocol.com/swap?isWidget=true&partnerId=widget-0101&fromChain=137&fromToken=0xc2132d05d31c914a87c6611c10748aeb04b58e8f&toChain=56&toToken=0x6855f7bb6287F94ddcC8915E37e73a3c9fEe5CF3&dstChains=5001,43113&dstTokens=0xb452b513552aa0B57c4b1C9372eFEa78024e5936,0x980111ae1B84E50222C8843e3A7a038F36Fecd2b"
-style="border: none;border-radius: 11px;box-shadow: 3px 3px 10px 4px rgba(0, 0, 0, 0.05);">
-</iframe>
+/>
 ```
 
 Restriction parameters are optional and can be added along with the aforementioned parameters as query params in the URL -
