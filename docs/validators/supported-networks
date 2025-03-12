@@ -8,298 +8,441 @@ These are the chains that the router chain will support for validations.
 
 ## Orchestrator Chain-Config
 ```json
-{
-    "chains": [
-        {
-            "chainId": "137",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Polygon",
-            "chainRpc": "https://polygon-rpc.com",
-            "blocksToSearch": 1000,
-            "blockTime": "5s"
-        },
-        {
-            "chainId": "42161",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Arbitrum",
-            "chainRpc": "https://arbitrum-one.publicnode.com",
-            "blocksToSearch": 1000,
-            "blockTime": "3s"
-        },
-        {
-            "chainId": "43114",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Avalanche",
-            "chainRpc": "https://avalanche.public-rpc.com",
-            "blocksToSearch": 1000,
-            "blockTime": "5s"
-        },
-        {
-            "chainId": "10",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Optimism",
-            "chainRpc": "https://mainnet.optimism.io",
-            "blocksToSearch": 1000,
-            "blockTime": "3s"
-        },
-        {
-            "chainId": "56",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "BSC",
-            "chainRpc": "https://bsc-dataseed4.bnbchain.org",
-            "blocksToSearch": 1000,
-            "blockTime": "5s"
-        },
-        {
-            "chainId": "1101",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "polygonZkEvm",
-            "chainRpc": "https://zkevm-rpc.com",
-            "blocksToSearch": 1000,
-            "blockTime": "10s"
-        },
-        {
-            "chainId": "324",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "zkSync",
-            "chainRpc": "https://mainnet.era.zksync.io",
-            "blocksToSearch": 1000,
-            "blockTime": "10s"
-        },
-        {
-            "chainId": "1",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Ethereum",
-            "chainRpc": "https://eth-pokt.nodies.app",
-            "blocksToSearch": 1000,
-            "blockTime": "15s"
-        },
-        {
-            "chainId": "728126428",
-            "chainType": "CHAIN_TYPE_TRON",
-            "chainName": "tron-mainnet",
-            "chainRpc": "https://api.trongrid.io/jsonrpc",
-            "chainGRpc": "grpc.trongrid.io:50051",
-            "blocksToSearch": 1000,
-            "blockTime": "5s"
-        },
-        {
-            "chainId": "8453",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Base",
-            "chainRpc": "https://base.publicnode.com",
-            "blocksToSearch": 1000,
-            "blockTime": "5s"
-        },
-        {
-            "chainId": "534352",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Scroll",
-            "chainRpc": "https://rpc.ankr.com/scroll",
-            "blocksToSearch": 1000,
-            "blockTime": "10s"
-        },
-        {
-            "chainId": "169",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Manta",
-            "chainRpc": "https://pacific-rpc.manta.network/http",
-            "blocksToSearch": 1000,
-            "blockTime": "10s"
-        },
-        {
-            "chainId": "5000",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Mantle",
-            "chainRpc": "https://rpc.mantle.xyz",
-            "blocksToSearch": 1000,
-            "blockTime": "5s"
-        },
-        {
-            "chainId": "34443",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Mode Network",
-            "chainRpc": "https://1rpc.io/mode",
-            "blocksToSearch": 1000,
-            "blockTime": "5s"
-        },
-        {
-            "chainId": "288",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "BOBA Network",
-            "chainRpc": "https://mainnet.boba.network",
-            "blocksToSearch": 1000,
-            "blockTime": "5s"
-        },
-        {
-            "chainId": "1088",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Metis Network",
-            "chainRpc": "https://andromeda.metis.io/?owner=1088",
-            "blocksToSearch": 1000,
-            "blockTime": "5s"
-        },
-        {
-            "chainId": "10242",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Arthera Mainnet",
-            "chainRpc": " https://rpc.arthera.net",
-            "blocksToSearch": 1000,
-            "blockTime": "5s"
-        },
-        {
-            "chainId": "30",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "RootStock",
-            "chainRpc": "https://public-node.rsk.co",
-            "blocksToSearch": 1000,
-            "blockTime": "3s"
-        },
-        {
-            "chainId": "1313161554",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Aurora",
-            "chainRpc": "https://mainnet.aurora.dev",
-            "blocksToSearch": 1000,
-            "blockTime": "3s"
-        },
-        {
-            "chainId": "59144",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Linea",
-            "chainRpc": "https://rpc.linea.build",
-            "blocksToSearch": 1000,
-            "blockTime": "2s"
-        },
-        {
-            "chainId": "81457",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "BlastL2",
-            "chainRpc": "https://blast.blockpi.network/v1/rpc/public",
-            "blocksToSearch": 1000,
-            "blockTime": "2s"
-        },
-        {
-            "chainId": "7225878",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Saakuru Mainnet",
-            "chainRpc": "https://rpc-mainnet.saakuru.network/",
-            "blocksToSearch": 1000,
-            "blockTime": "5s"
-        },
-        {
-            "chainId": "200901",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "bitlayer-mainnet",
-            "chainRpc": "https://rpc.bitlayer-rpc.com",
-            "blocksToSearch": 1000,
-            "blockTime": "5s"
-        },
-        {
-            "chainId": "167000",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Taiko",
-            "chainRpc": "https://rpc.taiko.xyz",
-            "blocksToSearch": 1000,
-            "blockTime": "60s"
-        },
-        {
-            "chainId": "near",
-            "chainType": "CHAIN_TYPE_NEAR",
-            "chainName": "near-mainnet",
-            "chainRpc": "https://rpc.mainnet.near.org",
-            "blocksToSearch": 10000,
-            "blockTime": "2s",
-            "useStreamerApi": true,
-            "nearStreamerApi": "http://13.233.000.00:6902/"
-        },
-        {
-            "chainId": "1997",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Kyoto",
-            "chainRpc": "https://rpc.kyotochain.io",
-            "blocksToSearch": 1000,
-            "blockTime": "5s"
-        },
-        {
-            "chainId": "196",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "XLayer",
-            "chainRpc": "https://xlayerrpc.okx.com",
-            "blocksToSearch": 1000,
-            "blockTime": "5s"
-        },
-        {
-            "chainId": "23294",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Oasis",
-            "chainRpc": "https://sapphire.oasis.io",
-            "blocksToSearch": 90,
-            "blockTime": "5s"
-        },
-        {
-            "chainId": "2000",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "Dogechain",
-            "chainRpc": "https://rpc.dogechain.dog",
-            "blocksToSearch": 1000,
-            "blockTime": "5s"
-        },
-        {
-            "chainId": "995",
-            "chainType": "CHAIN_TYPE_EVM",
-            "chainName": "5ire network",
-            "chainRpc": "https://rpc.5ire.network",
-            "blocksToSearch": 1000,
-            "blockTime": "5s"
-        },
-        {
-        "chainId": "570",
-        "chainType": "CHAIN_TYPE_EVM",
-        "chainName": "Rollux Mainnet",
-        "chainRpc": "https://rpc.rollux.com",
-        "blocksToSearch": 1000,
-        "blockTime": "5s"
-        },
-        {
-        "chainId": "2040",
-        "chainType": "CHAIN_TYPE_EVM",
-        "chainName": "vanarChain",
-        "chainRpc": "https://rpc.vanarchain.com",
-        "blocksToSearch": 1000,
-        "blockTime": "5s"
-        },
-        {
-        "chainId": "698",
-        "chainType": "CHAIN_TYPE_EVM",
-        "chainName": "Matchain",
-        "chainRpc": "https://rpc.matchain.io",
-        "blocksToSearch": 1000,
-        "blockTime": "5s"
-        },
-        {
-        "chainId": "bitcoin",
-        "chainType": "CHAIN_TYPE_BITCOIN",
-        "chainName":"bitcoin",
-        "wnativeAddress" : "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-        "blocksToSearch": 100,
-        "blockTime": "600s",
-        "evmRelayerForBitcoin" : "0x444a0f21f51babf03bb8a0714a03f802c0619784",
-        "UseStreamerApi":true,
-        "BitcoinStreamerApi":"" 
+ "chains": [
+    {
+      "chainId": "137",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Polygon",
+      "chainRpc": "https://polygon-rpc.com",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "42161",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Arbitrum",
+      "chainRpc": "https://arbitrum-one.publicnode.com",
+      "blocksToSearch": 1000,
+      "blockTime": "3s"
+    },
+    {
+      "chainId": "43114",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Avalanche",
+      "chainRpc": "https://avalanche.public-rpc.com",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "5845",
+      "chainName": "Tangle",
+      "chainRpc": "https://rpc.tangle.tools",
+      "blocksToSearch": 1000,
+      "blockTime": "3s"
+    },
+    {
+      "chainId": "10",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Optimism",
+      "chainRpc": "https://mainnet.optimism.io",
+      "blocksToSearch": 1000,
+      "blockTime": "3s"
+    },
+    {
+      "chainId": "56",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "BSC",
+      "chainRpc": "https://bsc-dataseed4.bnbchain.org",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "1101",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "polygonZkEvm",
+      "chainRpc": "https://zkevm-rpc.com",
+      "blocksToSearch": 1000,
+      "blockTime": "10s"
+    },
+    {
+      "chainId": "324",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "zkSync",
+      "chainRpc": "https://mainnet.era.zksync.io",
+      "blocksToSearch": 1000,
+      "blockTime": "10s"
+    },
+    {
+      "chainId": "1",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Ethereum",
+      "chainRpc": "https://eth-pokt.nodies.app",
+      "blocksToSearch": 1000,
+      "blockTime": "15s"
+    },
+    {
+      "chainId": "728126428",
+      "chainType": "CHAIN_TYPE_TRON",
+      "chainName": "tron-mainnet",
+      "chainRpc": "https://api.trongrid.io/jsonrpc",
+      "chainGRpc": "grpc.trongrid.io:50051",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "8453",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Base",
+      "chainRpc": "https://base.publicnode.com",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "534352",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Scroll",
+      "chainRpc": "https://rpc.ankr.com/scroll",
+      "blocksToSearch": 1000,
+      "blockTime": "10s"
+    },
+    {
+      "chainId": "169",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Manta",
+      "chainRpc": "https://pacific-rpc.manta.network/http",
+      "blocksToSearch": 1000,
+      "blockTime": "10s"
+    },
+    {
+      "chainId": "5000",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Mantle",
+      "chainRpc": "https://rpc.mantle.xyz",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "34443",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Mode Network",
+      "chainRpc": "https://1rpc.io/mode",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "288",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "BOBA Network",
+      "chainRpc": "https://mainnet.boba.network",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "1088",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Metis Network",
+      "chainRpc": "https://andromeda.metis.io/?owner=1088",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "10242",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Arthera Mainnet",
+      "chainRpc": "https://rpc.arthera.net",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "30",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "RootStock",
+      "chainRpc": "https://public-node.rsk.co",
+      "blocksToSearch": 1000,
+      "blockTime": "3s"
+    },
+    {
+      "chainId": "1313161554",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Aurora",
+      "chainRpc": "https://mainnet.aurora.dev",
+      "blocksToSearch": 1000,
+      "blockTime": "3s"
+    },
+    {
+      "chainId": "59144",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Linea",
+      "chainRpc": "https://rpc.linea.build",
+      "blocksToSearch": 1000,
+      "blockTime": "2s"
+    },
+    {
+      "chainId": "81457",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "BlastL2",
+      "chainRpc": "https://blast.blockpi.network/v1/rpc/public",
+      "blocksToSearch": 1000,
+      "blockTime": "2s"
+    },
+    {
+      "chainId": "7225878",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Saakuru Mainnet",
+      "chainRpc": "https://rpc-mainnet.saakuru.network/",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "167000",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Taiko",
+      "chainRpc": "https://rpc.taiko.xyz",
+      "blocksToSearch": 1000,
+      "blockTime": "60s"
+    },
+    {
+      "chainId": "196",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "XLayer",
+      "chainRpc": "https://xlayerrpc.okx.com",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "23294",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Oasis",
+      "chainRpc": "https://sapphire.oasis.io",
+      "blocksToSearch": 90,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "2000",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Dogechain",
+      "chainRpc": "https://rpc.dogechain.dog",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "995",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "5ire network",
+      "chainRpc": "https://rpc.5ire.network",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "570",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Rollux Mainnet",
+      "chainRpc": "https://rpc.rollux.com",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "2040",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "vanarChain",
+      "chainRpc": "https://rpc.vanarchain.com",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "698",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Matchain",
+      "chainRpc": "https://rpc.matchain.io",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "bitcoin",
+      "chainName": "bitcoin",
+      "wnativeAddress": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "blocksToSearch": 100,
+      "blockTime": "300s",
+      "evmRelayerForBitcoin": "0x444a0f21f51babf03bb8a0714a03f802c0619784",
+      "useStreamerApi": true,
+      "bitcoinStreamerApi": "https://api.btc-streamer-dorado.routerchain.network/"
+    },
+    {
+      "chainId": "sui",
+      "chainName": "Sui",
+      "blocksToSearch": 604800000,
+      "blockTime": "120s",
+      "chainRpc": "https://sui-rpc.publicnode.com"
+    },
+    {
+      "chainId": "solana",
+      "chainName": "Solana",
+      "chainRpc": "https://sui-rpc.publicnode.com",
+      "blocksToSearch": 1000,
+      "blockTime": "3s"
+    },
+    {
+      "chainId": "153153",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Odyssey",
+      "chainRpc": "https://node.dioneprotocol.com/ext/bc/D/rpc",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "4061",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Nahmii",
+      "chainRpc": "https://rpc.n3.nahmii.io/",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "1689",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Nero",
+      "chainRpc": "https://rpc.nerochain.io",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "151",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Redbelly Network Mainnet",
+      "chainRpc": "https://governors.mainnet.redbelly.network/",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "146",
+      "chainName": "Sonic",
+      "chainRpc": "https://rpc.soniclabs.com",
+      "blocksToSearch": 1000,
+      "blockTime": "3s"
+    },
+    {
+      "chainId": "1868",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Soneium",
+      "chainRpc": "https://rpc.soneium.org/",
+      "blocksToSearch": 1000,
+      "blockTime": "3s"
+    },
+    {
+      "chainId": "57073",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Ink",
+      "chainRpc": "https://rpc-gel.inkonchain.com",
+      "blocksToSearch": 1000,
+      "blockTime": "3s"
+    },
+    {
+      "chainId": "2818",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "MorphL2",
+      "chainRpc": "https://rpc.morphl2.io",
+      "blocksToSearch": 1000,
+      "blockTime": "3s"
+    },
+    {
+      "chainId": "7777777",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Zora",
+      "chainRpc": "https://rpc.zora.energy",
+      "blocksToSearch": 1000,
+      "blockTime": "3s"
+    },
+    {
+      "chainId": "480",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "World chain",
+      "chainRpc": "https://worldchain.drpc.org",
+      "blocksToSearch": 1000,
+      "blockTime": "3s"
+    },
+    {
+      "chainId": "543210",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Zero",
+      "chainRpc": "https://rpc.zerion.io/v1/zero",
+      "blocksToSearch": 1000,
+      "blockTime": "3s"
+    },
+    {
+      "chainId": "2741",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Abstract",
+      "chainRpc": "https://api.mainnet.abs.xyz",
+      "blocksToSearch": 1000,
+      "blockTime": "3s"
+    },
+    {
+      "chainId": "3501",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "jfinchain",
+      "chainRpc": "https://rpc.jfinchain.com/",
+      "blocksToSearch": 1000,
+      "blockTime": "3s"
+    },
+    {
+      "chainId": "80094",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Berachain",
+      "chainRpc": "https://rpc.berachain.com",
+      "blocksToSearch": 1000,
+      "blockTime": "3s"
+    },
+    {
+      "chainId": "1514",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Story Network",
+      "chainRpc": "https://homer.storyrpc.io/",
+      "blocksToSearch": 1000,
+      "blockTime": "3s"
+    },
+    {
+      "chainId": "130",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Unichain",
+      "chainRpc": "https://mainnet.unichain.org",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
+    },
+    {
+      "chainId": "100",
+      "chainType": "CHAIN_TYPE_EVM",
+      "chainName": "Gnosis",
+      "chainRpc": "https://rpc.gnosischain.com",
+      "blocksToSearch": 1000,
+      "blockTime": "5s"
     }
-    ]
-}
-
+  ]
 ```
-### Must be added in globalConfig of Orchestrator to support Bitcoin Network 
+### Must be added in globalConfig
 ```json
 "globalConfig": {
-    "routerBridgeAddress":"router17p9rzwnnfxcjp32un9ug7yhhzgtkhvl9jfksztgw5uh69wac2pgsmpev85"
+    "globalConfig": {
+      "networkType": "mainnet",
+      "dbPath": "orchestrator.db",
+      "logLevel": "debug",
+      "solanaDBPurge": true,
+      "routerBridgeAddress": "router17p9rzwnnfxcjp32un9ug7yhhzgtkhvl9jfksztgw5uh69wac2pgsmpev85",
+      "ethPrivateKey": "" ,
+      "cosmosPrivateKey": "" ,
+      "evmAddress" : "" ,
+      "cosmosAddress": "",
+      "batchSize": 25,
+      "batchWaitTime": 6,
+      "network": {
+      "chainId": "router_9600-1",
+      "apiEndpoint": "http://localhost:3317",
+      "tmRpc": "http://localhost:3657",
+      "gRpc": "tcp://localhost:3090",
+      "evmRpc": "http://localhost:3545"
+    }
+  }
 }
 ```
 
 ### For better performance
-Please use premium RPCs or self deployed nodes for the above supported networks.   
-### Note
-For Near chain, please setup streamer before enabling it for orchestration.  
+Please use premium RPCs or self deployed nodes for the above supported networks.  
