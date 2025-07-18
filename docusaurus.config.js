@@ -284,6 +284,10 @@ const config = {
                 href: 'https://www.routerprotocol.com/router-ccif-whitepaper.pdf'
               },
               {
+                label: 'Router Open Architecture Whitepaper',
+                href: 'https://www.routerprotocol.com/router-open-architecture-whitepaper'
+              },
+              {
                 label: 'GitHub',
                 href: 'https://github.com/router-protocol',
               },
